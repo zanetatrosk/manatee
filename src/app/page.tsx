@@ -1,4 +1,5 @@
 import { SvgIcon } from "@mui/material";
+import WhiteDragon from "./assets/ColorWhite";
 export default function callsth() {
   return (
     <div>
@@ -19,6 +20,7 @@ export default function callsth() {
           />
         </svg>
       </SvgIcon>
+      <WhiteDragon/>
     </div>
   );
 }
