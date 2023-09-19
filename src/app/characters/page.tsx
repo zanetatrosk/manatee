@@ -14,6 +14,7 @@ export default function MultiActionAreaCard() {
       sx={{
         display: "flex",
         justifyContent: "center",
+        p: 3,
       }}
     >
       <Grid

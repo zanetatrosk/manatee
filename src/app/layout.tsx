@@ -3,8 +3,6 @@ import ThemeRegistry from "./components/ThemeRegistry/ThemeRegistry";
 import { Container } from "@mui/material";
 import ResponsiveAppBar from "./components/navbar";
 
-
-
 export default function RootLayout({
   children,
 }: {
@@ -12,12 +10,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <ThemeRegistry>
+      <ThemeRegistry>
           <ResponsiveAppBar />
-          <Container maxWidth="xl">{children} </Container>
-        </ThemeRegistry>
-      </body>
+          <body>
+            <Container maxWidth="xl">{children} </Container>
+          </body>
+      </ThemeRegistry>
     </html>
   );
 }
