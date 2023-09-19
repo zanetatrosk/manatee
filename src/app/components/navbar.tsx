@@ -13,7 +13,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import PersonIcon from "@mui/icons-material/Person";
-import DragonLogo from "@/app/assets/ColorWhite";
+import DragonLogo from "@/app/assets/whiteDragonIcon";
 
 const pages = ["Characters", "Content"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];

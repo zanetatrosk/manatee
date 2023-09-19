@@ -1,5 +1,5 @@
 import { SvgIcon } from "@mui/material";
-import WhiteDragon from "./assets/ColorWhite";
+import WhiteDragon from "./assets/whiteDragonIcon";
 export default function callsth() {
   return (
     <div>

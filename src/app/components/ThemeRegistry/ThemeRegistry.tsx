@@ -14,7 +14,7 @@ const lightTheme = createTheme({
     palette: {
       //this will be variable in the store which will change after clicking on button (now it is hardcoded)
       //todo
-      mode: 'light',
+      mode: 'dark',
     },
     typography: {
       fontFamily: roboto.style.fontFamily
