@@ -10,12 +10,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+          <body>
       <ThemeRegistry>
           <ResponsiveAppBar />
-          <body>
             <Container maxWidth="xl">{children} </Container>
-          </body>
       </ThemeRegistry>
+          </body>
     </html>
   );
 }
