@@ -4,9 +4,8 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Container } from "@mui/material";
-import { Button, CardActions, CardMedia } from "@mui/material";
+import { Button, CardActions, CardMedia, Box } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-
 
 function CharacterCard() {
   return (
@@ -29,11 +28,20 @@ function CharacterCard() {
       <CardActions>
         <Grid container direction="row" justifyContent="flex-start" xs={12}>
           <Grid xs container direction="row">
-            <Button size="small">VIEW</Button>
-            <Button size="small">EDIT</Button>
+            <Button variant="outlined" size="small" sx={{ mx: 1 }}>
+              VIEW
+            </Button>
+            <Button variant="outlined" size="small">
+              EDIT
+            </Button>
           </Grid>
           <Grid>
-            <Button size="small" color="error">
+            <Button
+              variant="outlined"
+              size="small"
+              color="error"
+              sx={{ mx: 1 }}
+            >
               DELETE
             </Button>
           </Grid>
@@ -46,18 +54,32 @@ export default function MultiActionAreaCard() {
   return (
     <Container
       sx={{
-        justifyContent: "center",
+        justifyContent: "right",
         mt: 4,
+        pr: 3,
       }}
     >
+      <Grid
+        xs
+        container
+        direction="row"
+        sx={{
+          justifyContent: "right",
+          mb: 4,
+          pr: 3,
+        }}
+      >
+        <Button variant="outlined" size="small">
+          create character +
+        </Button>
+      </Grid>
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 1, sm: 8, md: 12 }}
-
       >
         {Array.from(Array(6)).map((_, index) => (
-          <Grid xs={1} sm={4} md={4} key={index}>
+          <Grid xs={2} sm={4} key={index}>
             <CharacterCard />
           </Grid>
         ))}
