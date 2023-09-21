@@ -4,11 +4,12 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Container } from "@mui/material";
-import { Button, CardActions, CardMedia, Box } from "@mui/material";
+import { Button, CardActions, CardMedia } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
+import AddIcon from '@mui/icons-material/Add';
 function CharacterCard() {
   return (
-    <Card sx={{ maxWidth: 345, width: "90%", minWidth: 340 }}>
+    <Card sx={{ maxWidth: 385, minWidth: 345 }}>
       <CardMedia
         sx={{ maxHeight: 140 }}
         component="img"
@@ -50,43 +51,54 @@ function CharacterCard() {
   );
 }
 
-
 export default function MultiActionAreaCard() {
   return (
     <Container
       sx={{
-        mt: 4,
+        mt: 7,
       }}
+      fixed
     >
       <Grid container>
-        {/* <Grid
-          xs={2}
-          container
-          sx={{
-            justifyContent: "center",
-            mb: 2,
-            mt: 7,
-            display: { xs: "flex", md: "none" },
-          }}
-        >
-          <Button variant="outlined" size="small" sx={{ width: 345 }}>
-            create character +
-          </Button>
-        </Grid> */}
-        {Array.from(Array(6)).map((_, index) => (
-            <Grid
-              xs={12}
-              sm={12}
-              md={6}
-              lg={4}
-              p={3}
-              key={index}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
+        
+          <Grid
+            xs={12}
+            sm={10}
+            md={12}
+            lg={12}
+            p={2}
+            display="flex"
+            justifyContent="right"
+            alignItems="right"
+          >
+            <Button
+              variant="outlined"
+              size="small"
+              endIcon={<AddIcon/>}
+              sx={{
+                px: 4,
+                py: 1,
+              }}
             >
-              <CharacterCard />
-            </Grid>
+              create character
+            </Button>
+          </Grid>
+      </Grid>
+      <Grid container>
+        {Array.from(Array(6)).map((_, index) => (
+          <Grid
+            xs={12}
+            sm={12}
+            md={6}
+            lg={4}
+            p={4}
+            key={index}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <CharacterCard />
+          </Grid>
         ))}
       </Grid>
     </Container>
