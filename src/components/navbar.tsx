@@ -32,8 +32,11 @@ function ResponsiveAppBar() {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  function handleCloseNavMenu (page: string){
     setAnchorElNav(null);
+    return(
+        <Link to={ '/' + page } >D&D APP</Link>
+    )
   };
 
   const handleCloseUserMenu = () => {
@@ -92,7 +95,7 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={() => {handleCloseNavMenu(page)}}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -117,15 +120,15 @@ function ResponsiveAppBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ m: 1, mx: 2, color: "white", display: "block" }}
-              >
-                <Link to={ '/' + page }>
-                {page}
-                </Link>
-              </Button>
+              <Link to={"/" + page}>
+                <Button
+                  key={page}
+                  onClick={() => {handleCloseNavMenu(page)}}
+                  sx={{ m: 1, mx: 2, color: "white", display: "block" }}
+                >
+                  {page}
+                </Button>
+              </Link>
             ))}
           </Box>
 
