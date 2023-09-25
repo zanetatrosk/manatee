@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -12,9 +11,10 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import PersonIcon from "@mui/icons-material/Person";
-import DragonLogo from "../assets/whiteDragon";
+import DragonLogo from "@assets/whiteDragon";
+import { Link } from "react-router-dom";
 
-const pages = ["Characters", "Content"];
+const pages = ["characters", "content"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
@@ -45,11 +45,11 @@ function ResponsiveAppBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <DragonLogo md="flex" xs="none" />
+
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/"
             sx={{
               mr: 3,
               ml: 1,
@@ -59,7 +59,7 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            D&D APP
+            <Link to="/">D&D APP</Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -102,8 +102,6 @@ function ResponsiveAppBar() {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -124,7 +122,9 @@ function ResponsiveAppBar() {
                 onClick={handleCloseNavMenu}
                 sx={{ m: 1, mx: 2, color: "white", display: "block" }}
               >
+                <Link to={ '/' + page }>
                 {page}
+                </Link>
               </Button>
             ))}
           </Box>
