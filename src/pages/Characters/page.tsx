@@ -5,7 +5,8 @@ import Typography from "@mui/material/Typography";
 import { Container } from "@mui/material";
 import { Button, CardActions, CardMedia } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
+import { Link, useNavigate } from "react-router-dom";
 function CharacterCard() {
   return (
     <Card sx={{ maxWidth: 385, minWidth: 345 }}>
@@ -50,7 +51,8 @@ function CharacterCard() {
   );
 }
 
-export default function MultiActionAreaCard() {
+export default function Characters() {
+  let navigate = useNavigate();
   return (
     <Container
       sx={{
@@ -59,29 +61,31 @@ export default function MultiActionAreaCard() {
       fixed
     >
       <Grid container>
-        
-          <Grid
-            xs={12}
-            sm={10}
-            md={12}
-            lg={12}
-            p={2}
-            display="flex"
-            justifyContent="right"
-            alignItems="right"
+        <Grid
+          xs={12}
+          sm={10}
+          md={12}
+          lg={12}
+          p={2}
+          display="flex"
+          justifyContent="right"
+          alignItems="right"
+        >
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={() => {
+                navigate("/characters/create-character");
+            }}
+            endIcon={<AddIcon />}
+            sx={{
+              px: 4,
+              py: 1,
+            }}
           >
-            <Button
-              variant="outlined"
-              size="small"
-              endIcon={<AddIcon/>}
-              sx={{
-                px: 4,
-                py: 1,
-              }}
-            >
-              create character
-            </Button>
-          </Grid>
+            create character
+          </Button>
+        </Grid>
       </Grid>
       <Grid container>
         {Array.from(Array(6)).map((_, index) => (

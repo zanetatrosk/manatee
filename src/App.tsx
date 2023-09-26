@@ -4,8 +4,8 @@ import Navbar from "./components/navbar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import Characters from "@pages/Characters/page";
-
+import Characters  from "@pages/Characters/page";
+import CreateCharacter from "@pages/Characters/CreateCharacter/page";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -22,7 +22,8 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<h1>Home Page</h1>} />
-            <Route path="/characters" element={<Characters />} />
+            <Route path="/characters" element={<Characters />}/>
+            <Route path="/characters/create-character" element={<CreateCharacter/>}/> 
           </Routes>
         </ThemeProvider>
       </Router>

@@ -35,7 +35,7 @@ function ResponsiveAppBar() {
   function handleCloseNavMenu (page: string){
     setAnchorElNav(null);
     return(
-        <Link to={ '/' + page } >D&D APP</Link>
+        <Link to={ '/' + page } />
     )
   };
 
@@ -48,11 +48,9 @@ function ResponsiveAppBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <DragonLogo md="flex" xs="none" />
-
           <Typography
             variant="h6"
             noWrap
-            component="a"
             sx={{
               mr: 3,
               ml: 1,
