@@ -9,7 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { Link, useNavigate } from "react-router-dom";
 function CharacterCard() {
   return (
-    <Card sx={{ maxWidth: 385, minWidth: 345 }}>
+    <Card sx={{ maxWidth: 385, minWidth: 345, mx: 5 }}>
       <CardMedia
         sx={{ maxHeight: 140 }}
         component="img"
@@ -60,7 +60,7 @@ export default function Characters() {
       }}
       fixed
     >
-      <Grid container>
+      <Grid container columnSpacing={{  md: 6 }} >
         <Grid
           xs={12}
           sm={10}
@@ -87,7 +87,7 @@ export default function Characters() {
           </Button>
         </Grid>
       </Grid>
-      <Grid container>
+      <Grid container rowSpacing={2}  columnSpacing={{  md: 10 }}>
         {Array.from(Array(6)).map((_, index) => (
           <Grid
             xs={12}
