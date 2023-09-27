@@ -10,12 +10,12 @@ import Box from "@mui/material/Box";
 import HorizontalLinearStepper from "./components/stepperComponent";
 export default function CreateCharacter() {
   return (
-    
+    <Container maxWidth="lg">
         <Card>
           <CardContent>
             <HorizontalLinearStepper />
           </CardContent>
         </Card>
- 
+        </Container>
   );
 }

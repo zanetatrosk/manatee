@@ -4,8 +4,8 @@ import Navbar from "./components/navbar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import Characters from "@pages/Characters/page";
-import CreateCharacter from "@pages/Characters/CreateCharacter/page";
+import Characters from "@pages/Characters/charactersPage";
+import CreateCharacter from "@pages/Characters/CreateCharacter/createCharacter";
 import { Container } from "@mui/material";
 const darkTheme = createTheme({
   palette: {
@@ -22,7 +22,7 @@ function App() {
           <Navbar />
           <Container
             sx={{
-              mt: 7,
+              mt: 9,
             }}
             maxWidth="xl"
           >
