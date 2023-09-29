@@ -74,7 +74,6 @@ export default function DynamicFrame() {
             SelectProps={{
               native: true,
             }}
-            helperText="Please select your currency"
             fullWidth
           >
             {currencies.map((option) => (
@@ -108,7 +107,19 @@ export default function DynamicFrame() {
                 High Elf
               </Typography>
             </CardContent>
-         
+            <CardContent
+              sx={{
+                display: "flex",
+                py: 0
+              }}
+            >
+              <Typography gutterBottom variant="body1" component="div" align="left" sx={{pr: 1}}>
+                Speed: 
+              </Typography>
+              <Typography variant="body1" color="text.secondary" align="justify">
+                20 km/h
+              </Typography>
+            </CardContent>
             <CardContent
               sx={{
                 display: "flex",
