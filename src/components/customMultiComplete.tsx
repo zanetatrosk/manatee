@@ -60,8 +60,8 @@ export default function MultiComplete() {
           <TextField
             {...params}
             variant="filled"
-            label="freeSolo"
-            placeholder="Favorites"
+            label="Languages"
+            placeholder="Elfistina"
           />
         )}
       />
