@@ -19,7 +19,62 @@ const sizes = [
     label: "Small",
   },
 ];
+//interface used for autocomplete
+interface AutocompleteItem {
+  id: number;
+  title: string;
+}
+const languages: AutocompleteItem[] = [
+  // Elvish languages
+  { id: generateId(), title: "Common Elvish" },
+  { id: generateId(), title: "High Elvish" },
+  { id: generateId(), title: "Wood Elvish" },
+  { id: generateId(), title: "Drow Sign Language" },
 
+  // Dwarvish languages
+  { id: generateId(), title: "Common Dwarvish" },
+  { id: generateId(), title: "Hill Dwarvish" },
+  { id: generateId(), title: "Mountain Dwarvish" },
+
+  // Draconic languages
+  { id: generateId(), title: "Common Draconic" },
+  { id: generateId(), title: "High Draconic" },
+  { id: generateId(), title: "Ancient Draconic" },
+
+  // Gnomish languages
+  { id: generateId(), title: "Common Gnomish" },
+  { id: generateId(), title: "Rock Gnomish" },
+  { id: generateId(), title: "Forest Gnomish" },
+
+  // Orcish languages
+  { id: generateId(), title: "Common Orcish" },
+  { id: generateId(), title: "Black Orcish" },
+  { id: generateId(), title: "Gray Orcish" },
+
+  // Celestial languages
+  { id: generateId(), title: "Common Celestial" },
+  { id: generateId(), title: "High Celestial" },
+
+  // Infernal languages
+  { id: generateId(), title: "Common Infernal" },
+  { id: generateId(), title: "High Infernal" },
+
+  // Abyssal languages
+  { id: generateId(), title: "Common Abyssal" },
+  { id: generateId(), title: "High Abyssal" },
+
+  // Giant languages
+  { id: generateId(), title: "Common Giant" },
+  { id: generateId(), title: "Hill Giant" },
+  { id: generateId(), title: "Stone Giant" },
+
+  // Undercommon languages
+  { id: generateId(), title: "Common Undercommon" },
+  { id: generateId(), title: "High Undercommon" },
+];
+function generateId(): number {
+  return Math.random();
+}
 const races = [
   { label: "Centaur" },
   { label: "Dragonborn" },
@@ -61,7 +116,14 @@ export default function Race() {
       </Box>
       <Grid container sx={{ py: 2 }}>
         <Grid item lg={6} xs={12} sx={{ p: 2 }}>
-          <MultiComplete />
+          <MultiComplete
+            values={languages}
+            defaultValue={languages[0]}
+            label="Languages"
+            helpText="Please choose 3 languages"
+            placeholder="elsiftisna"
+            maxItems={3}
+          />
         </Grid>
         <Grid item lg={4} xs={12} sx={{ p: 2, pl: 7 }}>
           <FormControl variant="filled" fullWidth>

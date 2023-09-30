@@ -2,75 +2,29 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Autocomplete, TextField, Chip } from "@mui/material";
 
-//interface used for autocomplete
-interface AutocompleteItem {
-  id: number;
-  title: string;
-}
-const languages: AutocompleteItem[] = [
-  // Elvish languages
-  { id: generateId(), title: "Common Elvish" },
-  { id: generateId(), title: "High Elvish" },
-  { id: generateId(), title: "Wood Elvish" },
-  { id: generateId(), title: "Drow Sign Language" },
 
-  // Dwarvish languages
-  { id: generateId(), title: "Common Dwarvish" },
-  { id: generateId(), title: "Hill Dwarvish" },
-  { id: generateId(), title: "Mountain Dwarvish" },
-
-  // Draconic languages
-  { id: generateId(), title: "Common Draconic" },
-  { id: generateId(), title: "High Draconic" },
-  { id: generateId(), title: "Ancient Draconic" },
-
-  // Gnomish languages
-  { id: generateId(), title: "Common Gnomish" },
-  { id: generateId(), title: "Rock Gnomish" },
-  { id: generateId(), title: "Forest Gnomish" },
-
-  // Orcish languages
-  { id: generateId(), title: "Common Orcish" },
-  { id: generateId(), title: "Black Orcish" },
-  { id: generateId(), title: "Gray Orcish" },
-
-  // Celestial languages
-  { id: generateId(), title: "Common Celestial" },
-  { id: generateId(), title: "High Celestial" },
-
-  // Infernal languages
-  { id: generateId(), title: "Common Infernal" },
-  { id: generateId(), title: "High Infernal" },
-
-  // Abyssal languages
-  { id: generateId(), title: "Common Abyssal" },
-  { id: generateId(), title: "High Abyssal" },
-
-  // Giant languages
-  { id: generateId(), title: "Common Giant" },
-  { id: generateId(), title: "Hill Giant" },
-  { id: generateId(), title: "Stone Giant" },
-
-  // Undercommon languages
-  { id: generateId(), title: "Common Undercommon" },
-  { id: generateId(), title: "High Undercommon" },
-];
-function generateId(): number {
-  return Math.random();
-}
 //interface used for props
+//is it posible to replace this with sth like Object?
 interface PropsParams {
-  values: string[];
-  defaultValue?: string[];
+  values: AutocompleteItem[];
+  defaultValue: AutocompleteItem;
   label: string,
   helpText?: string,
   placeholder?: string,
   maxItems: number,
 }
-
-export default function MultiComplete() {
+//interface used for autocomplete
+interface AutocompleteItem {
+  id: number;
+  title: string;
+}
+//this func will be in utils
+function generateId(): number {
+  return Math.random();
+}
+export default function MultiComplete(props: PropsParams) {
   //selected will be filled with defaultValue?
-  const [selected, setSelected] = useState<AutocompleteItem[]>([languages[5]]);
+  const [selected, setSelected] = useState<AutocompleteItem[]>([props.defaultValue]);
   const [item, setItem] = React.useState("");
   const updateSelected = (newArr: AutocompleteItem[]) => {
     setSelected(newArr); // This should update the state with the new value
@@ -86,7 +40,7 @@ export default function MultiComplete() {
         multiple
         value={selected}
         freeSolo
-        options={languages}
+        options={props.values}
         getOptionLabel={(option) => typeof option === "string" ? option : option.title}
         inputValue={item}
         onInputChange={(_, v) => setItem(v)}
@@ -118,9 +72,9 @@ export default function MultiComplete() {
           <TextField
             {...params}
             variant="filled"
-            label="Languages"
-            helperText="Choose 3 languages"
-            placeholder="Elfistina"
+            label={props.label}
+            helperText={props.helpText}
+            placeholder={props.placeholder}
           />
         )}
       />
