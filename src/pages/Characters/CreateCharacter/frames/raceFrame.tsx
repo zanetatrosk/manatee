@@ -94,12 +94,7 @@ export default function Race() {
   function handleChange(event: SelectChangeEvent) {
     setSize(event.target.value);
   }
-  const onChange = (e: HTMLInputElement, value: string) => {
-
-  }
-  // useEffect(() => {
-  //   if( )
-  // }, race)
+ 
   return (
     <Box sx={{ pt: 2, pb: 3 }}>
       <Grid container sx={{ py: 2 }}>
@@ -113,10 +108,7 @@ export default function Race() {
             onChange={(_, value: Race | null) => {
               if( !value ) return;
               setRace(value);
-              console.log('reeeeeeee', race);
-              if( race?.label !== "" ) setVisibility(true); 
-              else setVisibility(false);
-
+              race?.label !== "" ? setVisibility(true) : setVisibility(false);
             }}
             renderInput={(params) => (
               <TextField

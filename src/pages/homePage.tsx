@@ -33,7 +33,6 @@ export default function SelectTextFields() {
       autoComplete="off"
     >
       
-      <div>
         <TextField
           id="filled-select-currency"
           select
@@ -49,7 +48,6 @@ export default function SelectTextFields() {
             </MenuItem>
           ))}
         </TextField>
-             </div>
       
     </Box>
   );

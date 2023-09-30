@@ -17,7 +17,7 @@ interface AutocompleteItem {
   id: number;
   title: string;
 }
-//this func will be in utils
+//this func will be in utils todo
 function generateId(): number {
   return Math.random();
 }
