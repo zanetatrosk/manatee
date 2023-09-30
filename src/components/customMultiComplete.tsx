@@ -59,12 +59,13 @@ function generateId(): number {
   return Math.random();
 }
 //interface used for props
-interface parameters {
+interface PropsParams {
   values: string[];
   defaultValue?: string[];
   label: string,
   helpText?: string,
-
+  placeholder?: string,
+  maxItems: number,
 }
 
 export default function MultiComplete() {
