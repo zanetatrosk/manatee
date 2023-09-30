@@ -2,16 +2,15 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Autocomplete, TextField, Chip } from "@mui/material";
 
-
 //interface used for props
 //is it posible to replace this with sth like Object?
 interface PropsParams {
   values: AutocompleteItem[];
   defaultValue: AutocompleteItem;
-  label: string,
-  helpText?: string,
-  placeholder?: string,
-  maxItems: number,
+  label: string;
+  helpText?: string;
+  placeholder?: string;
+  maxItems: number;
 }
 //interface used for autocomplete
 interface AutocompleteItem {
@@ -24,7 +23,9 @@ function generateId(): number {
 }
 export default function MultiComplete(props: PropsParams) {
   //selected will be filled with defaultValue?
-  const [selected, setSelected] = useState<AutocompleteItem[]>([props.defaultValue]);
+  const [selected, setSelected] = useState<AutocompleteItem[]>([
+    props.defaultValue,
+  ]);
   const [item, setItem] = React.useState("");
   const updateSelected = (newArr: AutocompleteItem[]) => {
     setSelected(newArr); // This should update the state with the new value
@@ -41,21 +42,23 @@ export default function MultiComplete(props: PropsParams) {
         value={selected}
         freeSolo
         options={props.values}
-        getOptionLabel={(option) => typeof option === "string" ? option : option.title}
+        getOptionLabel={(option) =>
+          typeof option === "string" ? option : option.title
+        }
+        getOptionDisabled={() => selected.length === props.maxItems}
         inputValue={item}
         onInputChange={(_, v) => setItem(v)}
         onBlur={() => {
-          if (item === "") return;
+          if (item.trim() === "") return;
           const tmp: AutocompleteItem[] = [
             ...selected,
             { id: generateId(), title: item },
           ];
           updateSelected(tmp);
         }}
-        onChange={(e, value: (AutocompleteItem | string) []) => {
+        onChange={(e, value: (AutocompleteItem | string)[]) => {
           //this is so ugly, I do not know how to do it better
-          console.log(value, 'result', typeof value.at(0) === 'string');
-          if( value.length !== 0 && typeof value.at(0) === 'string') return;
+          if (value.length !== 0 && typeof value.at(0) === "string") return;
           //@ts-ignore
           updateSelected(value);
         }}

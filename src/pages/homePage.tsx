@@ -41,6 +41,7 @@ export default function SelectTextFields() {
           defaultValue="EUR"
           helperText="Please select your currency"
           variant="filled"
+          fullWidth={false}
         >
           {currencies.map((option) => (
             <MenuItem key={option.value} value={option.value}>
