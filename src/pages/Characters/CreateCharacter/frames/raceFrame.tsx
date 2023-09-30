@@ -1,17 +1,15 @@
 import * as React from "react";
 import { Box, Autocomplete, Divider, Grid } from "@mui/material";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import MultiComplete from "@components/customMultiComplete";
 import Card from "@mui/material/Card";
-import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-
-const currencies = [
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+const sizes = [
   {
     value: "M",
     label: "Medium",
@@ -22,17 +20,16 @@ const currencies = [
   },
 ];
 
-
-const top100Films = [
-  { label: "The Shawshank Redemption", year: 1994 },
-  { label: "The Godfather", year: 1972 },
-  { label: "The Godfather: Part II", year: 1974 },
-  { label: "The Dark Knight", year: 2008 },
-  { label: "12 Angry Men", year: 1957 },
+const races = [
+  { label: "Centaur" },
+  { label: "Dragonborn" },
+  { label: "Elf (High)" },
+  { label: "Goblin" },
+  { label: "Human" },
 ];
 export default function Race() {
-  const [size, setSize] = React.useState("Medium");
-  function handleChange(event: any) {
+  const [size, setSize] = React.useState("M");
+  function handleChange(event: SelectChangeEvent) {
     setSize(event.target.value);
   }
   return (
@@ -42,10 +39,15 @@ export default function Race() {
           <Autocomplete
             disablePortal
             id="combo-box-demo"
-            options={top100Films}
+            options={races}
             sx={{ m: 2 }}
             renderInput={(params) => (
-              <TextField {...params} label="Race" variant="filled" />
+              <TextField
+                {...params}
+                label="Race"
+                variant="filled"
+                placeholder="Human"
+              />
             )}
           />
         </Grid>
@@ -62,22 +64,23 @@ export default function Race() {
           <MultiComplete />
         </Grid>
         <Grid item lg={4} xs={12} sx={{ p: 2, pl: 7 }}>
-          <div>
-            <TextField
-              id="outlined-select-currency"
-              select
-              label="Select"
-              fullWidth
-              defaultValue="EUR"
-              variant="filled"
+          <FormControl variant="filled" fullWidth>
+            <InputLabel id="demo-simple-select-label">Size</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={size}
+              label="Size"
+              defaultValue={size}
+              onChange={handleChange}
             >
-              {currencies.map((option) => (
+              {sizes.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
               ))}
-            </TextField>
-          </div>
+            </Select>
+          </FormControl>
         </Grid>
       </Grid>
       <Box display="flex" flexGrow={1}>

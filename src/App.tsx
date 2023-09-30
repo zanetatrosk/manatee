@@ -39,7 +39,8 @@ function App() {
               />
             </Routes>
           </Container>
-          <Footer/>
+          {/* todo footer */}
+          {/* <Footer/> */}
         </ThemeProvider>
       </Router>
     </div>
