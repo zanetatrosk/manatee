@@ -8,6 +8,7 @@ import Characters from "@pages/Characters/charactersPage";
 import CreateCharacter from "@pages/Characters/CreateCharacter/createCharacter";
 import HomePage from "@pages/homePage";
 import { Container } from "@mui/material";
+import Footer from "@components/footer";
 const darkTheme = createTheme({
   palette: {
     mode: "light",
@@ -24,8 +25,10 @@ function App() {
           <Container
             sx={{
               mt: 9,
+              mb: 4, 
             }}
             maxWidth="xl"
+            component="main"
           >
             <Routes>
               <Route path="/" element={<HomePage />} />
@@ -36,6 +39,7 @@ function App() {
               />
             </Routes>
           </Container>
+          <Footer/>
         </ThemeProvider>
       </Router>
     </div>

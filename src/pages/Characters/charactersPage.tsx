@@ -28,38 +28,32 @@ function CharacterCard() {
           Lianna
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Half Elf 
+          Half Elf
         </Typography>
       </CardContent>
-    <CardActions>
-      <Grid
-        container
-        direction="row"
-        justifyContent="flex-start"
-        xs={12}
-      >
-        <Grid xs container direction="row">
-          <Button variant="outlined" size="small" sx={{ mx: 1 }}>
-            VIEW
-          </Button>
-          <Button variant="outlined" size="small">
-            EDIT
-          </Button>
+      <CardActions>
+        <Grid container direction="row" justifyContent="flex-start" xs={12}>
+          <Grid xs container direction="row">
+            <Button variant="outlined" size="small" sx={{ mx: 1 }}>
+              VIEW
+            </Button>
+            <Button variant="outlined" size="small">
+              EDIT
+            </Button>
+          </Grid>
+          <Grid>
+            <Button
+              variant="outlined"
+              size="small"
+              color="error"
+              sx={{ mr: 1 }}
+            >
+              DELETE
+            </Button>
+          </Grid>
         </Grid>
-        <Grid>
-          <Button
-            variant="outlined"
-            size="small"
-            color="error"
-            sx={{ mr: 1 }}
-          >
-            DELETE
-          </Button>
-        </Grid>
-      </Grid>
-    </CardActions>
-
-  </Card>
+      </CardActions>
+    </Card>
   );
 }
 
@@ -67,13 +61,16 @@ export default function Characters() {
   let navigate = useNavigate();
   return (
     <Container
-      sx={{
-        mt: 7,
-      }}
+      
       maxWidth="lg"
     >
-      <Grid container my={8}>
-        <Grid xs={12} pr={3} display="flex" justifyContent="flex-end">
+      <Grid container>
+        <Grid
+          xs={12}
+          pr={3}
+          container
+          justifyContent="flex-end"
+        >
           <Button
             variant="outlined"
             size="small"
@@ -98,11 +95,9 @@ export default function Characters() {
             lg={4}
             p={3}
             key={index}
-            display="flex"
             justifyContent="center"
-            alignItems="center"
           >
-            <CharacterCard/>
+            <CharacterCard />
           </Grid>
         ))}
       </Grid>
