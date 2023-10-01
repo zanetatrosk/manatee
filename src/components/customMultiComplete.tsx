@@ -6,7 +6,7 @@ import { Autocomplete, TextField, Chip } from "@mui/material";
 //is it posible to replace this with sth like Object?
 interface PropsParams {
   values: AutocompleteItem[];
-  defaultValue: AutocompleteItem;
+  defaultValue: AutocompleteItem[];
   label: string;
   helpText?: string;
   placeholder?: string;
@@ -24,7 +24,7 @@ function generateId(): number {
 export default function MultiComplete(props: PropsParams) {
   //selected will be filled with defaultValue?
   const [selected, setSelected] = useState<AutocompleteItem[]>([
-    props.defaultValue,
+    ...props.defaultValue,
   ]);
   const [item, setItem] = React.useState("");
   const updateSelected = (newArr: AutocompleteItem[]) => {

@@ -135,7 +135,7 @@ export default function Race() {
               <Grid item lg={6} xs={12} sx={{ p: 2 }}>
                 <MultiComplete
                   values={languages}
-                  defaultValue={languages[0]}
+                  defaultValue={[languages[0]]}
                   label="Languages"
                   helpText="Please choose 3 languages"
                   placeholder="elsiftisna"
