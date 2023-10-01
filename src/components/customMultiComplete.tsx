@@ -40,7 +40,6 @@ export default function MultiComplete(props: PropsParams) {
   useEffect(() => {
     console.log("Selected after update:", selected, props.results);
     setSelected(props.results)
-    setItem("");
   }, [props.results]);
 
   return (

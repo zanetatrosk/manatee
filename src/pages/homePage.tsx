@@ -33,21 +33,7 @@ export default function SelectTextFields() {
       autoComplete="off"
     >
       
-        <TextField
-          id="filled-select-currency"
-          select
-          label="Select"
-          defaultValue="EUR"
-          helperText="Please select your currency"
-          variant="filled"
-          fullWidth={false}
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+        
       
     </Box>
   );
