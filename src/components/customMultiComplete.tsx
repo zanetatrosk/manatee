@@ -6,7 +6,7 @@ import { Autocomplete, TextField, Chip } from "@mui/material";
 //is it posible to replace this with sth like Object?
 interface PropsParams {
   values: AutocompleteItem[];
-  defaultValue: AutocompleteItem[];
+  results: AutocompleteItem[];
   label: string;
   helpText?: string;
   placeholder?: string;
@@ -22,16 +22,18 @@ function generateId(): number {
   return Math.random();
 }
 export default function MultiComplete(props: PropsParams) {
-  //selected will be filled with defaultValue?
-  const [selected, setSelected] = useState<AutocompleteItem[]>([
-    ...props.defaultValue,
-  ]);
+  //selected will be filled with defaultValue
+
+  //this is working
+  const [selected, setSelected] = useState<AutocompleteItem[]>(props.results);
+
+
   const [item, setItem] = React.useState("");
   const updateSelected = (newArr: AutocompleteItem[]) => {
     setSelected(newArr); // This should update the state with the new value
   };
   useEffect(() => {
-    console.log("Selected after update:", selected);
+    console.log("Selected after update:", selected, props.results);
     setItem("");
   }, [selected]);
 
@@ -40,6 +42,7 @@ export default function MultiComplete(props: PropsParams) {
       <Autocomplete
         multiple
         value={selected}
+        defaultValue={selected}
         freeSolo
         options={props.values}
         getOptionLabel={(option) =>

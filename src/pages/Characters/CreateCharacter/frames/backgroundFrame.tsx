@@ -24,6 +24,34 @@ interface AutocompleteItem {
 export default function Background() {
   const [background, setBackground] = useState<Background | null>(null);
   const [isVisible, setVisibility] = React.useState(false);
+  const [languagesValue, setLanguages] = useState<AutocompleteItem[]>(
+    languages.filter((option) =>
+      background?.languages.find((id) => id === option.id)
+    )
+  );
+  const [toolsValue, setTools] = useState<AutocompleteItem[]>([]);
+  useEffect(() => {
+    const resLen = languages.filter((option) => {
+      const result = background?.languages.find(
+        (id) => id === option.id
+      );
+      
+      return result;
+    })
+    debugger;
+    setLanguages(resLen);
+    const tools: AutocompleteItem[] = proficiencyTools.filter(
+      (option) => background?.tools.find((id) => id === option.id)
+    );
+   
+    setTools(tools);
+    console.log("information from effect resLen", resLen);
+
+  }, [background]);
+  useEffect(() => {
+    console.log("information from effect others", toolsValue, languagesValue);
+
+  }, [languagesValue, toolsValue])
   return (
     <Box sx={{ pt: 2, pb: 3 }}>
       <Grid container sx={{ py: 2 }}>
@@ -66,7 +94,7 @@ export default function Background() {
               <Grid item lg={6} xs={12} sx={{ p: 2 }}>
                 <MultiComplete
                   values={languages}
-                  defaultValue={languages.filter((option) => background?.languages.find(id => id === option.id))}
+                  results={languagesValue}
                   label="Languages"
                   helpText="Please choose 2 languages"
                   placeholder="elsiftisna"
@@ -76,7 +104,7 @@ export default function Background() {
               <Grid item lg={6} xs={12} sx={{ p: 2 }}>
                 <MultiComplete
                   values={proficiencyTools}
-                  defaultValue={proficiencyTools.filter((option) => background?.tools.find(id => id === option.id))}
+                  results={toolsValue}
                   label="Proficiency tools"
                   helpText="Please choose 2 tools"
                   placeholder="some tool"
@@ -84,7 +112,6 @@ export default function Background() {
                 />
               </Grid>
             </Grid>
-            
           </div>
         )}
       </React.Fragment>
@@ -96,49 +123,48 @@ export default function Background() {
 const backgrounds: Background[] = [
   {
     id: 1,
-    label: 'Acolyte',
-    languages: [1,2],
-    tools: [2,3],
+    label: "Acolyte",
+    languages: [1, 2],
+    tools: [2, 3],
   },
   {
     id: 2,
-    label: 'Charlatan',
+    label: "Charlatan",
     languages: [1],
     tools: [4],
   },
   {
     id: 3,
-    label: 'Folk Hero',
+    label: "Folk Hero",
     languages: [],
-    tools: [6,7],
+    tools: [6, 7],
   },
   {
     id: 4,
-    label: 'Noble',
+    label: "Noble",
     languages: [3],
     tools: [8],
   },
   {
     id: 5,
-    label: 'Sage',
+    label: "Sage",
     languages: [1],
     tools: [5],
   },
   {
     id: 6,
-    label: 'Soldier',
+    label: "Soldier",
     languages: [],
     tools: [3],
   },
   {
     id: 7,
-    label: 'Urchin',
+    label: "Urchin",
     languages: [],
-    tools: [3,4],
+    tools: [3, 4],
   },
   // Add more backgrounds as needed
 ];
-
 
 // TypeScript array of objects with hardcoded IDs representing D&D languages
 
@@ -192,33 +218,33 @@ const languages: AutocompleteItem[] = [
 ];
 
 const proficiencyTools: AutocompleteItem[] = [
-  { id: 1, title: 'Alchemist’s Supplies' },
-  { id: 2, title: 'Brewer’s Supplies' },
-  { id: 3, title: 'Calligrapher’s Supplies' },
-  { id: 4, title: 'Carpenter’s Tools' },
-  { id: 5, title: 'Cartographer’s Tools' },
-  { id: 6, title: 'Cobbler’s Tools' },
-  { id: 7, title: 'Cook’s Utensils' },
-  { id: 8, title: 'Glassblower’s Tools' },
-  { id: 9, title: 'Jeweler’s Tools' },
-  { id: 10, title: 'Leatherworker’s Tools' },
-  { id: 11, title: 'Mason’s Tools' },
-  { id: 12, title: 'Painter’s Supplies' },
-  { id: 13, title: 'Potter’s Tools' },
-  { id: 14, title: 'Smith’s Tools' },
-  { id: 15, title: 'Tinker’s Tools' },
-  { id: 16, title: 'Weaver’s Tools' },
-  { id: 17, title: 'Woodcarver’s Tools' },
-  { id: 18, title: 'Disguise Kit' },
-  { id: 19, title: 'Forgery Kit' },
-  { id: 20, title: 'Herbalism Kit' },
-  { id: 21, title: 'Navigator’s Tools' },
-  { id: 22, title: 'Poisoner’s Kit' },
-  { id: 23, title: 'Thieves’ Tools' },
-  { id: 24, title: 'Dice Set' },
-  { id: 25, title: 'Dragonchess Set' },
-  { id: 26, title: 'Playing Card Set' },
-  { id: 27, title: 'Three-Dragon Ante Set' },
-  { id: 28, title: 'Land Vehicles' },
-  { id: 29, title: 'Water Vehicles' },
+  { id: 1, title: "Alchemist’s Supplies" },
+  { id: 2, title: "Brewer’s Supplies" },
+  { id: 3, title: "Calligrapher’s Supplies" },
+  { id: 4, title: "Carpenter’s Tools" },
+  { id: 5, title: "Cartographer’s Tools" },
+  { id: 6, title: "Cobbler’s Tools" },
+  { id: 7, title: "Cook’s Utensils" },
+  { id: 8, title: "Glassblower’s Tools" },
+  { id: 9, title: "Jeweler’s Tools" },
+  { id: 10, title: "Leatherworker’s Tools" },
+  { id: 11, title: "Mason’s Tools" },
+  { id: 12, title: "Painter’s Supplies" },
+  { id: 13, title: "Potter’s Tools" },
+  { id: 14, title: "Smith’s Tools" },
+  { id: 15, title: "Tinker’s Tools" },
+  { id: 16, title: "Weaver’s Tools" },
+  { id: 17, title: "Woodcarver’s Tools" },
+  { id: 18, title: "Disguise Kit" },
+  { id: 19, title: "Forgery Kit" },
+  { id: 20, title: "Herbalism Kit" },
+  { id: 21, title: "Navigator’s Tools" },
+  { id: 22, title: "Poisoner’s Kit" },
+  { id: 23, title: "Thieves’ Tools" },
+  { id: 24, title: "Dice Set" },
+  { id: 25, title: "Dragonchess Set" },
+  { id: 26, title: "Playing Card Set" },
+  { id: 27, title: "Three-Dragon Ante Set" },
+  { id: 28, title: "Land Vehicles" },
+  { id: 29, title: "Water Vehicles" },
 ];
