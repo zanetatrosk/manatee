@@ -133,14 +133,14 @@ export default function Race() {
             </Box>
             <Grid container sx={{ py: 2 }}>
               <Grid item lg={6} xs={12} sx={{ p: 2 }}>
-                <MultiComplete
+                {/* <MultiComplete
                   values={languages}
                   results={[languages[0]]}
                   label="Languages"
                   helpText="Please choose 3 languages"
                   placeholder="elsiftisna"
                   maxItems={3}
-                />
+                /> */}
               </Grid>
 
               <Grid item lg={4} xs={12} sx={{ p: 2, pl: 7 }}>

@@ -35,7 +35,6 @@ export default function Background() {
       const result = background?.languages.find(
         (id) => id === option.id
       );
-      
       return result;
     })
     debugger;
@@ -43,15 +42,10 @@ export default function Background() {
     const tools: AutocompleteItem[] = proficiencyTools.filter(
       (option) => background?.tools.find((id) => id === option.id)
     );
-   
     setTools(tools);
     console.log("information from effect resLen", resLen);
-
   }, [background]);
-  useEffect(() => {
-    console.log("information from effect others", toolsValue, languagesValue);
 
-  }, [languagesValue, toolsValue])
   return (
     <Box sx={{ pt: 2, pb: 3 }}>
       <Grid container sx={{ py: 2 }}>
@@ -95,6 +89,7 @@ export default function Background() {
                 <MultiComplete
                   values={languages}
                   results={languagesValue}
+                  onChange={setLanguages}
                   label="Languages"
                   helpText="Please choose 2 languages"
                   placeholder="elsiftisna"
@@ -105,6 +100,7 @@ export default function Background() {
                 <MultiComplete
                   values={proficiencyTools}
                   results={toolsValue}
+                  onChange={setTools}
                   label="Proficiency tools"
                   helpText="Please choose 2 tools"
                   placeholder="some tool"
