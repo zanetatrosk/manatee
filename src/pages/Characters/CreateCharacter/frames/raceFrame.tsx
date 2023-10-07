@@ -10,6 +10,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState, useEffect } from "react";
+import { useAppSelector, useAppDispatch } from "../../../../hooks/hooksStore";
 
 //interface used for autocomplete
 interface AutocompleteItem {
@@ -26,75 +27,24 @@ const sizes = [
     label: "Small",
   },
 ];
-const languages: AutocompleteItem[] = [
-  // Elvish languages
-  { id: generateId(), title: "Common Elvish" },
-  { id: generateId(), title: "High Elvish" },
-  { id: generateId(), title: "Wood Elvish" },
-  { id: generateId(), title: "Drow Sign Language" },
 
-  // Dwarvish languages
-  { id: generateId(), title: "Common Dwarvish" },
-  { id: generateId(), title: "Hill Dwarvish" },
-  { id: generateId(), title: "Mountain Dwarvish" },
-
-  // Draconic languages
-  { id: generateId(), title: "Common Draconic" },
-  { id: generateId(), title: "High Draconic" },
-  { id: generateId(), title: "Ancient Draconic" },
-
-  // Gnomish languages
-  { id: generateId(), title: "Common Gnomish" },
-  { id: generateId(), title: "Rock Gnomish" },
-  { id: generateId(), title: "Forest Gnomish" },
-
-  // Orcish languages
-  { id: generateId(), title: "Common Orcish" },
-  { id: generateId(), title: "Black Orcish" },
-  { id: generateId(), title: "Gray Orcish" },
-
-  // Celestial languages
-  { id: generateId(), title: "Common Celestial" },
-  { id: generateId(), title: "High Celestial" },
-
-  // Infernal languages
-  { id: generateId(), title: "Common Infernal" },
-  { id: generateId(), title: "High Infernal" },
-
-  // Abyssal languages
-  { id: generateId(), title: "Common Abyssal" },
-  { id: generateId(), title: "High Abyssal" },
-
-  // Giant languages
-  { id: generateId(), title: "Common Giant" },
-  { id: generateId(), title: "Hill Giant" },
-  { id: generateId(), title: "Stone Giant" },
-
-  // Undercommon languages
-  { id: generateId(), title: "Common Undercommon" },
-  { id: generateId(), title: "High Undercommon" },
-];
-function generateId(): number {
-  return Math.random();
+interface Race {
+  label: string | null;
 }
-interface Race{
-  label: string
-}
-const races: Race[] = [
-  { label: "Centaur" },
-  { label: "Dragonborn" },
-  { label: "Elf (High)" },
-  { label: "Goblin" },
-  { label: "Human" },
-];
 export default function Race() {
   const [size, setSize] = useState("M");
-  const [race, setRace] = useState<Race| null>(null);
+  const raceChange: Race = {label: useAppSelector((state) => state.character.race)};
+  const [race, setRace] = useState<Race | null>(raceChange);
   const [isVisible, setVisibility] = React.useState(false);
   function handleChange(event: SelectChangeEvent) {
     setSize(event.target.value);
   }
- 
+  useEffect(() => {
+    race?.label !== "" ? setVisibility(true) : setVisibility(false);
+    const a = race?.label;
+    dispatch({ type: "character/setRace", payload: a });
+  }, [race]);
+  const dispatch = useAppDispatch();
   return (
     <Box sx={{ pt: 2, pb: 3 }}>
       <Grid container sx={{ py: 2 }}>
@@ -105,10 +55,9 @@ export default function Race() {
             options={races}
             value={race}
             sx={{ m: 2 }}
-            onChange={(_, value: Race | null) => {
-              if( !value ) return;
+            onChange={(_, value) => {
+              if (!value) return;
               setRace(value);
-              race?.label !== "" ? setVisibility(true) : setVisibility(false);
             }}
             renderInput={(params) => (
               <TextField
@@ -237,3 +186,60 @@ export default function Race() {
     </Box>
   );
 }
+const races: Race[] = [
+  { label: "Centaur" },
+  { label: "Dragonborn"},
+  { label: "Elf (High)"},
+  { label: "Goblin" },
+  { label: "Human" },
+];
+// TypeScript array of objects with hardcoded IDs representing D&D languages
+
+const languages: AutocompleteItem[] = [
+  // Elvish languages
+  { id: 1, title: "Common Elvish" },
+  { id: 2, title: "High Elvish" },
+  { id: 3, title: "Wood Elvish" },
+  { id: 4, title: "Drow Sign Language" },
+
+  // Dwarvish languages
+  { id: 5, title: "Common Dwarvish" },
+  { id: 6, title: "Hill Dwarvish" },
+  { id: 7, title: "Mountain Dwarvish" },
+
+  // Draconic languages
+  { id: 8, title: "Common Draconic" },
+  { id: 9, title: "High Draconic" },
+  { id: 10, title: "Ancient Draconic" },
+
+  // Gnomish languages
+  { id: 11, title: "Common Gnomish" },
+  { id: 12, title: "Rock Gnomish" },
+  { id: 13, title: "Forest Gnomish" },
+
+  // Orcish languages
+  { id: 14, title: "Common Orcish" },
+  { id: 15, title: "Black Orcish" },
+  { id: 16, title: "Gray Orcish" },
+
+  // Celestial languages
+  { id: 17, title: "Common Celestial" },
+  { id: 18, title: "High Celestial" },
+
+  // Infernal languages
+  { id: 19, title: "Common Infernal" },
+  { id: 20, title: "High Infernal" },
+
+  // Abyssal languages
+  { id: 21, title: "Common Abyssal" },
+  { id: 22, title: "High Abyssal" },
+
+  // Giant languages
+  { id: 23, title: "Common Giant" },
+  { id: 24, title: "Hill Giant" },
+  { id: 25, title: "Stone Giant" },
+
+  // Undercommon languages
+  { id: 26, title: "Common Undercommon" },
+  { id: 27, title: "High Undercommon" },
+];
