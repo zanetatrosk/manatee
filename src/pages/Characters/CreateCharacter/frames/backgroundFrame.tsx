@@ -26,7 +26,6 @@ export default function BackgroundFrame() {
       );
       return result;
     })
-    debugger;
     setLanguages(resLen);
     const tools: AutocompleteItem[] = proficiencyTools.filter(
       (option) => background?.tools.find((id) => id === option.id)

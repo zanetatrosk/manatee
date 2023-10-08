@@ -46,6 +46,13 @@ export default function RaceFrame() {
     race?.label !== "" ? setVisibility(true) : setVisibility(false);
     const a = race?.label;
     dispatch({ type: "character/setRace", payload: a });
+    const resLen = languages.filter((option) => {
+      const result = race?.languages.find(
+        (id) => id === option.id
+      );
+      return result;
+    })
+    setLanguages(resLen);
   }, [race]);
   const dispatch = useAppDispatch();
   return (
