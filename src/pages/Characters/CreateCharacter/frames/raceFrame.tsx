@@ -11,12 +11,11 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../../../hooks/hooksStore";
+import {
+  Race,
+  AutocompleteItem,
+} from "@pages/Characters/definitions/characterForm";
 
-//interface used for autocomplete
-interface AutocompleteItem {
-  id: number;
-  title: string;
-}
 const sizes = [
   {
     value: "M",
@@ -28,14 +27,18 @@ const sizes = [
   },
 ];
 
-interface Race {
-  label: string | null;
-}
-export default function Race() {
+export default function RaceFrame() {
   const [size, setSize] = useState("M");
-  const raceChange: Race = {label: useAppSelector((state) => state.character.race)};
+  const raceChange: Race = {
+    id: 44,
+    label: useAppSelector((state) => state.character.race),
+    languages: [],
+  };
   const [race, setRace] = useState<Race | null>(raceChange);
   const [isVisible, setVisibility] = React.useState(false);
+  const [languagesRes, setLanguages] = useState<AutocompleteItem[]>(
+    languages.filter((option) => race?.languages.find((id) => id === option.id))
+  );
   function handleChange(event: SelectChangeEvent) {
     setSize(event.target.value);
   }
@@ -82,14 +85,15 @@ export default function Race() {
             </Box>
             <Grid container sx={{ py: 2 }}>
               <Grid item lg={6} xs={12} sx={{ p: 2 }}>
-                {/* <MultiComplete
+                <MultiComplete
                   values={languages}
-                  results={[languages[0]]}
+                  results={languagesRes}
+                  onChange={setLanguages}
                   label="Languages"
                   helpText="Please choose 3 languages"
                   placeholder="elsiftisna"
                   maxItems={3}
-                /> */}
+                />
               </Grid>
 
               <Grid item lg={4} xs={12} sx={{ p: 2, pl: 7 }}>
@@ -187,11 +191,11 @@ export default function Race() {
   );
 }
 const races: Race[] = [
-  { label: "Centaur" },
-  { label: "Dragonborn"},
-  { label: "Elf (High)"},
-  { label: "Goblin" },
-  { label: "Human" },
+  { id: 1, label: "Centaur", languages: [0, 3] },
+  { id: 1, label: "Dragonborn", languages: [0, 3] },
+  { id: 1, label: "Elf (High)", languages: [0, 1] },
+  { id: 1, label: "Goblin", languages: [0, 2] },
+  { id: 1, label: "Human", languages: [0, 3] },
 ];
 // TypeScript array of objects with hardcoded IDs representing D&D languages
 

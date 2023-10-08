@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface Character{
+    name: string| null;
     race: string | null;
 }
 const initialState = {

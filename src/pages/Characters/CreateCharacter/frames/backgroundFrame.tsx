@@ -5,23 +5,12 @@ import Typography from "@mui/material/Typography";
 import MultiComplete from "@components/customMultiComplete";
 import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState, useEffect } from "react";
-interface Background {
-  id: number;
-  label: string;
-  languages: number[];
-  tools: number[];
-}
-//interface used for autocomplete
-interface AutocompleteItem {
-  id: number;
-  title: string;
-}
-export default function Background() {
+import { Background, AutocompleteItem } from "@pages/Characters/definitions/characterForm";
+
+
+
+export default function BackgroundFrame() {
   const [background, setBackground] = useState<Background | null>(null);
   const [isVisible, setVisibility] = React.useState(false);
   const [languagesValue, setLanguages] = useState<AutocompleteItem[]>(
