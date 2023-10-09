@@ -1,9 +1,7 @@
 import * as React from "react";
 import { Box, Autocomplete, Divider, Grid } from "@mui/material";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import MultiComplete from "@components/customMultiComplete";
-import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
 import { useState, useEffect } from "react";
 import { Background, AutocompleteItem } from "@pages/Characters/definitions/characterForm";
