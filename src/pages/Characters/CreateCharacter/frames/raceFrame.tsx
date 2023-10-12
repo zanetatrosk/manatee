@@ -9,40 +9,38 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../../../hooks/hooksStore";
-import { Race, AutocompleteItem } from "@pages/Characters/definitions/characterForm";
+import {
+  Race,
+  AutocompleteItem,
+  Ability,
+  Size,
+} from "@pages/Characters/definitions/characterForm";
 import { setRace as setRaceStore } from "reducers/characterReducer";
 import CardInfo from "../components/cardInfo";
 
-
 export default function RaceFrame() {
-  const [size, setSize] = useState("M");
-  const raceName = useAppSelector((state) => state.character.race);
+  const [size, setSize] = useState<string| null>(null);
+  const raceStore = useAppSelector((state) => state.character.race);
   const dispatch = useAppDispatch();
-  const raceChange: Race = {
-    id: 44,
-    label: raceName,
-    languages: [],
-  };
-  const [race, setRace] = useState<Race | null>(raceChange);
+  const [race, setRace] = useState<Race | null>(raceStore || null);
   const [isVisible, setVisibility] = React.useState(false);
   const [languagesRes, setLanguages] = useState<AutocompleteItem[]>(
-    languages.filter((option) => race?.languages.find((id) => id === option.id))
+    race?.languages?.defaults || []
   );
-  
+
   function handleChange(event: SelectChangeEvent) {
     setSize(event.target.value);
+    console.log(event.target.value);
   }
   useEffect(() => {
-    if(!race) return;
+    if (!race) return;
     race?.label !== "" ? setVisibility(true) : setVisibility(false);
-    const a = race?.label;
+    const a = race;
+    setLanguages(a.languages?.defaults || []);
+    setSize(a.sizeOptions?.[0] || null);
     dispatch(setRaceStore(a));
-    const resLen = languages.filter((option) => {
-      const result = race?.languages.find((id) => id === option.id);
-      return result;
-    });
-    setLanguages(resLen);
   }, [race, dispatch]);
+
   return (
     <Box sx={{ pt: 2, pb: 3 }}>
       <Grid container sx={{ py: 2 }}>
@@ -51,11 +49,13 @@ export default function RaceFrame() {
             disablePortal
             id="combo-box-demo"
             options={races}
+            isOptionEqualToValue={(option, value) => option.id === value.id}
             value={race}
             sx={{ m: 2 }}
             onChange={(_, value) => {
               if (!value) return;
               setRace(value);
+              setSize(null);
             }}
             renderInput={(params) => (
               <TextField
@@ -95,36 +95,86 @@ export default function RaceFrame() {
                 <FormControl variant="filled" fullWidth>
                   <InputLabel id="demo-simple-select-label">Size</InputLabel>
                   <Select
-                    labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={size}
+                    value={size || ""}
                     label="Size"
-                    defaultValue={size}
                     onChange={handleChange}
                   >
-                    {sizes.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
+                    {(race?.sizeOptions?.map((option) => (
+                      <MenuItem key={option} value={option} >
+                        {option}
                       </MenuItem>
-                    ))}
+                    )))}
                   </Select>
                 </FormControl>
               </Grid>
             </Grid>
-            <CardInfo/>
+            <CardInfo />
           </div>
         )}
       </React.Fragment>
     </Box>
   );
 }
+//generate races from D&D as in interface
 const races: Race[] = [
-  { id: 1, label: "Centaur", languages: [0, 3] },
-  { id: 1, label: "Dragonborn", languages: [0, 3] },
-  { id: 1, label: "Elf (High)", languages: [0, 1] },
-  { id: 1, label: "Goblin", languages: [0, 2] },
-  { id: 1, label: "Human", languages: [0, 3] },
+  {
+    id: 1,
+    label: "Dwarf",
+    languages: {
+      amount: 2,
+      defaults: [
+        { id: 5, title: "Common Dwarvish" },
+      ],
+    },
+    description:
+      "Bold and hardy, dwarves are known as skilled warriors, miners, and workers of stone and metal.",
+    speed: 25,
+    features: [
+      "Darkvision",
+      "Dwarven Resilience",
+      "Dwarven Combat Training",
+      "Stonecunning",
+    ],
+    abilityScorePlus2: ["CONSTITUTION"],
+    sizeOptions: ["Medium"],
+  },
+  {
+    id: 2,
+    label: "Elf",
+    languages: {
+      amount: 2,
+      defaults: [
+        { id: 1, title: "Common Elvish" },
+        { id: 2, title: "High Elvish" },
+      ],
+    },
+    description:
+      "Elves are a magical people of otherworldly grace, living in the world but not entirely part of it.",
+    speed: 30,
+    features: ["Darkvision", "Keen Senses", "Fey Ancestry", "Trance"],
+    abilityScorePlus2: ["DEXTERITY"],
+    sizeOptions: ["Medium"],
+  },
+  {
+    id: 3,
+    label: "Halfling",
+    languages: {
+      amount: 2,
+      defaults: [
+        { id: 8, title: "Common Draconic" },
+        { id: 9, title: "High Draconic" },
+      ],
+    },
+    description:
+      "The diminutive halflings survive in a world full of larger creatures by avoiding notice or, barring that, avoiding offense.",
+    speed: 25,
+    features: ["Lucky", "Brave", "Halfling Nimbleness"],
+    abilityScorePlus2: ["DEXTERITY"],
+    sizeOptions: ["Small"],
+  },
 ];
+
 // TypeScript array of objects with hardcoded IDs representing D&D languages
 
 const languages: AutocompleteItem[] = [
@@ -175,13 +225,4 @@ const languages: AutocompleteItem[] = [
   { id: 26, title: "Common Undercommon" },
   { id: 27, title: "High Undercommon" },
 ];
-const sizes = [
-  {
-    value: "M",
-    label: "Medium",
-  },
-  {
-    value: "S",
-    label: "Small",
-  },
-];
+
