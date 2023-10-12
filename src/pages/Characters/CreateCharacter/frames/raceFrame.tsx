@@ -14,7 +14,9 @@ import {
   AutocompleteItem,
   Ability,
   Size,
+  Feature,
 } from "@pages/Characters/definitions/characterForm";
+
 import { setRace as setRaceStore } from "reducers/characterReducer";
 import CardInfo from "../components/cardInfo";
 
@@ -24,6 +26,7 @@ export default function RaceFrame() {
   const dispatch = useAppDispatch();
   const [race, setRace] = useState<Race | null>(raceStore || null);
   const [isVisible, setVisibility] = React.useState(false);
+  const [features,setFeatures] = React.useState<Feature[] | []>([]);
   const [languagesRes, setLanguages] = useState<AutocompleteItem[]>(
     race?.languages?.defaults || []
   );
@@ -36,8 +39,9 @@ export default function RaceFrame() {
     if (!race) return;
     race?.label !== "" ? setVisibility(true) : setVisibility(false);
     const a = race;
-    setLanguages(a.languages?.defaults || []);
+    setLanguages(a.languages?.defaults);
     setSize(a.sizeOptions?.[0] || null);
+    setFeatures([{title: "Speed", text: `${a.speed} ft.`}, ...a.features]);
     dispatch(setRaceStore(a));
   }, [race, dispatch]);
 
@@ -109,7 +113,11 @@ export default function RaceFrame() {
                 </FormControl>
               </Grid>
             </Grid>
-            <CardInfo />
+            <CardInfo
+            title={race?.label || ""}  
+            features={features}   
+            description={race?.description || ""}           
+            />
           </div>
         )}
       </React.Fragment>
@@ -131,10 +139,26 @@ const races: Race[] = [
       "Bold and hardy, dwarves are known as skilled warriors, miners, and workers of stone and metal.",
     speed: 25,
     features: [
-      "Darkvision",
-      "Dwarven Resilience",
-      "Dwarven Combat Training",
-      "Stonecunning",
+      {
+          "title": "Darkvision",
+          "text": "..."
+      },
+      {
+          "title": "Dwarven Resilience",
+          "text": "..."
+      },
+      {
+          "title": "Dwarven Combat Training",
+          "text": "..."
+      },
+      {
+          "title": "Tool Proficiency",
+          "text": "..."
+      },
+      {
+          "title": "Stonecunning",
+          "text": "..."
+      }
     ],
     abilityScorePlus2: ["CONSTITUTION"],
     sizeOptions: ["Medium"],
@@ -152,7 +176,20 @@ const races: Race[] = [
     description:
       "Elves are a magical people of otherworldly grace, living in the world but not entirely part of it.",
     speed: 30,
-    features: ["Darkvision", "Keen Senses", "Fey Ancestry", "Trance"],
+    features: [
+      {
+          "title": "Darkvision",
+          "text": "..."
+      },
+      {
+          "title": "Fey Ancestry",
+          "text": "..."
+      },
+      {
+          "title": "Skill Versatility",
+          "text": "..."
+      }
+  ],
     abilityScorePlus2: ["DEXTERITY"],
     sizeOptions: ["Medium"],
   },
@@ -169,7 +206,20 @@ const races: Race[] = [
     description:
       "The diminutive halflings survive in a world full of larger creatures by avoiding notice or, barring that, avoiding offense.",
     speed: 25,
-    features: ["Lucky", "Brave", "Halfling Nimbleness"],
+    features: [ 
+      {
+          "title": "Lucky",
+          "text": "..."
+
+      },
+      {
+          "title": "Brave",
+          "text": "..."
+      },
+      {
+          "title": "Halfling Nimbleness",
+          "text": "..."
+      }],
     abilityScorePlus2: ["DEXTERITY"],
     sizeOptions: ["Small"],
   },

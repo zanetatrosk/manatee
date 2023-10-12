@@ -34,15 +34,19 @@ interface AbilityScore {
 interface Race {
     id: number;
     label: string | null;
-    languages?: LanguageParams;
-    description?: string;
-    speed?: number;
-    features?: string[];
+    languages: LanguageParams;
+    description: string;
+    speed: number;
+    features: Feature[];
     //this will be enum
     abilityScorePlus1?: string[];
     abilityScorePlus2?: string[];
     //enum
-    sizeOptions?: string[];
+    sizeOptions: string[];
+}
+interface Feature{
+    title: string;
+    text: string;
 }
 interface Background {
     id: number;
@@ -81,5 +85,5 @@ interface LanguageParams {
 //     languagesBackground: AutocompleteItem[];
 // }
 
-export type {Race, AutocompleteItem, Background, AbilityScore, LanguageParams}
+export type {Race, AutocompleteItem, Background, AbilityScore, LanguageParams, Feature}
 export {Ability, Size}
