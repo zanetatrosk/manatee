@@ -12,11 +12,8 @@ import { useAppSelector, useAppDispatch } from "../../../../hooks/hooksStore";
 import {
   Race,
   AutocompleteItem,
-  Ability,
-  Size,
   Feature,
 } from "@pages/Characters/definitions/characterForm";
-
 import { setRace as setRaceStore } from "reducers/characterReducer";
 import CardInfo from "../components/cardInfo";
 
@@ -89,7 +86,7 @@ export default function RaceFrame() {
                   results={languagesRes}
                   onChange={setLanguages}
                   label="Languages"
-                  helpText="Please choose 3 languages"
+                  helpText={`Please choose ${race?.languages.amount} languages`}
                   placeholder="elsiftisna"
                   maxItems={3}
                 />
@@ -149,7 +146,7 @@ const races: Race[] = [
       },
       {
           "title": "Dwarven Combat Training",
-          "text": "..."
+          "text": "As an action, you can touch a piece of nonmagical metal and imbue it with one of your smith’s specialties, as if you had cast the magic weapon spell on it. For the purpose of this trait, a martial weapon is a melee or ranged weapon that requires an Attack roll, and a ranged weapon is any weapon that can be used to make a ranged Attack."
       },
       {
           "title": "Tool Proficiency",

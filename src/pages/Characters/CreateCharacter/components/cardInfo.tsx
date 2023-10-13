@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { Box, Card, CardContent, Typography, Grid } from "@mui/material";
 import { Feature } from "@pages/Characters/definitions/characterForm";
 interface PropsParams {
   title: string | null;
@@ -7,7 +7,6 @@ interface PropsParams {
   description: string | null;
 }
 export default function CardInfo(props: PropsParams) {
-  
   React.useEffect(() => {
     console.log(props.features, "features");
   }, [props.features]);
@@ -33,22 +32,18 @@ export default function CardInfo(props: PropsParams) {
             py: 0,
           }}
         >
-          {props.features.map(
-            (feature) =>
-            <Box sx={{display: 'flex'}}>
-                <Typography
-                  variant="body1"
-                  align="justify"
-                  sx={{ pr: 1 }}
-                >
-                  {feature.title}: 
-                </Typography>
-                <Typography variant="body1" color="text.secondary" align="justify">
-                {feature.text}
-              </Typography>
-              </Box>
-              
-          )}
+          <div style={{ width: "100%" }}>
+            {props.features.map((feature) => (
+              <Grid container my={1}>
+              <Grid item xs={12} sm={2}>
+                <Typography variant="body1">{feature.title}</Typography>
+              </Grid>
+              <Grid item xs={12} sm={10}>
+                <Typography variant="body1" color="text.secondary">{feature.text}</Typography>
+              </Grid>
+            </Grid>
+            ))}
+          </div>
         </CardContent>
         <CardContent
           sx={{

@@ -5,6 +5,7 @@ import MultiComplete from "@components/customMultiComplete";
 import TextField from "@mui/material/TextField";
 import { useState, useEffect } from "react";
 import { Background, AutocompleteItem } from "@pages/Characters/definitions/characterForm";
+import CardInfo from "../components/cardInfo";
 
 
 
@@ -13,20 +14,20 @@ export default function BackgroundFrame() {
   const [isVisible, setVisibility] = React.useState(false);
   const [languagesValue, setLanguages] = useState<AutocompleteItem[]>(
     languages.filter((option) =>
-      background?.languages.find((id) => id === option.id)
+      background?.languages.defaults.find( (id: AutocompleteItem) => id.id === option.id )
     )
   );
   const [toolsValue, setTools] = useState<AutocompleteItem[]>([]);
   useEffect(() => {
     const resLen = languages.filter((option) => {
-      const result = background?.languages.find(
-        (id) => id === option.id
+      const result = background?.languages.defaults.find(
+        (id) => id.id === option.id
       );
       return result;
     })
     setLanguages(resLen);
     const tools: AutocompleteItem[] = proficiencyTools.filter(
-      (option) => background?.tools.find((id) => id === option.id)
+      (option) => background?.tools.defaults.find((id) => id.id === option.id)
     );
     setTools(tools);
     console.log("information from effect resLen", resLen);
@@ -77,7 +78,7 @@ export default function BackgroundFrame() {
                   results={languagesValue}
                   onChange={setLanguages}
                   label="Languages"
-                  helpText="Please choose 2 languages"
+                  helpText={`Please choose ${background?.id} languages`}
                   placeholder="elsiftisna"
                   maxItems={3}
                 />
@@ -88,12 +89,17 @@ export default function BackgroundFrame() {
                   results={toolsValue}
                   onChange={setTools}
                   label="Proficiency tools"
-                  helpText="Please choose 2 tools"
+                  helpText={`Please choose ${background?.id} tools`}
                   placeholder="some tool"
                   maxItems={3}
                 />
               </Grid>
             </Grid>
+            <CardInfo
+            title={background?.label || ""}  
+            features={background?.features || []}   
+            description={background?.description || ""}           
+            />
           </div>
         )}
       </React.Fragment>
@@ -102,50 +108,54 @@ export default function BackgroundFrame() {
 }
 // TypeScript array of objects representing D&D backgrounds
 
+
 const backgrounds: Background[] = [
   {
     id: 1,
     label: "Acolyte",
-    languages: [1, 2],
-    tools: [2, 3],
+    languages: {
+      amount: 2,
+      defaults: [
+        { id: 1, title: "Common" },
+        { id: 17, title: "Celestial" },
+      ],
+    },
+    tools: {
+      amount: 0,
+      defaults: [],
+    },
+    description:
+      "You have spent your life in the service of a temple to a specific god or pantheon of gods. You act as an intermediary between the realm of the holy and the mortal world, performing sacred rites and offering sacrifices in order to conduct worshipers into the presence of the divine. You are not necessarily a cleric—performing sacred rites is not the same thing as channeling divine power.",
+    features: [
+      {
+        title: "Shelter of the Faithful",
+        text:
+          "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.",
+      },
+    ],
   },
   {
     id: 2,
     label: "Charlatan",
-    languages: [1],
-    tools: [4],
+    languages: {
+      amount: 0,
+      defaults: [],
+    },
+    tools: {
+      amount: 0,
+      defaults: [],
+    },
+    description:
+      "You have always had a way with people. You know what makes them tick, you can tease out their hearts' desires after a few minutes of conversation, and with a few leading questions you can read them like they were children's books. It's a useful talent, and one that you're perfectly willing to use for your advantage.",
+    features: [
+      {
+        title: "False Identity",
+        text:
+          "You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona. Additionally, you can forge documents including official papers and personal letters, as long as you have seen an example of the kind of document or the handwriting you are trying to copy.",
+      },
+    ],
   },
-  {
-    id: 3,
-    label: "Folk Hero",
-    languages: [],
-    tools: [6, 7],
-  },
-  {
-    id: 4,
-    label: "Noble",
-    languages: [3],
-    tools: [8],
-  },
-  {
-    id: 5,
-    label: "Sage",
-    languages: [1],
-    tools: [5],
-  },
-  {
-    id: 6,
-    label: "Soldier",
-    languages: [],
-    tools: [3],
-  },
-  {
-    id: 7,
-    label: "Urchin",
-    languages: [],
-    tools: [3, 4],
-  },
-  // Add more backgrounds as needed
+
 ];
 
 // TypeScript array of objects with hardcoded IDs representing D&D languages
