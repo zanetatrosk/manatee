@@ -34,12 +34,12 @@ export default function CardInfo(props: PropsParams) {
         >
           <div style={{ width: "100%" }}>
             {props.features.map((feature) => (
-              <Grid container my={1}>
+              <Grid container my={1.5}>
               <Grid item xs={12} sm={2}>
                 <Typography variant="body1">{feature.title}</Typography>
               </Grid>
               <Grid item xs={12} sm={10}>
-                <Typography variant="body1" color="text.secondary">{feature.text}</Typography>
+                <Typography variant="body1" color="text.secondary" align="justify">{feature.text}</Typography>
               </Grid>
             </Grid>
             ))}

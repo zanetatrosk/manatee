@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Autocomplete, TextField, Chip } from "@mui/material";
+import { AutocompleteItem } from "@pages/Characters/definitions/characterForm";
 //interface used for props
 //is it posible to replace this with sth like Object?
 interface PropsParams {
@@ -12,11 +13,7 @@ interface PropsParams {
   placeholder?: string;
   maxItems: number;
 }
-//interface used for autocomplete
-interface AutocompleteItem {
-  id: number;
-  title: string;
-}
+
 //this func will be in utils todo
 function generateId(): number {
   return Math.random();
@@ -25,9 +22,6 @@ export default function MultiComplete(props: PropsParams) {
 
   const [item, setItem] = React.useState("");
 
-  useEffect(() => {
-    setItem("");
-  }, [props.results]);
 
   return (
     <div>
@@ -44,14 +38,18 @@ export default function MultiComplete(props: PropsParams) {
         inputValue={item}
         onInputChange={(_, v) => setItem(v)}
         onBlur={() => {
-          if (item.trim() === "") return;
+          if (item.trim() === "" || props.results.length === props.maxItems){
+            setItem("");
+            return;
+          }
           const tmp: AutocompleteItem[] = [
             ...props.results,
-            { id: generateId(), title: item },
+            { id: null, title: item },
           ];
           props.onChange(tmp);
         }}
-        onChange={(e, value) => {          
+        onChange={(e, value) => {
+          setItem("");          
           props.onChange(value);
         }}
         renderTags={(value: readonly AutocompleteItem[], getTagProps) =>

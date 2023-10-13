@@ -88,7 +88,7 @@ export default function RaceFrame() {
                   label="Languages"
                   helpText={`Please choose ${race?.languages.amount} languages`}
                   placeholder="elsiftisna"
-                  maxItems={3}
+                  maxItems={race?.languages.amount || 0}
                 />
               </Grid>
 

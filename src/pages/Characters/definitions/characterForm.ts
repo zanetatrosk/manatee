@@ -61,7 +61,7 @@ interface Background {
 
 //interface used for autocomplete
 interface AutocompleteItem {
-    id: number;
+    id: number | null;
     title: string;
 }
 interface AutocompleteParams {

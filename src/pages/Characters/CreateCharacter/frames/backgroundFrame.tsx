@@ -6,31 +6,25 @@ import TextField from "@mui/material/TextField";
 import { useState, useEffect } from "react";
 import { Background, AutocompleteItem } from "@pages/Characters/definitions/characterForm";
 import CardInfo from "../components/cardInfo";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/hooksStore";
+import { setBackground as setBackgroundStore } from "reducers/characterReducer";
 
 
 
 export default function BackgroundFrame() {
-  const [background, setBackground] = useState<Background | null>(null);
   const [isVisible, setVisibility] = React.useState(false);
-  const [languagesValue, setLanguages] = useState<AutocompleteItem[]>(
-    languages.filter((option) =>
-      background?.languages.defaults.find( (id: AutocompleteItem) => id.id === option.id )
-    )
-  );
+  const [languagesValue, setLanguages] = useState<AutocompleteItem[]>([]);
+  const backgroundStore = useAppSelector((state) => state.character.background);
+  const dispatch = useAppDispatch();
+  const [background, setBackground] = useState<Background | null>(null || backgroundStore);
   const [toolsValue, setTools] = useState<AutocompleteItem[]>([]);
   useEffect(() => {
-    const resLen = languages.filter((option) => {
-      const result = background?.languages.defaults.find(
-        (id) => id.id === option.id
-      );
-      return result;
-    })
-    setLanguages(resLen);
-    const tools: AutocompleteItem[] = proficiencyTools.filter(
-      (option) => background?.tools.defaults.find((id) => id.id === option.id)
-    );
-    setTools(tools);
-    console.log("information from effect resLen", resLen);
+    if (!background) return;
+    setLanguages(background?.languages?.defaults || []);
+    setTools(background?.tools?.defaults || []);
+    setVisibility(true);
+    const tmpBack = background;
+    dispatch(setBackgroundStore(tmpBack));
   }, [background]);
 
   return (
@@ -78,9 +72,9 @@ export default function BackgroundFrame() {
                   results={languagesValue}
                   onChange={setLanguages}
                   label="Languages"
-                  helpText={`Please choose ${background?.id} languages`}
+                  helpText={`Please choose ${background?.languages.amount} languages`}
                   placeholder="elsiftisna"
-                  maxItems={3}
+                  maxItems={background?.languages.amount || 0 }
                 />
               </Grid>
               <Grid item lg={6} xs={12} sx={{ p: 2 }}>
@@ -89,9 +83,9 @@ export default function BackgroundFrame() {
                   results={toolsValue}
                   onChange={setTools}
                   label="Proficiency tools"
-                  helpText={`Please choose ${background?.id} tools`}
+                  helpText={`Please choose ${background?.tools.amount} tools`}
                   placeholder="some tool"
-                  maxItems={3}
+                  maxItems={background?.tools.amount || 0}
                 />
               </Grid>
             </Grid>
@@ -154,8 +148,7 @@ const backgrounds: Background[] = [
           "You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona. Additionally, you can forge documents including official papers and personal letters, as long as you have seen an example of the kind of document or the handwriting you are trying to copy.",
       },
     ],
-  },
-
+  },  
 ];
 
 // TypeScript array of objects with hardcoded IDs representing D&D languages
