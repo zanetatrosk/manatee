@@ -33,8 +33,8 @@ export default function BackgroundFrame() {
   }, [background]);
 
   return (
-    <Box sx={{ pt: 2, pb: 3 }}>
-      <Grid container sx={{ py: 2 }}>
+    <Box>
+      <Grid container>
         <Grid item lg={7} xs={12}>
           <Autocomplete
             disablePortal
