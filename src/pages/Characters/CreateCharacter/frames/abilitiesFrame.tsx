@@ -39,7 +39,7 @@ const StyledModifier = styled(TableCell)(({ theme }) => ({
 }));
 function setModifiersValues(row: AbilityScore): number {
   
-  let modifier = Math.floor((row.score - 10) / 2);
+  let modifier = Math.floor(((row.score + (row.modifierUpToOne ? 1 : 0) + (row.modifierUpToTwo ? 2 : 0)) - 10) / 2);
   return modifier;
 }
 export default function Abilities() {
