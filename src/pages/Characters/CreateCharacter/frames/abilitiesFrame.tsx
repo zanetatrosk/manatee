@@ -24,22 +24,17 @@ const DEFAULT_SCORE = 8;
 const MAX_POINTS = 27;
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
+  
   [`&.${tableCellClasses.body}`]: {
     ...theme.typography.button,
   },
 }));
 
 const StyledModifier = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
+ 
   [`&.${tableCellClasses.body}`]: {
     ...theme.typography.h4,
+    
   },
 }));
 function setModifiersValues(row: AbilityScore): number {
@@ -82,11 +77,12 @@ export default function Abilities() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Ability</TableCell>
-            <TableCell align="left">Score</TableCell>
-            <TableCell align="left">Modifier</TableCell>
-            <TableCell align="left">Up&nbsp;+&nbsp;1</TableCell>
-            <TableCell align="left">Up&nbsp;+&nbsp;2</TableCell>
+            <TableCell align="center">Ability</TableCell>
+            <TableCell align="center">Score</TableCell>
+            <TableCell align="center">Modifier</TableCell>
+            <TableCell align="center">Up&nbsp;+&nbsp;1</TableCell>
+            <TableCell align="center">Up&nbsp;+&nbsp;2</TableCell>
+            <TableCell align="center">Total score</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -95,12 +91,13 @@ export default function Abilities() {
               key={row.label}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <StyledTableCell>{row.label}</StyledTableCell>
-              <TableCell align="left" sx={{ maxWidth: 151 }}>
+              <StyledTableCell align="center">{row.label}</StyledTableCell>
+              <TableCell align="center" size="small">
                 <TextField
                   id="outlined-number"
                   type="number"
-                  value={row.score}
+                 
+                   value={row.score}
                   inputProps={{ min: MIN, max: MAX }}
                   onChange={(e) => {
                     let value = parseInt(e.target.value, BASE_10);
@@ -117,10 +114,10 @@ export default function Abilities() {
                   }}
                 />
               </TableCell>
-              <StyledModifier align="left">
+              <StyledModifier align="center">
                 {setModifiersValues(row)}
               </StyledModifier>
-              <TableCell>
+              <StyledModifier align="center">
                 <Checkbox
                   checked={row.modifierUpToOne && !row.modifierUpToTwo}
                   onChange={() => { 
@@ -131,8 +128,8 @@ export default function Abilities() {
                   value={row.modifierUpToOne}
                   disabled={row.modifierUpToTwo}
                 />
-              </TableCell>
-              <TableCell>
+              </StyledModifier>
+              <StyledModifier align="center">
                 <Checkbox
                   value={row.modifierUpToTwo}
                   checked={row.modifierUpToTwo && !row.modifierUpToOne}
@@ -143,7 +140,10 @@ export default function Abilities() {
                   }}
                   disabled={row.modifierUpToOne}
                 />
-              </TableCell>
+              </StyledModifier>
+              <StyledModifier align="center">
+                {row.score + (row.modifierUpToOne ? 1 : 0) + (row.modifierUpToTwo ? 2 : 0)}
+              </StyledModifier>
             </TableRow>
           ))}
         </TableBody>
