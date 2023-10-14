@@ -138,11 +138,11 @@ const races: Race[] = [
     features: [
       {
           "title": "Darkvision",
-          "text": "..."
+          "text": "As an action, you touch a stone object no larger than 3 feet in any dimension and imbue it with magic. For the duration, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. If you chose a sphere, the radius is doubled. Once used, this trait can’t be used again until you finish a long rest."
       },
       {
           "title": "Dwarven Resilience",
-          "text": "..."
+          "text": "The hit point maximum of a dwarf is increased by 1, and it increases by 1 every time the dwarf gains a level."
       },
       {
           "title": "Dwarven Combat Training",
@@ -150,11 +150,11 @@ const races: Race[] = [
       },
       {
           "title": "Tool Proficiency",
-          "text": "..."
+          "text": "This trait grants you proficiency with the artisan’s tools of your choice: smith’s tools, brewer’s supplies, or mason’s tools."
       },
       {
           "title": "Stonecunning",
-          "text": "..."
+          "text": "The dwarf has advantage on Intelligence (History) checks related to the origin of stonework, and it can make such checks untrained."
       }
     ],
     abilityScorePlus2: ["CONSTITUTION"],

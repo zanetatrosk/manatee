@@ -27,7 +27,7 @@ enum Size {
 }
 interface AbilityScore {
     label: string;
-    value: number;
+    score: number;
     modifierUpToOne: boolean;
     modifierUpToTwo: boolean;
 }

@@ -10,24 +10,17 @@ import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
 import { TextField, Typography, CardContent } from "@mui/material";
-import { Ability } from "@pages/Characters/definitions/characterForm";
+import {
+  Ability,
+  AbilityScore,
+} from "@pages/Characters/definitions/characterForm";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/hooksStore";
 
 const MIN = 1;
 const MAX = 20;
 const BASE_10 = 10;
 const DEFAULT_SCORE = 8;
-function createData(name: Ability, modifier: number) {
-  return { name, modifier };
-}
-
-const rows = [
-  createData(Ability.STRENGTH, -1),
-  createData(Ability.DEXTERITY, -1),
-  createData(Ability.CONSTITUTION, -1),
-  createData(Ability.INTELLIGENCE, -1),
-  createData(Ability.WISDOM, -1),
-  createData(Ability.CHARISMA, -1),
-];
+const MAX_POINTS = 27;
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -38,6 +31,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     ...theme.typography.button,
   },
 }));
+//implement point buy todo
 
 const StyledModifier = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -48,9 +42,42 @@ const StyledModifier = styled(TableCell)(({ theme }) => ({
     ...theme.typography.h4,
   },
 }));
-
+function setModifiersValues(row: AbilityScore): number {
+  //return score with counted modifiers due to variable upToOne and upToTwo
+  let modifier = Math.floor((row.score - 10) / 2);
+  if (row.modifierUpToOne) modifier++;
+  if (row.modifierUpToTwo) modifier+=2;
+  return modifier;
+}
 export default function Abilities() {
-  const [scores, setScores] = React.useState<number[]>([]);
+  const race = useAppSelector((state) => state.character.race);
+  const [rows, setRows] = React.useState<AbilityScore[]>(createData());
+  const [points, setPoints] = React.useState<number>(0);
+  function createData(): AbilityScore[] {
+    const keys = Object.keys(Ability);
+    let newArray = [] as AbilityScore[];
+    keys.map((ability: string) => {
+      let upToOne = false;
+      let upToTwo = false;
+      if (
+        typeof race?.abilityScorePlus1?.find((ab) => ab === ability) !==
+        "undefined"
+      )
+        upToOne = true;
+      if (
+        typeof race?.abilityScorePlus2?.find((ab) => ab === ability) !==
+        "undefined"
+      )
+        upToTwo = true;
+      newArray.push({
+        label: ability,
+        score: DEFAULT_SCORE,
+        modifierUpToOne: upToOne,
+        modifierUpToTwo: upToTwo,
+      });
+    });
+    return newArray;
+  }
   return (
     <TableContainer component={Card}>
       <CardContent>
@@ -58,7 +85,7 @@ export default function Abilities() {
           Abilities
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Additional description if required
+          Used points {points}/{MAX_POINTS}
         </Typography>
       </CardContent>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -74,35 +101,53 @@ export default function Abilities() {
         <TableBody>
           {rows.map((row, idx) => (
             <TableRow
-              key={row.name}
+              key={row.label}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <StyledTableCell>{row.name}</StyledTableCell>
+              <StyledTableCell>{row.label}</StyledTableCell>
               <TableCell align="left" sx={{ maxWidth: 151 }}>
                 <TextField
                   id="outlined-number"
                   type="number"
-                  value={scores[idx] || DEFAULT_SCORE}
+                  value={row.score}
                   inputProps={{ min: MIN, max: MAX }}
                   onChange={(e) => {
-                    var value = parseInt(e.target.value, BASE_10);
+                    let value = parseInt(e.target.value, BASE_10);
                     if (value > MAX) value = MAX;
                     if (value < MIN) value = MIN;
-                    let newValues = [...scores];
-                    newValues[idx] = value;
-                    setScores(newValues);
+                    row.score = value;
+                    const newRows = [...rows];
+                    setRows(newRows);
                   }}
                   InputLabelProps={{
                     shrink: true,
                   }}
                 />
               </TableCell>
-              <StyledModifier align="left">{row.modifier}</StyledModifier>
+              <StyledModifier align="left">
+                {setModifiersValues(row)}
+              </StyledModifier>
               <TableCell>
-                <Checkbox color="primary" />
+                <Checkbox
+                  checked={row.modifierUpToOne}
+                  onChange={() => {
+                    row.modifierUpToOne = !row.modifierUpToOne;
+                    const newRows = [...rows];
+                    setRows(newRows);
+                  }}
+                  color="primary"
+                />
               </TableCell>
               <TableCell>
-                <Checkbox color="primary" />
+                <Checkbox
+                  checked={row.modifierUpToTwo}
+                  onChange={() => {
+                    row.modifierUpToTwo = !row.modifierUpToTwo;
+                    const newRows = [...rows];
+                    setRows(newRows);
+                  }}
+                  color="primary"
+                />
               </TableCell>
             </TableRow>
           ))}
