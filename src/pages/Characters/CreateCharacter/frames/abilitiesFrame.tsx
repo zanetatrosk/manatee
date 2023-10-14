@@ -9,7 +9,7 @@ import Card from "@mui/material/Card";
 import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
-import { TextField, Typography, CardContent } from "@mui/material";
+import { TextField, Typography, CardContent, Radio } from "@mui/material";
 import {
   Ability,
   AbilityScore,
@@ -46,37 +46,21 @@ function setModifiersValues(row: AbilityScore): number {
   //return score with counted modifiers due to variable upToOne and upToTwo
   let modifier = Math.floor((row.score - 10) / 2);
   if (row.modifierUpToOne) modifier++;
-  if (row.modifierUpToTwo) modifier+=2;
+  if (row.modifierUpToTwo) modifier += 2;
   return modifier;
 }
 export default function Abilities() {
   const race = useAppSelector((state) => state.character.race);
   const [rows, setRows] = React.useState<AbilityScore[]>(createData());
   const [points, setPoints] = React.useState<number>(0);
+  
   function createData(): AbilityScore[] {
-    const keys = Object.keys(Ability);
-    let newArray = [] as AbilityScore[];
-    keys.map((ability: string) => {
-      let upToOne = false;
-      let upToTwo = false;
-      if (
-        typeof race?.abilityScorePlus1?.find((ab) => ab === ability) !==
-        "undefined"
-      )
-        upToOne = true;
-      if (
-        typeof race?.abilityScorePlus2?.find((ab) => ab === ability) !==
-        "undefined"
-      )
-        upToTwo = true;
-      newArray.push({
-        label: ability,
-        score: DEFAULT_SCORE,
-        modifierUpToOne: upToOne,
-        modifierUpToTwo: upToTwo,
-      });
-    });
-    return newArray;
+    return Object.keys(Ability).map((ability: string) => ({
+      label: ability,
+      score: DEFAULT_SCORE,
+      modifierUpToOne: race?.abilityScorePlus1?.includes(ability) || false,
+      modifierUpToTwo: race?.abilityScorePlus2?.includes(ability) || false,
+    }));
   }
   return (
     <TableContainer component={Card}>
@@ -128,25 +112,29 @@ export default function Abilities() {
                 {setModifiersValues(row)}
               </StyledModifier>
               <TableCell>
-                <Checkbox
-                  checked={row.modifierUpToOne}
-                  onChange={() => {
-                    row.modifierUpToOne = !row.modifierUpToOne;
+                <Radio
+                  checked={row.modifierUpToOne && !row.modifierUpToTwo}
+                  onChange={() => { 
+                    row.modifierUpToOne = true;
+                    row.modifierUpToTwo = false;
                     const newRows = [...rows];
                     setRows(newRows);
                   }}
-                  color="primary"
+                  value={row.modifierUpToOne}
+                  name="radio-buttons"
                 />
               </TableCell>
               <TableCell>
-                <Checkbox
-                  checked={row.modifierUpToTwo}
+                <Radio
+                  checked={row.modifierUpToTwo && !row.modifierUpToOne}
                   onChange={() => {
-                    row.modifierUpToTwo = !row.modifierUpToTwo;
+                    row.modifierUpToTwo = true;
+                    row.modifierUpToOne = false;
                     const newRows = [...rows];
                     setRows(newRows);
                   }}
-                  color="primary"
+                  value={row.modifierUpToTwo}
+                  name="radio-buttons"
                 />
               </TableCell>
             </TableRow>
