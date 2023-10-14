@@ -180,7 +180,7 @@ const races: Race[] = [
       },
       {
           "title": "Fey Ancestry",
-          "text": "..."
+          "text": "The elf has advantage on saving throws against being charmed, and magic can’t put the elf to sleep."
       },
       {
           "title": "Skill Versatility",

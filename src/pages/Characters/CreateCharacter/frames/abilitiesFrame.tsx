@@ -6,15 +6,16 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Card from "@mui/material/Card";
-import Checkbox from "@mui/material/Checkbox";
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
-import { TextField, Typography, CardContent, Radio } from "@mui/material";
+import { TextField, Typography, CardContent, Radio, Checkbox } from "@mui/material";
 import {
   Ability,
   AbilityScore,
 } from "@pages/Characters/definitions/characterForm";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/hooksStore";
+import { setAbilityScores } from "reducers/characterReducer";
+import { useEffect } from "react";
 
 const MIN = 1;
 const MAX = 20;
@@ -31,7 +32,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     ...theme.typography.button,
   },
 }));
-//implement point buy todo
 
 const StyledModifier = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -43,17 +43,23 @@ const StyledModifier = styled(TableCell)(({ theme }) => ({
   },
 }));
 function setModifiersValues(row: AbilityScore): number {
-  //return score with counted modifiers due to variable upToOne and upToTwo
+  
   let modifier = Math.floor((row.score - 10) / 2);
-  if (row.modifierUpToOne) modifier++;
-  if (row.modifierUpToTwo) modifier += 2;
   return modifier;
 }
 export default function Abilities() {
-  const race = useAppSelector((state) => state.character.race);
-  const [rows, setRows] = React.useState<AbilityScore[]>(createData());
-  const [points, setPoints] = React.useState<number>(0);
   
+  const { race, abilityScores } = useAppSelector((state) => state.character);
+  const [rows, setRows] = React.useState<AbilityScore[]>(() => createData());
+  const [points, setPoints] = React.useState<number>(0);
+  const dispatch = useAppDispatch();
+
+  // useEffect(() => {
+  //   console.log(rows, "rows");
+  //   const tmpData = rows;
+  //   dispatch(setAbilityScores(tmpData));
+  // }
+  // , [rows, dispatch]);
   function createData(): AbilityScore[] {
     return Object.keys(Ability).map((ability: string) => ({
       label: ability,
@@ -69,7 +75,8 @@ export default function Abilities() {
           Abilities
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Used points {points}/{MAX_POINTS}
+          {/* todo implement point buy */}
+          Used points {points}/{MAX_POINTS} 
         </Typography>
       </CardContent>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -97,6 +104,8 @@ export default function Abilities() {
                   inputProps={{ min: MIN, max: MAX }}
                   onChange={(e) => {
                     let value = parseInt(e.target.value, BASE_10);
+                    //this is to prevent NaN
+                    if(value !== value) value = MIN;
                     if (value > MAX) value = MAX;
                     if (value < MIN) value = MIN;
                     row.score = value;
@@ -112,29 +121,27 @@ export default function Abilities() {
                 {setModifiersValues(row)}
               </StyledModifier>
               <TableCell>
-                <Radio
+                <Checkbox
                   checked={row.modifierUpToOne && !row.modifierUpToTwo}
                   onChange={() => { 
-                    row.modifierUpToOne = true;
-                    row.modifierUpToTwo = false;
+                    row.modifierUpToOne = !row.modifierUpToOne;
                     const newRows = [...rows];
                     setRows(newRows);
                   }}
                   value={row.modifierUpToOne}
-                  name="radio-buttons"
+                  disabled={row.modifierUpToTwo}
                 />
               </TableCell>
               <TableCell>
-                <Radio
+                <Checkbox
+                  value={row.modifierUpToTwo}
                   checked={row.modifierUpToTwo && !row.modifierUpToOne}
-                  onChange={() => {
-                    row.modifierUpToTwo = true;
-                    row.modifierUpToOne = false;
+                  onChange={() => { 
+                    row.modifierUpToTwo = !row.modifierUpToTwo;
                     const newRows = [...rows];
                     setRows(newRows);
                   }}
-                  value={row.modifierUpToTwo}
-                  name="radio-buttons"
+                  disabled={row.modifierUpToOne}
                 />
               </TableCell>
             </TableRow>
@@ -144,3 +151,6 @@ export default function Abilities() {
     </TableContainer>
   );
 }
+
+
+

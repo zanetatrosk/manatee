@@ -33,7 +33,7 @@ function CharacterCard() {
       </CardContent>
       <CardActions>
         <Grid container direction="row" justifyContent="flex-start" xs={12}>
-          <Grid xs container direction="row">
+          <Grid item xs direction="row">
             <Button variant="outlined" size="small" sx={{ mx: 1 }}>
               VIEW
             </Button>
@@ -65,7 +65,7 @@ export default function Characters() {
       maxWidth="lg"
     >
       <Grid container>
-        <Grid
+        <Grid item
           xs={12}
           pr={3}
           container

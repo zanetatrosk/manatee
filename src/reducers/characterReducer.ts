@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Race, Background } from "@pages/Characters/definitions/characterForm";
+import { Race, Background, AbilityScore } from "@pages/Characters/definitions/characterForm";
 interface Character{
     name: string| null;
     race: Race | null;
     background: Background | null;
+    abilityScores: AbilityScore[] | [];
 }
 const initialState = {
     race: null,
     background: null,
+    abilityScores: [],
 } as Character
 export const characterReducer = createSlice({
     name: 'character',
@@ -18,11 +20,15 @@ export const characterReducer = createSlice({
         },
         setBackground (state, action: PayloadAction<Background| null>){
             state.background = action.payload;
+        },
+        setAbilityScores (state, action: PayloadAction<AbilityScore[]| []>){
+            state.abilityScores = action.payload;
         }
+        
     }
 });
 
 
-export const { setRace, setBackground } = characterReducer.actions
+export const { setRace, setBackground, setAbilityScores } = characterReducer.actions
 
 export default characterReducer.reducer;
