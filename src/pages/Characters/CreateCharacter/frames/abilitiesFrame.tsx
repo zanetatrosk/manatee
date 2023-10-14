@@ -45,16 +45,17 @@ function setModifiersValues(row: AbilityScore): number {
 export default function Abilities() {
   
   const { race, abilityScores } = useAppSelector((state) => state.character);
-  const [rows, setRows] = React.useState<AbilityScore[]>(() => createData());
+  const [rows, setRows] = React.useState<AbilityScore[]>( abilityScores ? abilityScores.map((row) => ({...row})) : createData() );
   const [points, setPoints] = React.useState<number>(0);
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   console.log(rows, "rows");
-  //   const tmpData = rows;
-  //   dispatch(setAbilityScores(tmpData));
-  // }
-  // , [rows, dispatch]);
+  useEffect(() => {
+    console.log(rows, "rows");
+    //do a deep copy of row
+    const a = rows.map((row) => ({...row}));
+    dispatch(setAbilityScores(a));
+    // dispatch(setAbilityScores([...rows]));
+  } , [rows]);
   function createData(): AbilityScore[] {
     return Object.keys(Ability).map((ability: string) => ({
       label: ability,
@@ -105,8 +106,8 @@ export default function Abilities() {
                     if(value !== value) value = MIN;
                     if (value > MAX) value = MAX;
                     if (value < MIN) value = MIN;
-                    row.score = value;
                     const newRows = [...rows];
+                    newRows[idx].score = value;
                     setRows(newRows);
                   }}
                   InputLabelProps={{
@@ -121,8 +122,8 @@ export default function Abilities() {
                 <Checkbox
                   checked={row.modifierUpToOne && !row.modifierUpToTwo}
                   onChange={() => { 
-                    row.modifierUpToOne = !row.modifierUpToOne;
                     const newRows = [...rows];
+                    newRows[idx].modifierUpToOne = !row.modifierUpToOne;
                     setRows(newRows);
                   }}
                   value={row.modifierUpToOne}
@@ -134,8 +135,8 @@ export default function Abilities() {
                   value={row.modifierUpToTwo}
                   checked={row.modifierUpToTwo && !row.modifierUpToOne}
                   onChange={() => { 
-                    row.modifierUpToTwo = !row.modifierUpToTwo;
                     const newRows = [...rows];
+                    newRows[idx].modifierUpToTwo = !row.modifierUpToTwo;
                     setRows(newRows);
                   }}
                   disabled={row.modifierUpToOne}

@@ -4,12 +4,12 @@ interface Character{
     name: string| null;
     race: Race | null;
     background: Background | null;
-    abilityScores: AbilityScore[] | [];
+    abilityScores: AbilityScore[] | null;
 }
 const initialState = {
     race: null,
     background: null,
-    abilityScores: [],
+    abilityScores: null,
 } as Character
 export const characterReducer = createSlice({
     name: 'character',
@@ -21,7 +21,7 @@ export const characterReducer = createSlice({
         setBackground (state, action: PayloadAction<Background| null>){
             state.background = action.payload;
         },
-        setAbilityScores (state, action: PayloadAction<AbilityScore[]| []>){
+        setAbilityScores (state, action: PayloadAction<AbilityScore[]| null>){
             state.abilityScores = action.payload;
         }
         
