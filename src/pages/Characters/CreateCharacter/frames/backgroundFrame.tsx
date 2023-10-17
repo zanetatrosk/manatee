@@ -1,22 +1,25 @@
 import * as React from "react";
-import { Box, Autocomplete, Divider, Grid } from "@mui/material";
+import { Box, Autocomplete, Divider, Grid, CardContent } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import MultiComplete from "@components/customMultiComplete";
 import TextField from "@mui/material/TextField";
 import { useState, useEffect } from "react";
-import { Background, AutocompleteItem } from "@pages/Characters/definitions/characterForm";
+import {
+  Background,
+  AutocompleteItem,
+} from "@pages/Characters/definitions/characterForm";
 import CardInfo from "../components/cardInfo";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/hooksStore";
 import { setBackground as setBackgroundStore } from "reducers/characterReducer";
-
-
 
 export default function BackgroundFrame() {
   const [isVisible, setVisibility] = React.useState(false);
   const [languagesValue, setLanguages] = useState<AutocompleteItem[]>([]);
   const backgroundStore = useAppSelector((state) => state.character.background);
   const dispatch = useAppDispatch();
-  const [background, setBackground] = useState<Background | null>(null || backgroundStore);
+  const [background, setBackground] = useState<Background | null>(
+    null || backgroundStore
+  );
   const [toolsValue, setTools] = useState<AutocompleteItem[]>([]);
   useEffect(() => {
     if (!background) return;
@@ -29,6 +32,17 @@ export default function BackgroundFrame() {
 
   return (
     <Box>
+      <CardContent>
+        <Typography gutterBottom variant="h4" component="div">
+          Background
+        </Typography>
+        {!isVisible && (
+          <Typography variant="body2" color="text.secondary">
+            {/* todo implement point buy */}
+            Choose your background and you will get some features and languages
+          </Typography>
+        )}
+      </CardContent>
       <Grid container>
         <Grid item lg={7} xs={12}>
           <Autocomplete
@@ -74,7 +88,7 @@ export default function BackgroundFrame() {
                   label="Languages"
                   helpText={`Please choose ${background?.languages.amount} languages`}
                   placeholder="elsiftisna"
-                  maxItems={background?.languages.amount || 0 }
+                  maxItems={background?.languages.amount || 0}
                 />
               </Grid>
               <Grid item lg={6} xs={12} sx={{ p: 2 }}>
@@ -90,9 +104,9 @@ export default function BackgroundFrame() {
               </Grid>
             </Grid>
             <CardInfo
-            title={background?.label || ""}  
-            features={background?.features || []}   
-            description={background?.description || ""}           
+              title={background?.label || ""}
+              features={background?.features || []}
+              description={background?.description || ""}
             />
           </div>
         )}
@@ -101,7 +115,6 @@ export default function BackgroundFrame() {
   );
 }
 // TypeScript array of objects representing D&D backgrounds
-
 
 const backgrounds: Background[] = [
   {
@@ -123,8 +136,7 @@ const backgrounds: Background[] = [
     features: [
       {
         title: "Shelter of the Faithful",
-        text:
-          "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.",
+        text: "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.",
       },
     ],
   },
@@ -144,11 +156,10 @@ const backgrounds: Background[] = [
     features: [
       {
         title: "False Identity",
-        text:
-          "You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona. Additionally, you can forge documents including official papers and personal letters, as long as you have seen an example of the kind of document or the handwriting you are trying to copy.",
+        text: "You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona. Additionally, you can forge documents including official papers and personal letters, as long as you have seen an example of the kind of document or the handwriting you are trying to copy.",
       },
     ],
-  },  
+  },
 ];
 
 // TypeScript array of objects with hardcoded IDs representing D&D languages

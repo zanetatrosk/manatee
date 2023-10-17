@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Autocomplete, Divider, Grid } from "@mui/material";
+import { Box, Autocomplete, Divider, Grid, CardContent } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import MultiComplete from "@components/customMultiComplete";
 import TextField from "@mui/material/TextField";
@@ -44,6 +44,15 @@ export default function RaceFrame() {
 
   return (
     <Box>
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Race
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {/* todo implement point buy */}
+          Choose your race and you will get some features and languages
+        </Typography>
+      </CardContent>
       <Grid container>
         <Grid item lg={7} xs={12}>
           <Autocomplete
