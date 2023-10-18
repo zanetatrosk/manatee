@@ -98,14 +98,14 @@ export default function RaceFrame() {
         {isVisible && (
           <div>
             <Box>
-              <Divider sx={{ p: 2 }}>
+              <Divider sx={{ py: 2 }}>
                 <Typography variant="overline" display="block" gutterBottom>
                   further information
                 </Typography>
               </Divider>
             </Box>
             <Grid container sx={{ py: 2 }}>
-              <Grid item lg={6} xs={12} sx={{ p: 2 }}>
+              <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
                   values={languages}
                   results={languagesRes}
@@ -117,7 +117,7 @@ export default function RaceFrame() {
                 />
               </Grid>
 
-              <Grid item lg={4} xs={12} sx={{ p: 2, pl: 7 }}>
+              <Grid item lg={4} xs={12} sx={{ py: 2, pl: 7 }}>
                 <FormControl variant="filled" fullWidth>
                   <InputLabel id="demo-simple-select-label">Size</InputLabel>
                   <Select

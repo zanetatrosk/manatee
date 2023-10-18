@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Race, Background, AbilityScore } from "@pages/Characters/definitions/characterForm";
+import { Race, Background, AbilityScore, BasicInfo } from "@pages/Characters/definitions/characterForm";
 interface Character{
-    name: string| null;
+    basicInfo: BasicInfo;
     race: Race | null;
     background: Background | null;
     abilityScores: AbilityScore[] | null;

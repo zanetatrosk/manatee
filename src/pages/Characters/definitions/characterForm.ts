@@ -25,6 +25,15 @@ enum Size {
     HUGE = "Huge",
     GARGANTUAN = "Gargantuan"
 }
+
+interface BasicInfo {
+    characterName: string;
+    playerName: string;
+    aligment: string | null;
+    sheetPhoto: string | null;
+    cardPhoto: string | null;
+}
+
 interface AbilityScore {
     label: string;
     score: number;
@@ -90,5 +99,5 @@ interface AutocompleteParams {
 //     languagesBackground: AutocompleteItem[];
 // }
 
-export type {Race, AutocompleteItem, Background, AbilityScore, AutocompleteParams, Feature}
+export type {Race, AutocompleteItem, Background, AbilityScore, AutocompleteParams, Feature, BasicInfo}
 export {Ability, Size}

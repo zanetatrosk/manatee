@@ -6,7 +6,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { AutocompleteItem } from "@pages/Characters/definitions/characterForm";
+import React from "react";
 export default function BasicInformation() {
+  const [item, setItem] = React.useState("");
   return (
     <Grid container spacing={6} padding={2}>
       <Grid container item columnSpacing={8}>
@@ -38,6 +41,7 @@ export default function BasicInformation() {
             id="combo-box-demo"
             options={sources}
             multiple
+            getOptionLabel={(option) => option.title}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -71,27 +75,22 @@ export default function BasicInformation() {
 }
 
 //generate sources for dnd5e
-const sources = [
-  "Player's Handbook",
-  "Dungeon Master's Guide",
-  "Monster Manual",
-  "Sword Coast Adventurer's Guide",
-  "Volo's Guide to Monsters",
-  "Xanathar's Guide to Everything",
-  "Mordenkainen's Tome of Foes",
-  "Guildmasters' Guide to Ravnica",
-  "Eberron: Rising from the Last War",
-  "Explorer's Guide to Wildemount",
-  "Mythic Odysseys of Theros",
-  "Tasha's Cauldron of Everything",
-  "Wayfinder's Guide to Eberron",
-  "Acquisitions Incorporated",
-  "The Tortle Package",
-  "Locathah Rising",
-  "The Lost Laboratory of Kwalish",
-  "The Wild Beyond the Witchlight",
-  "Van Richten's Guide to Ravenloft",
-  "Fizban's Treasury of Dragons",
-  "Candlekeep Mysteries",
-  "The Wild Beyond the Witchlight",
+const sources: AutocompleteItem[] = [
+  {id: 0,  title: "Player's Handbook" },
+  {id: 1,  title: "Dungeon Master's Guide" },
+  {id: 2,  title: "Monster Manual" },
+  {id: 3,  title: "Volo's Guide to Monsters" },
+  {id: 4,  title: "Mordenkainen's Tome of Foes" },
+  {id: 5,  title: "Xanathar's Guide to Everything" },
+  {id: 6,  title: "Guildmasters' Guide to Ravnica" },
+  {id: 7,  title: "Acquisitions Incorporated" },
+  {id: 8,  title: "Eberron: Rising from the Last War" },
+  {id: 9,  title: "Explorer's Guide to Wildemount" },
+  {id: 10, title: "Mythic Odysseys of Theros" },
+  {id: 11, title: "Tasha's Cauldron of Everything" },
+  {id: 12, title: "Van Richten's Guide to Ravenloft" },
+  {id: 13, title: "Fizban's Treasury of Dragons" },
+  {id: 14, title: "Strixhaven: A Curriculum of Chaos" },
+  {id: 15, title: "The Wild Beyond the Witchlight" },
+  
 ];
