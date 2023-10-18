@@ -56,25 +56,28 @@ export default function RaceFrame() {
   }, [race, dispatch]);
 
   return (
-    <Box>
-      <CardContent>
+    <Box padding={2}>
+      <Grid container direction="column" py={2}>
+        <Grid item>
         <Typography gutterBottom variant="h4" component="div">
           Race
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        </Grid>
+        <Grid item>
+        <Typography gutterBottom  variant="body2" color="text.secondary">
           {/* todo implement point buy */}
           Choose your race and you will get some features and languages
         </Typography>
-      </CardContent>
+        </Grid>
+      </Grid>
       <Grid container>
         <Grid item lg={7} xs={12}>
           <Autocomplete
-            
+            sx={{my: 2}}
             id="combo-box-demo"
             options={races}
             isOptionEqualToValue={(option, value) => option.id === value.id}
             value={race}
-            sx={{ m: 2 }}
             onChange={(_, value) => {
               if (!value) return;
               setRace(value);
