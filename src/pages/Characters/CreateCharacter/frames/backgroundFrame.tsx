@@ -46,7 +46,6 @@ export default function BackgroundFrame() {
       <Grid container>
         <Grid item lg={7} xs={12}>
           <Autocomplete
-            disablePortal
             id="combo-box-demo"
             options={backgrounds}
             value={background}

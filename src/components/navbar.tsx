@@ -90,8 +90,8 @@ function ResponsiveAppBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <Link to={"/" + page}>
+              {pages.map((page, index) => (
+                <Link to={"/" + page} key={index}>
                   <MenuItem
                     key={page}
                     onClick={() => {
@@ -122,8 +122,8 @@ function ResponsiveAppBar() {
             D&D APP
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Link to={"/" + page}>
+            {pages.map((page, index) => (
+              <Link to={"/" + page} key={index}>
                 <Button
                   key={page}
                   onClick={() => {

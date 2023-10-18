@@ -32,8 +32,8 @@ function CharacterCard() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Grid container direction="row" justifyContent="flex-start" xs={12}>
-          <Grid item xs direction="row">
+        <Grid container direction="row" justifyContent="flex-start" >
+          <Grid item={true} xs>
             <Button variant="outlined" size="small" sx={{ mx: 1 }}>
               VIEW
             </Button>
@@ -61,7 +61,6 @@ export default function Characters() {
   let navigate = useNavigate();
   return (
     <Container
-      
       maxWidth="lg"
     >
       <Grid container>
@@ -97,7 +96,7 @@ export default function Characters() {
             key={index}
             justifyContent="center"
           >
-            <CharacterCard />
+            <CharacterCard/>
           </Grid>
         ))}
       </Grid>

@@ -8,7 +8,13 @@ import TableRow from "@mui/material/TableRow";
 import Card from "@mui/material/Card";
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
-import { TextField, Typography, CardContent, Radio, Checkbox } from "@mui/material";
+import {
+  TextField,
+  Typography,
+  CardContent,
+  Radio,
+  Checkbox,
+} from "@mui/material";
 import {
   Ability,
   AbilityScore,
@@ -24,38 +30,43 @@ const DEFAULT_SCORE = 8;
 const MAX_POINTS = 27;
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  
   [`&.${tableCellClasses.body}`]: {
     ...theme.typography.button,
   },
 }));
 
 const StyledModifier = styled(TableCell)(({ theme }) => ({
- 
   [`&.${tableCellClasses.body}`]: {
     ...theme.typography.h4,
-    
   },
 }));
 function setModifiersValues(row: AbilityScore): number {
-  
-  let modifier = Math.floor(((row.score + (row.modifierUpToOne ? 1 : 0) + (row.modifierUpToTwo ? 2 : 0)) - 10) / 2);
+  let modifier = Math.floor(
+    (row.score +
+      (row.modifierUpToOne ? 1 : 0) +
+      (row.modifierUpToTwo ? 2 : 0) -
+      10) /
+      2
+  );
   return modifier;
 }
 export default function Abilities() {
-  
   const { race, abilityScores } = useAppSelector((state) => state.character);
-  const [rows, setRows] = React.useState<AbilityScore[]>( abilityScores ? abilityScores.map((row) => ({...row})) : createData() );
+  const [rows, setRows] = React.useState<AbilityScore[]>(
+    abilityScores ? abilityScores.map((row) => ({ ...row })) : createData()
+  );
   const [points, setPoints] = React.useState<number>(0);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     console.log(rows, "rows");
     //do a deep copy of row
-    const a = rows.map((row) => ({...row}));
+    const a = rows.map((row) => ({ ...row }));
     dispatch(setAbilityScores(a));
-    // dispatch(setAbilityScores([...rows]));
-  } , [rows]);
+  }, [rows]);
+
+
+
   function createData(): AbilityScore[] {
     return Object.keys(Ability).map((ability: string) => ({
       label: ability,
@@ -64,15 +75,16 @@ export default function Abilities() {
       modifierUpToTwo: race?.abilityScorePlus2?.includes(ability) || false,
     }));
   }
+
   return (
     <TableContainer component={Card}>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h4" component="div">
           Abilities
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {/* todo implement point buy */}
-          Used points {points}/{MAX_POINTS} 
+          Used points {points}/{MAX_POINTS}
         </Typography>
       </CardContent>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -97,13 +109,12 @@ export default function Abilities() {
                 <TextField
                   id="outlined-number"
                   type="number"
-                 
-                   value={row.score}
+                  value={row.score}
                   inputProps={{ min: MIN, max: MAX }}
                   onChange={(e) => {
                     let value = parseInt(e.target.value, BASE_10);
                     //this is to prevent NaN
-                    if(value !== value) value = MIN;
+                    if (value !== value) value = MIN;
                     if (value > MAX) value = MAX;
                     if (value < MIN) value = MIN;
                     const newRows = [...rows];
@@ -121,7 +132,7 @@ export default function Abilities() {
               <StyledModifier align="center">
                 <Checkbox
                   checked={row.modifierUpToOne && !row.modifierUpToTwo}
-                  onChange={() => { 
+                  onChange={() => {
                     const newRows = [...rows];
                     newRows[idx].modifierUpToOne = !row.modifierUpToOne;
                     setRows(newRows);
@@ -134,7 +145,7 @@ export default function Abilities() {
                 <Checkbox
                   value={row.modifierUpToTwo}
                   checked={row.modifierUpToTwo && !row.modifierUpToOne}
-                  onChange={() => { 
+                  onChange={() => {
                     const newRows = [...rows];
                     newRows[idx].modifierUpToTwo = !row.modifierUpToTwo;
                     setRows(newRows);
@@ -143,7 +154,9 @@ export default function Abilities() {
                 />
               </StyledModifier>
               <StyledModifier align="center">
-                {row.score + (row.modifierUpToOne ? 1 : 0) + (row.modifierUpToTwo ? 2 : 0)}
+                {row.score +
+                  (row.modifierUpToOne ? 1 : 0) +
+                  (row.modifierUpToTwo ? 2 : 0)}
               </StyledModifier>
             </TableRow>
           ))}
@@ -152,6 +165,3 @@ export default function Abilities() {
     </TableContainer>
   );
 }
-
-
-

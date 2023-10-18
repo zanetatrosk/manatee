@@ -13,8 +13,10 @@ import {
   Race,
   AutocompleteItem,
   Feature,
+  AbilityScore,
+  Ability,
 } from "@pages/Characters/definitions/characterForm";
-import { setRace as setRaceStore } from "reducers/characterReducer";
+import { setAbilityScores, setRace as setRaceStore } from "reducers/characterReducer";
 import CardInfo from "../components/cardInfo";
 
 export default function RaceFrame() {
@@ -27,25 +29,36 @@ export default function RaceFrame() {
   const [languagesRes, setLanguages] = useState<AutocompleteItem[]>(
     race?.languages?.defaults || []
   );
-
+  const DEFAULT_SCORE = 8;
   function handleChange(event: SelectChangeEvent) {
     setSize(event.target.value);
     console.log(event.target.value);
   }
+  function createData(): AbilityScore[] {
+    return Object.keys(Ability).map((ability: string) => ({
+      label: ability,
+      score: DEFAULT_SCORE,
+      modifierUpToOne: race?.abilityScorePlus1?.includes(ability) || false,
+      modifierUpToTwo: race?.abilityScorePlus2?.includes(ability) || false,
+    }));
+  }
   useEffect(() => {
     if (!race) return;
+    const abilities = createData();
     race?.label !== "" ? setVisibility(true) : setVisibility(false);
     const a = race;
     setLanguages(a.languages?.defaults);
     setSize(a.sizeOptions?.[0] || null);
     setFeatures([{title: "Speed", text: `${a.speed} ft.`}, ...a.features]);
     dispatch(setRaceStore(a));
+    dispatch(setAbilityScores(abilities));
+    
   }, [race, dispatch]);
 
   return (
     <Box>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h4" component="div">
           Race
         </Typography>
         <Typography variant="body2" color="text.secondary">
@@ -56,7 +69,7 @@ export default function RaceFrame() {
       <Grid container>
         <Grid item lg={7} xs={12}>
           <Autocomplete
-            disablePortal
+            
             id="combo-box-demo"
             options={races}
             isOptionEqualToValue={(option, value) => option.id === value.id}
@@ -229,6 +242,20 @@ const races: Race[] = [
     abilityScorePlus2: ["DEXTERITY"],
     sizeOptions: ["Small"],
   },
+  {
+    id: 4,
+    label: "Human",
+    languages: {
+      amount: 1,
+      defaults: [{ id: 1, title: "Common Elvish" }],
+    },
+    description: "The Human is ",
+    speed: 30,
+    features: [],
+    abilityScorePlus2: [],
+    sizeOptions: ["Medium"],
+
+  }
 ];
 
 // TypeScript array of objects with hardcoded IDs representing D&D languages
