@@ -8,7 +8,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState, useEffect } from "react";
-import { useAppSelector, useAppDispatch } from "../../../../hooks/hooksStore";
+import { useAppSelector, useAppDispatch } from "../../../hooks/hooksStore";
 import {
   Race,
   AutocompleteItem,
@@ -20,7 +20,7 @@ import {
   setAbilityScores,
   setRace as setRaceStore,
 } from "reducers/characterReducer";
-import CardInfo from "../components/cardInfo";
+import CardInfo from "./cardInfo";
 
 const DEFAULT_SCORE = 8;
 

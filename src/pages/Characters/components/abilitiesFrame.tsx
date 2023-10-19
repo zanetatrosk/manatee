@@ -20,7 +20,7 @@ import {
   Ability,
   AbilityScore,
 } from "@pages/Characters/definitions/characterForm";
-import { useAppDispatch, useAppSelector } from "../../../../hooks/hooksStore";
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooksStore";
 import { setAbilityScores } from "reducers/characterReducer";
 import { useEffect } from "react";
 

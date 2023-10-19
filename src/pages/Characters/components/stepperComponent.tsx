@@ -5,11 +5,12 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Race from "@pages/Characters/CreateCharacter/frames/raceFrame";
-import Class from "@pages/Characters/CreateCharacter/frames/classFrame";
-import Abilities from "@pages/Characters/CreateCharacter/frames/abilitiesFrame";
-import BasicInformation from "@pages/Characters/CreateCharacter/frames/basicInformationFrame";
-import Background from "@pages/Characters/CreateCharacter/frames/backgroundFrame";
+import BasicInformation from "@pages/Characters/components/basicInformationFrame";
+import Class  from "@pages/Characters/components/classFrame";
+import Race from "./raceFrame";
+import Abilities from "./abilitiesFrame";
+import Background from "./backgroundFrame";
+
 const steps = ["Basic information", "Class", "Race", "Abilities", "Background"];
 interface ComponentRegister {
   id: number;

@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import HorizontalLinearStepper from "./components/stepperComponent";
+import HorizontalLinearStepper from "./stepperComponent";
 export default function CreateCharacter() {
   return (
     <Container maxWidth="lg">

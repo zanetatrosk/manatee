@@ -8,8 +8,8 @@ import {
   Background,
   AutocompleteItem,
 } from "@pages/Characters/definitions/characterForm";
-import CardInfo from "../components/cardInfo";
-import { useAppDispatch, useAppSelector } from "../../../../hooks/hooksStore";
+import CardInfo from "./cardInfo";
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooksStore";
 import { setBackground as setBackgroundStore } from "reducers/characterReducer";
 
 export default function BackgroundFrame() {
@@ -17,9 +17,7 @@ export default function BackgroundFrame() {
   const [languagesValue, setLanguages] = useState<AutocompleteItem[]>([]);
   const backgroundStore = useAppSelector((state) => state.character.background);
   const dispatch = useAppDispatch();
-  const [background, setBackground] = useState<Background>(
-    backgroundStore
-  );
+  const [background, setBackground] = useState<Background>(backgroundStore);
   const [toolsValue, setTools] = useState<AutocompleteItem[]>([]);
   useEffect(() => {
     if (!background.id) return;
@@ -39,12 +37,12 @@ export default function BackgroundFrame() {
           </Typography>
         </Grid>
         <Grid item>
-          { !isVisible && 
-          (<Typography gutterBottom variant="body2" color="text.secondary">
-            {/* todo implement point buy */}
-            Choose your background to see further information
-          </Typography>   )}
-          
+          {!isVisible && (
+            <Typography gutterBottom variant="body2" color="text.secondary">
+              {/* todo implement point buy */}
+              Choose your background to see further information
+            </Typography>
+          )}
         </Grid>
       </Grid>
       <Grid container>
@@ -107,12 +105,12 @@ export default function BackgroundFrame() {
                 />
               </Grid>
             </Grid>
-            <Box py={2}>
-            <CardInfo
-              title={background?.label}
-              features={background?.features}
-              description={background?.description}
-            />
+            <Box>
+              <CardInfo
+                title={background?.label}
+                features={background?.features}
+                description={background?.description}
+              />
             </Box>
           </div>
         )}

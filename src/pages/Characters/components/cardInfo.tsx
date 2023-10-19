@@ -11,7 +11,7 @@ export default function CardInfo(props: PropsParams) {
     console.log(props.features, "features");
   }, [props.features]);
   return (
-    <Box display="flex">
+    <Box display="flex" my={2}>
       <Card
         sx={{
           display: "flex",
@@ -35,7 +35,7 @@ export default function CardInfo(props: PropsParams) {
           <div style={{ width: "100%" }}>
             {props.features.map((feature) => (
               <Grid container my={1.5} key={feature.title}>
-              <Grid item xs={12} sm={2}>
+              <Grid item xs={12} sm={2} pr={0.5}>
                 <Typography variant="body1">{feature.title}</Typography>
               </Grid>
               <Grid item xs={12} sm={10}>
