@@ -6,12 +6,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { AutocompleteItem } from "@pages/Characters/definitions/characterForm";
+import { AutocompleteItem, BasicInfo } from "@pages/Characters/definitions/characterForm";
 import React from "react";
+
 export default function BasicInformation() {
-  const [item, setItem] = React.useState("");
+  
+  const [basicInfo, setBasicInfo] = React.useState<BasicInfo | null>(null);
+  
   return (
-    <Grid container spacing={6} padding={2}>
+    <Grid container spacing={6} >
       <Grid container item columnSpacing={8}>
         <Grid item xs={12} pb={2}>
           <Typography gutterBottom variant="h4" component="div" >

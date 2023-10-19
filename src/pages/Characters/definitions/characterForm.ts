@@ -29,7 +29,7 @@ enum Size {
 interface BasicInfo {
     characterName: string;
     playerName: string;
-    aligment: string | null;
+    sources: AutocompleteItem[];
     sheetPhoto: string | null;
     cardPhoto: string | null;
 }
@@ -41,7 +41,7 @@ interface AbilityScore {
     modifierUpToTwo: boolean;
 }
 interface Race {
-    id: number;
+    id: number | null;
     label: string | null;
     languages: AutocompleteParams;
     description: string;
@@ -59,7 +59,7 @@ interface Feature{
 }
 //interface Background similar as Race
 interface Background {
-    id: number;
+    id: number | null;
     label: string | null;
     features: Feature[];
     description: string;
@@ -77,27 +77,88 @@ interface AutocompleteParams {
     amount: number;
     defaults: AutocompleteItem[];
 }
-// class CharacterForm {
-//     // basic information part
-//     id: number | null;
-//     characterName: string;
-//     playerName: string;
-//     aligment: string | null;
-//     sheetPhoto: string | null;
-//     cardPhoto: string | null;
-//     //class part
-//     //todo
-//     //race part
-//     race: string | null;
-//     languagesRace: AutocompleteItem[];
-//     size: string | null;
-//     //ability scores part
-//     abilityScores: AbilityScore[];
-//     //background part
-//     background: string | null;
-//     tools: AutocompleteItem[];
-//     languagesBackground: AutocompleteItem[];
-// }
+interface CharacterSheet {
+    id: number | null;
+    basicInfo: BasicInfo;
+    race: Race ;
+    background: Background ;
+    abilityScores: AbilityScore[];
+}
+function createForm() : CharacterSheet{
+    return {
+        basicInfo: {
+            characterName: 'New Character Name',
+            playerName: 'Player Name',
+            sheetPhoto: "",
+            cardPhoto: "",
+        } as BasicInfo,
+        race: {
+            id: null,
+            label: "",
+            languages: {
+                amount: 0,
+                defaults: []
+            },
+            description: "",
+            speed: 0,
+            features: [],
+            sizeOptions: []
+        } as Race,
+        background: {
+            id: null,
+            label: "",
+            features: [],
+            description: "",
+            languages: {
+                amount: 0,
+                defaults: []
+            },
+            tools: {
+                amount: 0,
+                defaults: []
+            }
+        } as Background,
+        abilityScores: [
+            {
+                label: Ability.STRENGTH,
+                score: 10,
+                modifierUpToOne: false,
+                modifierUpToTwo: false
+            },
+            {
+                label: Ability.DEXTERITY,
+                score: 10,
+                modifierUpToOne: false,
+                modifierUpToTwo: false
+            },
+            {
+                label: Ability.CONSTITUTION,
+                score: 10,
+                modifierUpToOne: false,
+                modifierUpToTwo: false
+            },
+            {
+                label: Ability.INTELLIGENCE,
+                score: 10,
+                modifierUpToOne: false,
+                modifierUpToTwo: false
+            },
+            {
+                label: Ability.WISDOM,
+                score: 10,
+                modifierUpToOne: false,
+                modifierUpToTwo: false
+            },
+            {
+                label: Ability.CHARISMA,
+                score: 10,
+                modifierUpToOne: false,
+                modifierUpToTwo: false
+            }
+        ] as AbilityScore[],
+    } as CharacterSheet;
+}
 
-export type {Race, AutocompleteItem, Background, AbilityScore, AutocompleteParams, Feature, BasicInfo}
-export {Ability, Size}
+
+export type {Race, AutocompleteItem, Background, AbilityScore, AutocompleteParams, Feature, BasicInfo, CharacterSheet}
+export {Ability, Size, createForm}

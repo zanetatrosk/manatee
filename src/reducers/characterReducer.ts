@@ -1,30 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Race, Background, AbilityScore, BasicInfo } from "@pages/Characters/definitions/characterForm";
-interface Character{
-    basicInfo: BasicInfo;
-    race: Race | null;
-    background: Background | null;
-    abilityScores: AbilityScore[] | null;
-}
-const initialState = {
-    race: null,
-    background: null,
-    abilityScores: null,
-} as Character
+import { Race, Background, AbilityScore, BasicInfo, createForm } from "@pages/Characters/definitions/characterForm";
+
+const initialState = createForm();
 export const characterReducer = createSlice({
     name: 'character',
     initialState,
     reducers: {
-        setRace (state, action: PayloadAction<Race| null>) {
+        setRace (state, action: PayloadAction<Race>) {
             state.race = action.payload;
         },
-        setBackground (state, action: PayloadAction<Background| null>){
+        setBackground (state, action: PayloadAction<Background>){
             state.background = action.payload;
         },
-        setAbilityScores (state, action: PayloadAction<AbilityScore[]| null>){
+        setAbilityScores (state, action: PayloadAction<AbilityScore[]>){
             state.abilityScores = action.payload;
+        },
+        setBasicInfo (state, action: PayloadAction<BasicInfo>){
+            state.basicInfo = action.payload;
         }
-        
     }
 });
 

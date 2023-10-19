@@ -14,6 +14,7 @@ import {
   CardContent,
   Radio,
   Checkbox,
+  Box,
 } from "@mui/material";
 import {
   Ability,
@@ -77,6 +78,7 @@ export default function Abilities() {
   }
 
   return (
+    <Box>
     <TableContainer component={Card}>
       <CardContent>
         <Typography gutterBottom variant="h4" component="div">
@@ -163,5 +165,6 @@ export default function Abilities() {
         </TableBody>
       </Table>
     </TableContainer>
+    </Box>
   );
 }

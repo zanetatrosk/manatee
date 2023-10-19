@@ -16,20 +16,24 @@ import {
   AbilityScore,
   Ability,
 } from "@pages/Characters/definitions/characterForm";
-import { setAbilityScores, setRace as setRaceStore } from "reducers/characterReducer";
+import {
+  setAbilityScores,
+  setRace as setRaceStore,
+} from "reducers/characterReducer";
 import CardInfo from "../components/cardInfo";
 
+const DEFAULT_SCORE = 8;
+
 export default function RaceFrame() {
-  const [size, setSize] = useState<string| null>(null);
+  const [size, setSize] = useState<string>("");
   const raceStore = useAppSelector((state) => state.character.race);
   const dispatch = useAppDispatch();
-  const [race, setRace] = useState<Race | null>(raceStore || null);
+  const [race, setRace] = useState<Race>(raceStore);
   const [isVisible, setVisibility] = React.useState(false);
-  const [features,setFeatures] = React.useState<Feature[] | []>([]);
+  const [features, setFeatures] = React.useState<Feature[] | []>([]);
   const [languagesRes, setLanguages] = useState<AutocompleteItem[]>(
     race?.languages?.defaults || []
   );
-  const DEFAULT_SCORE = 8;
   function handleChange(event: SelectChangeEvent) {
     setSize(event.target.value);
     console.log(event.target.value);
@@ -48,40 +52,43 @@ export default function RaceFrame() {
     race?.label !== "" ? setVisibility(true) : setVisibility(false);
     const a = race;
     setLanguages(a.languages?.defaults);
-    setSize(a.sizeOptions?.[0] || null);
-    setFeatures([{title: "Speed", text: `${a.speed} ft.`}, ...a.features]);
+    setSize(a.sizeOptions?.[0]);
+    setFeatures([{ title: "Speed", text: `${a.speed} ft.` }, ...a.features]);
     dispatch(setRaceStore(a));
     dispatch(setAbilityScores(abilities));
-    
   }, [race, dispatch]);
 
   return (
-    <Box padding={2}>
-      <Grid container direction="column" py={2}>
+    <Box>
+      <Grid container direction="column" pb={2}>
         <Grid item>
-        <Typography gutterBottom variant="h4" component="div">
-          Race
-        </Typography>
+          <Typography gutterBottom variant="h4" component="div">
+            Race
+          </Typography>
         </Grid>
         <Grid item>
-        <Typography gutterBottom  variant="body2" color="text.secondary">
-          {/* todo implement point buy */}
-          Choose your race and you will get some features and languages
-        </Typography>
+          { !isVisible && 
+          (<Typography gutterBottom variant="body2" color="text.secondary">
+            {/* todo implement point buy */}
+            Choose your race and you will get some features and languages
+          </Typography>   )}
+          
         </Grid>
       </Grid>
       <Grid container>
         <Grid item lg={7} xs={12}>
           <Autocomplete
-            sx={{my: 2}}
+            sx={{ my: 2 }}
+            freeSolo
+            clearOnBlur
             id="combo-box-demo"
             options={races}
             isOptionEqualToValue={(option, value) => option.id === value.id}
             value={race}
             onChange={(_, value) => {
-              if (!value) return;
+              if (!value || typeof value === "string") return;
               setRace(value);
-              setSize(null);
+              setSize("");
             }}
             renderInput={(params) => (
               <TextField
@@ -113,7 +120,7 @@ export default function RaceFrame() {
                   label="Languages"
                   helpText={`Please choose ${race?.languages.amount} languages`}
                   placeholder="elsiftisna"
-                  maxItems={race?.languages.amount || 0}
+                  maxItems={race.languages.amount}
                 />
               </Grid>
 
@@ -122,23 +129,23 @@ export default function RaceFrame() {
                   <InputLabel id="demo-simple-select-label">Size</InputLabel>
                   <Select
                     id="demo-simple-select"
-                    value={size || ""}
+                    value={size}
                     label="Size"
                     onChange={handleChange}
                   >
-                    {(race?.sizeOptions?.map((option) => (
-                      <MenuItem key={option} value={option} >
+                    {race.sizeOptions?.map((option) => (
+                      <MenuItem key={option} value={option}>
                         {option}
                       </MenuItem>
-                    )))}
+                    ))}
                   </Select>
                 </FormControl>
               </Grid>
             </Grid>
             <CardInfo
-            title={race?.label || ""}  
-            features={features}   
-            description={race?.description || ""}           
+              title={race.label}
+              features={features}
+              description={race.description}
             />
           </div>
         )}
@@ -153,34 +160,32 @@ const races: Race[] = [
     label: "Dwarf",
     languages: {
       amount: 2,
-      defaults: [
-        { id: 5, title: "Common Dwarvish" },
-      ],
+      defaults: [{ id: 5, title: "Common Dwarvish" }],
     },
     description:
       "Bold and hardy, dwarves are known as skilled warriors, miners, and workers of stone and metal.",
     speed: 25,
     features: [
       {
-          "title": "Darkvision",
-          "text": "As an action, you touch a stone object no larger than 3 feet in any dimension and imbue it with magic. For the duration, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. If you chose a sphere, the radius is doubled. Once used, this trait can’t be used again until you finish a long rest."
+        title: "Darkvision",
+        text: "As an action, you touch a stone object no larger than 3 feet in any dimension and imbue it with magic. For the duration, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. If you chose a sphere, the radius is doubled. Once used, this trait can’t be used again until you finish a long rest.",
       },
       {
-          "title": "Dwarven Resilience",
-          "text": "The hit point maximum of a dwarf is increased by 1, and it increases by 1 every time the dwarf gains a level."
+        title: "Dwarven Resilience",
+        text: "The hit point maximum of a dwarf is increased by 1, and it increases by 1 every time the dwarf gains a level.",
       },
       {
-          "title": "Dwarven Combat Training",
-          "text": "As an action, you can touch a piece of nonmagical metal and imbue it with one of your smith’s specialties, as if you had cast the magic weapon spell on it. For the purpose of this trait, a martial weapon is a melee or ranged weapon that requires an Attack roll, and a ranged weapon is any weapon that can be used to make a ranged Attack."
+        title: "Dwarven Combat Training",
+        text: "As an action, you can touch a piece of nonmagical metal and imbue it with one of your smith’s specialties, as if you had cast the magic weapon spell on it. For the purpose of this trait, a martial weapon is a melee or ranged weapon that requires an Attack roll, and a ranged weapon is any weapon that can be used to make a ranged Attack.",
       },
       {
-          "title": "Tool Proficiency",
-          "text": "This trait grants you proficiency with the artisan’s tools of your choice: smith’s tools, brewer’s supplies, or mason’s tools."
+        title: "Tool Proficiency",
+        text: "This trait grants you proficiency with the artisan’s tools of your choice: smith’s tools, brewer’s supplies, or mason’s tools.",
       },
       {
-          "title": "Stonecunning",
-          "text": "The dwarf has advantage on Intelligence (History) checks related to the origin of stonework, and it can make such checks untrained."
-      }
+        title: "Stonecunning",
+        text: "The dwarf has advantage on Intelligence (History) checks related to the origin of stonework, and it can make such checks untrained.",
+      },
     ],
     abilityScorePlus2: ["CONSTITUTION"],
     sizeOptions: ["Medium"],
@@ -200,18 +205,18 @@ const races: Race[] = [
     speed: 30,
     features: [
       {
-          "title": "Darkvision",
-          "text": "..."
+        title: "Darkvision",
+        text: "...",
       },
       {
-          "title": "Fey Ancestry",
-          "text": "The elf has advantage on saving throws against being charmed, and magic can’t put the elf to sleep."
+        title: "Fey Ancestry",
+        text: "The elf has advantage on saving throws against being charmed, and magic can’t put the elf to sleep.",
       },
       {
-          "title": "Skill Versatility",
-          "text": "..."
-      }
-  ],
+        title: "Skill Versatility",
+        text: "...",
+      },
+    ],
     abilityScorePlus2: ["DEXTERITY"],
     sizeOptions: ["Medium"],
   },
@@ -228,20 +233,20 @@ const races: Race[] = [
     description:
       "The diminutive halflings survive in a world full of larger creatures by avoiding notice or, barring that, avoiding offense.",
     speed: 25,
-    features: [ 
+    features: [
       {
-          "title": "Lucky",
-          "text": "..."
-
+        title: "Lucky",
+        text: "...",
       },
       {
-          "title": "Brave",
-          "text": "..."
+        title: "Brave",
+        text: "...",
       },
       {
-          "title": "Halfling Nimbleness",
-          "text": "..."
-      }],
+        title: "Halfling Nimbleness",
+        text: "...",
+      },
+    ],
     abilityScorePlus2: ["DEXTERITY"],
     sizeOptions: ["Small"],
   },
@@ -257,8 +262,7 @@ const races: Race[] = [
     features: [],
     abilityScorePlus2: [],
     sizeOptions: ["Medium"],
-
-  }
+  },
 ];
 
 // TypeScript array of objects with hardcoded IDs representing D&D languages
@@ -311,4 +315,3 @@ const languages: AutocompleteItem[] = [
   { id: 26, title: "Common Undercommon" },
   { id: 27, title: "High Undercommon" },
 ];
-

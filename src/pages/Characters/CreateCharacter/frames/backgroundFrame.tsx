@@ -17,14 +17,14 @@ export default function BackgroundFrame() {
   const [languagesValue, setLanguages] = useState<AutocompleteItem[]>([]);
   const backgroundStore = useAppSelector((state) => state.character.background);
   const dispatch = useAppDispatch();
-  const [background, setBackground] = useState<Background | null>(
-    null || backgroundStore
+  const [background, setBackground] = useState<Background>(
+    backgroundStore
   );
   const [toolsValue, setTools] = useState<AutocompleteItem[]>([]);
   useEffect(() => {
-    if (!background) return;
-    setLanguages(background?.languages?.defaults || []);
-    setTools(background?.tools?.defaults || []);
+    if (!background.id) return;
+    setLanguages(background.languages?.defaults);
+    setTools(background.tools?.defaults);
     setVisibility(true);
     const tmpBack = background;
     dispatch(setBackgroundStore(tmpBack));
@@ -32,28 +32,33 @@ export default function BackgroundFrame() {
 
   return (
     <Box>
-      <CardContent>
-        <Typography gutterBottom variant="h4" component="div">
-          Background
-        </Typography>
-        {!isVisible && (
-          <Typography variant="body2" color="text.secondary">
-            {/* todo implement point buy */}
-            Choose your background and you will get some features and languages
+      <Grid container direction="column" pb={2}>
+        <Grid item>
+          <Typography gutterBottom variant="h4" component="div">
+            Background
           </Typography>
-        )}
-      </CardContent>
+        </Grid>
+        <Grid item>
+          { !isVisible && 
+          (<Typography gutterBottom variant="body2" color="text.secondary">
+            {/* todo implement point buy */}
+            Choose your background to see further information
+          </Typography>   )}
+          
+        </Grid>
+      </Grid>
       <Grid container>
         <Grid item lg={7} xs={12}>
           <Autocomplete
             id="combo-box-demo"
+            freeSolo
             options={backgrounds}
             value={background}
-            sx={{ m: 2 }}
-            onChange={(_, value: Background | null) => {
-              if (!value) return;
+            sx={{ my: 2 }}
+            onChange={(_, value) => {
+              if (!value || typeof value === "string") return;
               setBackground(value);
-              background?.label !== ""
+              background.label !== ""
                 ? setVisibility(true)
                 : setVisibility(false);
             }}
@@ -72,25 +77,25 @@ export default function BackgroundFrame() {
         {isVisible && (
           <div>
             <Box>
-              <Divider sx={{ p: 2 }}>
+              <Divider sx={{ py: 2 }}>
                 <Typography variant="overline" display="block" gutterBottom>
                   further information
                 </Typography>
               </Divider>
             </Box>
-            <Grid container sx={{ py: 2 }}>
-              <Grid item lg={6} xs={12} sx={{ p: 2 }}>
+            <Grid container sx={{ py: 2 }} columnSpacing={8}>
+              <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
                   values={languages}
                   results={languagesValue}
                   onChange={setLanguages}
                   label="Languages"
-                  helpText={`Please choose ${background?.languages.amount} languages`}
+                  helpText={`Please choose ${background.languages.amount} languages`}
                   placeholder="elsiftisna"
-                  maxItems={background?.languages.amount || 0}
+                  maxItems={background.languages.amount}
                 />
               </Grid>
-              <Grid item lg={6} xs={12} sx={{ p: 2 }}>
+              <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
                   values={proficiencyTools}
                   results={toolsValue}
@@ -98,15 +103,17 @@ export default function BackgroundFrame() {
                   label="Proficiency tools"
                   helpText={`Please choose ${background?.tools.amount} tools`}
                   placeholder="some tool"
-                  maxItems={background?.tools.amount || 0}
+                  maxItems={background.tools.amount}
                 />
               </Grid>
             </Grid>
+            <Box py={2}>
             <CardInfo
-              title={background?.label || ""}
-              features={background?.features || []}
-              description={background?.description || ""}
+              title={background?.label}
+              features={background?.features}
+              description={background?.description}
             />
+            </Box>
           </div>
         )}
       </React.Fragment>

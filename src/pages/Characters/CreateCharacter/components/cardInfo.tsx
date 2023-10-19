@@ -15,8 +15,8 @@ export default function CardInfo(props: PropsParams) {
       <Card
         sx={{
           display: "flex",
-          m: 2,
           p: 1,
+          my: 2,
           width: "100%",
           justifyContent: "flex-start",
           flexDirection: "column",
@@ -34,7 +34,7 @@ export default function CardInfo(props: PropsParams) {
         >
           <div style={{ width: "100%" }}>
             {props.features.map((feature) => (
-              <Grid container my={1.5}>
+              <Grid container my={1.5} key={feature.title}>
               <Grid item xs={12} sm={2}>
                 <Typography variant="body1">{feature.title}</Typography>
               </Grid>
