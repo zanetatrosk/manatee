@@ -52,7 +52,7 @@ function setModifiersValues(row: AbilityScore): number {
 }
 export default function Abilities() {
   const { abilityScores } = useAppSelector((state) => state.character);
-  const [rows, setRows] = React.useState<AbilityScore[]>(abilityScores);
+  const [rows, setRows] = React.useState<AbilityScore[]>(abilityScores.map((row) => ({ ...row })));
   const dispatch = useAppDispatch();
 
   useEffect(() => {
