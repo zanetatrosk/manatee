@@ -20,14 +20,13 @@ import {
   Ability,
   AbilityScore,
 } from "@pages/Characters/definitions/characterForm";
-import { useAppDispatch, useAppSelector } from "../../../hooks/hooksStore";
+import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
 import { setAbilityScores } from "reducers/characterReducer";
 import { useEffect } from "react";
 
 const MIN = 1;
 const MAX = 20;
 const BASE_10 = 10;
-const DEFAULT_SCORE = 8;
 const MAX_POINTS = 27;
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -52,11 +51,8 @@ function setModifiersValues(row: AbilityScore): number {
   return modifier;
 }
 export default function Abilities() {
-  const { race, abilityScores } = useAppSelector((state) => state.character);
-  const [rows, setRows] = React.useState<AbilityScore[]>(
-    abilityScores ? abilityScores.map((row) => ({ ...row })) : createData()
-  );
-  const [points, setPoints] = React.useState<number>(0);
+  const { abilityScores } = useAppSelector((state) => state.character);
+  const [rows, setRows] = React.useState<AbilityScore[]>(abilityScores);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -65,17 +61,6 @@ export default function Abilities() {
     const a = rows.map((row) => ({ ...row }));
     dispatch(setAbilityScores(a));
   }, [rows]);
-
-
-
-  function createData(): AbilityScore[] {
-    return Object.keys(Ability).map((ability: string) => ({
-      label: ability,
-      score: DEFAULT_SCORE,
-      modifierUpToOne: race?.abilityScorePlus1?.includes(ability) || false,
-      modifierUpToTwo: race?.abilityScorePlus2?.includes(ability) || false,
-    }));
-  }
 
   return (
     <Box>
@@ -86,7 +71,7 @@ export default function Abilities() {
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {/* todo implement point buy */}
-          Used points {points}/{MAX_POINTS}
+          Choose your abilities 
         </Typography>
       </CardContent>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">

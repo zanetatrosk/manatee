@@ -89,6 +89,7 @@ function createForm() : CharacterSheet{
         basicInfo: {
             characterName: 'New Character Name',
             playerName: 'Player Name',
+            sources: [],
             sheetPhoto: "",
             cardPhoto: "",
         } as BasicInfo,
@@ -121,37 +122,37 @@ function createForm() : CharacterSheet{
         abilityScores: [
             {
                 label: Ability.STRENGTH,
-                score: 10,
+                score: 8,
                 modifierUpToOne: false,
                 modifierUpToTwo: false
             },
             {
                 label: Ability.DEXTERITY,
-                score: 10,
+                score: 8,
                 modifierUpToOne: false,
                 modifierUpToTwo: false
             },
             {
                 label: Ability.CONSTITUTION,
-                score: 10,
+                score: 8,
                 modifierUpToOne: false,
                 modifierUpToTwo: false
             },
             {
                 label: Ability.INTELLIGENCE,
-                score: 10,
+                score: 8,
                 modifierUpToOne: false,
                 modifierUpToTwo: false
             },
             {
                 label: Ability.WISDOM,
-                score: 10,
+                score: 8,
                 modifierUpToOne: false,
                 modifierUpToTwo: false
             },
             {
                 label: Ability.CHARISMA,
-                score: 10,
+                score: 8,
                 modifierUpToOne: false,
                 modifierUpToTwo: false
             }

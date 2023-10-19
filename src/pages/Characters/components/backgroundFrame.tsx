@@ -9,7 +9,7 @@ import {
   AutocompleteItem,
 } from "@pages/Characters/definitions/characterForm";
 import CardInfo from "./cardInfo";
-import { useAppDispatch, useAppSelector } from "../../../hooks/hooksStore";
+import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
 import { setBackground as setBackgroundStore } from "reducers/characterReducer";
 
 export default function BackgroundFrame() {

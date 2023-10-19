@@ -22,6 +22,6 @@ export const characterReducer = createSlice({
 });
 
 
-export const { setRace, setBackground, setAbilityScores } = characterReducer.actions
+export const { setRace, setBackground, setAbilityScores, setBasicInfo } = characterReducer.actions
 
 export default characterReducer.reducer;

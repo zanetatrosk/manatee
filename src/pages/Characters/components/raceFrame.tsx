@@ -8,7 +8,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState, useEffect } from "react";
-import { useAppSelector, useAppDispatch } from "../../../hooks/hooksStore";
+import { useAppSelector, useAppDispatch } from "@hooks/hooksStore";
 import {
   Race,
   AutocompleteItem,
@@ -21,8 +21,8 @@ import {
   setRace as setRaceStore,
 } from "reducers/characterReducer";
 import CardInfo from "./cardInfo";
+import createAbilityData from "utils/abilityUtils";
 
-const DEFAULT_SCORE = 8;
 
 export default function RaceFrame() {
   const [size, setSize] = useState<string>("");
@@ -38,19 +38,12 @@ export default function RaceFrame() {
     setSize(event.target.value);
     console.log(event.target.value);
   }
-  function createData(): AbilityScore[] {
-    return Object.keys(Ability).map((ability: string) => ({
-      label: ability,
-      score: DEFAULT_SCORE,
-      modifierUpToOne: race?.abilityScorePlus1?.includes(ability) || false,
-      modifierUpToTwo: race?.abilityScorePlus2?.includes(ability) || false,
-    }));
-  }
+  
   useEffect(() => {
-    if (!race) return;
-    const abilities = createData();
+    if (!race || race.label === "" ) return;
     race?.label !== "" ? setVisibility(true) : setVisibility(false);
     const a = race;
+    const abilities = createAbilityData(a);
     setLanguages(a.languages?.defaults);
     setSize(a.sizeOptions?.[0]);
     setFeatures([{ title: "Speed", text: `${a.speed} ft.` }, ...a.features]);
@@ -71,7 +64,7 @@ export default function RaceFrame() {
           (<Typography gutterBottom variant="body2" color="text.secondary">
             {/* todo implement point buy */}
             Choose your race and you will get some features and languages
-          </Typography>   )}
+          </Typography>)}
           
         </Grid>
       </Grid>
