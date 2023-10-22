@@ -12,23 +12,22 @@ import {
   TextField,
   Typography,
   CardContent,
-  Radio,
   Checkbox,
   Box,
 } from "@mui/material";
 import {
-  Ability,
   AbilityScore,
 } from "@pages/Characters/definitions/characterForm";
 import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
 import { setAbilityScores } from "reducers/characterReducer";
 import { useEffect } from "react";
 
+//declaring constants
 const MIN = 1;
 const MAX = 20;
 const BASE_10 = 10;
-const MAX_POINTS = 27;
-
+const headers = ["Ability", "Score", "Modifier", "Up +1", "Up +2", "Total score"];
+//styling
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     ...theme.typography.button,
@@ -40,21 +39,44 @@ const StyledModifier = styled(TableCell)(({ theme }) => ({
     ...theme.typography.h4,
   },
 }));
+
+//function that sets the score to the correct value
+function setScore(value: number) {
+  //this is to prevent NaN
+  if (value !== value) value = MIN;
+  value < MIN ? (value = Math.max(value, MIN)) : (value = Math.min(value, MAX));
+}
+
+//function that calculates the full score
+function calculateFullScore(row: AbilityScore): number {
+  let score = row.score;
+  if (row.modifierUpToOne) score += 1;
+  if (row.modifierUpToTwo) score += 2;
+  return Math.min(score, MAX);
+}
+
+//function that calculates the modifier
 function setModifiersValues(row: AbilityScore): number {
-  let modifier = Math.floor(
-    (row.score +
-      (row.modifierUpToOne ? 1 : 0) +
-      (row.modifierUpToTwo ? 2 : 0) -
-      10) /
-      2
-  );
-  return modifier;
+  return Math.floor((calculateFullScore(row) - 10) / 2);
 }
 export default function Abilities() {
   const { abilityScores } = useAppSelector((state) => state.character);
-  const [rows, setRows] = React.useState<AbilityScore[]>(abilityScores.map((row) => ({ ...row })));
   const dispatch = useAppDispatch();
 
+  //deep copy of abilityScores from store
+  const [rows, setRows] = React.useState<AbilityScore[]>(
+    abilityScores.map((row) => ({ ...row }))
+  );
+
+  //setting the row with new values
+  const setRow = (idx: number, param: string, value: number | boolean) => {
+    const newRows = [...rows];
+    newRows[idx] = { ...rows[idx], [param]: value };
+    setRows(newRows);
+  };
+
+  /*this is called every time some value in rows changes
+  it is unoptimized, in future todo optimize*/
   useEffect(() => {
     console.log(rows, "rows");
     //do a deep copy of row
@@ -64,92 +86,78 @@ export default function Abilities() {
 
   return (
     <Box>
-    <TableContainer component={Card}>
-      <CardContent>
-        <Typography gutterBottom variant="h4" component="div">
-          Abilities
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {/* todo implement point buy */}
-          Choose your abilities 
-        </Typography>
-      </CardContent>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="center">Ability</TableCell>
-            <TableCell align="center">Score</TableCell>
-            <TableCell align="center">Modifier</TableCell>
-            <TableCell align="center">Up&nbsp;+&nbsp;1</TableCell>
-            <TableCell align="center">Up&nbsp;+&nbsp;2</TableCell>
-            <TableCell align="center">Total score</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row, idx) => (
-            <TableRow
-              key={row.label}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <StyledTableCell align="center">{row.label}</StyledTableCell>
-              <TableCell align="center" size="small">
-                <TextField
-                  id="outlined-number"
-                  type="number"
-                  value={row.score}
-                  inputProps={{ min: MIN, max: MAX }}
-                  onChange={(e) => {
-                    let value = parseInt(e.target.value, BASE_10);
-                    //this is to prevent NaN
-                    if (value !== value) value = MIN;
-                    if (value > MAX) value = MAX;
-                    if (value < MIN) value = MIN;
-                    const newRows = [...rows];
-                    newRows[idx].score = value;
-                    setRows(newRows);
-                  }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </TableCell>
-              <StyledModifier align="center">
-                {setModifiersValues(row)}
-              </StyledModifier>
-              <StyledModifier align="center">
-                <Checkbox
-                  checked={row.modifierUpToOne && !row.modifierUpToTwo}
-                  onChange={() => {
-                    const newRows = [...rows];
-                    newRows[idx].modifierUpToOne = !row.modifierUpToOne;
-                    setRows(newRows);
-                  }}
-                  value={row.modifierUpToOne}
-                  disabled={row.modifierUpToTwo}
-                />
-              </StyledModifier>
-              <StyledModifier align="center">
-                <Checkbox
-                  value={row.modifierUpToTwo}
-                  checked={row.modifierUpToTwo && !row.modifierUpToOne}
-                  onChange={() => {
-                    const newRows = [...rows];
-                    newRows[idx].modifierUpToTwo = !row.modifierUpToTwo;
-                    setRows(newRows);
-                  }}
-                  disabled={row.modifierUpToOne}
-                />
-              </StyledModifier>
-              <StyledModifier align="center">
-                {row.score +
-                  (row.modifierUpToOne ? 1 : 0) +
-                  (row.modifierUpToTwo ? 2 : 0)}
-              </StyledModifier>
+      <TableContainer component={Card}>
+        <CardContent>
+          <Typography gutterBottom variant="h4" component="div">
+            Abilities
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {/* todo implement point buy */}
+            Choose your abilities
+          </Typography>
+        </CardContent>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              { headers.map((header) => (
+                <StyledTableCell align="center" key={header} >{header}</StyledTableCell>
+              )) }
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {rows.map((row, idx) => (
+              <TableRow
+                key={row.label}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <StyledTableCell align="center">{row.label}</StyledTableCell>
+                <TableCell align="center" size="small">
+                  <TextField
+                    id="outlined-number"
+                    type="number"
+                    value={row.score}
+                    inputProps={{ min: MIN, max: MAX }}
+                    onChange={(e) => {
+                      let value = parseInt(e.target.value, BASE_10) as number;
+                      setScore(value);
+                      setRow(idx, "score", value);
+                    }}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                </TableCell>
+                <StyledModifier align="center">
+                  {setModifiersValues(row)}
+                </StyledModifier>
+                <StyledModifier align="center">
+                  <Checkbox
+                    checked={row.modifierUpToOne && !row.modifierUpToTwo}
+                    onChange={() => {
+                      setRow(idx, "modifierUpToOne", !row.modifierUpToOne);
+                    }}
+                    value={row.modifierUpToOne}
+                    disabled={row.modifierUpToTwo}
+                  />
+                </StyledModifier>
+                <StyledModifier align="center">
+                  <Checkbox
+                    value={row.modifierUpToTwo}
+                    checked={row.modifierUpToTwo && !row.modifierUpToOne}
+                    onChange={() => {
+                      setRow(idx, "modifierUpToTwo", !row.modifierUpToTwo);
+                    }}
+                    disabled={row.modifierUpToOne}
+                  />
+                </StyledModifier>
+                <StyledModifier align="center">
+                  {calculateFullScore(row)}
+                </StyledModifier>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Box>
   );
 }

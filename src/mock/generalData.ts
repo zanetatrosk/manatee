@@ -110,7 +110,7 @@ const races: Race[] = [
     abilityScorePlus2: [],
     sizeOptions: ["Medium"],
     },
-  ];
+];
 
 const backgrounds: Background[] = [
     {
