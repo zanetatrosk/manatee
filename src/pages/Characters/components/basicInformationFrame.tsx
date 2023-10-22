@@ -27,9 +27,9 @@ export default function BasicInformation() {
     dispatch(setBasicInfo(basicInfoTmp));
   }, [basicInfo]);
   return (
-    <Grid container spacing={6}>
+    <Grid container spacing={10}>
       <Grid container item columnSpacing={8}>
-        <Grid item xs={12} pb={2}>
+        <Grid item xs={12} pb={4}>
           <Typography gutterBottom variant="h4" component="div">
             Basic Information
           </Typography>

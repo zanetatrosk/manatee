@@ -12,6 +12,6 @@ function createAbilityData(race: Race): AbilityScore[] {
   }
 
 function retAbilityScore (){
-
+  
 }  
 export default createAbilityData;

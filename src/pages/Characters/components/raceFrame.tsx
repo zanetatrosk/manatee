@@ -22,7 +22,7 @@ import {
 } from "reducers/characterReducer";
 import CardInfo from "./cardInfo";
 import createAbilityData from "utils/abilityUtils";
-
+import { useGetAllRacesQuery } from "api/raceApiSlice";
 
 export default function RaceFrame() {
   const [size, setSize] = useState<string>("");
@@ -31,6 +31,7 @@ export default function RaceFrame() {
   const [race, setRace] = useState<Race>(raceStore);
   const [isVisible, setVisibility] = React.useState(false);
   const [features, setFeatures] = React.useState<Feature[] | []>([]);
+  const racesApi = useGetAllRacesQuery();
   const [languagesRes, setLanguages] = useState<AutocompleteItem[]>(
     race?.languages?.defaults || []
   );
@@ -44,6 +45,7 @@ export default function RaceFrame() {
     race?.label !== "" ? setVisibility(true) : setVisibility(false);
     const a = race;
     const abilities = createAbilityData(a);
+    console.log("races from api", racesApi.data);
     setLanguages(a.languages?.defaults);
     setSize(a.sizeOptions?.[0]);
     setFeatures([{ title: "Speed", text: `${a.speed} ft.` }, ...a.features]);
@@ -76,7 +78,7 @@ export default function RaceFrame() {
             clearOnBlur
             id="combo-box-demo"
             options={races}
-            isOptionEqualToValue={(option, value) => option.id === value.id}
+            isOptionEqualToValue={(option, value) => option.id === value.id }
             value={race}
             onChange={(_, value) => {
               if (!value || typeof value === "string") return;

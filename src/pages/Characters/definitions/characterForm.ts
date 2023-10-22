@@ -84,6 +84,7 @@ interface CharacterSheet {
     background: Background ;
     abilityScores: AbilityScore[];
 }
+
 function createForm() : CharacterSheet{
     return {
         basicInfo: {
