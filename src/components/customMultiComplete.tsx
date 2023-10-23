@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Autocomplete, TextField, Chip } from "@mui/material";
-import { AutocompleteItem } from "@pages/Characters/definitions/characterForm";
+import { AutocompleteItem } from "@pages/CreateCharacter/definitions/characterForm";
 //interface used for props
 //is it posible to replace this with sth like Object?
 interface PropsParams {

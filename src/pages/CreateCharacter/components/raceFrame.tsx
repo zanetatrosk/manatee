@@ -9,13 +9,12 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@hooks/hooksStore";
+import {CREATE_CHARACTER} from "constants/characterDefinition";
 import {
   Race,
   AutocompleteItem,
   Feature,
-  AbilityScore,
-  Ability,
-} from "@pages/Characters/definitions/characterForm";
+} from "@pages/CreateCharacter/definitions/characterForm";
 import {
   setAbilityScores,
   setRace as setRaceStore,
@@ -23,6 +22,8 @@ import {
 import CardInfo from "./cardInfo";
 import createAbilityData from "utils/abilityUtils";
 import { useGetAllRacesQuery } from "api/raceApiSlice";
+
+const RACE = CREATE_CHARACTER.RACE;
 
 export default function RaceFrame() {
   const raceStore = useAppSelector((state) => state.character.race);
@@ -64,14 +65,14 @@ export default function RaceFrame() {
       <Grid container direction="column" pb={2}>
         <Grid item>
           <Typography gutterBottom variant="h4" component="div">
-            Race
+            {RACE.HEADING}
           </Typography>
         </Grid>
         <Grid item>
           { !isVisible && 
           (<Typography gutterBottom variant="body2" color="text.secondary">
             {/* todo implement point buy */}
-            Choose your race and you will get some features and languages
+            {RACE.SUBTITLE}
           </Typography>)}
           
         </Grid>
@@ -102,9 +103,9 @@ export default function RaceFrame() {
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Race"
+                label={RACE.HEADING}
                 variant="filled"
-                placeholder="Human"
+                placeholder={ RACE.PLACEHOLDER}
               />
             )}
           />
@@ -116,7 +117,7 @@ export default function RaceFrame() {
             <Box>
               <Divider sx={{ py: 2 }}>
                 <Typography variant="overline" display="block" gutterBottom>
-                  further information
+                  {CREATE_CHARACTER.CARD_ACTIONS.FURTHER_INFO}
                 </Typography>
               </Divider>
             </Box>
@@ -126,9 +127,9 @@ export default function RaceFrame() {
                   values={languages}
                   results={languagesRes}
                   onChange={setLanguages}
-                  label="Languages"
+                  label={RACE.LANGUAGES}
                   helpText={`Please choose ${race.languages.amount} languages`}
-                  placeholder="elsiftisna"
+                  placeholder={RACE.LANGUAGES_PLACEHOLDER}
                   maxItems={race.languages.amount}
                 />
               </Grid>
@@ -139,7 +140,7 @@ export default function RaceFrame() {
                   <Select
                     id="demo-simple-select"
                     value={size}
-                    label="Size"
+                    label={RACE.SIZE}
                     onChange={handleChange}
                   >
                     {race.sizeOptions?.map((option) => (

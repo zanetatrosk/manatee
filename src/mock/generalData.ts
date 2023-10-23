@@ -1,4 +1,4 @@
-import { AutocompleteItem, Background, Race } from "@pages/Characters/definitions/characterForm";
+import { AutocompleteItem, Background, Race } from "@pages/CreateCharacter/definitions/characterForm";
 
 
 const races: Race[] = [

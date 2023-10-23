@@ -1,4 +1,4 @@
-import { Ability, AbilityScore, Race } from '@pages/Characters/definitions/characterForm';
+import { Ability, AbilityScore, Race } from '@pages/CreateCharacter/definitions/characterForm';
 
 
 const DEFAULT_SCORE = 8;

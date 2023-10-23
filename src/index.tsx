@@ -27,7 +27,9 @@ if (process.env.NODE_ENV === 'development') {
 
   const { worker } = require('./mock/browser')
 
-  worker.start()
+  worker.start({
+    onUnhandledRequest: 'bypass',
+  })
 
 }
 // If you want to start measuring performance in your app, pass a function

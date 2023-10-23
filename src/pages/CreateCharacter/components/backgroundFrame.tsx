@@ -7,10 +7,13 @@ import { useState, useEffect } from "react";
 import {
   Background,
   AutocompleteItem,
-} from "@pages/Characters/definitions/characterForm";
+} from "@pages/CreateCharacter/definitions/characterForm";
 import CardInfo from "./cardInfo";
 import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
 import { setBackground as setBackgroundStore } from "reducers/characterReducer";
+import {CREATE_CHARACTER} from "constants/characterDefinition";
+
+const BACKGROUND = CREATE_CHARACTER.BACKGROUND;
 
 export default function BackgroundFrame() {
   const backgroundStore = useAppSelector((state) => state.character.background);
@@ -35,13 +38,13 @@ export default function BackgroundFrame() {
       <Grid container direction="column" pb={2}>
         <Grid item>
           <Typography gutterBottom variant="h4" component="div">
-            Background
+            {BACKGROUND.HEADING}
           </Typography>
         </Grid>
         <Grid item>
           {!isVisible && (
             <Typography gutterBottom variant="body2" color="text.secondary">
-              Choose your background to see further information
+              {BACKGROUND.SUBTITLE}
             </Typography>
           )}
         </Grid>
@@ -65,9 +68,9 @@ export default function BackgroundFrame() {
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Background"
+                label={BACKGROUND.HEADING}
                 variant="filled"
-                placeholder="Human"
+                placeholder={BACKGROUND.PLACEHOLDER}
               />
             )}
           />
@@ -79,7 +82,7 @@ export default function BackgroundFrame() {
             <Box>
               <Divider sx={{ py: 2 }}>
                 <Typography variant="overline" display="block" gutterBottom>
-                  further information
+                  {CREATE_CHARACTER.CARD_ACTIONS.FURTHER_INFO}
                 </Typography>
               </Divider>
             </Box>
@@ -89,9 +92,9 @@ export default function BackgroundFrame() {
                   values={languages}
                   results={languagesValue}
                   onChange={setLanguages}
-                  label="Languages"
+                  label={BACKGROUND.LANGUAGES}
                   helpText={`Please choose ${background.languages.amount} languages`}
-                  placeholder="elsiftisna"
+                  placeholder={BACKGROUND.LANGUAGES_PLACEHOLDER}
                   maxItems={background.languages.amount}
                 />
               </Grid>
@@ -100,9 +103,9 @@ export default function BackgroundFrame() {
                   values={proficiencyTools}
                   results={toolsValue}
                   onChange={setTools}
-                  label="Proficiency tools"
+                  label={BACKGROUND.TOOLS}
                   helpText={`Please choose ${background.tools.amount} tools`}
-                  placeholder="some tool"
+                  placeholder={BACKGROUND.TOOLS_PLACEHOLDER}
                   maxItems={background.tools.amount}
                 />
               </Grid>

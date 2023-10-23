@@ -17,16 +17,19 @@ import {
 } from "@mui/material";
 import {
   AbilityScore,
-} from "@pages/Characters/definitions/characterForm";
+} from "@pages/CreateCharacter/definitions/characterForm";
 import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
 import { setAbilityScores } from "reducers/characterReducer";
 import { useEffect } from "react";
+import {CREATE_CHARACTER} from "constants/characterDefinition";
 
 //declaring constants
 const MIN = 1;
 const MAX = 20;
 const BASE_10 = 10;
 const headers = ["Ability", "Score", "Modifier", "Up +1", "Up +2", "Total score"];
+const ABILITIES = CREATE_CHARACTER.ABILITIES;
+
 //styling
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
@@ -89,11 +92,11 @@ export default function Abilities() {
       <TableContainer component={Card}>
         <CardContent>
           <Typography gutterBottom variant="h4" component="div">
-            Abilities
+            {ABILITIES.HEADING}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {/* todo implement point buy */}
-            Choose your abilities
+            {ABILITIES.SUBTITLE}
           </Typography>
         </CardContent>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">

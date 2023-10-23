@@ -1,4 +1,4 @@
-import { Race } from '@pages/Characters/definitions/characterForm';
+import { Race } from '@pages/CreateCharacter/definitions/characterForm';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 

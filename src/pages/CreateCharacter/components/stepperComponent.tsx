@@ -5,17 +5,20 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import BasicInformation from "@pages/Characters/components/basicInformationFrame";
-import Class  from "@pages/Characters/components/classFrame";
+import BasicInformation from "@pages/CreateCharacter/components/basicInformationFrame";
+import Class  from "@pages/CreateCharacter/components/classFrame";
 import Race from "./raceFrame";
 import Abilities from "./abilitiesFrame";
 import Background from "./backgroundFrame";
+import {CREATE_CHARACTER} from "constants/characterDefinition";
 
-const steps = ["Basic information", "Class", "Race", "Abilities", "Background"];
-interface ComponentRegister {
-  id: number;
-  component: React.ReactElement;
-}
+  const steps = ["Basic information", "Class", "Race", "Abilities", "Background"];
+
+  interface ComponentRegister {
+    id: number;
+    component: React.ReactElement;
+  }
+
 export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
@@ -121,11 +124,11 @@ export default function HorizontalLinearStepper() {
             <Box sx={{ flex: "1 1 auto" }} />
             {isStepOptional(activeStep) && (
               <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Skip
+               {CREATE_CHARACTER.CARD_ACTIONS.SKIP}
               </Button>
             )}
             <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? "Finish" : "Next"}
+              {activeStep === steps.length - 1 ? CREATE_CHARACTER.CARD_ACTIONS.BACK : CREATE_CHARACTER.CARD_ACTIONS.NEXT}
             </Button>
           </Box>
         </React.Fragment>

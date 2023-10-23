@@ -13,6 +13,8 @@ import {
 import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
 import { Link, useNavigate } from "react-router-dom";
+import { CHARACTERS } from "constants/characterDefinition";
+
 function CharacterCard() {
   return (
     <Card sx={{ maxWidth: 370 }}>
@@ -35,10 +37,10 @@ function CharacterCard() {
         <Grid container direction="row" justifyContent="flex-start" >
           <Grid item={true} xs>
             <Button variant="outlined" size="small" sx={{ mx: 1 }}>
-              VIEW
+              {CHARACTERS.VIEW}
             </Button>
             <Button variant="outlined" size="small">
-              EDIT
+              {CHARACTERS.EDIT}
             </Button>
           </Grid>
           <Grid>
@@ -48,7 +50,7 @@ function CharacterCard() {
               color="error"
               sx={{ mr: 1 }}
             >
-              DELETE
+              {CHARACTERS.DELETE}
             </Button>
           </Grid>
         </Grid>
@@ -82,7 +84,7 @@ export default function Characters() {
               py: 1,
             }}
           >
-            create character
+            {CHARACTERS.CREATE_CHARACTER}
           </Button>
         </Grid>
         {Array.from(Array(6)).map((_, index) => (

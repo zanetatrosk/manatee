@@ -1,8 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
 import {
   Autocomplete,
-  Box,
-  CardContent,
   Grid,
   TextField,
   Typography,
@@ -10,9 +8,12 @@ import {
 import {
   AutocompleteItem,
   BasicInfo,
-} from "@pages/Characters/definitions/characterForm";
+} from "@pages/CreateCharacter/definitions/characterForm";
 import React, { useEffect } from "react";
 import { setBasicInfo } from "reducers/characterReducer";
+import { CREATE_CHARACTER } from "constants/characterDefinition";
+
+const BASIC_INFO = CREATE_CHARACTER.BASIC_INFO;
 
 export default function BasicInformation() {
 
@@ -21,11 +22,13 @@ export default function BasicInformation() {
   );
   const dispatch = useAppDispatch();
   const [basicInfo, setInfo] = React.useState<BasicInfo>(basicInfoFromStore);
-
+  
+  //this is uneffective, bcs it is called every time user inputs something
   useEffect(() => {
     const basicInfoTmp = { ...basicInfo, sources: basicInfo.sources.map((s) => s) };
+    console.log(basicInfoTmp, "basicInfoTmp");
     dispatch(setBasicInfo(basicInfoTmp));
-  }, [basicInfo]);
+  }, [basicInfo, dispatch]);
 
   return (
     <Grid container spacing={10}>
@@ -43,14 +46,14 @@ export default function BasicInformation() {
               setInfo({ ...basicInfo, characterName: e.target.value })
             }
             variant="filled"
-            label="Character Name"
+            label={BASIC_INFO.CHARACTER_NAME}
           ></TextField>
         </Grid>
         <Grid item xs={12} lg={5}>
           <TextField
             variant="filled"
             fullWidth
-            label="Player Name"
+            label={BASIC_INFO.PLAYER_NAME}
             value={basicInfo.playerName}
             onChange={(e) =>
               setInfo({ ...basicInfo, playerName: e.target.value })
@@ -61,7 +64,7 @@ export default function BasicInformation() {
       <Grid container item>
         <Grid item xs={12} pb={1}>
           <Typography gutterBottom variant="h5" component="div">
-            Sources
+            {BASIC_INFO.SOURCES}
           </Typography>
         </Grid>
 
@@ -78,9 +81,8 @@ export default function BasicInformation() {
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Source"
+                label={BASIC_INFO.SOURCES}
                 variant="filled"
-                placeholder="Human"
               />
             )}
           />
@@ -98,7 +100,7 @@ export default function BasicInformation() {
             value={basicInfo.cardPhoto}
             onChange={(e) => setInfo({ ...basicInfo, cardPhoto: e.target.value })}
             variant="filled"
-            label="card photo"
+            label={BASIC_INFO.CARD_PHOTO}
           ></TextField>
         </Grid>
         <Grid item xs={12} lg={6}>
@@ -106,7 +108,7 @@ export default function BasicInformation() {
             variant="filled"
             fullWidth
             onChange={(e) => setInfo({ ...basicInfo, sheetPhoto: e.target.value })}
-            label="sheet photo"
+            label={BASIC_INFO.SHEET_PHOTO}
             value={basicInfo.sheetPhoto}
           ></TextField>
         </Grid>
