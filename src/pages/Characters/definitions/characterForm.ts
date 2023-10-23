@@ -42,7 +42,7 @@ interface AbilityScore {
 }
 interface Race {
     id: number | null;
-    label: string | null;
+    label: string;
     languages: AutocompleteParams;
     description: string;
     speed: number;
@@ -60,7 +60,7 @@ interface Feature{
 //interface Background similar as Race
 interface Background {
     id: number | null;
-    label: string | null;
+    label: string;
     features: Feature[];
     description: string;
     languages: AutocompleteParams;

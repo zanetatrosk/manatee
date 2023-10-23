@@ -67,14 +67,6 @@ export default function Abilities() {
   const [rows, setRows] = React.useState<AbilityScore[]>(
     abilityScores.map((row) => ({ ...row }))
   );
-
-  //setting the row with new values
-  const setRow = (idx: number, param: string, value: number | boolean) => {
-    const newRows = [...rows];
-    newRows[idx] = { ...rows[idx], [param]: value };
-    setRows(newRows);
-  };
-
   /*this is called every time some value in rows changes
   it is unoptimized, in future todo optimize*/
   useEffect(() => {
@@ -83,6 +75,14 @@ export default function Abilities() {
     const a = rows.map((row) => ({ ...row }));
     dispatch(setAbilityScores(a));
   }, [rows]);
+
+  //setting the row with new values
+  const setRow = (idx: number, param: string, value: number | boolean) => {
+    const newRows = [...rows];
+    newRows[idx] = { ...rows[idx], [param]: value };
+    setRows(newRows);
+  };
+
 
   return (
     <Box>

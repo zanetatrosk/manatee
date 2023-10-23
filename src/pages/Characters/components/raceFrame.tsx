@@ -25,33 +25,39 @@ import createAbilityData from "utils/abilityUtils";
 import { useGetAllRacesQuery } from "api/raceApiSlice";
 
 export default function RaceFrame() {
-  const [size, setSize] = useState<string>("");
   const raceStore = useAppSelector((state) => state.character.race);
   const dispatch = useAppDispatch();
+
+  //calling api to get all races, in future this will be called when create character button is clicked
+  const racesApi = useGetAllRacesQuery();
+
+  const [size, setSize] = useState<string>("");
   const [race, setRace] = useState<Race>(raceStore);
   const [isVisible, setVisibility] = React.useState(false);
-  const [features, setFeatures] = React.useState<Feature[] | []>([]);
-  const racesApi = useGetAllRacesQuery();
-  const [languagesRes, setLanguages] = useState<AutocompleteItem[]>(
-    race?.languages?.defaults || []
-  );
+  //these are the values that are going to be displayed in the multicomplete
+  //that are selected by user or by default according to race
+  const [features, setFeatures] = React.useState<Feature[]>(raceStore.features);
+  const [languagesRes, setLanguages] = useState<AutocompleteItem[]>(raceStore.languages.defaults);
+  
+  useEffect(() => {
+    if ( !race.id || race.label === "") return;
+    const a = race;
+    setVisibility(true);
+    //setting the right properties of race
+    setLanguages(a.languages.defaults);
+    setSize(a.sizeOptions?.[0] || "");
+    setFeatures([{ title: "Speed", text: `${a.speed} ft.` }, ...a.features]);
+    //recalculate ability scores acording to a new race
+    const abilities = createAbilityData(a);
+
+    dispatch(setRaceStore(a));
+    dispatch(setAbilityScores(abilities));
+  }, [race, dispatch]);
+  
   function handleChange(event: SelectChangeEvent) {
     setSize(event.target.value);
     console.log(event.target.value);
   }
-  
-  useEffect(() => {
-    if (!race || race.label === "" ) return;
-    race?.label !== "" ? setVisibility(true) : setVisibility(false);
-    const a = race;
-    const abilities = createAbilityData(a);
-    console.log("races from api", racesApi.data);
-    setLanguages(a.languages?.defaults);
-    setSize(a.sizeOptions?.[0]);
-    setFeatures([{ title: "Speed", text: `${a.speed} ft.` }, ...a.features]);
-    dispatch(setRaceStore(a));
-    dispatch(setAbilityScores(abilities));
-  }, [race, dispatch]);
 
   return (
     <Box>
@@ -81,8 +87,16 @@ export default function RaceFrame() {
             isOptionEqualToValue={(option, value) => option.id === value.id }
             value={race}
             onChange={(_, value) => {
+              //the typeof value === "string" is caused by the freeSolo option
               if (!value || typeof value === "string") return;
               setRace(value);
+              // if this is not set, I get following error:
+              /*
+              You have provided an out-of-range value `Medium` for the select component.
+              Consider providing a value that matches one of the available options or ''.
+              The available values are `Small`.
+              */
+             //I do not understand why this is happening
               setSize("");
             }}
             renderInput={(params) => (
@@ -113,7 +127,7 @@ export default function RaceFrame() {
                   results={languagesRes}
                   onChange={setLanguages}
                   label="Languages"
-                  helpText={`Please choose ${race?.languages.amount} languages`}
+                  helpText={`Please choose ${race.languages.amount} languages`}
                   placeholder="elsiftisna"
                   maxItems={race.languages.amount}
                 />

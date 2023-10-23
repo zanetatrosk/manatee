@@ -15,6 +15,7 @@ import React, { useEffect } from "react";
 import { setBasicInfo } from "reducers/characterReducer";
 
 export default function BasicInformation() {
+
   const { basicInfo: basicInfoFromStore } = useAppSelector(
     (state) => state.character
   );
@@ -22,10 +23,10 @@ export default function BasicInformation() {
   const [basicInfo, setInfo] = React.useState<BasicInfo>(basicInfoFromStore);
 
   useEffect(() => {
-    if( typeof basicInfo.sources === "undefined") return;
     const basicInfoTmp = { ...basicInfo, sources: basicInfo.sources.map((s) => s) };
     dispatch(setBasicInfo(basicInfoTmp));
   }, [basicInfo]);
+
   return (
     <Grid container spacing={10}>
       <Grid container item columnSpacing={8}>

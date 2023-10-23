@@ -13,12 +13,14 @@ import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
 import { setBackground as setBackgroundStore } from "reducers/characterReducer";
 
 export default function BackgroundFrame() {
-  const [isVisible, setVisibility] = React.useState(false);
-  const [languagesValue, setLanguages] = useState<AutocompleteItem[]>([]);
   const backgroundStore = useAppSelector((state) => state.character.background);
   const dispatch = useAppDispatch();
+
+  const [isVisible, setVisibility] = React.useState(false);
+  const [languagesValue, setLanguages] = useState<AutocompleteItem[]>([]);
   const [background, setBackground] = useState<Background>(backgroundStore);
   const [toolsValue, setTools] = useState<AutocompleteItem[]>([]);
+
   useEffect(() => {
     if (!background.id) return;
     setLanguages(background.languages?.defaults);
@@ -39,7 +41,6 @@ export default function BackgroundFrame() {
         <Grid item>
           {!isVisible && (
             <Typography gutterBottom variant="body2" color="text.secondary">
-              {/* todo implement point buy */}
               Choose your background to see further information
             </Typography>
           )}
@@ -54,6 +55,7 @@ export default function BackgroundFrame() {
             value={background}
             sx={{ my: 2 }}
             onChange={(_, value) => {
+              //this is caused by the freeSolo option 
               if (!value || typeof value === "string") return;
               setBackground(value);
               background.label !== ""
@@ -99,7 +101,7 @@ export default function BackgroundFrame() {
                   results={toolsValue}
                   onChange={setTools}
                   label="Proficiency tools"
-                  helpText={`Please choose ${background?.tools.amount} tools`}
+                  helpText={`Please choose ${background.tools.amount} tools`}
                   placeholder="some tool"
                   maxItems={background.tools.amount}
                 />
@@ -107,9 +109,9 @@ export default function BackgroundFrame() {
             </Grid>
             <Box>
               <CardInfo
-                title={background?.label}
-                features={background?.features}
-                description={background?.description}
+                title={background.label}
+                features={background.features}
+                description={background.description}
               />
             </Box>
           </div>
