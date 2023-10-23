@@ -85,8 +85,7 @@ interface CharacterSheet {
     abilityScores: AbilityScore[];
 }
 
-function createForm() : CharacterSheet{
-    return {
+const formDefaults  = {
         basicInfo: {
             characterName: 'New Character Name',
             playerName: 'Player Name',
@@ -158,9 +157,8 @@ function createForm() : CharacterSheet{
                 modifierUpToTwo: false
             }
         ] as AbilityScore[],
-    } as CharacterSheet;
-}
+} as CharacterSheet
 
 
 export type {Race, AutocompleteItem, Background, AbilityScore, AutocompleteParams, Feature, BasicInfo, CharacterSheet}
-export {Ability, Size, createForm}
+export {Ability, Size, formDefaults}

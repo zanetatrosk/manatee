@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Race, Background, AbilityScore, BasicInfo, createForm } from "@pages/CreateCharacter/definitions/characterForm";
+import { Race, Background, AbilityScore, BasicInfo, formDefaults } from "@pages/CreateCharacter/definitions/characterForm";
 
-const initialState = createForm();
+const initialState = formDefaults;
 export const characterReducer = createSlice({
     name: 'character',
     initialState,

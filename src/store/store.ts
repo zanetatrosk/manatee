@@ -1,6 +1,4 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import getReducers from '../reducers/reducers';
-// Or from '@reduxjs/toolkit/query/react'
 import characterReducer from '../reducers/characterReducer';
 import { raceApiSlice } from '../api/raceApiSlice';
 // ...

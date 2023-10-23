@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Autocomplete, Divider, Grid, CardContent } from "@mui/material";
+import { Box, Autocomplete, Divider, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import MultiComplete from "@components/customMultiComplete";
 import TextField from "@mui/material/TextField";
@@ -31,7 +31,7 @@ export default function BackgroundFrame() {
     setVisibility(true);
     const tmpBack = background;
     dispatch(setBackgroundStore(tmpBack));
-  }, [background]);
+  }, [background, dispatch]);
 
   return (
     <Box>

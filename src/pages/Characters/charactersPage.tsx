@@ -7,12 +7,10 @@ import {
   Button,
   CardActions,
   CardMedia,
-  Box,
-  CardActionArea,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CHARACTERS } from "constants/characterDefinition";
 
 function CharacterCard() {

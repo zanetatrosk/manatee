@@ -2,17 +2,14 @@ import * as React from "react";
 import { Box, Card, CardContent, Typography, Grid } from "@mui/material";
 import { Feature } from "@pages/CreateCharacter/definitions/characterForm";
 
-  interface PropsParams {
-    title: string;
-    features: Feature[];
-    description: string;
-  }
 
-  CardInfo.defaultProps = {
-    title: "Title",
-    features: [],
-    description: "Description",
-  };
+interface PropsParams {
+  title: string;
+  features: Feature[];
+  description: string;
+}
+
+
 export default function CardInfo(props: PropsParams) {
   React.useEffect(() => {
     console.log(props.features, "features");

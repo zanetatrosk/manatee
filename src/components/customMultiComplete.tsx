@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import { Autocomplete, TextField, Chip } from "@mui/material";
 import { AutocompleteItem } from "@pages/CreateCharacter/definitions/characterForm";
 //interface used for props
@@ -14,10 +13,6 @@ interface PropsParams {
   maxItems: number;
 }
 
-//this func will be in utils todo
-function generateId(): number {
-  return Math.random();
-}
 export default function MultiComplete(props: PropsParams) {
 
   const [item, setItem] = React.useState("");

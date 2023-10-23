@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Autocomplete, Divider, Grid, CardContent } from "@mui/material";
+import { Box, Autocomplete, Divider, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import MultiComplete from "@components/customMultiComplete";
 import TextField from "@mui/material/TextField";
@@ -30,7 +30,7 @@ export default function RaceFrame() {
   const dispatch = useAppDispatch();
 
   //calling api to get all races, in future this will be called when create character button is clicked
-  const racesApi = useGetAllRacesQuery();
+  const racesApi = useGetAllRacesQuery().data as Race[] || [];
 
   const [size, setSize] = useState<string>("");
   const [race, setRace] = useState<Race>(raceStore);
@@ -84,7 +84,7 @@ export default function RaceFrame() {
             freeSolo
             clearOnBlur
             id="combo-box-demo"
-            options={races}
+            options={racesApi}
             isOptionEqualToValue={(option, value) => option.id === value.id }
             value={race}
             onChange={(_, value) => {
@@ -164,116 +164,116 @@ export default function RaceFrame() {
   );
 }
 //generate races from D&D as in interface
-const races: Race[] = [
-  {
-    id: 1,
-    label: "Dwarf",
-    languages: {
-      amount: 2,
-      defaults: [{ id: 5, title: "Common Dwarvish" }],
-    },
-    description:
-      "Bold and hardy, dwarves are known as skilled warriors, miners, and workers of stone and metal.",
-    speed: 25,
-    features: [
-      {
-        title: "Darkvision",
-        text: "As an action, you touch a stone object no larger than 3 feet in any dimension and imbue it with magic. For the duration, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. If you chose a sphere, the radius is doubled. Once used, this trait can’t be used again until you finish a long rest.",
-      },
-      {
-        title: "Dwarven Resilience",
-        text: "The hit point maximum of a dwarf is increased by 1, and it increases by 1 every time the dwarf gains a level.",
-      },
-      {
-        title: "Dwarven Combat Training",
-        text: "As an action, you can touch a piece of nonmagical metal and imbue it with one of your smith’s specialties, as if you had cast the magic weapon spell on it. For the purpose of this trait, a martial weapon is a melee or ranged weapon that requires an Attack roll, and a ranged weapon is any weapon that can be used to make a ranged Attack.",
-      },
-      {
-        title: "Tool Proficiency",
-        text: "This trait grants you proficiency with the artisan’s tools of your choice: smith’s tools, brewer’s supplies, or mason’s tools.",
-      },
-      {
-        title: "Stonecunning",
-        text: "The dwarf has advantage on Intelligence (History) checks related to the origin of stonework, and it can make such checks untrained.",
-      },
-    ],
-    abilityScorePlus2: ["CONSTITUTION"],
-    sizeOptions: ["Medium"],
-  },
-  {
-    id: 2,
-    label: "Elf",
-    languages: {
-      amount: 2,
-      defaults: [
-        { id: 1, title: "Common Elvish" },
-        { id: 2, title: "High Elvish" },
-      ],
-    },
-    description:
-      "Elves are a magical people of otherworldly grace, living in the world but not entirely part of it.",
-    speed: 30,
-    features: [
-      {
-        title: "Darkvision",
-        text: "...",
-      },
-      {
-        title: "Fey Ancestry",
-        text: "The elf has advantage on saving throws against being charmed, and magic can’t put the elf to sleep.",
-      },
-      {
-        title: "Skill Versatility",
-        text: "...",
-      },
-    ],
-    abilityScorePlus2: ["DEXTERITY"],
-    sizeOptions: ["Medium"],
-  },
-  {
-    id: 3,
-    label: "Halfling",
-    languages: {
-      amount: 2,
-      defaults: [
-        { id: 8, title: "Common Draconic" },
-        { id: 9, title: "High Draconic" },
-      ],
-    },
-    description:
-      "The diminutive halflings survive in a world full of larger creatures by avoiding notice or, barring that, avoiding offense.",
-    speed: 25,
-    features: [
-      {
-        title: "Lucky",
-        text: "...",
-      },
-      {
-        title: "Brave",
-        text: "...",
-      },
-      {
-        title: "Halfling Nimbleness",
-        text: "...",
-      },
-    ],
-    abilityScorePlus2: ["DEXTERITY"],
-    sizeOptions: ["Small"],
-  },
-  {
-    id: 4,
-    label: "Human",
-    languages: {
-      amount: 1,
-      defaults: [{ id: 1, title: "Common Elvish" }],
-    },
-    description: "The Human is ",
-    speed: 30,
-    features: [],
-    abilityScorePlus2: [],
-    sizeOptions: ["Medium"],
-  },
-];
+// const races: Race[] = [
+//   {
+//     id: 1,
+//     label: "Dwarf",
+//     languages: {
+//       amount: 2,
+//       defaults: [{ id: 5, title: "Common Dwarvish" }],
+//     },
+//     description:
+//       "Bold and hardy, dwarves are known as skilled warriors, miners, and workers of stone and metal.",
+//     speed: 25,
+//     features: [
+//       {
+//         title: "Darkvision",
+//         text: "As an action, you touch a stone object no larger than 3 feet in any dimension and imbue it with magic. For the duration, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. If you chose a sphere, the radius is doubled. Once used, this trait can’t be used again until you finish a long rest.",
+//       },
+//       {
+//         title: "Dwarven Resilience",
+//         text: "The hit point maximum of a dwarf is increased by 1, and it increases by 1 every time the dwarf gains a level.",
+//       },
+//       {
+//         title: "Dwarven Combat Training",
+//         text: "As an action, you can touch a piece of nonmagical metal and imbue it with one of your smith’s specialties, as if you had cast the magic weapon spell on it. For the purpose of this trait, a martial weapon is a melee or ranged weapon that requires an Attack roll, and a ranged weapon is any weapon that can be used to make a ranged Attack.",
+//       },
+//       {
+//         title: "Tool Proficiency",
+//         text: "This trait grants you proficiency with the artisan’s tools of your choice: smith’s tools, brewer’s supplies, or mason’s tools.",
+//       },
+//       {
+//         title: "Stonecunning",
+//         text: "The dwarf has advantage on Intelligence (History) checks related to the origin of stonework, and it can make such checks untrained.",
+//       },
+//     ],
+//     abilityScorePlus2: ["CONSTITUTION"],
+//     sizeOptions: ["Medium"],
+//   },
+//   {
+//     id: 2,
+//     label: "Elf",
+//     languages: {
+//       amount: 2,
+//       defaults: [
+//         { id: 1, title: "Common Elvish" },
+//         { id: 2, title: "High Elvish" },
+//       ],
+//     },
+//     description:
+//       "Elves are a magical people of otherworldly grace, living in the world but not entirely part of it.",
+//     speed: 30,
+//     features: [
+//       {
+//         title: "Darkvision",
+//         text: "...",
+//       },
+//       {
+//         title: "Fey Ancestry",
+//         text: "The elf has advantage on saving throws against being charmed, and magic can’t put the elf to sleep.",
+//       },
+//       {
+//         title: "Skill Versatility",
+//         text: "...",
+//       },
+//     ],
+//     abilityScorePlus2: ["DEXTERITY"],
+//     sizeOptions: ["Medium"],
+//   },
+//   {
+//     id: 3,
+//     label: "Halfling",
+//     languages: {
+//       amount: 2,
+//       defaults: [
+//         { id: 8, title: "Common Draconic" },
+//         { id: 9, title: "High Draconic" },
+//       ],
+//     },
+//     description:
+//       "The diminutive halflings survive in a world full of larger creatures by avoiding notice or, barring that, avoiding offense.",
+//     speed: 25,
+//     features: [
+//       {
+//         title: "Lucky",
+//         text: "...",
+//       },
+//       {
+//         title: "Brave",
+//         text: "...",
+//       },
+//       {
+//         title: "Halfling Nimbleness",
+//         text: "...",
+//       },
+//     ],
+//     abilityScorePlus2: ["DEXTERITY"],
+//     sizeOptions: ["Small"],
+//   },
+//   {
+//     id: 4,
+//     label: "Human",
+//     languages: {
+//       amount: 1,
+//       defaults: [{ id: 1, title: "Common Elvish" }],
+//     },
+//     description: "The Human is ",
+//     speed: 30,
+//     features: [],
+//     abilityScorePlus2: [],
+//     sizeOptions: ["Medium"],
+//   },
+// ];
 
 // TypeScript array of objects with hardcoded IDs representing D&D languages
 

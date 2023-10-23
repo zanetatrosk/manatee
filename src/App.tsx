@@ -8,7 +8,7 @@ import Characters from "@pages/Characters/charactersPage";
 import CreateCharacter from "@pages/CreateCharacter/components/createCharacter";
 import HomePage from "@pages/homePage";
 import { Container } from "@mui/material";
-import Footer from "@components/footer";
+// import Footer from "@components/footer";
 const darkTheme = createTheme({
   palette: {
     mode: "light",

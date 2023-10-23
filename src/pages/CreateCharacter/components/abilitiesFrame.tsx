@@ -46,6 +46,7 @@ const StyledModifier = styled(TableCell)(({ theme }) => ({
 //function that sets the score to the correct value
 function setScore(value: number) {
   //this is to prevent NaN
+  // eslint-disable-next-line
   if (value !== value) value = MIN;
   value < MIN ? (value = Math.max(value, MIN)) : (value = Math.min(value, MAX));
 }
@@ -77,7 +78,7 @@ export default function Abilities() {
     //do a deep copy of row
     const a = rows.map((row) => ({ ...row }));
     dispatch(setAbilityScores(a));
-  }, [rows]);
+  }, [rows, dispatch]);
 
   //setting the row with new values
   const setRow = (idx: number, param: string, value: number | boolean) => {
