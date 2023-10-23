@@ -1,6 +1,8 @@
 import { Ability, AbilityScore, Race } from '@pages/Characters/definitions/characterForm';
 
+
 const DEFAULT_SCORE = 8;
+//in future this could be use by more components
 function createAbilityData(race: Race): AbilityScore[] {
     
     return Object.keys(Ability).map((ability: string) => ({
@@ -11,7 +13,4 @@ function createAbilityData(race: Race): AbilityScore[] {
     }));
   }
 
-function retAbilityScore (){
-  
-}  
 export default createAbilityData;
