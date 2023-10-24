@@ -53,6 +53,17 @@ interface Race {
     //enum
     sizeOptions: string[];
 }
+interface Class {
+    id: number | null;
+    label: string;
+    subclass: AutocompleteItem;
+    description: string;
+    hitDice: string;
+    features: Feature[];
+    tools: AutocompleteParams;
+
+
+}
 interface Feature{
     title: string;
     text: string;
@@ -65,7 +76,6 @@ interface Background {
     description: string;
     languages: AutocompleteParams;
     tools: AutocompleteParams;
-    //this will be enum
 }
 
 //interface used for autocomplete
@@ -83,6 +93,7 @@ interface CharacterSheet {
     race: Race ;
     background: Background ;
     abilityScores: AbilityScore[];
+    characterClass: Class;
 }
 
 const formDefaults  = {
@@ -157,8 +168,23 @@ const formDefaults  = {
                 modifierUpToTwo: false
             }
         ] as AbilityScore[],
+        characterClass: {
+            id: null,
+            label: "",
+            description: "",
+            hitDice: "",
+            features: [],
+            subclass: {
+                id: null,
+                title: ""
+            },
+            tools: {
+                amount: 0,
+                defaults: []
+            }
+        } as Class,
 } as CharacterSheet
 
 
-export type {Race, AutocompleteItem, Background, AbilityScore, AutocompleteParams, Feature, BasicInfo, CharacterSheet}
+export type {Race, AutocompleteItem, Background, AbilityScore, AutocompleteParams, Feature, BasicInfo, CharacterSheet, Class}
 export {Ability, Size, formDefaults}

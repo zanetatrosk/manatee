@@ -25,6 +25,10 @@ const CREATE_CHARACTER = {
     CLASS:  {
         HEADING: "Class",
         SUBTITLE: "Choose your class and you will get some features",
+        PLACEHOLDER: "Barbarian, Bard, Cleric, ...",
+        SUBCLASS: "Subclass",
+        TOOLS: "Proficiency Tools",
+        TOOLS_PLACEHOLDER: "Thieves' Tools",
     },
 
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Race, Background, AbilityScore, BasicInfo, formDefaults } from "@pages/CreateCharacter/definitions/characterForm";
+import { Race, Background, AbilityScore, BasicInfo, formDefaults, Class } from "@pages/CreateCharacter/definitions/characterForm";
 
 const initialState = formDefaults;
 export const characterReducer = createSlice({
@@ -17,11 +17,17 @@ export const characterReducer = createSlice({
         },
         setBasicInfo (state, action: PayloadAction<BasicInfo>){
             state.basicInfo = action.payload;
+        },
+        setClass (state, action: PayloadAction<Class>){
+            state.characterClass = action.payload;
         }
+
+
+
     }
 });
 
 
-export const { setRace, setBackground, setAbilityScores, setBasicInfo } = characterReducer.actions
+export const { setRace, setBackground, setAbilityScores, setBasicInfo, setClass } = characterReducer.actions
 
 export default characterReducer.reducer;

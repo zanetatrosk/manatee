@@ -61,9 +61,6 @@ export default function BackgroundFrame() {
               //this is caused by the freeSolo option 
               if (!value || typeof value === "string") return;
               setBackground(value);
-              background.label !== ""
-                ? setVisibility(true)
-                : setVisibility(false);
             }}
             renderInput={(params) => (
               <TextField
