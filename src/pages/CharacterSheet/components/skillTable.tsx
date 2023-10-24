@@ -1,0 +1,65 @@
+import {
+  Card,
+  CardContent,
+  Checkbox,
+  Table,
+  TableCell,
+  TableRow,
+  TextField,
+  Typography,
+} from "@mui/material";
+import Box from "@mui/material/Box";
+
+interface TableRow {
+  label: string;
+  score: number;
+  checked: boolean;
+}
+
+interface TableProps {
+  name: string;
+  description: string;
+  tableData: TableRow[];
+}
+
+export default function SkillTable(props: TableProps) {
+  return (
+    <Box display="inline-flex">
+      <Card>
+        <CardContent>
+          <Typography variant="h5">{props.name}</Typography>
+          <Typography variant="body2" color="text.secondary">
+            {props.description}
+          </Typography>
+        </CardContent>
+        <Table>
+          {props.tableData.map((i: TableRow) => (
+            <TableRow>
+              <TableCell padding="checkbox">
+                <Checkbox
+                  color="primary"
+                  checked={i.checked}
+                  inputProps={{
+                    "aria-label": "select all desserts",
+                  }}
+                />
+              </TableCell>
+              <TableCell sx={{ pr: 3 }}>{i.label}</TableCell>
+              <TableCell>
+                <TextField
+                  variant="filled"
+                  size="small"
+                  hiddenLabel
+                  defaultValue={i.score}
+                  inputProps={{
+                    style: { textAlign: "center", maxWidth: 32, maxHeight: 13 },
+                  }}
+                />
+              </TableCell>
+            </TableRow>
+          ))}
+        </Table>
+      </Card>
+    </Box>
+  );
+}

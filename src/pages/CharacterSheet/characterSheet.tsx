@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SkillTable from './components/skillTable';
 
 interface CharacterSheetProps {
     // Define any props that your component needs here
@@ -222,8 +223,100 @@ const CharacterSheet: React.FC<CharacterSheetProps> = (props) => {
                     <input type="text" />
                 </div>
             </div>
+            <SkillTable
+                name="Skills"
+                description="Please choose skills"
+                tableData={tableData}
+            />
         </div>
+
     );
 };
-
+const tableData = [
+    {
+      label: "Animal Handling(WIS)",
+      score: 8,
+      checked: false,
+    },
+    {
+      label: "Arcana(INT)",
+      score: 8,
+      checked: false,
+    },
+    {
+      label: "Athletics(STR)",
+      score: 8,
+      checked: false,
+    },
+    {
+      label: "Deception(CHA)",
+      score: 8,
+      checked: false,
+    },
+    {
+      label: "History(INT)",
+      score: 8,
+      checked: false,
+    },
+    {
+      label: "Insight(WIS)",
+      score: 8,
+      checked: false,
+    },
+    {
+      label: "Intimidation(CHA)",
+      score: 8,
+      checked: false,
+    },
+    {
+      label: "Investigation(INT)",
+      score: 8,
+      checked: false,
+    },
+    {
+      label: "Medicine(WIS)",
+      score: 8,
+      checked: true,
+    },
+    {
+      label: "Nature(INT)",
+      score: 8,
+      checked: false,
+    },
+    {
+      label: "Perception(WIS)",
+      score: 8,
+      checked: false,
+    },
+    {
+      label: "Performance(CHA)",
+      score: 8,
+      checked: false,
+    },
+    {
+      label: "Persuasion(CHA)",
+      score: 8,
+      checked: false,
+    },
+    {
+      label: "Religion(INT)",
+      score: 8,
+      checked: false,
+    },
+    {
+      label: "Sleight of Hand(DEX)",
+      score: 8,
+      checked: false,
+    },
+    {
+      label: "Stealth(DEX)",
+      score: 8,
+      checked: true,
+    },
+    {
+      label: "Survival(WIS)",
+      score: 8,
+      checked: false,
+    },
+  ];
 export default CharacterSheet;
