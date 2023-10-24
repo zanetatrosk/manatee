@@ -85,7 +85,7 @@ export default function Characters() {
             {CHARACTERS.CREATE_CHARACTER}
           </Button>
         </Grid>
-        {Array.from(Array(6)).map((_, index) => (
+        {Array.from(Array(6)).map((aa, index) => (
           <Grid
             item
             xs={12}

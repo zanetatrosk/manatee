@@ -233,4 +233,5 @@ const subclasses : AutocompleteItem[] = [
   {id: 28, title: "Swords"},
   {id: 29, title: "Whispers"},
   {id: 30, title: "Glamour"},
-  {id: 31, title: "Swords"}]
+  {id: 31, title: "Swords"}
+]
