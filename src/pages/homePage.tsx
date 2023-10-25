@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <Box display="flex" justifyContent="center">
       <Card>
-        <Grid container alignItems="center" p={2} columnSpacing={3}>
+        <Grid container alignItems="center" p={1} columnSpacing={3}>
           <Grid item p={1}>
             <Typography variant="h4">Neville Longbottom aaaaa</Typography>
           </Grid>
@@ -35,7 +35,11 @@ export default function HomePage() {
                   </Typography>
                 </Grid>
                 <Grid item xs>
-                  <Typography>{i.value}</Typography>
+                  <Typography
+                   component="span"
+                   noWrap
+                  
+                  >{i.value}</Typography>
                 </Grid>
               </Grid>
             </React.Fragment>
@@ -49,7 +53,7 @@ export default function HomePage() {
 const data = [
   {
     header: "Player",
-    value: "Zaneta",
+    value: "Zanetaaaaaa",
   },
   {
     header: "Race",
@@ -57,6 +61,6 @@ const data = [
   },
   {
     header: "Class & level",
-    value: "Wizard 1",
+    value: "Barbarian 1",
   },
 ];
