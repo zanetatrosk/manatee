@@ -1,9 +1,10 @@
-import Box from "@mui/material/Box";
 
+import Box from "@mui/material/Box";
 
 export default function HomePage() {
   return (
-    <Box>
-    </Box>
+    <Box display="flex" justifyContent="center">
+  </Box>
   );
 }
+
