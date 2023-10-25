@@ -11,11 +11,9 @@ export default function HomePage() {
             <Typography variant="h4">Neville Longbottom aaaaa</Typography>
           </Grid>
           <Grid item />
-          <Grid item container xs columnSpacing={3}>
+          <Grid item container xs columnSpacing={4}>
           {data.map((i) => (
             <React.Fragment>
-              <Grid item/>
-              <Divider orientation="vertical" flexItem />
               <Grid item/>
               <Grid
                 item
