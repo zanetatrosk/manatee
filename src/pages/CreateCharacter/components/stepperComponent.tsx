@@ -119,7 +119,7 @@ export default function HorizontalLinearStepper() {
               onClick={handleBack}
               sx={{ mr: 1 }}
             >
-              Back
+              {CREATE_CHARACTER.CARD_ACTIONS.BACK}
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
             {isStepOptional(activeStep) && (
@@ -128,7 +128,7 @@ export default function HorizontalLinearStepper() {
               </Button>
             )}
             <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? CREATE_CHARACTER.CARD_ACTIONS.BACK : CREATE_CHARACTER.CARD_ACTIONS.NEXT}
+              {activeStep === steps.length - 1 ? CREATE_CHARACTER.CARD_ACTIONS.FINISH : CREATE_CHARACTER.CARD_ACTIONS.NEXT}
             </Button>
           </Box>
         </React.Fragment>
