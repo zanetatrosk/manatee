@@ -45,16 +45,8 @@ export default function SkillTable(props: TableProps) {
                 />
               </TableCell>
               <TableCell sx={{ pr: 3 }}>{i.label}</TableCell>
-              <TableCell>
-                <TextField
-                  variant="filled"
-                  size="small"
-                  hiddenLabel
-                  defaultValue={i.score}
-                  inputProps={{
-                    style: { textAlign: "center", maxWidth: 32, maxHeight: 13 },
-                  }}
-                />
+              <TableCell sx={{ px: 4 }}>
+                <Typography variant="h6">{i.score}</Typography>
               </TableCell>
             </TableRow>
           ))}

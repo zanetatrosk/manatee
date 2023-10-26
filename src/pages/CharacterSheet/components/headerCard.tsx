@@ -4,45 +4,40 @@ import React from "react";
 
 export default function HeaderCard() {
   return (
-    <Box display="flex" justifyContent="center">
-      <Card>
-        <Grid container alignItems="center" p={3} columnSpacing={3}>
-          <Grid item>
-            <Typography variant="h4">Neville Longbottom aaaaa</Typography>
+    <Box display="flex" justifyContent={"center"} flexGrow={1} >
+      <Card sx={{ display: "flex", p: 3, width: "100%" }}>
+        <Grid container flexDirection={"column"} spacing={3} >
+          <Grid item wrap="nowrap">
+            <Typography variant="h4" component="span" >
+              Neville Longbottom the 3rd
+            </Typography>
           </Grid>
-          <Grid item />
-          <Grid item container xs columnSpacing={4}>
-          {data.map((i) => (
-            <React.Fragment>
-              <Grid item/>
-              <Grid
-                item
-                container
-                flexDirection="column"
-                xs
-                wrap="nowrap"
-                p={3}
-                spacing={0.5}
-              >
-                <Grid item xs>
-                  <Typography
-                    component="span"
-                    noWrap
-                    color="text.secondary"
-                    variant="caption"
-                  >
-                    {i.header}
-                  </Typography>
+          <Grid item container spacing={4}  rowSpacing={1}>
+            {data.map((i) => (
+              <React.Fragment>
+                <Grid
+                  item
+                  container
+                  xs
+                  flexDirection={"column"}
+                >
+                  <Grid item>
+                    <Typography
+                      component="span"
+                      color="text.secondary"
+                      variant="caption"
+                    >
+                      {i.header}
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography component="span" >
+                      {i.value}
+                    </Typography>
+                  </Grid>
                 </Grid>
-                <Grid item xs>
-                  <Typography
-                   component="span"
-                   noWrap
-                  >{i.value}</Typography>
-                </Grid>
-              </Grid>
-            </React.Fragment>
-          ))}
+              </React.Fragment>
+            ))}
           </Grid>
         </Grid>
       </Card>
@@ -63,4 +58,14 @@ const data = [
     header: "Class & level",
     value: "Barbarian 123",
   },
+  {
+    header: "Subclass",
+    value: "Author",
+  },
+  {
+    header: "Background",
+    value: "Outlander",
+  },
+ 
+  
 ];

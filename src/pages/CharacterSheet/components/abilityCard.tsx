@@ -2,7 +2,7 @@ import { Grid, Paper, Typography, styled } from "@mui/material";
 import Box from "@mui/material/Box";
 
 const StyledModifier = styled(Box)({
-  width: 92,
+  width: 82,
   height: 50,
   p: 2,
   borderRadius: "var(--none, 6px);",
@@ -16,7 +16,7 @@ const StyledModifier = styled(Box)({
 });
 
 const StyledAbilityScore = styled(Box)({
-  width: 56,
+  width: 46,
   height: 32,
   p: 2,
   display: "flex",
@@ -42,8 +42,8 @@ interface AbilityCardProps {
 export default function AbilityCard(props: AbilityCardProps) {
   return (
     <Box>
-      <Paper sx={{ width: 128, height: 150,  px: 1, py: 2, borderRadius: 2 }} elevation={3}>
-        <Grid alignItems="center" container flexDirection="column" spacing={1.5}>
+      <Paper sx={{ px: 2 , py: 1,  borderRadius: 2 }} elevation={3}>
+        <Grid alignItems="center" container flexDirection="column" spacing={1}>
           <Grid item>
             <Typography variant="button">{props.ability}</Typography>
           </Grid>
