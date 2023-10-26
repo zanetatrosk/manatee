@@ -21,24 +21,25 @@ export default function HomePage() {
     <Container>
       <Paper sx={{ p: 1 }} elevation={4}>
         <Grid container flexDirection={"column"} spacing={7}>
-                  <Grid item container spacing={2}>
-                    <Grid item>
-                      <Card sx={{ width: 250, height: 336 }} />
-                    </Grid>
-                            <Grid item container xs flexDirection={"column"} spacing={4}>
-                              <Grid item>
-                                <HeaderCard />
-                              </Grid>
-                              <Grid item container spacing={3} justifyContent="center">
-                                {Array.from(Array(6).keys()).map((i) => (
-                                  <Grid item key={i}>
-                                    <AbilityCard ability="Strength" score={12} modifier={1} />
-                                  </Grid>
-                                ))}
-                              </Grid>
+          {/* first row */}
+                    <Grid item container spacing={2}>
+                      <Grid item>
+                        <Card sx={{ width: 250, height: 336 }} />
+                      </Grid>
+                      <Grid item container xs flexDirection={"column"} spacing={4}>
+                        <Grid item>
+                          <HeaderCard />
+                        </Grid>
+                        <Grid item container spacing={3} justifyContent="center">
+                          {Array.from(Array(6).keys()).map((i) => (
+                            <Grid item key={i}>
+                              <AbilityCard ability="Strength" score={12} modifier={1} />
                             </Grid>
-                  </Grid>
-
+                          ))}
+                        </Grid>
+                      </Grid>
+                    </Grid>
+          {/* second row */}
           <Grid container item spacing={3}>
             <Grid item>
               <SkillTable
@@ -55,10 +56,7 @@ export default function HomePage() {
               />
             </Grid>
             <Grid item xs>
-            <StatsGrid
-            title="Stats"
-            items={items}
-            />
+              <StatsGrid title="Stats" items={items} />
             </Grid>
           </Grid>
         </Grid>
@@ -191,5 +189,4 @@ const items: Item[] = [
     header: "Hit Dice",
     value: "1d10",
   },
-
 ];
