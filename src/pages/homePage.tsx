@@ -1,10 +1,8 @@
 import {
   Card,
-  CardContent,
   Container,
   Grid,
   Paper,
-  Typography,
 } from "@mui/material";
 import AbilityCard from "./CharacterSheet/components/abilityCard";
 import SkillTable from "./CharacterSheet/components/skillTable";
