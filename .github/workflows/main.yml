@@ -1,0 +1,45 @@
+name: CI
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build
+
+  cypress-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Start server
+      run: npm run start &
+
+    - name: Wait for server to start
+      run: |
+        n=0
+        until [ $n -ge 5 ]
+        do
+          curl -I http://localhost:3000 && break
+          n=$[$n+1]
+          sleep 15
+        done
+
+    - name: Run Cypress tests
+      uses: cypress-io/github-action@v2
+      with:
+        record: true
+        start: npm run start
+        wait-on: 'http://localhost:3000'
