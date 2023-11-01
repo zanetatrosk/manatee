@@ -18,12 +18,12 @@ export default function HomePage() {
           {/* first row */}
           <Grid item container spacing={2}>
             <Grid item>
-              <Card sx={{ width: 250, height: "100%" }}>
+              <Card sx={{ maxWidth: 250, height: "100%", maxHeight: 345 }}>
                 <CardMedia
-                  sx={{ height: '100%' }}
+                sx={{ height: "100%"}}
                   component="img"
                   // Picture by internet user: 
-                  src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*Xe_nttm4GmNuNASsxKG3gg.png"
+                  src="https://i.pinimg.com/originals/54/5e/cb/545ecb06834f6fe5afd5faebcae19a5a.png"
                   title="character"
                 />
               </Card>
