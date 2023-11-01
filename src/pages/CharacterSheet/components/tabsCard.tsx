@@ -14,19 +14,25 @@ export default function TabsCard() {
   };
 
   return (
-    <Box sx={{ display: "flex", width: "100%" }}>
-      <Card>
-        <TabContext value={value}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label="Item One" value="1" />
-              <Tab label="Item Two" value="2" />
-              <Tab label="Item Three" value="3" />
+    <Box sx={{ width: '100%' }}>
+      <Card >
+        <TabContext value={value} >
+          <Box sx={{ borderBottom: 1, borderColor: "divider", display: "flex" }} >
+            <TabList  onChange={handleChange} aria-label="lab API tabs example">
+              <Tab  label="Attacks and Armor" value="1" />
+              <Tab label="Spellcasting" value="2" />
+              <Tab label="Other prof. & languages" value="3" />
+              <Tab label="Features" value="4" />
+              <Tab label="Characteristics" value="5" />
+
+
             </TabList>
           </Box>
           <TabPanel value="1">Item One</TabPanel>
           <TabPanel value="2">Item Two</TabPanel>
           <TabPanel value="3">Item Three</TabPanel>
+          <TabPanel value="4">Item Four</TabPanel>
+          <TabPanel value="5">Item Five</TabPanel>
         </TabContext>
       </Card>
     </Box>

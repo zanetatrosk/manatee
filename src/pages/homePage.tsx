@@ -3,6 +3,7 @@ import AbilityCard from "./CharacterSheet/components/abilityCard";
 import SkillTable from "./CharacterSheet/components/skillTable";
 import HeaderCard from "./CharacterSheet/components/headerCard";
 import StatsGrid from "./CharacterSheet/components/statsGrid";
+import TabsCard from "./CharacterSheet/components/tabsCard";
 
 interface Item {
   header: string;
@@ -41,9 +42,9 @@ export default function HomePage() {
                 tableData={tableData}
               />
             </Grid>
-            <Grid container item xs flexDirection={"column"}>
-              <Grid container item wrap="nowrap" spacing={2}>
-                <Grid item xs>
+            <Grid container item xs flexDirection={"column"} spacing={3}>
+              <Grid container item wrap="nowrap" spacing={3}>
+                <Grid item xs={5}>
                   <SkillTable
                     name="Saving Throws"
                     description="Choose which saving throws you are proficient in."
@@ -54,6 +55,14 @@ export default function HomePage() {
                   <StatsGrid title="Stats" items={items} />
                 </Grid>
               </Grid>
+
+              <Grid container item xs>
+                <Grid item xs>
+                  <TabsCard/>
+                </Grid>
+              </Grid>
+
+              
             </Grid>
           </Grid>
         </Grid>
