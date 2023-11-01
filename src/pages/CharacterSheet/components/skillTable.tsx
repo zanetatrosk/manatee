@@ -31,9 +31,9 @@ export default function SkillTable(props: TableProps) {
             {props.description}
           </Typography>
         </CardContent>
-        <Table>
+        <Table size="small">
           {props.tableData.map((i: RowData) => (
-            <TableRow>
+            <TableRow >
               <TableCell padding="checkbox">
                 <Checkbox
                   color="primary"

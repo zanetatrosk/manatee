@@ -1,4 +1,4 @@
-import { Card, Container, Grid, Paper } from "@mui/material";
+import { Card, CardMedia, Container, Grid, Paper } from "@mui/material";
 import AbilityCard from "./CharacterSheet/components/abilityCard";
 import SkillTable from "./CharacterSheet/components/skillTable";
 import HeaderCard from "./CharacterSheet/components/headerCard";
@@ -13,14 +13,22 @@ interface Item {
 export default function HomePage() {
   return (
     <Container>
-      <Paper sx={{ p: 1 }} elevation={4}>
-        <Grid container flexDirection={"column"} spacing={7}>
+      <Paper sx={{ p: 2 }} elevation={4}>
+        <Grid container flexDirection={"column"} spacing={5}>
           {/* first row */}
           <Grid item container spacing={2}>
             <Grid item>
-              <Card sx={{ width: 250, height: 336 }} />
+              <Card sx={{ width: 250, height: "100%" }}>
+                <CardMedia
+                  sx={{ height: '100%' }}
+                  component="img"
+                  // Picture by internet user: 
+                  src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*Xe_nttm4GmNuNASsxKG3gg.png"
+                  title="character"
+                />
+              </Card>
             </Grid>
-            <Grid item container xs flexDirection={"column"} spacing={4}>
+            <Grid item container xs flexDirection={"column"} spacing={3}>
               <Grid item>
                 <HeaderCard />
               </Grid>
@@ -34,7 +42,7 @@ export default function HomePage() {
             </Grid>
           </Grid>
           {/* second row */}
-          <Grid container item spacing={3}>
+          <Grid container item spacing={3} xs={12}>
             <Grid item>
               <SkillTable
                 name="Skills"
@@ -42,7 +50,7 @@ export default function HomePage() {
                 tableData={tableData}
               />
             </Grid>
-            <Grid container item xs flexDirection={"column"} spacing={3}>
+            <Grid container item flexDirection={"column"} spacing={3} xs>
               <Grid container item wrap="nowrap" spacing={3}>
                 <Grid item xs={5}>
                   <SkillTable
@@ -58,11 +66,9 @@ export default function HomePage() {
 
               <Grid container item xs>
                 <Grid item xs>
-                  <TabsCard/>
+                  <TabsCard />
                 </Grid>
               </Grid>
-
-              
             </Grid>
           </Grid>
         </Grid>
@@ -178,18 +184,6 @@ const items: Item[] = [
   {
     header: "Hit Points max",
     value: "412",
-  },
-  {
-    header: "Hit Dice",
-    value: "1d10",
-  },
-  {
-    header: "Hit Dice",
-    value: "1d10",
-  },
-  {
-    header: "Hit Dice",
-    value: "1d10",
   },
   {
     header: "Hit Dice",
