@@ -1,4 +1,4 @@
-import { Card, CardContent, Grid, Paper, Typography } from "@mui/material";
+import { Card, Grid, Paper, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 
 function LittleCard({item}: {item: Item}) {
@@ -54,53 +54,53 @@ export default function StatsGrid(props: Props) {
     </Box>
   );
 }
-const items : Item[] = [
-  {
-    header: "speed",
-    value: "35 ft",
-  },
-  {
-    header: "Initiative",
-    value: "+2",
-  },
-  {
-    header: "Prof. Bonus",
-    value: "+2",
-  },
-  {
-    header: "Armor Class",
-    value: "15",
-  },
-  {
-    header: "Hit Points max",
-    value: "412",
-  },
-  {
-    header: "Hit Dice",
-    value: "1d10",
-  },
-  {
-    header: "Hit Dice",
-    value: "1d10",
-  },
-  {
-    header: "Hit Dice",
-    value: "1d10",
-  },
-  {
-    header: "Hit Dice",
-    value: "1d10",
-  },
-  {
-    header: "Hit Dice",
-    value: "1d10",
-  },
-  {
-    header: "Hit Dice",
-    value: "1d10",
-  },
+// const items : Item[] = [
+//   {
+//     header: "speed",
+//     value: "35 ft",
+//   },
+//   {
+//     header: "Initiative",
+//     value: "+2",
+//   },
+//   {
+//     header: "Prof. Bonus",
+//     value: "+2",
+//   },
+//   {
+//     header: "Armor Class",
+//     value: "15",
+//   },
+//   {
+//     header: "Hit Points max",
+//     value: "412",
+//   },
+//   {
+//     header: "Hit Dice",
+//     value: "1d10",
+//   },
+//   {
+//     header: "Hit Dice",
+//     value: "1d10",
+//   },
+//   {
+//     header: "Hit Dice",
+//     value: "1d10",
+//   },
+//   {
+//     header: "Hit Dice",
+//     value: "1d10",
+//   },
+//   {
+//     header: "Hit Dice",
+//     value: "1d10",
+//   },
+//   {
+//     header: "Hit Dice",
+//     value: "1d10",
+//   },
   
   
   
  
-];
+// ];

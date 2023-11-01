@@ -5,12 +5,11 @@ import {
   Table,
   TableCell,
   TableRow,
-  TextField,
   Typography,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 
-interface TableRow {
+interface RowData {
   label: string;
   score: number;
   checked: boolean;
@@ -19,7 +18,7 @@ interface TableRow {
 interface TableProps {
   name: string;
   description: string;
-  tableData: TableRow[];
+  tableData: RowData[];
 }
 
 export default function SkillTable(props: TableProps) {
@@ -33,7 +32,7 @@ export default function SkillTable(props: TableProps) {
           </Typography>
         </CardContent>
         <Table>
-          {props.tableData.map((i: TableRow) => (
+          {props.tableData.map((i: RowData) => (
             <TableRow>
               <TableCell padding="checkbox">
                 <Checkbox
