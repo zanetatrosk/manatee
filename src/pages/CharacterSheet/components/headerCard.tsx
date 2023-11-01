@@ -5,11 +5,11 @@ import React from "react";
 export default function HeaderCard() {
   return (
     <Box display="flex" justifyContent={"center"} flexGrow={1} >
-      <Card sx={{ display: "flex", p: 3, width: "100%" }}>
+      <Card sx={{  p: 3, width: "100%" }}>
         <Grid container flexDirection={"column"} spacing={3} >
-          <Grid item wrap="nowrap">
-            <Typography variant="h4" component="span" >
-              Neville Longbottom the 3rd
+          <Grid item container maxWidth={800} zeroMinWidth>
+            <Typography variant="h4"  noWrap>
+              Neville Longbottom the 3rdjkjjkhkjhjkhjkhhjjghjgjghjgh
             </Typography>
           </Grid>
           <Grid item container spacing={4}  rowSpacing={1}>

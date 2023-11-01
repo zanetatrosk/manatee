@@ -29,7 +29,7 @@ export default function HomePage() {
               </Card>
             </Grid>
             <Grid item container xs flexDirection={"column"} spacing={3}>
-              <Grid item>
+              <Grid item xs>
                 <HeaderCard />
               </Grid>
               <Grid item container spacing={3} justifyContent="center">
@@ -42,7 +42,7 @@ export default function HomePage() {
             </Grid>
           </Grid>
           {/* second row */}
-          <Grid container item spacing={3} xs={12}>
+          <Grid container item spacing={3} columns={{ xs: 12 }} >
             <Grid item>
               <SkillTable
                 name="Skills"
@@ -51,7 +51,7 @@ export default function HomePage() {
               />
             </Grid>
             <Grid container item flexDirection={"column"} spacing={3} xs>
-              <Grid container item wrap="nowrap" spacing={3}>
+              <Grid container item spacing={3}>
                 <Grid item xs>
                   <SkillTable
                     name="Saving Throws"
@@ -59,7 +59,7 @@ export default function HomePage() {
                     tableData={savingThrows}
                   />
                 </Grid>
-                <Grid item>
+                <Grid item >
                   <StatsGrid title="Stats" items={items} />
                 </Grid>
               </Grid>
