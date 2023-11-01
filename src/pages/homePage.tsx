@@ -1,9 +1,4 @@
-import {
-  Card,
-  Container,
-  Grid,
-  Paper,
-} from "@mui/material";
+import { Card, Container, Grid, Paper } from "@mui/material";
 import AbilityCard from "./CharacterSheet/components/abilityCard";
 import SkillTable from "./CharacterSheet/components/skillTable";
 import HeaderCard from "./CharacterSheet/components/headerCard";
@@ -20,23 +15,23 @@ export default function HomePage() {
       <Paper sx={{ p: 1 }} elevation={4}>
         <Grid container flexDirection={"column"} spacing={7}>
           {/* first row */}
-                    <Grid item container spacing={2}>
-                      <Grid item>
-                        <Card sx={{ width: 250, height: 336 }} />
-                      </Grid>
-                      <Grid item container xs flexDirection={"column"} spacing={4}>
-                        <Grid item>
-                          <HeaderCard />
-                        </Grid>
-                        <Grid item container spacing={3} justifyContent="center">
-                          {Array.from(Array(6).keys()).map((i) => (
-                            <Grid item key={i}>
-                              <AbilityCard ability="Strength" score={12} modifier={1} />
-                            </Grid>
-                          ))}
-                        </Grid>
-                      </Grid>
-                    </Grid>
+          <Grid item container spacing={2}>
+            <Grid item>
+              <Card sx={{ width: 250, height: 336 }} />
+            </Grid>
+            <Grid item container xs flexDirection={"column"} spacing={4}>
+              <Grid item>
+                <HeaderCard />
+              </Grid>
+              <Grid item container spacing={3} justifyContent="center">
+                {Array.from(Array(6).keys()).map((i) => (
+                  <Grid item key={i}>
+                    <AbilityCard ability="Strength" score={12} modifier={1} />
+                  </Grid>
+                ))}
+              </Grid>
+            </Grid>
+          </Grid>
           {/* second row */}
           <Grid container item spacing={3}>
             <Grid item>
@@ -46,15 +41,19 @@ export default function HomePage() {
                 tableData={tableData}
               />
             </Grid>
-            <Grid item xs={3.5}>
-              <SkillTable
-                name="Saving Throws"
-                description="Choose which saving throws you are proficient in."
-                tableData={tableData.slice(0, 6)}
-              />
-            </Grid>
-            <Grid item xs>
-              <StatsGrid title="Stats" items={items} />
+            <Grid container item xs flexDirection={"column"}>
+              <Grid container item wrap="nowrap" spacing={2}>
+                <Grid item xs>
+                  <SkillTable
+                    name="Saving Throws"
+                    description="Choose which saving throws you are proficient in."
+                    tableData={tableData.slice(0, 6)}
+                  />
+                </Grid>
+                <Grid item>
+                  <StatsGrid title="Stats" items={items} />
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
