@@ -23,7 +23,7 @@ export default function HomePage() {
                 sx={{ height: "100%"}}
                   component="img"
                   // Picture by internet user: 
-                  src="https://i.pinimg.com/originals/54/5e/cb/545ecb06834f6fe5afd5faebcae19a5a.png"
+                  src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/318394173/original/c4b3f1c87e9c941530cfdbabda92abbab1b7b622/make-dnd-character-art-and-character-design.png"
                   title="character"
                 />
               </Card>
@@ -52,18 +52,17 @@ export default function HomePage() {
             </Grid>
             <Grid container item flexDirection={"column"} spacing={3} xs>
               <Grid container item wrap="nowrap" spacing={3}>
-                <Grid item xs={5}>
+                <Grid item xs>
                   <SkillTable
                     name="Saving Throws"
                     description="Choose which saving throws you are proficient in."
-                    tableData={tableData.slice(0, 6)}
+                    tableData={savingThrows}
                   />
                 </Grid>
                 <Grid item>
                   <StatsGrid title="Stats" items={items} />
                 </Grid>
               </Grid>
-
               <Grid container item xs>
                 <Grid item xs>
                   <TabsCard />
@@ -160,6 +159,39 @@ const tableData = [
   },
   {
     label: "Survival(WIS)",
+    score: 8,
+    checked: false,
+  },
+];
+//generate saving throws in the same format as tableData
+const savingThrows = [
+  {
+    label: "Strength",
+    score: 8,
+    checked: false,
+  },
+  {
+    label: "Dexterity",
+    score: 8,
+    checked: true,
+  },
+  {
+    label: "Constitution",
+    score: 8,
+    checked: false,
+  },
+  {
+    label: "Intelligence",
+    score: 8,
+    checked: false,
+  },
+  {
+    label: "Wisdom",
+    score: 8,
+    checked: false,
+  },
+  {
+    label: "Charisma",
     score: 8,
     checked: false,
   },

@@ -13,8 +13,8 @@ export default function HeaderCard() {
             </Typography>
           </Grid>
           <Grid item container spacing={4}  rowSpacing={1}>
-            {data.map((i) => (
-              <React.Fragment>
+            {data.map((i, idx) => (
+              <React.Fragment key={idx}>
                 <Grid
                   item
                   container

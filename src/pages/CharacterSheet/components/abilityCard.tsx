@@ -1,4 +1,4 @@
-import { Grid, Paper, Typography, styled } from "@mui/material";
+import { Card, Grid, Typography, styled } from "@mui/material";
 import Box from "@mui/material/Box";
 
 const StyledModifier = styled(Box)({
@@ -9,9 +9,10 @@ const StyledModifier = styled(Box)({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: "#F5F5F5",
+  //set background color depending on theme
+  // backgroundColor: "#F5F5F5",
   borderShadow: "none",
-  border: "2px solid #000000",
+  border: "2px solid",
   elevation: 0,
 });
 
@@ -22,8 +23,8 @@ const StyledAbilityScore = styled(Box)({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: "#F5F5F5",
-  border: "2px solid #000000",
+  // backgroundColor: "#F5F5F5",
+  border: "2px solid",
   elevation: 0,
   borderTop: "none",
   boxShadow: "none",
@@ -42,7 +43,7 @@ interface AbilityCardProps {
 export default function AbilityCard(props: AbilityCardProps) {
   return (
     <Box>
-      <Paper sx={{ px: 2 , py: 1,  borderRadius: 2 }} elevation={3}>
+      <Card sx={{ px: 2 , py: 1,  borderRadius: 2 }} >
         <Grid alignItems="center" container flexDirection="column" spacing={1}>
           <Grid item>
             <Typography variant="button">{props.ability}</Typography>
@@ -58,7 +59,7 @@ export default function AbilityCard(props: AbilityCardProps) {
           </Grid>
           
         </Grid>
-      </Paper>
+      </Card>
     </Box>
   );
 }
