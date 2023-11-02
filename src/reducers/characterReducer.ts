@@ -20,8 +20,8 @@ export const characterReducer = createSlice({
         },
         setClass (state, action: PayloadAction<Class>){
             state.characterClass = action.payload;
-        }
-
+        },
+        
 
 
     }

@@ -52,7 +52,7 @@ export default function ClassFrame() {
             value={characterClass}
             sx={{ my: 2 }}
             onChange={(_, value) => {
-              if(!value) return;
+              if(!value || value?.id) return;
               setClass(value);
             }}
             renderInput={(params) => (

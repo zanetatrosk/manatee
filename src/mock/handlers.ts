@@ -24,4 +24,13 @@ export const handlers = [
             ctx.json(sources),
         );
     }),
+
+    rest.get('/api/classes', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json([]),
+        );
+    }),
+
+    
 ];
