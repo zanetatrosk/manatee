@@ -6,7 +6,7 @@ import CharacterSheet from "./CharacterSheet/characterSheet";
 export default function HomePage() {
   return (
     <Box>
-    <CharacterSheet/>
+    {/* <CharacterSheet/> */}
     </Box>
   );
 }

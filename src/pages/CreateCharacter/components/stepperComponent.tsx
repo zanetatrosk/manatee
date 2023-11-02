@@ -11,8 +11,10 @@ import Race from "./raceFrame";
 import Abilities from "./abilitiesFrame";
 import Background from "./backgroundFrame";
 import {CREATE_CHARACTER} from "constants/characterDefinition";
+import { useNavigate } from "react-router-dom";
 
   const steps = ["Basic information", "Class", "Race", "Abilities", "Background"];
+
 
   interface ComponentRegister {
     id: number;
@@ -22,6 +24,9 @@ import {CREATE_CHARACTER} from "constants/characterDefinition";
 export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
+
+  const navigate = useNavigate();
+
   const components: ComponentRegister[] = [
     { id: 0, component: <BasicInformation /> },
     { id: 1, component: <Class /> },
@@ -71,6 +76,10 @@ export default function HorizontalLinearStepper() {
   const handleReset = () => {
     setActiveStep(0);
   };
+
+  const handleFinish = () => {
+    navigate("/characters/character-sheet");
+  }
 
   return (
     <Box>
@@ -127,7 +136,7 @@ export default function HorizontalLinearStepper() {
                {CREATE_CHARACTER.CARD_ACTIONS.SKIP}
               </Button>
             )}
-            <Button onClick={handleNext}>
+            <Button onClick={ activeStep === steps.length - 1 ? handleFinish : handleNext }>
               {activeStep === steps.length - 1 ? CREATE_CHARACTER.CARD_ACTIONS.FINISH : CREATE_CHARACTER.CARD_ACTIONS.NEXT}
             </Button>
           </Box>

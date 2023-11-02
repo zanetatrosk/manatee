@@ -8,6 +8,7 @@ import Characters from "@pages/Characters/charactersPage";
 import CreateCharacter from "@pages/CreateCharacter/components/createCharacter";
 import HomePage from "@pages/homePage";
 import { Container } from "@mui/material";
+import CharacterSheet from "@pages/CharacterSheet/characterSheet";
 // import Footer from "@components/footer";
 const darkTheme = createTheme({
   palette: {
@@ -37,6 +38,10 @@ function App() {
                 path="/characters/create-character"
                 element={<CreateCharacter />}
               />
+              <Route path="/characters/character-sheet"
+                element={<CharacterSheet/>} />
+               
+             
             </Routes>
           </Container>
           {/* todo footer */}

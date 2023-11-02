@@ -17,7 +17,7 @@ export default function ClassFrame() {
   const classStore = useAppSelector((state) => state.character.characterClass);
   const dispatch = useAppDispatch();
   
-  const [characterClass, setClass] = React.useState(classStore); 
+  const [characterClass, setClass] = React.useState<Class>(classStore); 
   const [isVisible, setVisibility] = React.useState(false);
   const [toolsValue, setTools] = React.useState<AutocompleteItem[]>(classStore.tools.defaults);
 
@@ -48,13 +48,11 @@ export default function ClassFrame() {
         <Grid item lg={7} xs={12}>
           <Autocomplete
             id="combo-box-demo"
-            freeSolo
             options={classes}
             value={characterClass}
             sx={{ my: 2 }}
             onChange={(_, value) => {
-              //this is caused by the freeSolo option 
-              if (!value || typeof value === "string") return;
+              if(!value) return;
               setClass(value);
             }}
             renderInput={(params) => (
@@ -84,6 +82,10 @@ export default function ClassFrame() {
                 options={subclasses}
                 value={characterClass.subclass}
                 getOptionLabel={(option) => option.title}
+                onChange={(_, value) => {
+                  if( !value ) return;
+                  setClass({...characterClass, subclass: value});
+                }}
                 renderInput={(params) => (
                   <TextField
                     {...params}
