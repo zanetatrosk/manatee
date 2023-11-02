@@ -53,13 +53,11 @@ export default function BackgroundFrame() {
         <Grid item lg={7} xs={12}>
           <Autocomplete
             id="combo-box-demo"
-            freeSolo
             options={backgrounds}
-            value={background}
+            value={background.id? background : null}
             sx={{ my: 2 }}
             onChange={(_, value) => {
-              //this is caused by the freeSolo option 
-              if (!value || typeof value === "string") return;
+              if (!value) return;
               setBackground(value);
             }}
             renderInput={(params) => (

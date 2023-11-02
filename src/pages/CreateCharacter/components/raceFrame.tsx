@@ -81,15 +81,13 @@ export default function RaceFrame() {
         <Grid item lg={7} xs={12}>
           <Autocomplete
             sx={{ my: 2 }}
-            freeSolo
             clearOnBlur
             id="combo-box-demo"
             options={racesApi}
             isOptionEqualToValue={(option, value) => option.id === value.id }
-            value={race}
+            value={race.id ? race : null}
             onChange={(_, value) => {
-              //the typeof value === "string" is caused by the freeSolo option
-              if (!value || typeof value === "string") return;
+              if (!value) return;
               setRace(value);
               // if this is not set, I get following error:
               /*

@@ -49,12 +49,13 @@ export default function ClassFrame() {
           <Autocomplete
             id="combo-box-demo"
             options={classes}
-            value={characterClass}
+            value={characterClass.id ? characterClass : null}
             sx={{ my: 2 }}
             onChange={(_, value) => {
-              if(!value || value?.id) return;
+              if(!value) return;
               setClass(value);
             }}
+            isOptionEqualToValue={(option, value) => option.id === value.id}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -80,10 +81,11 @@ export default function ClassFrame() {
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <Autocomplete
                 options={subclasses}
-                value={characterClass.subclass}
+                value={characterClass.subclass.id ? characterClass.subclass : null}
                 getOptionLabel={(option) => option.title}
+                isOptionEqualToValue={(option, value) => option.id === value.id}
                 onChange={(_, value) => {
-                  if( !value ) return;
+                  if(!value) return;
                   setClass({...characterClass, subclass: value});
                 }}
                 renderInput={(params) => (
