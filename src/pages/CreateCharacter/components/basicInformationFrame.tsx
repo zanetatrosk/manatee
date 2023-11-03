@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
 import {
   Autocomplete,
+  CircularProgress,
   Grid,
   TextField,
   Typography,
@@ -12,6 +13,7 @@ import {
 import React, { useEffect } from "react";
 import { setBasicInfo } from "reducers/characterReducer";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
+import { useGetSourcesQuery } from "api/raceApiSlice";
 
 const BASIC_INFO = CREATE_CHARACTER.BASIC_INFO;
 
@@ -22,13 +24,15 @@ export default function BasicInformation() {
   );
   const dispatch = useAppDispatch();
   const [basicInfo, setInfo] = React.useState<BasicInfo>(basicInfoFromStore);
-  
   //this is uneffective, bcs it is called every time user inputs something
   useEffect(() => {
     const basicInfoTmp = { ...basicInfo, sources: basicInfo.sources.map((s) => s) };
     console.log(basicInfoTmp, "basicInfoTmp");
     dispatch(setBasicInfo(basicInfoTmp));
   }, [basicInfo, dispatch]);
+
+  //fetch data sources only first time when component is mounted
+  const { data: sources, isLoading: loading } = useGetSourcesQuery();
 
   return (
     <Grid container spacing={10}>
@@ -72,16 +76,26 @@ export default function BasicInformation() {
           <Autocomplete
             id="combo-box-demo"
             value={basicInfo.sources}
-            options={sources}
+            options={sources || [] }
             multiple
             getOptionLabel={(option) => option.title}
             onChange={(_, value) => {
+              if (!value) return;
               setInfo({ ...basicInfo, sources: value });
             }}
             renderInput={(params) => (
               <TextField
                 {...params}
                 label={BASIC_INFO.SOURCES}
+                InputProps={{
+                  ...params.InputProps,
+                  endAdornment: (
+                    <React.Fragment>
+                      {loading ? <CircularProgress color="inherit" size={23} /> : null}
+                      {params.InputProps.endAdornment}
+                    </React.Fragment>
+                  ),
+                }}
                 variant="filled"
               />
             )}
@@ -118,7 +132,7 @@ export default function BasicInformation() {
 }
 
 //generate sources for dnd5e
-const sources: AutocompleteItem[] = [
+const sourcesTh: AutocompleteItem[] = [
   { id: 0, title: "Player's Handbook" },
   { id: 1, title: "Dungeon Master's Guide" },
   { id: 2, title: "Monster Manual" },

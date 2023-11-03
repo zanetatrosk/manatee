@@ -61,8 +61,6 @@ interface Class {
     hitDice: string;
     features: Feature[];
     tools: AutocompleteParams;
-
-
 }
 interface Feature{
     title: string;
@@ -77,6 +75,7 @@ interface Background {
     languages: AutocompleteParams;
     tools: AutocompleteParams;
 }
+interface Source extends AutocompleteItem {}
 
 //interface used for autocomplete
 interface AutocompleteItem {
@@ -186,5 +185,5 @@ const formDefaults  = {
 } as CharacterSheet
 
 
-export type {Race, AutocompleteItem, Background, AbilityScore, AutocompleteParams, Feature, BasicInfo, CharacterSheet, Class}
+export type {Race, AutocompleteItem, Background, AbilityScore, AutocompleteParams, Feature, BasicInfo, CharacterSheet, Class, Source}
 export {Ability, Size, formDefaults}
