@@ -2,12 +2,15 @@
 
 
 describe('check home page after loading an app', () => {
-  beforeAll(() => {
+
+  before(() => {
     cy.visit('http://localhost:3000/')
   });
 
-  it('get element', () => {
-    cy.get
+  it('should have a title', () => {
+    cy.title().should('include', 'React App')
   });
+
+  
   
 })
