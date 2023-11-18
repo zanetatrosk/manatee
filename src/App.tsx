@@ -8,6 +8,8 @@ import Characters from "@pages/Characters/charactersPage";
 import CreateCharacter from "@pages/CreateCharacter/components/createCharacter";
 import HomePage from "@pages/homePage";
 import { Container } from "@mui/material";
+import CharacterSheet from "@pages/CharacterSheet/characterSheet";
+import ContentPage from "@pages/Content/contentPage";
 // import Footer from "@components/footer";
 const darkTheme = createTheme({
   palette: {
@@ -27,16 +29,19 @@ function App() {
               mt: 9,
               mb: 4, 
             }}
-            maxWidth="xl"
+            maxWidth="lg"
             component="main"
           >
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/characters" element={<Characters />} />
+              <Route path="/content" element={<ContentPage/>}/>
               <Route
                 path="/characters/create-character"
                 element={<CreateCharacter />}
               />
+              <Route path="/characters/character-sheet"
+                element={<CharacterSheet/>} />
             </Routes>
           </Container>
           {/* todo footer */}

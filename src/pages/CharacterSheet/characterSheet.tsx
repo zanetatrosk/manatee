@@ -24,7 +24,7 @@ export default function CharacterSheet() {
                 sx={{ height: "100%"}}
                   component="img"
                   // Picture by internet user: 
-                  src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/318394173/original/c4b3f1c87e9c941530cfdbabda92abbab1b7b622/make-dnd-character-art-and-character-design.png"
+                  src="https://miro.medium.com/v2/resize:fit:1024/1*Xe_nttm4GmNuNASsxKG3gg.png"
                   title="character"
                 />
               </Card>

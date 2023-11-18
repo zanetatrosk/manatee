@@ -6,29 +6,32 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import BasicInformation from "@pages/CreateCharacter/components/basicInformationFrame";
-import Class  from "@pages/CreateCharacter/components/classFrame";
+import Class from "@pages/CreateCharacter/components/classFrame";
 import Race from "./raceFrame";
 import Abilities from "./abilitiesFrame";
 import Background from "./backgroundFrame";
-import {CREATE_CHARACTER} from "constants/characterDefinition";
+import { CREATE_CHARACTER } from "constants/characterDefinition";
+import { useNavigate } from "react-router-dom";
 
-  const steps = ["Basic information", "Class", "Race", "Abilities", "Background"];
+const steps = ["Basic information", "Class", "Race", "Abilities", "Background"];
 
-  interface ComponentRegister {
-    id: number;
-    component: React.ReactElement;
-  }
+interface ComponentRegister {
+  id: number;
+  component: React.ReactElement;
+}
 
 export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
+
+  const navigate = useNavigate();
+
   const components: ComponentRegister[] = [
     { id: 0, component: <BasicInformation /> },
     { id: 1, component: <Class /> },
     { id: 2, component: <Race /> },
     { id: 3, component: <Abilities /> },
     { id: 4, component: <Background /> },
-
   ];
   const isStepOptional = (step: number) => {
     return step === 0;
@@ -72,6 +75,10 @@ export default function HorizontalLinearStepper() {
     setActiveStep(0);
   };
 
+  const handleFinish = () => {
+    navigate("/characters/character-sheet");
+  };
+
   return (
     <Box>
       <Stepper activeStep={activeStep} sx={{ mb: 7 }}>
@@ -109,8 +116,8 @@ export default function HorizontalLinearStepper() {
       ) : (
         <React.Fragment>
           {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
-          <Box sx={{ pt: 2, pb: 8, px: 8 ,}}>
-          {components.at(activeStep)?.component}
+          <Box sx={{ pt: 2, pb: 8, px: 8 }}>
+            {components.at(activeStep)?.component}
           </Box>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
@@ -124,11 +131,17 @@ export default function HorizontalLinearStepper() {
             <Box sx={{ flex: "1 1 auto" }} />
             {isStepOptional(activeStep) && (
               <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-               {CREATE_CHARACTER.CARD_ACTIONS.SKIP}
+                {CREATE_CHARACTER.CARD_ACTIONS.SKIP}
               </Button>
             )}
-            <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? CREATE_CHARACTER.CARD_ACTIONS.FINISH : CREATE_CHARACTER.CARD_ACTIONS.NEXT}
+            <Button
+              onClick={
+                activeStep === steps.length - 1 ? handleFinish : handleNext
+              }
+            >
+              {activeStep === steps.length - 1
+                ? CREATE_CHARACTER.CARD_ACTIONS.FINISH
+                : CREATE_CHARACTER.CARD_ACTIONS.NEXT}
             </Button>
           </Box>
         </React.Fragment>
