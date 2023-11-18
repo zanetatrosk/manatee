@@ -11,7 +11,7 @@ import { CHARACTERS } from "constants/characterDefinition";
 
 function CharacterCard() {
   return (
-    <Card sx={{ maxWidth: 370 }}>
+    <Card sx={{ maxWidth: 370 }} data-cy="character-card">
       <CardMedia
         sx={{ maxHeight: 140, minWidth: 350 }}
         component="img"
