@@ -32,12 +32,10 @@ function ResponsiveAppBar() {
     setAnchorElUser(event.currentTarget);
   };
 
-  function handleCloseNavMenu (page: string){
+  function handleCloseNavMenu(page: string) {
     setAnchorElNav(null);
-    return(
-        <Link to={ '/' + page } >D&D APP</Link>
-    )
-  };
+    return <Link to={"/" + page} />;
+  }
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -45,14 +43,12 @@ function ResponsiveAppBar() {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="lg">
         <Toolbar disableGutters>
           <DragonLogo md="flex" xs="none" />
-
           <Typography
             variant="h6"
             noWrap
-            component="a"
             sx={{
               mr: 3,
               ml: 1,
@@ -94,10 +90,17 @@ function ResponsiveAppBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={() => {handleCloseNavMenu(page)}}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+              {pages.map((page, index) => (
+                <Link to={"/" + page} key={index}>
+                  <MenuItem
+                    key={page}
+                    onClick={() => {
+                      handleCloseNavMenu(page);
+                    }}
+                  >
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -119,11 +122,13 @@ function ResponsiveAppBar() {
             D&D APP
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Link to={"/" + page}>
+            {pages.map((page, index) => (
+              <Link to={"/" + page} key={index}>
                 <Button
                   key={page}
-                  onClick={() => {handleCloseNavMenu(page)}}
+                  onClick={() => {
+                    handleCloseNavMenu(page);
+                  }}
                   sx={{ m: 1, mx: 2, color: "white", display: "block" }}
                 >
                   {page}

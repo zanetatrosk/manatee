@@ -4,14 +4,18 @@ import Navbar from "./components/navbar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import Characters from "@pages/Characters/page";
-
+import Characters from "@pages/Characters/charactersPage";
+import CreateCharacter from "@pages/CreateCharacter/components/createCharacter";
+import HomePage from "@pages/homePage";
+import { Container } from "@mui/material";
+import CharacterSheet from "@pages/CharacterSheet/characterSheet";
+import ContentPage from "@pages/Content/contentPage";
+// import Footer from "@components/footer";
 const darkTheme = createTheme({
   palette: {
-    mode: "dark",
+    mode: "light",
   },
 });
-
 
 function App() {
   return (
@@ -20,10 +24,28 @@ function App() {
         <ThemeProvider theme={darkTheme}>
           <CssBaseline />
           <Navbar />
-          <Routes>
-            <Route path="/" element={<h1>Home Page</h1>} />
-            <Route path="/characters" element={<Characters />} />
-          </Routes>
+          <Container
+            sx={{
+              mt: 9,
+              mb: 4, 
+            }}
+            maxWidth="lg"
+            component="main"
+          >
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/characters" element={<Characters />} />
+              <Route path="/content" element={<ContentPage/>}/>
+              <Route
+                path="/characters/create-character"
+                element={<CreateCharacter />}
+              />
+              <Route path="/characters/character-sheet"
+                element={<CharacterSheet/>} />
+            </Routes>
+          </Container>
+          {/* todo footer */}
+          {/* <Footer/> */}
         </ThemeProvider>
       </Router>
     </div>
