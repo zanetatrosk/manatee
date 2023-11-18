@@ -24,8 +24,6 @@ export default function TabsCard() {
               <Tab label="Other prof. & languages" value="3" />
               <Tab label="Features" value="4" />
               <Tab label="Characteristics" value="5" />
-
-
             </TabList>
           </Box>
           <TabPanel value="1">Item One</TabPanel>

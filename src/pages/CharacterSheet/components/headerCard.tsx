@@ -2,18 +2,26 @@ import { Card, Grid, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import React from "react";
 
-export default function HeaderCard() {
+interface DisplayedHeaders {
+  header: string;
+  value: string;
+}
+interface DisplayedData {
+  headers: DisplayedHeaders[];
+  title: string;
+}
+export default function HeaderCard({props: character}: {props: DisplayedData}) {
   return (
     <Box display="flex" justifyContent={"center"} flexGrow={1} >
       <Card sx={{  p: 3, width: "100%" }}>
         <Grid container flexDirection={"column"} spacing={3} >
           <Grid item container maxWidth={800} zeroMinWidth>
             <Typography variant="h4" noWrap>
-              Neville Longbottom the 3rdjkjjkhkjhjkhjkhhjjghjgjghjgh
+              {character.title}
             </Typography>
           </Grid>
           <Grid item container spacing={4}  rowSpacing={1}>
-            {data.map((i, idx) => (
+            {character.headers.map((i, idx) => (
               <React.Fragment key={idx}>
                 <Grid
                   item
@@ -45,28 +53,28 @@ export default function HeaderCard() {
     </Box>
   );
 }
-const data = [
-  {
-    header: "Player",
-    value: "Zanetaaaaaa",
-  },
-  {
-    header: "Race",
-    //add race that has the longest string
-    value: "Half-Orc",
-  },
-  {
-    header: "Class & level",
-    value: "Barbarian 123",
-  },
-  {
-    header: "Subclass",
-    value: "Path of the Totem Warrior",
-  },
-  {
-    header: "Background",
-    value: "Outlander",
-  },
+// const data = [
+//   {
+//     header: "Player",
+//     value: "Zanetaaaaaa",
+//   },
+//   {
+//     header: "Race",
+//     //add race that has the longest string
+//     value: "Half-Orc",
+//   },
+//   {
+//     header: "Class & level",
+//     value: "Barbarian 123",
+//   },
+//   {
+//     header: "Subclass",
+//     value: "Path of the Totem Warrior",
+//   },
+//   {
+//     header: "Background",
+//     value: "Outlander",
+//   },
  
   
-];
+// ];

@@ -86,8 +86,7 @@ export default function Abilities() {
     newRows[idx] = { ...rows[idx], [param]: value };
     setRows(newRows);
   };
-
-
+  
   return (
     <Box>
       <TableContainer component={Card}>
