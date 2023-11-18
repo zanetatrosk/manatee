@@ -8,7 +8,7 @@ export default function HeaderCard() {
       <Card sx={{  p: 3, width: "100%" }}>
         <Grid container flexDirection={"column"} spacing={3} >
           <Grid item container maxWidth={800} zeroMinWidth>
-            <Typography variant="h4"  noWrap>
+            <Typography variant="h4" noWrap>
               Neville Longbottom the 3rdjkjjkhkjhjkhjkhhjjghjgjghjgh
             </Typography>
           </Grid>
@@ -26,12 +26,13 @@ export default function HeaderCard() {
                       component="span"
                       color="text.secondary"
                       variant="caption"
+                      noWrap
                     >
                       {i.header}
                     </Typography>
                   </Grid>
                   <Grid item>
-                    <Typography component="span" >
+                    <Typography component="span" noWrap>
                       {i.value}
                     </Typography>
                   </Grid>
@@ -52,7 +53,7 @@ const data = [
   {
     header: "Race",
     //add race that has the longest string
-    value: "Dragonborn",
+    value: "Half-Orc",
   },
   {
     header: "Class & level",
@@ -60,7 +61,7 @@ const data = [
   },
   {
     header: "Subclass",
-    value: "Author",
+    value: "Path of the Totem Warrior",
   },
   {
     header: "Background",

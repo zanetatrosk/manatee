@@ -4,6 +4,7 @@ import AbilityCard from "./components/abilityCard";
 import SkillTable from "./components/skillTable";
 import StatsGrid from "./components/statsGrid";
 import TabsCard from "./components/tabsCard";
+import React from "react";
 
 
 interface Item {
@@ -13,7 +14,7 @@ interface Item {
 
 export default function CharacterSheet() {
   return (
-    <Container>
+    <React.Fragment>
       <Paper sx={{ p: 2 }} elevation={4}>
         <Grid container flexDirection={"column"} spacing={5}>
           {/* first row */}
@@ -73,7 +74,7 @@ export default function CharacterSheet() {
           </Grid>
         </Grid>
       </Paper>
-    </Container>
+    </React.Fragment>
   );
 }
 
