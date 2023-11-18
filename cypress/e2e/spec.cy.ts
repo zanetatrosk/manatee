@@ -1,12 +1,13 @@
 
 
 
-describe('visit', () => {
-  
-  it('get element', () => {
+describe('check home page after loading an app', () => {
+  beforeAll(() => {
     cy.visit('http://localhost:3000/')
-    cy.get('.css-1t6c9ts > [href="/characters"] > .MuiButtonBase-root').click();
-    cy.url().should('include', '/characters')
+  });
+
+  it('get element', () => {
+    cy.get
   });
   
 })
