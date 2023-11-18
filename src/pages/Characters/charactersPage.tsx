@@ -3,11 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Container } from "@mui/material";
-import {
-  Button,
-  CardActions,
-  CardMedia,
-} from "@mui/material";
+import { Button, CardActions, CardMedia } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +28,7 @@ function CharacterCard() {
         </Typography>
       </CardContent>
       <CardActions>
-        <Grid container direction="row" justifyContent="flex-start" >
+        <Grid container direction="row" justifyContent="flex-start">
           <Grid item={true} xs>
             <Button variant="outlined" size="small" sx={{ mx: 1 }}>
               {CHARACTERS.VIEW}
@@ -60,16 +56,12 @@ function CharacterCard() {
 export default function Characters() {
   let navigate = useNavigate();
   return (
-    <Container
-      maxWidth="lg"
-    >
-      <Grid container>
-        <Grid item
-          xs={12}
-          pr={3}
-          container
-          justifyContent="flex-end"
-        >
+    <Grid container>
+      <Grid container xs={12} sx={{px: 3, mb: 1}}>
+        <Grid item>
+          <Typography variant="h4">My Characters</Typography>
+        </Grid>
+        <Grid item xs container justifyContent="flex-end">
           <Button
             variant="outlined"
             size="small"
@@ -85,21 +77,21 @@ export default function Characters() {
             {CHARACTERS.CREATE_CHARACTER}
           </Button>
         </Grid>
-        {Array.from(Array(6)).map((aa, index) => (
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            md={6}
-            lg={4}
-            p={3}
-            key={index}
-            justifyContent="center"
-          >
-            <CharacterCard/>
-          </Grid>
-        ))}
       </Grid>
-    </Container>
+      {Array.from(Array(6)).map((index) => (
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={6}
+          lg={4}
+          p={3}
+          key={index}
+          justifyContent="center"
+        >
+          <CharacterCard />
+        </Grid>
+      ))}
+    </Grid>
   );
 }

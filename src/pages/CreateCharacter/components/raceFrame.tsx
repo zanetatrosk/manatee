@@ -43,6 +43,15 @@ export default function RaceFrame() {
   const { data: races, isLoading: loadingRaces } = useGetRacesQuery();
   const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery();
 
+  function handleChange(event: SelectChangeEvent) {
+    setSize(event.target.value);
+    console.log(event.target.value);
+  }
+
+  const handleLanguagesChange = (value: AutocompleteItem[]): void => {
+    setLanguages(value);
+  }
+
   useEffect(() => {
     if ( !race.id || race.label === "") return;
     const a = race;
@@ -58,10 +67,7 @@ export default function RaceFrame() {
     dispatch(setAbilityScores(abilities));
   }, [race, dispatch]);
   
-  function handleChange(event: SelectChangeEvent) {
-    setSize(event.target.value);
-    console.log(event.target.value);
-  }
+  
 
   return (
     <Box>
@@ -136,7 +142,7 @@ export default function RaceFrame() {
                 <MultiComplete
                   values={languages || []}
                   results={languagesRes}
-                  onChange={setLanguages}
+                  onChange={handleLanguagesChange}
                   label={RACE.LANGUAGES}
                   helpText={`Please choose ${race.languages.amount} languages`}
                   placeholder={RACE.LANGUAGES_PLACEHOLDER}

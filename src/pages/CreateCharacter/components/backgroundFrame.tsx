@@ -29,6 +29,13 @@ export default function BackgroundFrame() {
   const {data: languages, isLoading: loadingLanguages} = useGetLanguagesQuery();
   const {data: tools, isLoading: loadingTools} = useGetToolsQuery();
 
+  const handleToolsChange = (value: AutocompleteItem[]): void => {
+    setTools(value);
+  }
+
+  const handleLanguagesChange = (value: AutocompleteItem[]): void => {
+    setLanguages(value);
+  }
 
   useEffect(() => {
     if (!background.id) return;
@@ -101,7 +108,7 @@ export default function BackgroundFrame() {
                 <MultiComplete
                   values={languages || []}
                   results={languagesValue}
-                  onChange={setLanguages}
+                  onChange={handleLanguagesChange}
                   label={BACKGROUND.LANGUAGES}
                   helpText={`Please choose ${background.languages.amount} languages`}
                   placeholder={BACKGROUND.LANGUAGES_PLACEHOLDER}
@@ -112,7 +119,7 @@ export default function BackgroundFrame() {
                 <MultiComplete
                   values={tools || []}
                   results={toolsValue}
-                  onChange={setTools}
+                  onChange={handleToolsChange}
                   label={BACKGROUND.TOOLS}
                   helpText={`Please choose ${background.tools.amount} tools`}
                   placeholder={BACKGROUND.TOOLS_PLACEHOLDER}

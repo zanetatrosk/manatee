@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { Autocomplete, TextField, Chip } from "@mui/material";
 import { AutocompleteItem } from "@pages/CreateCharacter/definitions/characterForm";
 //interface used for props
@@ -6,7 +6,7 @@ import { AutocompleteItem } from "@pages/CreateCharacter/definitions/characterFo
 interface PropsParams {
   values: AutocompleteItem[];
   results: AutocompleteItem[];
-  onChange: any;
+  onChange: (value: AutocompleteItem[]) => void;
   label: string;
   helpText?: string;
   placeholder?: string;
@@ -16,7 +16,6 @@ interface PropsParams {
 export default function MultiComplete(props: PropsParams) {
 
   const [item, setItem] = React.useState("");
-
 
   return (
     <div>
@@ -44,7 +43,9 @@ export default function MultiComplete(props: PropsParams) {
           props.onChange(tmp);
         }}
         onChange={(e, value) => {
-          setItem("");          
+          setItem("");
+          if(typeof value === "string") return;
+          // @ts-ignore        
           props.onChange(value);
         }}
         renderTags={(value: readonly AutocompleteItem[], getTagProps) =>

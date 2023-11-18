@@ -1,5 +1,6 @@
 import { rest } from 'msw';
 import { races, backgrounds, sources, classes, languages, proficiencyTools, subclasses } from './generalData';
+import { randomInt } from 'crypto';
 
 
 
@@ -51,9 +52,17 @@ export const handlers = [
             ctx.status(200),
             ctx.json(subclasses),
         );
-    })
+    }),
 
-    
+    rest.post('/api/characters', (req, res, ctx) => {
+        const { message } = JSON.parse(req.bodyUsed?.toString() || '');
+        return res(
+            ctx.status(200),
+            ctx.json({id: Math.floor(Math.random() * 100), message}),
+        );
+    }),
+
+
 
     
 ];

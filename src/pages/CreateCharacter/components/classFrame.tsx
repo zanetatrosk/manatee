@@ -26,12 +26,17 @@ export default function ClassFrame() {
   const { data: subclasses, isLoading: loadingSubclasses } = useGetSubclassesQuery();
   const { data: tools, isLoading: toolsLoading } = useGetToolsQuery();
 
+  const handleToolsChange = (value: AutocompleteItem[]): void => {
+    setTools(value);
+  }
+
   useEffect(() => {
     if( !characterClass.id ) return;
     const tmpClass = characterClass;
     setVisibility(true);
     dispatch(setStoreClass(tmpClass));
   }, [characterClass, dispatch]);
+
 
   return (
     <Box>
@@ -115,7 +120,7 @@ export default function ClassFrame() {
                 <MultiComplete
                   values={tools || []}
                   results={toolsValue}
-                  onChange={setTools}
+                  onChange={handleToolsChange}
                   label={CLASS.TOOLS}
                   helpText={`Please choose ${characterClass.tools.amount} tools`}
                   placeholder={CLASS.TOOLS_PLACEHOLDER}

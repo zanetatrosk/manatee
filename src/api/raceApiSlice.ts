@@ -26,6 +26,13 @@ export const raceApiSlice = createApi({
         }),
         getSubclasses: builder.query<AutocompleteItem[], void>({
             query: () => 'subclasses',
+        }),
+        addCharacter: builder.mutation<void, void>({
+            query: (body) => ({
+                url: 'characters',
+                method: 'POST',
+                body,
+            }),
         }),    
         
     }),
