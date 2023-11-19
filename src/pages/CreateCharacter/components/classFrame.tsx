@@ -122,7 +122,7 @@ export default function ClassFrame() {
                   results={toolsValue}
                   onChange={handleToolsChange}
                   label={CLASS.TOOLS}
-                  helpText={`Please choose ${characterClass.tools.amount} tools`}
+                  helpText={`You can have up to ${characterClass.tools.amount} tools`}
                   placeholder={CLASS.TOOLS_PLACEHOLDER}
                   maxItems={characterClass.tools.amount}
                 />

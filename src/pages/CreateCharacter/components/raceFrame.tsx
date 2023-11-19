@@ -144,7 +144,7 @@ export default function RaceFrame() {
                   results={languagesRes}
                   onChange={handleLanguagesChange}
                   label={RACE.LANGUAGES}
-                  helpText={`Please choose ${race.languages.amount} languages`}
+                  helpText={`You can have up to ${race.languages.amount} languages`}
                   placeholder={RACE.LANGUAGES_PLACEHOLDER}
                   maxItems={race.languages.amount}
                 />

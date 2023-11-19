@@ -110,7 +110,7 @@ export default function BackgroundFrame() {
                   results={languagesValue}
                   onChange={handleLanguagesChange}
                   label={BACKGROUND.LANGUAGES}
-                  helpText={`Please choose ${background.languages.amount} languages`}
+                  helpText={`You can have up to ${background.languages.amount} languages`}
                   placeholder={BACKGROUND.LANGUAGES_PLACEHOLDER}
                   maxItems={background.languages.amount}
                 />
@@ -121,7 +121,7 @@ export default function BackgroundFrame() {
                   results={toolsValue}
                   onChange={handleToolsChange}
                   label={BACKGROUND.TOOLS}
-                  helpText={`Please choose ${background.tools.amount} tools`}
+                  helpText={`You can have up to ${background.tools.amount} tools`}
                   placeholder={BACKGROUND.TOOLS_PLACEHOLDER}
                   maxItems={background.tools.amount}
                 />

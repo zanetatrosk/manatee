@@ -44,11 +44,12 @@ const StyledModifier = styled(TableCell)(({ theme }) => ({
 }));
 
 //function that sets the score to the correct value
-function setScore(value: number) {
+function setScore(value: number) : number {
   //this is to prevent NaN
   // eslint-disable-next-line
-  if (value !== value) value = MIN;
-  value < MIN ? (value = Math.max(value, MIN)) : (value = Math.min(value, MAX));
+  if (value !== value) return MIN;
+  console.log(value, "value");
+  return value < MIN ? ( Math.max(value, MIN)) : (Math.min(value, MAX));
 }
 
 //function that calculates the full score
@@ -122,8 +123,7 @@ export default function Abilities() {
                     inputProps={{ min: MIN, max: MAX }}
                     onChange={(e) => {
                       let value = parseInt(e.target.value, BASE_10) as number;
-                      setScore(value);
-                      setRow(idx, "score", value);
+                      setRow(idx, "score", setScore(value));
                     }}
                     InputLabelProps={{
                       shrink: true,
