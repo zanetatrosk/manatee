@@ -21,10 +21,13 @@ export const characterReducer = createSlice({
         setClass (state, action: PayloadAction<Class>){
             state.characterClass = action.payload;
         },
+        resetState (){
+            return formDefaults;
+        }
     }
 });
 
 
-export const { setRace, setBackground, setAbilityScores, setBasicInfo, setClass } = characterReducer.actions
+export const { setRace, setBackground, setAbilityScores, setBasicInfo, setClass, resetState } = characterReducer.actions
 
 export default characterReducer.reducer;

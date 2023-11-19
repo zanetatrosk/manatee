@@ -44,7 +44,6 @@ export default function CharacterSheet() {
                       },
                       {
                         header: "Race",
-                        //add race that has the longest string
                         value: character.race.label,
                       },
                       {

@@ -8,6 +8,8 @@ import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import { CHARACTERS } from "constants/characterDefinition";
+import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
+import { resetState } from "reducers/characterReducer";
 
 function CharacterCard() {
   return (
@@ -55,6 +57,7 @@ function CharacterCard() {
 
 export default function Characters() {
   let navigate = useNavigate();
+  const dispatch = useAppDispatch();
   return (
     <Grid container>
       <Grid container xs={12} sx={{px: 3, mb: 1}}>
@@ -66,6 +69,7 @@ export default function Characters() {
             variant="outlined"
             size="small"
             onClick={() => {
+              dispatch(resetState());
               navigate("/characters/create-character");
             }}
             endIcon={<AddIcon />}
