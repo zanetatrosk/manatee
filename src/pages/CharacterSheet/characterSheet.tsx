@@ -17,8 +17,8 @@ export default function CharacterSheet() {
   const character: CharacterSheetI = useAppSelector((state) => state.character);
   return (
     <React.Fragment>
-      <Paper sx={{ p: 2 }} elevation={4}>
-        <Grid container flexDirection={"column"} spacing={5}>
+      <Paper sx={{ p: 2 }} elevation={4} >
+        <Grid container flexDirection={"column"} spacing={5} >
           {/* first row */}
           <Grid item container spacing={2}>
             <Grid item>
@@ -32,8 +32,8 @@ export default function CharacterSheet() {
                 />
               </Card>
             </Grid>
-            <Grid item container xs flexDirection={"column"} spacing={3}>
-              <Grid item xs>
+            <Grid item container xs={character.basicInfo.sheetPhoto ? true : false} spacing={3} justifyContent="center">
+              <Grid item xs >
                 <HeaderCard
                   props={{
                     title: character.basicInfo.characterName,
