@@ -60,7 +60,6 @@ export default function Characters() {
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const greaterThanMid = useMediaQuery(theme.breakpoints.up("md"));
-  console.log(greaterThanMid, " theme.breakpoints.up('sm')")
   return (
     <Grid container>
       <Grid container sx={{px: 3, mb: 1}} spacing={2}>
@@ -70,7 +69,7 @@ export default function Characters() {
         <Grid item justifyContent={greaterThanMid ? "flex-end" : "flex-start" }>
           <Button
             variant="outlined"
-            size="small"
+            size="small"  
             onClick={() => {
               dispatch(resetState());
               navigate("/characters/create-character");

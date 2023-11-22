@@ -26,11 +26,11 @@ export default function TabsCard() {
               <Tab label="Characteristics" value="5" />
             </TabList>
           </Box>
-          <TabPanel value="1">Item One</TabPanel>
-          <TabPanel value="2">Item Two</TabPanel>
-          <TabPanel value="3">Item Three</TabPanel>
-          <TabPanel value="4">Item Four</TabPanel>
-          <TabPanel value="5">Item Five</TabPanel>
+          <TabPanel value="1">Attacks and Armor</TabPanel>
+          <TabPanel value="2">Spellcasting</TabPanel>
+          <TabPanel value="3">Other prof. & languages</TabPanel>
+          <TabPanel value="4">Features</TabPanel>
+          <TabPanel value="5">Characteristics</TabPanel>
         </TabContext>
       </Card>
     </Box>

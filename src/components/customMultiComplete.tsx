@@ -32,19 +32,18 @@ export default function MultiComplete(props: PropsParams) {
         inputValue={item}
         onInputChange={(_, v) => setItem(v)}
         onBlur={() => {
-          if (item.trim() === "" || props.results.length === props.maxItems){
+          if (item.trim() === "" || props.results.length === props.maxItems || props.results.find((i) => i.title === item)){
             setItem("");
             return;
           }
           const tmp: AutocompleteItem[] = [
-            ...props.results,
             { id: null, title: item },
+            ...props.results,
           ];
+          setItem("");
           props.onChange(tmp);
         }}
         onChange={(e, value) => {
-          setItem("");
-          if(typeof value === "string") return;
           // @ts-ignore        
           props.onChange(value);
         }}
