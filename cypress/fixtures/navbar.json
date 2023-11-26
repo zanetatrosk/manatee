@@ -1,0 +1,12 @@
+{
+  "nav": {
+    "characters": "characters",
+    "content": "content"
+  },
+  "usersChoices": {
+    "profile": "Profile",
+    "logout": "Logout",
+    "account": "Account",
+    "dashboard": "Dashboard"
+  }
+}

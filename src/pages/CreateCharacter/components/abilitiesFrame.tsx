@@ -90,7 +90,7 @@ export default function Abilities() {
   
   return (
     <Box>
-      <TableContainer component={Card}>
+      <TableContainer component={Card} data-cy="abilities">
         <CardContent>
           <Typography gutterBottom variant="h4" component="div">
             {ABILITIES.HEADING}
@@ -102,7 +102,7 @@ export default function Abilities() {
         </CardContent>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
-            <TableRow>
+            <TableRow data-cy="headers">
               { headers.map((header) => (
                 <StyledTableCell align="center" key={header} >{header}</StyledTableCell>
               )) }
@@ -112,13 +112,15 @@ export default function Abilities() {
             {rows.map((row, idx) => (
               <TableRow
                 key={row.label}
+                data-cy="ability-row"
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <StyledTableCell align="center">{row.label}</StyledTableCell>
+                <StyledTableCell data-cy="ability-name" align="center">{row.label}</StyledTableCell>
                 <TableCell align="center" size="small">
                   <TextField
                     id="outlined-number"
                     type="number"
+                    data-cy="ability-score"
                     value={row.score}
                     inputProps={{ min: MIN, max: MAX }}
                     onChange={(e) => {
@@ -130,11 +132,12 @@ export default function Abilities() {
                     }}
                   />
                 </TableCell>
-                <StyledModifier align="center">
+                <StyledModifier data-cy="ability-mod" align="center">
                   {setModifiersValues(row)}
                 </StyledModifier>
                 <StyledModifier align="center">
                   <Checkbox
+                    data-cy="ability-up-one"
                     checked={row.modifierUpToOne && !row.modifierUpToTwo}
                     onChange={() => {
                       setRow(idx, "modifierUpToOne", !row.modifierUpToOne);
@@ -145,6 +148,7 @@ export default function Abilities() {
                 </StyledModifier>
                 <StyledModifier align="center">
                   <Checkbox
+                    data-cy="ability-up-two"
                     value={row.modifierUpToTwo}
                     checked={row.modifierUpToTwo && !row.modifierUpToOne}
                     onChange={() => {
@@ -153,7 +157,7 @@ export default function Abilities() {
                     disabled={row.modifierUpToOne}
                   />
                 </StyledModifier>
-                <StyledModifier align="center">
+                <StyledModifier align="center" data-cy="ability-total-score">
                   {calculateFullScore(row)}
                 </StyledModifier>
               </TableRow>

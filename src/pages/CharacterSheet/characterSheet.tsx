@@ -32,7 +32,7 @@ export default function CharacterSheet() {
                 />
               </Card>
             </Grid>
-            <Grid item container xs={character.basicInfo.sheetPhoto ? true : false} spacing={3} justifyContent="center">
+            <Grid item container xs={!!character.basicInfo.sheetPhoto} spacing={3} justifyContent="center">
               <Grid item xs >
                 <HeaderCard
                   props={{
