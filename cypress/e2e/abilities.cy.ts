@@ -21,8 +21,15 @@ describe('check abilities', () => {
                 cy.wrap($ability).get('[data-cy="ability-up-two"]').should('be.visible');
                 cy.wrap($ability).find('[data-cy="ability-mod"]').should('have.text', '-1');
             });
-            
         });
+        cy.get('[data-cy="content-table"] > [data-cy="ability-row"]').should('have.length', 6);
+        cy.get('[data-cy="content-table"] > :nth-child(1) > :nth-child(2) > [data-cy="ability-score"]').clear();
+        cy.get('[data-cy="content-table"] > :nth-child(1) > :nth-child(2) > [data-cy="ability-score"]').find('input').invoke('val').should('equal', '1'); 
+        cy.get('[data-cy="content-table"] > :nth-child(1) > [data-cy="ability-mod"]').should('have.text', '-5');;       
+        cy.get('[data-cy="content-table"] > :nth-child(1) > :nth-child(2) > [data-cy="ability-score"]').type('20');
+        cy.get('[data-cy="content-table"] > :nth-child(1) > :nth-child(2) > [data-cy="ability-score"]').find('input').invoke('val').should('equal', '20');
+        cy.get('[data-cy="content-table"] > :nth-child(1) > [data-cy="ability-mod"]').should('have.text', '5');
     }
+
     );
 });

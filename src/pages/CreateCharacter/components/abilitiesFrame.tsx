@@ -108,7 +108,7 @@ export default function Abilities() {
               )) }
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody data-cy="content-table">
             {rows.map((row, idx) => (
               <TableRow
                 key={row.label}
