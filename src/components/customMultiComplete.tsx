@@ -2,7 +2,6 @@ import React, { Dispatch, SetStateAction } from "react";
 import { Autocomplete, TextField, Chip } from "@mui/material";
 import { AutocompleteItem } from "@pages/CreateCharacter/definitions/characterForm";
 //interface used for props
-//is it posible to replace this with sth like Object?
 interface PropsParams {
   values: AutocompleteItem[];
   results: AutocompleteItem[];
@@ -11,6 +10,7 @@ interface PropsParams {
   helpText?: string;
   placeholder?: string;
   maxItems: number;
+  data_cy?: string;
 }
 
 export default function MultiComplete(props: PropsParams) {
@@ -24,6 +24,7 @@ export default function MultiComplete(props: PropsParams) {
         value={props.results}
         defaultValue={props.results}
         freeSolo
+        data-cy={props.data_cy}
         options={props.values}
         getOptionLabel={(option) =>
           typeof option === "string" ? option : option.title
@@ -52,6 +53,7 @@ export default function MultiComplete(props: PropsParams) {
             <Chip
               variant="outlined"
               label={option.title}
+              data-cy={"chip-" + index}
               {...getTagProps({ index })}
             />
           ))

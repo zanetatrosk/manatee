@@ -10,7 +10,14 @@ describe("check that information that was entered in the form is displayed on th
     cy.visit("http://localhost:3000/characters/create-character");
   });
 
+  const checkPage = (page: string) => {
+    cy.get(".MuiStepper-root").should("be.visible");
+    cy.contains(page);
+  }
+  
   it("fill form", () => {
+    cy.get(".MuiStepper-root").should("be.visible");
+    cy.contains("Basic information");
     cy.get('[data-cy="character-name"]').within(() => {
       cy.get("#input").clear().type(characterName);
     });
@@ -18,13 +25,17 @@ describe("check that information that was entered in the form is displayed on th
       cy.get("#input").clear().type(playerName);
     });
     cy.get('[data-cy="next"]').click();
+    checkPage("Class");
     cy.get('[data-cy="class"]').click();
     cy.contains("Barbarian").click();
     cy.get('[data-cy="next"]').click();
+    checkPage("Race");
     cy.get('[data-cy="race"]').click();
     cy.contains(race).click();
     cy.get('[data-cy="next"]').click();
+    checkPage("Abilities");
     cy.get('[data-cy="next"]').click();
+    checkPage("Background");
     cy.get('[data-cy="background"]').click();
     cy.contains(background).click();
     cy.get('[data-cy="finish"]').click();

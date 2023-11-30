@@ -5,13 +5,23 @@ describe("Character sheet picture", () => {
   before(() => {
     cy.visit("http://localhost:3000/characters/create-character");
   });
-  it("pick a sheet photo and check that it will be displaed on sheet", () => {
-    // Click on the "Content" link in the navbar
+
+  const checkPage = (page: string) => {
+    cy.get(".MuiStepper-root").should("be.visible");
+    cy.contains(page);
+  }
+
+  it("type an url of a sheet photo and check that it will be displayed on the sheet", () => {
+    checkPage("Basic information");
     cy.get('[data-cy="sheet-photo"]').type(srcPic);
     cy.get('[data-cy="next"]').click();
+    checkPage("Class");
     cy.get('[data-cy="next"]').click();
+    checkPage("Race")
     cy.get('[data-cy="next"]').click();
+    checkPage("Abilities")
     cy.get('[data-cy="next"]').click();
+    checkPage("Background");
     cy.get('[data-cy="finish"]').click();
 
     cy.get("img").should("have.attr", "src", srcPic);
