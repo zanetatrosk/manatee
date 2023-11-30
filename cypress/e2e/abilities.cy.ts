@@ -5,7 +5,6 @@ describe('check abilities', () => {
         cy.get('[data-cy="next"]').click();
         cy.get('[data-cy="next"]').click();
         cy.get('[data-cy="next"]').click();
-
     })
     it('check abilities page', () => {
         cy.get('[data-cy="next"]').contains('Next');

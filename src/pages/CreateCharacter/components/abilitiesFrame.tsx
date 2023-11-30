@@ -15,19 +15,24 @@ import {
   Checkbox,
   Box,
 } from "@mui/material";
-import {
-  AbilityScore,
-} from "@pages/CreateCharacter/definitions/characterForm";
+import { AbilityScore } from "@pages/CreateCharacter/definitions/characterForm";
 import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
 import { setAbilityScores } from "reducers/characterReducer";
 import { useEffect } from "react";
-import {CREATE_CHARACTER} from "constants/characterDefinition";
+import { CREATE_CHARACTER } from "constants/characterDefinition";
 
 //declaring constants
 const MIN = 1;
 const MAX = 20;
 const BASE_10 = 10;
-const headers = ["Ability", "Score", "Modifier", "Up +1", "Up +2", "Total score"];
+const headers = [
+  "Ability",
+  "Score",
+  "Modifier",
+  "Up +1",
+  "Up +2",
+  "Total score",
+];
 const ABILITIES = CREATE_CHARACTER.ABILITIES;
 
 //styling
@@ -44,12 +49,12 @@ const StyledModifier = styled(TableCell)(({ theme }) => ({
 }));
 
 //function that sets the score to the correct value
-function setScore(value: number) : number {
+function setScore(value: number): number {
   //this is to prevent NaN
   // eslint-disable-next-line
   if (value !== value) return MIN;
   console.log(value, "value");
-  return value < MIN ? ( Math.max(value, MIN)) : (Math.min(value, MAX));
+  return value < MIN ? Math.max(value, MIN) : Math.min(value, MAX);
 }
 
 //function that calculates the full score
@@ -87,7 +92,7 @@ export default function Abilities() {
     newRows[idx] = { ...rows[idx], [param]: value };
     setRows(newRows);
   };
-  
+
   return (
     <Box>
       <TableContainer component={Card} data-cy="abilities">
@@ -100,12 +105,14 @@ export default function Abilities() {
             {ABILITIES.SUBTITLE}
           </Typography>
         </CardContent>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table aria-label="simple table">
           <TableHead>
             <TableRow data-cy="headers">
-              { headers.map((header) => (
-                <StyledTableCell align="center" key={header} >{header}</StyledTableCell>
-              )) }
+              {headers.map((header) => (
+                <StyledTableCell align="center" key={header}>
+                  {header}
+                </StyledTableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody data-cy="content-table">
@@ -115,7 +122,9 @@ export default function Abilities() {
                 data-cy="ability-row"
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <StyledTableCell data-cy="ability-name" align="center">{row.label}</StyledTableCell>
+                <StyledTableCell data-cy="ability-name" align="center">
+                  {row.label}
+                </StyledTableCell>
                 <TableCell align="center" size="small">
                   <TextField
                     id="outlined-number"
@@ -127,9 +136,6 @@ export default function Abilities() {
                       let value = parseInt(e.target.value, BASE_10) as number;
                       setRow(idx, "score", setScore(value));
                     }}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
                   />
                 </TableCell>
                 <StyledModifier data-cy="ability-mod" align="center">
@@ -138,6 +144,9 @@ export default function Abilities() {
                 <StyledModifier align="center">
                   <Checkbox
                     data-cy="ability-up-one"
+                    inputProps={{
+                      "id": "checkbox-input",
+                    }}
                     checked={row.modifierUpToOne && !row.modifierUpToTwo}
                     onChange={() => {
                       setRow(idx, "modifierUpToOne", !row.modifierUpToOne);
@@ -150,6 +159,9 @@ export default function Abilities() {
                   <Checkbox
                     data-cy="ability-up-two"
                     value={row.modifierUpToTwo}
+                    inputProps={{
+                      "id": "checkbox-input",
+                    }}
                     checked={row.modifierUpToTwo && !row.modifierUpToOne}
                     onChange={() => {
                       setRow(idx, "modifierUpToTwo", !row.modifierUpToTwo);
