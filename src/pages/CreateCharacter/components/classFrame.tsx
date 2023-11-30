@@ -65,6 +65,7 @@ export default function ClassFrame() {
               if(!value) return;
               setClass(value);
             }}
+            data-cy="class"
             isOptionEqualToValue={(option, value) => option.id === value.id}
             renderInput={(params) => (
               <TextField

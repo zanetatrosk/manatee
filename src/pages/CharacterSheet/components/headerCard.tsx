@@ -16,7 +16,7 @@ export default function HeaderCard({props: character}: {props: DisplayedData}) {
       <Card sx={{  p: 3, width: "100%" }}>
         <Grid container flexDirection={"column"} spacing={3} >
           <Grid item container maxWidth={800} zeroMinWidth>
-            <Typography variant="h4" noWrap>
+            <Typography variant="h4" noWrap data-cy="character-name">
               {character.title}
             </Typography>
           </Grid>
@@ -26,6 +26,7 @@ export default function HeaderCard({props: character}: {props: DisplayedData}) {
                 <Grid
                   item
                   container
+                  data-cy={i.header}
                   xs
                   flexDirection={"column"}
                 >
@@ -40,7 +41,7 @@ export default function HeaderCard({props: character}: {props: DisplayedData}) {
                     </Typography>
                   </Grid>
                   <Grid item>
-                    <Typography component="span" noWrap>
+                    <Typography component="span" noWrap data-cy={i.header + "-value"}>
                       {i.value}
                     </Typography>
                   </Grid>

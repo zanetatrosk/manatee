@@ -91,7 +91,7 @@ export default function RaceFrame() {
           <Autocomplete
             sx={{ my: 2 }}
             clearOnBlur
-            id="combo-box-demo"
+            data-cy="race"
             options={races || [] }
             isOptionEqualToValue={(option, value) => option.id === value.id }
             value={race.id ? race : null}

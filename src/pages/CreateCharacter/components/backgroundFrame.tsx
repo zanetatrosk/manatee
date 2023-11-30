@@ -65,7 +65,7 @@ export default function BackgroundFrame() {
       <Grid container>
         <Grid item lg={7} xs={12}>
           <Autocomplete
-            id="combo-box-demo"
+            data-cy="background"
             options={backgrounds || []}
             value={background.id? background : null}
             sx={{ my: 2 }}
