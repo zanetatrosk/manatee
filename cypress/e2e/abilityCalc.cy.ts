@@ -12,6 +12,7 @@ describe("check ability calc", () => {
       .then(($ability) => {
         cy.wrap($ability)
           .find('[data-cy="ability-score"]')
+          .clear()
           .type("{backspace}{end}5");
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
