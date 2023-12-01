@@ -141,6 +141,7 @@ export default function RaceFrame() {
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
                   values={languages || []}
+                  data_cy="languages"
                   results={languagesRes}
                   onChange={handleLanguagesChange}
                   label={RACE.LANGUAGES}
@@ -152,9 +153,8 @@ export default function RaceFrame() {
 
               <Grid item lg={4} xs={12} sx={{ py: 2, pl: 7 }}>
                 <FormControl variant="filled" fullWidth>
-                  <InputLabel id="demo-simple-select-label">Size</InputLabel>
+                  <InputLabel data-cy="size">Size</InputLabel>
                   <Select
-                    id="demo-simple-select"
                     value={size}
                     label={RACE.SIZE}
                     onChange={handleChange}
