@@ -124,6 +124,7 @@ export default function HorizontalLinearStepper() {
               color="inherit"
               disabled={activeStep === 0}
               onClick={handleBack}
+              data-cy="back"
               sx={{ mr: 1 }}
             >
               {CREATE_CHARACTER.CARD_ACTIONS.BACK}
@@ -138,6 +139,7 @@ export default function HorizontalLinearStepper() {
               onClick={
                 activeStep === steps.length - 1 ? handleFinish : handleNext
               }
+              data-cy={activeStep === steps.length - 1 ? "finish" : "next" }
             >
               {activeStep === steps.length - 1
                 ? CREATE_CHARACTER.CARD_ACTIONS.FINISH

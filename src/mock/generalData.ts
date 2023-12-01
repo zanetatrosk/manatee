@@ -117,14 +117,13 @@ const backgrounds: Background[] = [
       id: 1,
       label: "Acolyte",
       languages: {
-        amount: 2,
+        amount: 1,
         defaults: [
           { id: 1, title: "Common" },
-          { id: 17, title: "Celestial" },
         ],
       },
       tools: {
-        amount: 0,
+        amount: 1,
         defaults: [],
       },
       description:
@@ -241,13 +240,13 @@ const sources: AutocompleteItem[] = [
         {
           title: "Unarmored Defense",
           text:
-            "While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a shield and still gain this benefit.",
+            "While you are not wearing any armor, your Armor Class equals 10 +T your Dexterity modifier + your Constitution modifier. You can use a shield and still gain this benefit.",
         },
       ],
       description:
         "For some, their rage springs from a communion with fierce animal spirits. Others draw from a roiling reservoir of anger at a world full of pain. For every barbarian, rage is a power that fuels not just a battle frenzy but also uncanny reflexes, resilience, and feats of strength.",
       tools: {
-        amount: 0,
+        amount: 2,
         defaults: [],
       },
     },
