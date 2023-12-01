@@ -13,7 +13,7 @@ describe("check ability calc", () => {
         cy.wrap($ability)
           .find('[data-cy="ability-score"]')
           .clear()
-          .type("{backspace}{end}5");
+          .type("{backspace}{moveToEnd}5");
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
           .should("have.text", "2");
@@ -37,7 +37,7 @@ describe("check ability calc", () => {
       .then(($ability) => {
         cy.wrap($ability)
           .find('[data-cy="ability-score"]')
-          .type("{backspace}{end}0");
+          .type("{backspace}{moveToEnd}0");
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
           .should("have.text", "0");
@@ -51,7 +51,7 @@ describe("check ability calc", () => {
       .then(($ability) => {
         cy.wrap($ability)
           .find('[data-cy="ability-score"]')
-          .type("{backspace}{end}6");
+          .type("{backspace}{moveToEnd}6");
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
           .should("have.text", "3");
@@ -65,7 +65,7 @@ describe("check ability calc", () => {
       .then(($ability) => {
         cy.wrap($ability)
           .find('[data-cy="ability-score"]')
-          .type("{backspace}{end}2");
+          .type("{backspace}{moveToEnd}2");
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
           .should("have.text", "1");
@@ -79,7 +79,7 @@ describe("check ability calc", () => {
       .then(($ability) => {
         cy.wrap($ability)
           .find('[data-cy="ability-score"]')
-          .type("{backspace}{end}4");
+          .type("{backspace}{moveToEnd}4");
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
           .should("have.text", "2");
@@ -93,7 +93,7 @@ describe("check ability calc", () => {
       .then(($ability) => {
         cy.wrap($ability)
           .find('[data-cy="ability-score"]')
-          .type("{backspace}{end}20");
+          .type("{backspace}{moveToEnd}20");
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
           .should("have.text", "5");
