@@ -1,4 +1,4 @@
-describe("Content page", () => {
+describe("Automation TC02 Content page", () => {
   before(() => {
     cy.visit("http://localhost:3000/");
   });

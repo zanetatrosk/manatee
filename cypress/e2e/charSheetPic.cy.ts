@@ -1,7 +1,7 @@
 const srcPic =
   "https://cdn.pixabay.com/photo/2023/05/25/20/09/ai-generated-8018229_960_720.jpg";
 
-describe("Character sheet picture", () => {
+describe("Automation TC07 Character sheet picture", () => {
   before(() => {
     cy.visit("http://localhost:3000/characters/create-character");
   });

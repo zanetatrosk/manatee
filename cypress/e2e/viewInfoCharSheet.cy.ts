@@ -5,7 +5,7 @@ const subclass = "Berserker";
 const playerName = "Test Player name";
 const characterName = "Test Character name";
 
-describe("check that information that was entered in the form is displayed on the character sheet", () => {
+describe("Automation TC08 check that information that was entered in the form is displayed on the character sheet", () => {
   before(() => {
     cy.visit("http://localhost:3000/characters/create-character");
   });

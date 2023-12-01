@@ -1,4 +1,4 @@
-describe('check home page after loading an app', () => {
+describe('Automation TC01 check home page after loading an app', () => {
 
   beforeEach(() => {
     cy.visit('http://localhost:3000/')

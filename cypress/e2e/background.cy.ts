@@ -1,7 +1,7 @@
 const str = "You can have up to";
 
 
-describe("check that data rendered by selected background on background page are correct", () => {
+describe("Automation TC04", () => {
   before(() => {
     cy.visit("http://localhost:3000/characters/create-character");
     cy.get('[data-cy="next"]').click();
@@ -18,7 +18,7 @@ describe("check that data rendered by selected background on background page are
       this.amountLanguages = background.languages.amount;
     })
   });
-  it("check data", () => {
+  it("check that data rendered by selected background on background page are correct", () => {
     cy.get('[data-cy="background"]').within(() => {
       cy.get("input").click();
       cy.get("input")

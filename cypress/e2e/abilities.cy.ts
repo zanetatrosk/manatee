@@ -1,4 +1,4 @@
-describe('check abilities', () => {
+describe('Automation TC03 check abilities', () => {
     
     before(() => {
         cy.visit('http://localhost:3000/characters/create-character');
