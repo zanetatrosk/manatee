@@ -65,6 +65,7 @@ export default function BackgroundFrame() {
       <Grid container>
         <Grid item lg={7} xs={12}>
           <Autocomplete
+            id="combo-box-demo"
             options={backgrounds || []}
             value={background.id? background : null}
             sx={{ my: 2 }}
@@ -72,11 +73,9 @@ export default function BackgroundFrame() {
               if (!value) return;
               setBackground(value);
             }}
-            data-cy="background"
             renderInput={(params) => (
               <TextField
                 {...params}
-                id="input"
                 label={BACKGROUND.HEADING}
                 variant="filled"
                 placeholder={BACKGROUND.PLACEHOLDER}
@@ -105,14 +104,13 @@ export default function BackgroundFrame() {
               </Divider>
             </Box>
             <Grid container sx={{ py: 2 }} columnSpacing={8}>
-              <Grid item lg={6} xs={12} sx={{ py: 2 }} >
+              <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
                   values={languages || []}
                   results={languagesValue}
-                  data_cy="languages"
                   onChange={handleLanguagesChange}
                   label={BACKGROUND.LANGUAGES}
-                  helpText={`You can have up to ${background.languages.amount} languages`}
+                  helpText={`Please choose ${background.languages.amount} languages`}
                   placeholder={BACKGROUND.LANGUAGES_PLACEHOLDER}
                   maxItems={background.languages.amount}
                 />
@@ -121,10 +119,9 @@ export default function BackgroundFrame() {
                 <MultiComplete
                   values={tools || []}
                   results={toolsValue}
-                  data_cy="tools"
                   onChange={handleToolsChange}
                   label={BACKGROUND.TOOLS}
-                  helpText={`You can have up to ${background.tools.amount} tools`}
+                  helpText={`Please choose ${background.tools.amount} tools`}
                   placeholder={BACKGROUND.TOOLS_PLACEHOLDER}
                   maxItems={background.tools.amount}
                 />

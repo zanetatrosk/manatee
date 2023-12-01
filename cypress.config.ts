@@ -4,7 +4,7 @@ export default defineConfig({
   viewportWidth: 1440,
   viewportHeight: 1080,
   e2e: {
-    slowTestThreshold: 9000,
+    slowTestThreshold: 8000,
     setupNodeEvents(on, config) {
       // implement node event listeners here
       

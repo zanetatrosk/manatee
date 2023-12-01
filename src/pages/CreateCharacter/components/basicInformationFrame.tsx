@@ -18,6 +18,7 @@ import { useGetSourcesQuery } from "api/raceApiSlice";
 const BASIC_INFO = CREATE_CHARACTER.BASIC_INFO;
 
 export default function BasicInformation() {
+
   const { basicInfo: basicInfoFromStore } = useAppSelector(
     (state) => state.character
   );
@@ -25,10 +26,7 @@ export default function BasicInformation() {
   const [basicInfo, setInfo] = React.useState<BasicInfo>(basicInfoFromStore);
   //this is uneffective, bcs it is called every time user inputs something
   useEffect(() => {
-    const basicInfoTmp = {
-      ...basicInfo,
-      sources: basicInfo.sources.map((s) => s),
-    };
+    const basicInfoTmp = { ...basicInfo, sources: basicInfo.sources.map((s) => s) };
     console.log(basicInfoTmp, "basicInfoTmp");
     dispatch(setBasicInfo(basicInfoTmp));
   }, [basicInfo, dispatch]);
@@ -47,12 +45,10 @@ export default function BasicInformation() {
         <Grid item xs={12} lg={6}>
           <TextField
             fullWidth
-            data-cy="character-name"
             value={basicInfo.characterName}
             onChange={(e) =>
               setInfo({ ...basicInfo, characterName: e.target.value })
             }
-            inputProps={{ "id": "input" }}
             variant="filled"
             label={BASIC_INFO.CHARACTER_NAME}
           ></TextField>
@@ -60,14 +56,12 @@ export default function BasicInformation() {
         <Grid item xs={12} lg={5}>
           <TextField
             variant="filled"
-            data-cy="player-name"
             fullWidth
             label={BASIC_INFO.PLAYER_NAME}
             value={basicInfo.playerName}
             onChange={(e) =>
               setInfo({ ...basicInfo, playerName: e.target.value })
             }
-            inputProps={{ "id": "input" }}
           ></TextField>
         </Grid>
       </Grid>
@@ -82,7 +76,7 @@ export default function BasicInformation() {
           <Autocomplete
             id="combo-box-demo"
             value={basicInfo.sources}
-            options={sources || []}
+            options={sources || [] }
             multiple
             getOptionLabel={(option) => option.title}
             onChange={(_, value) => {
@@ -97,9 +91,7 @@ export default function BasicInformation() {
                   ...params.InputProps,
                   endAdornment: (
                     <React.Fragment>
-                      {loading ? (
-                        <CircularProgress color="inherit" size={23} />
-                      ) : null}
+                      {loading ? <CircularProgress color="inherit" size={23} /> : null}
                       {params.InputProps.endAdornment}
                     </React.Fragment>
                   ),
@@ -120,21 +112,16 @@ export default function BasicInformation() {
           <TextField
             fullWidth
             value={basicInfo.cardPhoto}
-            onChange={(e) =>
-              setInfo({ ...basicInfo, cardPhoto: e.target.value })
-            }
+            onChange={(e) => setInfo({ ...basicInfo, cardPhoto: e.target.value })}
             variant="filled"
             label={BASIC_INFO.CARD_PHOTO}
           ></TextField>
         </Grid>
         <Grid item xs={12} lg={6}>
           <TextField
-            data-cy="sheet-photo"
             variant="filled"
             fullWidth
-            onChange={(e) =>
-              setInfo({ ...basicInfo, sheetPhoto: e.target.value })
-            }
+            onChange={(e) => setInfo({ ...basicInfo, sheetPhoto: e.target.value })}
             label={BASIC_INFO.SHEET_PHOTO}
             value={basicInfo.sheetPhoto}
           ></TextField>

@@ -91,7 +91,7 @@ export default function RaceFrame() {
           <Autocomplete
             sx={{ my: 2 }}
             clearOnBlur
-            data-cy="race"
+            id="combo-box-demo"
             options={races || [] }
             isOptionEqualToValue={(option, value) => option.id === value.id }
             value={race.id ? race : null}
@@ -141,11 +141,10 @@ export default function RaceFrame() {
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
                   values={languages || []}
-                  data_cy="languages"
                   results={languagesRes}
                   onChange={handleLanguagesChange}
                   label={RACE.LANGUAGES}
-                  helpText={`You can have up to ${race.languages.amount} languages`}
+                  helpText={`Please choose ${race.languages.amount} languages`}
                   placeholder={RACE.LANGUAGES_PLACEHOLDER}
                   maxItems={race.languages.amount}
                 />
@@ -153,8 +152,9 @@ export default function RaceFrame() {
 
               <Grid item lg={4} xs={12} sx={{ py: 2, pl: 7 }}>
                 <FormControl variant="filled" fullWidth>
-                  <InputLabel data-cy="size">Size</InputLabel>
+                  <InputLabel id="demo-simple-select-label">Size</InputLabel>
                   <Select
+                    id="demo-simple-select"
                     value={size}
                     label={RACE.SIZE}
                     onChange={handleChange}

@@ -11,8 +11,6 @@ function createAbilityData(race: Race): AbilityScore[] {
       modifierUpToOne: race?.abilityScorePlus1?.includes(ability) || false,
       modifierUpToTwo: race?.abilityScorePlus2?.includes(ability) || false,
     }));
-
   }
-
 
 export default createAbilityData;

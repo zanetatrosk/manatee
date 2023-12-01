@@ -17,7 +17,6 @@ export default function CardInfo(props: PropsParams) {
   return (
     <Box display="flex" my={2}>
       <Card
-        data-cy="card-info"
         sx={{
           display: "flex",
           p: 1,
@@ -28,7 +27,7 @@ export default function CardInfo(props: PropsParams) {
         }}
       >
         <CardContent sx={{ display: "flex", pb: 0 }}>
-          <Typography gutterBottom variant="h5" component="div" align="left" data-cy="card-title">
+          <Typography gutterBottom variant="h5" component="div" align="left">
             {props.title}
           </Typography>
         </CardContent>
@@ -38,10 +37,10 @@ export default function CardInfo(props: PropsParams) {
           }}
         >
           <div style={{ width: "100%" }}>
-            {props.features.map((feature, idx) => (
+            {props.features.map((feature) => (
               <Grid container my={1.5} key={feature.title}>
               <Grid item xs={12} sm={2} pr={0.5}>
-                <Typography variant="body1" data-cy={"feat-" + idx}>{feature.title}</Typography>
+                <Typography variant="body1">{feature.title}</Typography>
               </Grid>
               <Grid item xs={12} sm={10}>
                 <Typography variant="body1" color="text.secondary" align="justify">{feature.text}</Typography>
@@ -55,7 +54,7 @@ export default function CardInfo(props: PropsParams) {
             display: "flex",
           }}
         >
-          <Typography variant="body1" color="text.secondary" align="justify" data-cy="card-descr">
+          <Typography variant="body1" color="text.secondary" align="justify">
             {props.description}
           </Typography>
         </CardContent>

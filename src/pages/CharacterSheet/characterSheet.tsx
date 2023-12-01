@@ -5,8 +5,7 @@ import SkillTable from "./components/skillTable";
 import StatsGrid from "./components/statsGrid";
 import TabsCard from "./components/tabsCard";
 import React from "react";
-import { useAppSelector } from "@hooks/hooksStore";
-import { CharacterSheet as CharacterSheetI } from "@pages/CreateCharacter/definitions/characterForm";
+
 
 interface Item {
   header: string;
@@ -14,77 +13,38 @@ interface Item {
 }
 
 export default function CharacterSheet() {
-  const character: CharacterSheetI = useAppSelector((state) => state.character);
   return (
     <React.Fragment>
       <Paper sx={{ p: 2 }} elevation={4}>
         <Grid container flexDirection={"column"} spacing={5}>
           {/* first row */}
           <Grid item container spacing={2}>
-            {character.basicInfo.sheetPhoto && (
-              <Grid item>
-                <Card sx={{ maxWidth: 250, height: "100%", maxHeight: 345 }}>
-                  <CardMedia
-                    sx={{ height: "100%" }}
-                    component="img"
-                    // Picture by internet user:
-                    src={character.basicInfo.sheetPhoto}
-                    title="character"
-                  />
-                </Card>
-              </Grid>
-            )}
-            <Grid
-              item
-              container
-              xs={!!character.basicInfo.sheetPhoto}
-              spacing={3}
-              justifyContent="center"
-            >
-              <Grid item xs>
-                <HeaderCard
-                  props={{
-                    title: character.basicInfo.characterName,
-                    headers: [
-                      {
-                        header: "Player",
-                        value: character.basicInfo.playerName,
-                      },
-                      {
-                        header: "Race",
-                        value: character.race.label,
-                      },
-                      {
-                        header: "Class & level",
-                        value: character.characterClass.label,
-                      },
-                      {
-                        header: "Subclass",
-                        value: character.characterClass.subclass.title,
-                      },
-                      {
-                        header: "Background",
-                        value: character.background.label,
-                      },
-                    ],
-                  }}
+            <Grid item>
+              <Card sx={{ maxWidth: 250, height: "100%", maxHeight: 345 }}>
+                <CardMedia
+                sx={{ height: "100%"}}
+                  component="img"
+                  // Picture by internet user: 
+                  src="https://miro.medium.com/v2/resize:fit:1024/1*Xe_nttm4GmNuNASsxKG3gg.png"
+                  title="character"
                 />
+              </Card>
+            </Grid>
+            <Grid item container xs flexDirection={"column"} spacing={3}>
+              <Grid item xs>
+                <HeaderCard />
               </Grid>
               <Grid item container spacing={3} justifyContent="center">
-                {character.abilityScores.map((i, idx) => (
-                  <Grid item key={idx}>
-                    <AbilityCard
-                      ability={i.label}
-                      score={i.score}
-                      modifier={1}
-                    />
+                {Array.from(Array(6).keys()).map((i) => (
+                  <Grid item key={i}>
+                    <AbilityCard ability="Strength" score={12} modifier={1} />
                   </Grid>
                 ))}
               </Grid>
             </Grid>
           </Grid>
           {/* second row */}
-          <Grid container item spacing={3} columns={{ xs: 12 }}>
+          <Grid container item spacing={3} columns={{ xs: 12 }} >
             <Grid item>
               <SkillTable
                 name="Skills"
@@ -101,7 +61,7 @@ export default function CharacterSheet() {
                     tableData={savingThrows}
                   />
                 </Grid>
-                <Grid item>
+                <Grid item >
                   <StatsGrid title="Stats" items={items} />
                 </Grid>
               </Grid>
