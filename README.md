@@ -1,3 +1,7 @@
+# Welcome to D&D App
+
+[Manual tests for BI-QUA](https://drive.google.com/drive/folders/1Kp4EtpLoMAXisAHpCpA_aXgXPdAVeQy0?usp=sharing).
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
