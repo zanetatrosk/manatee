@@ -65,6 +65,7 @@ export default function ClassFrame() {
               if(!value) return;
               setClass(value);
             }}
+            data-cy="class"
             isOptionEqualToValue={(option, value) => option.id === value.id}
             renderInput={(params) => (
               <TextField
@@ -122,7 +123,7 @@ export default function ClassFrame() {
                   results={toolsValue}
                   onChange={handleToolsChange}
                   label={CLASS.TOOLS}
-                  helpText={`Please choose ${characterClass.tools.amount} tools`}
+                  helpText={`You can have up to ${characterClass.tools.amount} tools`}
                   placeholder={CLASS.TOOLS_PLACEHOLDER}
                   maxItems={characterClass.tools.amount}
                 />

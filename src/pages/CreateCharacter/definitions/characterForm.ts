@@ -10,14 +10,6 @@ enum Ability {
     CHARISMA = "Charisma"
 }
 
-//write dnd sizes
-// const Size = {
-//     SMALL: 'Small',
-//     MEDIUM: 'Medium',
-//     LARGE: 'Large',
-//     HUGE: 'Huge',
-//     GARGANTUAN: 'Gargantuan'
-// }
 enum Size {
     SMALL = "Small",
     MEDIUM = "Medium",

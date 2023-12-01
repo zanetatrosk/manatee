@@ -42,11 +42,12 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" id='navbar'>
       <Container maxWidth="lg">
         <Toolbar disableGutters>
           <DragonLogo md="flex" xs="none" />
           <Typography
+            data-cy="app-title"
             variant="h6"
             noWrap
             sx={{
@@ -94,6 +95,7 @@ function ResponsiveAppBar() {
                 <Link to={"/" + page} key={index}>
                   <MenuItem
                     key={page}
+                    data-cy={page}
                     onClick={() => {
                       handleCloseNavMenu(page);
                     }}
@@ -108,6 +110,7 @@ function ResponsiveAppBar() {
           <Typography
             variant="h5"
             noWrap
+            data-cy="app-title"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -126,6 +129,7 @@ function ResponsiveAppBar() {
               <Link to={"/" + page} key={index}>
                 <Button
                   key={page}
+                  data-cy={page}
                   onClick={() => {
                     handleCloseNavMenu(page);
                   }}
@@ -138,18 +142,19 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip id="user-tooltip" title="Open settings">
               <IconButton
                 onClick={handleOpenUserMenu}
                 sx={{ p: 0 }}
                 color="inherit"
+                data-cy="user-icon"
               >
-                <PersonIcon />
+                <PersonIcon  />
               </IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: "45px" }}
-              id="menu-appbar"
+              data-cy="user-menu"
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: "top",
