@@ -102,7 +102,7 @@ export default function CharacterSheet() {
                   />
                 </Grid>
                 <Grid item container xs justifyContent="center">
-                  <StatsGrid title="Stats" items={items} />
+                  <StatsGrid title="Stats" items={items}/>
                 </Grid>
               </Grid>
               <Grid container item xs>
