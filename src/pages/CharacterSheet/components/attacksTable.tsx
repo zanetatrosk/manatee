@@ -25,7 +25,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   const [open, setOpen] = useState(false);
   return (
     <React.Fragment>
-      <TableRow key={row.name} sx={[ !open && { "& > *": { borderBottom: "unset" } }]}>
+      <TableRow key={row.name} sx={[ open && { "& > *": { borderBottom: "unset" } }]}>
         <TableCell component="th" scope="row">
           {row.name}
         </TableCell>
@@ -41,7 +41,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           </IconButton>
         </TableCell>
       </TableRow>
-      {<TableRow>
+      <TableRow sx={[ !open && { "& > *": { borderBottom: "unset" } }]}>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box py={2}>
@@ -52,7 +52,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
             </Box>
           </Collapse>
         </TableCell>
-      </TableRow> }
+      </TableRow> 
     </React.Fragment>
   );
 }
