@@ -43,7 +43,7 @@ interface AbilityCardProps {
 export default function AbilityCard(props: AbilityCardProps) {
   return (
     <Box>
-      <Card sx={{ px: 2 , py: 1,  borderRadius: 2 }} >
+      <Card sx={{ py: 1,  borderRadius: 2, width: 115, height: 130 }} >
         <Grid alignItems="center" container flexDirection="column" spacing={1}>
           <Grid item>
             <Typography variant="button">{props.ability}</Typography>
