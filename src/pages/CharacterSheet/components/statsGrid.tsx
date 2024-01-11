@@ -33,7 +33,7 @@ export default function StatsGrid(props: Props) {
 
   return (
     <Box display="flex" justifyContent="center">
-      <Card sx={{ p: 4, display: "flex", maxWidth: 520 }}>
+      <Card sx={{ p: 4, display: "flex" }}>
         <Grid container flexDirection={"column"} rowSpacing={3}>
           <Grid item>
             <Typography variant="h5" component="div">
@@ -42,7 +42,7 @@ export default function StatsGrid(props: Props) {
           </Grid>
           <Grid container item spacing={{ xs: 2, md: 3 }} columns={{ xs: 12, md: 12 }} >
             {props.items.map((i: Item) => (
-              <Grid item container justifyContent={"center"} xs={6} md={4}  key={i.header} >
+              <Grid item container justifyContent={"center"} xs={6} xl={3} md={4}  key={i.header}>
                 <LittleCard 
                   item={i}
                 />

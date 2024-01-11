@@ -29,7 +29,7 @@ function App() {
               mt: 9,
               mb: 4, 
             }}
-            maxWidth="lg"
+            maxWidth="xl"
             component="main"
           >
             <Routes>

@@ -5,6 +5,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { Card } from "@mui/material";
+import AttacksTable from "./attacksTable";
 
 export default function TabsCard() {
   const [value, setValue] = React.useState("1");
@@ -26,7 +27,11 @@ export default function TabsCard() {
               <Tab label="Characteristics" value="5" />
             </TabList>
           </Box>
-          <TabPanel value="1">Attacks and Armor</TabPanel>
+          <TabPanel value="1">
+            <AttacksTable/>
+            <div style={{ margin: 30 }}/>
+            <AttacksTable/>
+          </TabPanel>
           <TabPanel value="2">Spellcasting</TabPanel>
           <TabPanel value="3">Other prof. & languages</TabPanel>
           <TabPanel value="4">Features</TabPanel>

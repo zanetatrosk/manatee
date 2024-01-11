@@ -1,36 +1,29 @@
+
 import {
-  Box,
-  Button,
-  Card,
-  CardHeader,
-  Collapse,
-  IconButton,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Typography,
+    Box,
+    Button,
+    Card,
+    CardHeader,
+    Collapse,
+    IconButton,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    Typography,
 } from "@mui/material";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useState } from "react";
 import React from "react";
 
-export default function HomePage() {
-  function createData(name: string, calories: number, fat: number) {
-    return { name, calories, fat };
-  }
 
-  //generate data as dnd attacks
-  const rows = [
-    createData("Attack 1", 159, 6.0),
-    createData("Attack 2", 237, 9.0),
-    createData("Attack 3", 262, 16.0),
-    createData("Attack 4", 305, 3.7),
-    createData("Attack 5", 356, 16.0),
-  ];
 
+
+function createData(name: string, calories: number, fat: number) {
+  return { name, calories, fat };
+}
   function Row(props: { row: ReturnType<typeof createData> }) {
     const { row } = props;
     const [open, setOpen] = useState(false);
@@ -70,30 +63,41 @@ export default function HomePage() {
     )
 
   }
-  return (
-    <Box data-cy="home">
-      <Typography variant="h4">Welcome to D&D App</Typography>
-      <Card>
-        <CardHeader
-          title={<Typography variant="h4">Attacks</Typography>}
-          action={<Button variant="contained">Add attack</Button>}
-        ></CardHeader>
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Attack bonus</TableCell>
-              <TableCell>Damage type</TableCell>
-            <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <Row row={row} key={row.name}/>
-            ))}
-          </TableBody>
-        </Table>
-      </Card>
-    </Box>
-  );
-}
+
+  export default function AttacksTable() {
+  
+    //generate data as dnd attacks
+    const rows = [
+      createData("Attack 1", 159, 6.0),
+      createData("Attack 2", 237, 9.0),
+      createData("Attack 3", 262, 16.0),
+      createData("Attack 4", 305, 3.7),
+      createData("Attack 5", 356, 16.0),
+    ];
+  
+    
+    return (
+        <Card>
+          <CardHeader
+            title="Attacks"
+            action={<Button variant="contained">Add attack</Button>}
+          ></CardHeader>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Attack bonus</TableCell>
+                <TableCell>Damage type</TableCell>
+              <TableCell></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <Row row={row} key={row.name}/>
+              ))}
+            </TableBody>
+          </Table>
+        </Card>
+    );
+  }
+  
