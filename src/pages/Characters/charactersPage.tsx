@@ -2,7 +2,7 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { Button, CardActions, CardMedia } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
@@ -61,15 +61,16 @@ export default function Characters() {
   const theme = useTheme();
   const greaterThanMid = useMediaQuery(theme.breakpoints.up("md"));
   return (
-    <Grid container>
-      <Grid container sx={{px: 3, mb: 1}} spacing={2}>
-        <Grid item xs>
+    <Grid container flexDirection={"column"}>
+      <Grid container item justifyContent={"space-between"} mb={5}>
+        <Grid item>
           <Typography variant="h4">My Characters</Typography>
         </Grid>
-        <Grid item justifyContent={greaterThanMid ? "flex-end" : "flex-start" }>
+
+        <Grid item justifyContent={greaterThanMid ? "flex-end" : "flex-start"}>
           <Button
             variant="outlined"
-            size="small"  
+            size="small"
             onClick={() => {
               dispatch(resetState());
               navigate("/characters/create-character");
@@ -84,20 +85,26 @@ export default function Characters() {
           </Button>
         </Grid>
       </Grid>
-      {Array.from(Array(6)).map((index) => (
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={6}
-          lg={4}
-          p={3}
-          key={index}
-          justifyContent="center"
-        >
-          <CharacterCard />
-        </Grid>
-      ))}
+      
+      <Grid container item>
+          {Array.from(Array(6)).map((index) => (
+            <Grid
+              item
+              container
+              xs={12}
+              sm={12}
+              md={6}
+              lg={4}
+              key={index}
+              justifyContent="center"
+              mb={5}
+            >
+              <Grid item>
+                <CharacterCard />
+              </Grid>
+            </Grid>
+          ))}
+      </Grid>
     </Grid>
   );
 }
