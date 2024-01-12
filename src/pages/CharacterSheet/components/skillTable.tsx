@@ -55,7 +55,7 @@ export default function SkillTable(props: TableProps) {
                 />
               </TableCell>
               <TableCell >{i.label}</TableCell>
-              <TableCell >
+              <TableCell align="right">
                 <Typography variant="h6">{i.score}</Typography>
               </TableCell>
             </TableRow>
