@@ -13,9 +13,9 @@ import { resetState } from "reducers/characterReducer";
 
 function CharacterCard() {
   return (
-    <Card sx={{ maxWidth: 370 }} data-cy="character-card">
+    <Card sx={{ width: "100%" }} data-cy="character-card">
       <CardMedia
-        sx={{ maxHeight: 140, minWidth: 350 }}
+        sx={{ maxHeight: 160 }}
         component="img"
         // Picture by pixabay: https://pixabay.com/cs
         src="https://cdn.pixabay.com/photo/2023/06/10/02/04/digital-art-8052936_960_720.jpg"
@@ -61,13 +61,22 @@ export default function Characters() {
   const theme = useTheme();
   const greaterThanMid = useMediaQuery(theme.breakpoints.up("md"));
   return (
-    <Grid container flexDirection={"column"}>
-      <Grid container item justifyContent={"space-between"} mb={5}>
-        <Grid item>
+    <Grid container flexDirection={"column"} component={Card} padding={4}>
+      <Grid container item pt={4} alignItems={"center"}>
+        <Grid container item xs={12} sm={12} md={6} lg={4} p={3}>
           <Typography variant="h4">My Characters</Typography>
         </Grid>
-
-        <Grid item justifyContent={greaterThanMid ? "flex-end" : "flex-start"}>
+        <Grid item xs={12} sm={12} md="auto" lg={4} />
+        <Grid
+          container
+          item
+          xs={12}
+          sm={12}
+          md={6}
+          lg={4}
+          p={3}
+          justifyContent={greaterThanMid ? "flex-end" : "flex-start"}
+        >
           <Button
             variant="outlined"
             size="small"
@@ -84,26 +93,22 @@ export default function Characters() {
             {CHARACTERS.CREATE_CHARACTER}
           </Button>
         </Grid>
-      </Grid>
-      
-      <Grid container item>
-          {Array.from(Array(6)).map((index) => (
-            <Grid
-              item
-              container
-              xs={12}
-              sm={12}
-              md={6}
-              lg={4}
-              key={index}
-              justifyContent="center"
-              mb={5}
-            >
-              <Grid item>
-                <CharacterCard />
-              </Grid>
-            </Grid>
-          ))}
+
+        {Array.from(Array(6)).map((index) => (
+          <Grid
+            item
+            container
+            xs={12}
+            sm={12}
+            md={6}
+            lg={4}
+            key={index}
+            justifyContent="center"
+            p={3}
+          >
+            <CharacterCard />
+          </Grid>
+        ))}
       </Grid>
     </Grid>
   );
