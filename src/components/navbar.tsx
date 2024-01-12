@@ -43,7 +43,7 @@ function ResponsiveAppBar() {
 
   return (
     <AppBar position="static" id='navbar'>
-      <Container maxWidth="xl">
+      <Container maxWidth="lg">
         <Toolbar disableGutters>
           <DragonLogo md="flex" xs="none" />
           <Typography

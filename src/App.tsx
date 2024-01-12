@@ -13,7 +13,7 @@ import ContentPage from "@pages/Content/contentPage";
 // import Footer from "@components/footer";
 const darkTheme = createTheme({
   palette: {
-    mode: "light",
+    mode: "dark",
   },
 });
 
@@ -29,7 +29,7 @@ function App() {
               mt: 9,
               mb: 4, 
             }}
-            maxWidth="xl"
+            maxWidth="lg"
             component="main"
           >
             <Routes>
