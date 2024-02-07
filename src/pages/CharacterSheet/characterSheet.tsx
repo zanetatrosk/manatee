@@ -94,7 +94,7 @@ export default function CharacterSheet() {
             </Grid>
             <Grid container item flexDirection={"column"} spacing={3} xs>
               <Grid container item spacing={3}>
-                <Grid item>
+                <Grid item sm={4.5} xs={12}>
                   <SkillTable
                     name="Saving Throws"
                     description="Choose which saving throws you are proficient in."

@@ -5,7 +5,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { Card } from "@mui/material";
-import AttacksTable from "./attacksTable";
+import AttacksTable, { RowData } from "./attacksTable";
 
 export default function TabsCard() {
   const [value, setValue] = React.useState("1");
@@ -13,6 +13,21 @@ export default function TabsCard() {
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
+
+  const rows: RowData[] = [
+    {
+      columns: ["Longsword", "+5", "Slashing"],
+      description: "lorem ipsum dolor sit amet consectetur adipisicing elit",
+    },
+    {
+      columns: ["Dagger", "+3", "Piercing"],
+      description: "lorem ipsum dolor sit amet consectetur adipisicing elit",
+    },
+    {
+      columns: ["Fireball", "+8", "Fire"],
+      description: "lorem ipsum dolor sit amet consectetur adipisicing elit",
+    },
+  ];
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -28,9 +43,18 @@ export default function TabsCard() {
             </TabList>
           </Box>
           <TabPanel value="1">
-            <AttacksTable/>
+            <AttacksTable 
+            rows={rows}
+            headers={["Name", "Attack bonus", "Damage type"]}
+            showDescription
+            
+            />
             <div style={{ margin: 30 }}/>
-            <AttacksTable/>
+            <AttacksTable
+            rows={rows}
+            headers={["Name", "Attack bonus", "Damage type"]}
+            showDescription
+            />
           </TabPanel>
           <TabPanel value="2">Spellcasting</TabPanel>
           <TabPanel value="3">Other prof. & languages</TabPanel>

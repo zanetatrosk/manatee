@@ -38,7 +38,7 @@ export default function SkillTable(props: TableProps) {
         <Table size="small">
           <TableBody>
           {tableData.tableData.map((i: RowData, idx) => (
-            <TableRow key={idx}>
+            <TableRow key={idx} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell padding="checkbox">
                 <Checkbox
                   color="primary"
@@ -54,7 +54,7 @@ export default function SkillTable(props: TableProps) {
                   }}
                 />
               </TableCell>
-              <TableCell >{i.label}</TableCell>
+              <TableCell>{i.label}</TableCell>
               <TableCell align="right">
                 <Typography variant="h6">{i.score}</Typography>
               </TableCell>
