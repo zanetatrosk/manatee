@@ -10,7 +10,6 @@ import HomePage from "@pages/homePage";
 import { Container } from "@mui/material";
 import CharacterSheet from "@pages/CharacterSheet/characterSheet";
 import ContentPage from "@pages/Content/contentPage";
-// import Footer from "@components/footer";
 const darkTheme = createTheme({
   palette: {
     mode: "light",
@@ -26,7 +25,7 @@ function App() {
           <Navbar />
           <Container
             sx={{
-              mt: 9,
+              mt: 6,
               mb: 4, 
             }}
             maxWidth="lg"

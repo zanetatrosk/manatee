@@ -66,7 +66,7 @@ export default function AttacksTable(props: Table) {
       <React.Fragment>
         <TableRow
           key={idx}
-          sx={[ open && { "& > *": { borderBottom: 0 } }, idx === lastIdx && { "& > *": { borderBottom: 0 } } ]}
+          sx={[ open && { "& > *": { borderBottom: 0 } }, (idx === lastIdx) && { "& > *": { borderBottom: 0 } } ]}
         >
           <>
             {row.columns.map((col) => (

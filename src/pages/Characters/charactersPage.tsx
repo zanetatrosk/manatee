@@ -122,7 +122,7 @@ export default function Characters() {
   const greaterThanMid = useMediaQuery(theme.breakpoints.up("md"));
   return (
     <Grid container flexDirection={"column"} >
-      <Grid container item pt={4} alignItems={"center"}>
+      <Grid container item alignItems={"center"}>
         <Grid container item xs={12} sm={12} md={6} lg={4} p={3}>
           <Typography variant="h4">My Characters</Typography>
         </Grid>

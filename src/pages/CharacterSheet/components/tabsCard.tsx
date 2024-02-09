@@ -73,13 +73,13 @@ export default function TabsCard() {
           <TabPanel value="2">
             <Grid container spacing={2} flexDirection={"column"}>
               <Grid container item spacing={2}>
-                <Grid item xs={7}>
+                <Grid item sm={7} xs={12}>
                   <StatsGrid
                     title="Magic"
                     items={[{ header: "speed", value: "12 ft" }, { header: "Initiative", value: "+2" }, { header: "Prof. Bonus", value: "+2" }]}
                   />
                 </Grid>
-                <Grid item container xs>
+                <Grid item container sm xs={12}>
                     <AttacksTable
                       rows={slotsData}
                       headers={["level", "count"]}
