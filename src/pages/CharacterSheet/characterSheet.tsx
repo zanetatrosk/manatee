@@ -88,7 +88,6 @@ export default function CharacterSheet() {
             <Grid item>
               <SkillTable
                 name="Skills"
-                description="Choose which skills you are proficient in."
                 tableData={tableData}
               />
             </Grid>
@@ -97,7 +96,6 @@ export default function CharacterSheet() {
                 <Grid item sm={4.5} xs={12}>
                   <SkillTable
                     name="Saving Throws"
-                    description="Choose which saving throws you are proficient in."
                     tableData={savingThrows}
                   />
                 </Grid>

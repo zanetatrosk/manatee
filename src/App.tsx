@@ -13,7 +13,7 @@ import ContentPage from "@pages/Content/contentPage";
 // import Footer from "@components/footer";
 const darkTheme = createTheme({
   palette: {
-    mode: "dark",
+    mode: "light",
   },
 });
 

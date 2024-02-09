@@ -5,7 +5,7 @@ function LittleCard({item}: {item: Item}) {
   return (
     <Paper
       elevation={12}
-      sx={{ borderRadius: 1, py: 1, pb: 0.3, width: 128, height: 84 }}
+      sx={{ borderRadius: 1, py: 1, pb: 0.3, width: 128, height: 84}}
     >
       <Grid container flexDirection="column" justifyItems="center">
         <Grid item container justifyContent="center">
@@ -32,9 +32,9 @@ interface Props {
 export default function StatsGrid(props: Props) {
 
   return (
-    <Box display="flex" justifyContent="center">
-      <Card sx={{ p: 4, display: "flex" }}>
-        <Grid container flexDirection={"column"} rowSpacing={3}>
+    <Box display="flex" flexGrow={1}>
+      <Card sx={{ p: 4, justifyContent: "center", flexGrow: 1 }} >
+        <Grid container flexDirection={"column"} spacing={3} >
           <Grid item>
             <Typography variant="h5" component="div">
               {props.title}

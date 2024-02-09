@@ -106,10 +106,11 @@ export default function AttacksTable(props: Table) {
   
 
   return (
-    <Card elevation={2}>
+    <Box display="flex" flexGrow={1}>
+    <Card elevation={2} sx={{ flexGrow: 1 }}>
       <CardHeader
         title="Attacks"
-        action={<Button variant="contained">Add attack</Button>}
+        action={props.actionButton ? <Button variant="contained">Add attack</Button> : null}
       ></CardHeader>
       <TableContainer>
         <Table size="small">
@@ -143,5 +144,6 @@ export default function AttacksTable(props: Table) {
         )}
       </TableContainer>
     </Card>
+    </Box>
   );
 }

@@ -19,7 +19,7 @@ interface RowData {
 
 interface TableProps {
   name: string;
-  description: string;
+  description?: string;
   tableData: RowData[];
 }
 
@@ -27,8 +27,8 @@ export default function SkillTable(props: TableProps) {
 
   const [tableData, setTableData] = React.useState<TableProps>(props);
   return (
-    <Box display="inline-flex">
-      <Card>
+    <Box display="flex">
+      <Card sx={{ width: "100%"}}>
         <CardContent>
           <Typography variant="h5">{tableData.name}</Typography>
           <Typography variant="body2" color="text.secondary">
