@@ -56,11 +56,11 @@ export default function CharacterSheet() {
                       },
                       {
                         header: "Class & level",
-                        value: character.characterClass.label,
+                        value: character.characterClass.name,
                       },
                       {
                         header: "Subclass",
-                        value: character.characterClass.subclass.title,
+                        value: "none",
                       },
                       {
                         header: "Background",

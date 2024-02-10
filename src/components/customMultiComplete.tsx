@@ -27,18 +27,18 @@ export default function MultiComplete(props: PropsParams) {
         data-cy={props.data_cy}
         options={props.values}
         getOptionLabel={(option) =>
-          typeof option === "string" ? option : option.title
+          typeof option === "string" ? option : option.name
         }
         getOptionDisabled={() => props.results.length === props.maxItems}
         inputValue={item}
         onInputChange={(_, v) => setItem(v)}
         onBlur={() => {
-          if (item.trim() === "" || props.results.length === props.maxItems || props.results.find((i) => i.title === item)){
+          if (item.trim() === "" || props.results.length === props.maxItems || props.results.find((i) => i.name === item)){
             setItem("");
             return;
           }
           const tmp: AutocompleteItem[] = [
-            { id: null, title: item },
+            { id: null, name: item },
             ...props.results,
           ];
           setItem("");
@@ -52,7 +52,7 @@ export default function MultiComplete(props: PropsParams) {
           value.map((option: AutocompleteItem, index: number) => (
             <Chip
               variant="outlined"
-              label={option.title}
+              label={option.name}
               data-cy={"chip-" + index}
               {...getTagProps({ index })}
             />

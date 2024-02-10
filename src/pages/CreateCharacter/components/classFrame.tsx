@@ -7,7 +7,7 @@ import React, { useEffect } from "react";
 import MultiComplete from "@components/customMultiComplete";
 import { AutocompleteItem, Class } from "../definitions/characterForm";
 import { setClass as setStoreClass } from "reducers/characterReducer";
-import { useGetClassesQuery, useGetSubclassesQuery, useGetToolsQuery } from "api/raceApiSlice";
+import { useGetClassesQuery, useGetToolsQuery } from "api/raceApiSlice";
 
 const CLASS = CREATE_CHARACTER.CLASS;
 
@@ -20,10 +20,9 @@ export default function ClassFrame() {
   
   const [characterClass, setClass] = React.useState<Class>(classStore); 
   const [isVisible, setVisibility] = React.useState(false);
-  const [toolsValue, setTools] = React.useState<AutocompleteItem[]>(classStore.tools.defaults);
+  const [toolsValue, setTools] = React.useState<AutocompleteItem[]>(classStore.toolProficiencies.defaults);
 
   const { data: classes, isLoading: loadingClasses } = useGetClassesQuery();
-  const { data: subclasses, isLoading: loadingSubclasses } = useGetSubclassesQuery();
   const { data: tools, isLoading: toolsLoading } = useGetToolsQuery();
 
   const handleToolsChange = (value: AutocompleteItem[]): void => {
@@ -59,6 +58,7 @@ export default function ClassFrame() {
           <Autocomplete
             id="combo-box-demo"
             options={classes || []}
+            getOptionLabel={(option) => option.name}
             value={characterClass.id ? characterClass : null}
             sx={{ my: 2 }}
             onChange={(_, value) => {
@@ -100,13 +100,10 @@ export default function ClassFrame() {
             <Grid container sx={{ py: 2 }} columnSpacing={8}>
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <Autocomplete
-                options={subclasses || []}
-                value={characterClass.subclass.id ? characterClass.subclass : null}
-                getOptionLabel={(option) => option.title}
-                isOptionEqualToValue={(option, value) => option.id === value.id}
+                options={characterClass.subclasses || []}
                 onChange={(_, value) => {
                   if(!value) return;
-                  setClass({...characterClass, subclass: value});
+                  //setClass({...characterClass, subclasses: value});
                 }}
                 renderInput={(params) => (
                   <TextField
@@ -123,15 +120,15 @@ export default function ClassFrame() {
                   results={toolsValue}
                   onChange={handleToolsChange}
                   label={CLASS.TOOLS}
-                  helpText={`You can have up to ${characterClass.tools.amount} tools`}
+                  helpText={`You can have up to ${characterClass.toolProficiencies.amount} tools`}
                   placeholder={CLASS.TOOLS_PLACEHOLDER}
-                  maxItems={characterClass.tools.amount}
+                  maxItems={characterClass.toolProficiencies.amount}
                 />
               </Grid>
             </Grid>
             <Box>
               <CardInfo
-                title={characterClass.label}
+                title={characterClass.name}
                 features={characterClass.features}
                 description={characterClass.description}
               />

@@ -7,7 +7,7 @@ const races: Race[] = [
     name: "Dwarf",
     languageProficiencies: {
         amount: 2,
-        defaults: [{ id: 5, title: "Common Dwarvish" }],
+        defaults: [{ id: 5, name: "Common Dwarvish" }],
     },
     description:
         "Bold and hardy, dwarves are known as skilled warriors, miners, and workers of stone and metal.",
@@ -43,8 +43,8 @@ const races: Race[] = [
     languageProficiencies: {
         amount: 2,
         defaults: [
-        { id: 1, title: "Common Elvish" },
-        { id: 2, title: "High Elvish" },
+        { id: 1, name: "Common Elvish" },
+        { id: 2, name: "High Elvish" },
         ],
     },
     description:
@@ -73,8 +73,8 @@ const races: Race[] = [
     languageProficiencies: {
         amount: 2,
         defaults: [
-        { id: 8, title: "Common Draconic" },
-        { id: 9, title: "High Draconic" },
+        { id: 8, name: "Common Draconic" },
+        { id: 9, name: "High Draconic" },
         ],
     },
     description:
@@ -102,7 +102,7 @@ const races: Race[] = [
     name: "Human",
     languageProficiencies: {
         amount: 1,
-        defaults: [{ id: 1, title: "Common Elvish" }],
+        defaults: [{ id: 1, name: "Common Elvish" }],
     },
     description: "The Human is ",
     speed: 30,
@@ -119,7 +119,7 @@ const backgrounds: Background[] = [
       languages: {
         amount: 1,
         defaults: [
-          { id: 1, title: "Common" },
+          { id: 1, name: "Common" },
         ],
       },
       tools: {
@@ -159,78 +159,78 @@ const backgrounds: Background[] = [
 
 const languages: AutocompleteItem[] = [
 // Elvish languages
-{ id: 1, title: "Common Elvish" },
-{ id: 2, title: "High Elvish" },
-{ id: 3, title: "Wood Elvish" },
-{ id: 4, title: "Drow Sign Language" },
+{ id: 1, name: "Common Elvish" },
+{ id: 2, name: "High Elvish" },
+{ id: 3, name: "Wood Elvish" },
+{ id: 4, name: "Drow Sign Language" },
 
 // Dwarvish languages
-{ id: 5, title: "Common Dwarvish" },
-{ id: 6, title: "Hill Dwarvish" },
-{ id: 7, title: "Mountain Dwarvish" },
+{ id: 5, name: "Common Dwarvish" },
+{ id: 6, name: "Hill Dwarvish" },
+{ id: 7, name: "Mountain Dwarvish" },
 
 // Draconic languages
-{ id: 8, title: "Common Draconic" },
-{ id: 9, title: "High Draconic" },
-{ id: 10, title: "Ancient Draconic" },
+{ id: 8, name: "Common Draconic" },
+{ id: 9, name: "High Draconic" },
+{ id: 10, name: "Ancient Draconic" },
 
 // Gnomish languages
-{ id: 11, title: "Common Gnomish" },
-{ id: 12, title: "Rock Gnomish" },
-{ id: 13, title: "Forest Gnomish" },
+{ id: 11, name: "Common Gnomish" },
+{ id: 12, name: "Rock Gnomish" },
+{ id: 13, name: "Forest Gnomish" },
 
 // Orcish languages
-{ id: 14, title: "Common Orcish" },
-{ id: 15, title: "Black Orcish" },
-{ id: 16, title: "Gray Orcish" },
+{ id: 14, name: "Common Orcish" },
+{ id: 15, name: "Black Orcish" },
+{ id: 16, name: "Gray Orcish" },
 
 // Celestial languages
-{ id: 17, title: "Common Celestial" },
-{ id: 18, title: "High Celestial" },
+{ id: 17, name: "Common Celestial" },
+{ id: 18, name: "High Celestial" },
 
 // Infernal languages
-{ id: 19, title: "Common Infernal" },
-{ id: 20, title: "High Infernal" },
+{ id: 19, name: "Common Infernal" },
+{ id: 20, name: "High Infernal" },
 
 // Abyssal languages
-{ id: 21, title: "Common Abyssal" },
-{ id: 22, title: "High Abyssal" },
+{ id: 21, name: "Common Abyssal" },
+{ id: 22, name: "High Abyssal" },
 
 // Giant languages
-{ id: 23, title: "Common Giant" },
-{ id: 24, title: "Hill Giant" },
-{ id: 25, title: "Stone Giant" },
+{ id: 23, name: "Common Giant" },
+{ id: 24, name: "Hill Giant" },
+{ id: 25, name: "Stone Giant" },
 
 // Undercommon languages
-{ id: 26, title: "Common Undercommon" },
-{ id: 27, title: "High Undercommon" },
+{ id: 26, name: "Common Undercommon" },
+{ id: 27, name: "High Undercommon" },
   ];
 
 const sources: AutocompleteItem[] = [
-{ id: 0, title: "Player's Handbook" },
-{ id: 1, title: "Dungeon Master's Guide" },
-{ id: 2, title: "Monster Manual" },
-{ id: 3, title: "Volo's Guide to Monsters" },
-{ id: 4, title: "Mordenkainen's Tome of Foes" },
-{ id: 5, title: "Xanathar's Guide to Everything" },
-{ id: 6, title: "Guildmasters' Guide to Ravnica" },
-{ id: 7, title: "Acquisitions Incorporated" },
-{ id: 8, title: "Eberron: Rising from the Last War" },
-{ id: 9, title: "Explorer's Guide to Wildemount" },
-{ id: 10, title: "Mythic Odysseys of Theros" },
-{ id: 11, title: "Tasha's Cauldron of Everything" },
-{ id: 12, title: "Van Richten's Guide to Ravenloft" },
-{ id: 13, title: "Fizban's Treasury of Dragons" },
-{ id: 14, title: "Strixhaven: A Curriculum of Chaos" },
-{ id: 15, title: "The Wild Beyond the Witchlight" },
+{ id: 0, name: "Player's Handbook" },
+{ id: 1, name: "Dungeon Master's Guide" },
+{ id: 2, name: "Monster Manual" },
+{ id: 3, name: "Volo's Guide to Monsters" },
+{ id: 4, name: "Mordenkainen's Tome of Foes" },
+{ id: 5, name: "Xanathar's Guide to Everything" },
+{ id: 6, name: "Guildmasters' Guide to Ravnica" },
+{ id: 7, name: "Acquisitions Incorporated" },
+{ id: 8, name: "Eberron: Rising from the Last War" },
+{ id: 9, name: "Explorer's Guide to Wildemount" },
+{ id: 10, name: "Mythic Odysseys of Theros" },
+{ id: 11, name: "Tasha's Cauldron of Everything" },
+{ id: 12, name: "Van Richten's Guide to Ravenloft" },
+{ id: 13, name: "Fizban's Treasury of Dragons" },
+{ id: 14, name: "Strixhaven: A Curriculum of Chaos" },
+{ id: 15, name: "The Wild Beyond the Witchlight" },
   ];
 
   const classes: Class[] = [
     {
-      id: 1,
-      label: "Barbarian",
+      id: "1",
+      name: "Barbarian",
       hitDice: "1d12",
-      subclass: { id: 1, title: "Berserker"},
+      subclasses: ["Berserker"],
       features: [
         {
           title: "Rage",
@@ -245,16 +245,16 @@ const sources: AutocompleteItem[] = [
       ],
       description:
         "For some, their rage springs from a communion with fierce animal spirits. Others draw from a roiling reservoir of anger at a world full of pain. For every barbarian, rage is a power that fuels not just a battle frenzy but also uncanny reflexes, resilience, and feats of strength.",
-      tools: {
+      toolProficiencies: {
         amount: 2,
         defaults: [],
       },
     },
     {
-      id: 2,
-      label: "Bard",
+      id: "2",
+      name: "Bard",
       hitDice: "1d8",
-      subclass: { id: 2, title: "Lore"},
+      subclasses: ["Lore", "Valor"],
       features: [
         {
           title: "Spellcasting",
@@ -270,7 +270,7 @@ const sources: AutocompleteItem[] = [
       description:
         "Humming as she traces her fingers over an ancient monument in a long-forgotten ruin, a half-elf in rugged leathers finds knowledge springing into her mind, conjured forth by the magic of her song—knowledge of the people who constructed the monument and the mythic saga it depicts.",
       
-      tools: {
+      toolProficiencies: {
         amount: 0,
         defaults: [],
       },
@@ -278,42 +278,41 @@ const sources: AutocompleteItem[] = [
   ];
 
   const proficiencyTools: AutocompleteItem[] = [
-    { id: 1, title: "Alchemist’s Supplies" },
-    { id: 2, title: "Brewer’s Supplies" },
-    { id: 3, title: "Calligrapher’s Supplies" },
-    { id: 4, title: "Carpenter’s Tools" },
-    { id: 5, title: "Cartographer’s Tools" },
-    { id: 6, title: "Cobbler’s Tools" },
-    { id: 7, title: "Cook’s Utensils" },
-    { id: 8, title: "Glassblower’s Tools" },
-    { id: 9, title: "Jeweler’s Tools" },
-    { id: 10, title: "Leatherworker’s Tools" },
-    { id: 11, title: "Mason’s Tools" },
-    { id: 12, title: "Painter’s Supplies" },
-    { id: 13, title: "Potter’s Tools" },
-    { id: 14, title: "Smith’s Tools" },
-    { id: 15, title: "Tinker’s Tools" },
-    { id: 16, title: "Weaver’s Tools" },
-    { id: 17, title: "Woodcarver’s Tools" },
-    { id: 18, title: "Disguise Kit" },
-    { id: 19, title: "Forgery Kit" },
-    { id: 20, title: "Herbalism Kit" },
-    { id: 21, title: "Navigator’s Tools" },
-    { id: 22, title: "Poisoner’s Kit" },
-    { id: 23, title: "Thieves’ Tools" },
-    { id: 24, title: "Dice Set" },
-    { id: 25, title: "Dragonchess Set" },
-    { id: 26, title: "Playing Card Set" },
-    { id: 27, title: "Three-Dragon Ante Set" },
-    { id: 28, title: "Land Vehicles" },
-    { id: 29, title: "Water Vehicles" },
+    { id: 1, name: "Alchemist’s Supplies" },
+    { id: 2, name: "Brewer’s Supplies" },
+    { id: 3, name: "Calligrapher’s Supplies" },
+    { id: 4, name: "Carpenter’s Tools" },
+    { id: 5, name: "Cartographer’s Tools" },
+    { id: 6, name: "Cobbler’s Tools" },
+    { id: 7, name: "Cook’s Utensils" },
+    { id: 8, name: "Glassblower’s Tools" },
+    { id: 9, name: "Jeweler’s Tools" },
+    { id: 10, name: "Leatherworker’s Tools" },
+    { id: 11, name: "Mason’s Tools" },
+    { id: 12, name: "Painter’s Supplies" },
+    { id: 13, name: "Potter’s Tools" },
+    { id: 14, name: "Smith’s Tools" },
+    { id: 15, name: "Tinker’s Tools" },
+    { id: 16, name: "Weaver’s Tools" },
+    { id: 17, name: "Woodcarver’s Tools" },
+    { id: 18, name: "Disguise Kit" },
+    { id: 19, name: "Forgery Kit" },
+    { id: 20, name: "Herbalism Kit" },
+    { id: 21, name: "Navigator’s Tools" },
+    { id: 22, name: "Poisoner’s Kit" },
+    { id: 23, name: "Thieves’ Tools" },
+    { id: 24, name: "Dice Set" },
+    { id: 25, name: "Dragonchess Set" },
+    { id: 26, name: "Playing Card Set" },
+    { id: 27, name: "Three-Dragon Ante Set" },
+    { id: 28, name: "Land Vehicles" },
+    { id: 29, name: "Water Vehicles" },
   ];
   
-  const subclasses : AutocompleteItem[] = [
-    {id: 1, title: "Berserker"},
-    {id: 2, title: "Lore"},
-    {id: 3, title: "Valor"},
-    {id: 4, title: "Swords"},
+  const subclasses : string[] = [
+    "Berserker",
+    "Lore",
+    "Valor",
    
   ]
   

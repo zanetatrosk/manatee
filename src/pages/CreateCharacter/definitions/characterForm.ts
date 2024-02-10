@@ -48,13 +48,13 @@ interface Race {
     languageProficiencies: AutocompleteParams;
 }
 interface Class {
-    id: number | null;
-    label: string;
-    subclass: AutocompleteItem;
+    id: string | null;
+    name: string;
+    subclasses: string[];
     description: string;
     hitDice: string;
     features: Feature[];
-    tools: AutocompleteParams;
+    toolProficiencies: AutocompleteParams;
 }
 interface Feature{
     title: string;
@@ -74,7 +74,7 @@ interface Source extends AutocompleteItem {}
 //interface used for autocomplete
 interface AutocompleteItem {
     id: number | null;
-    title: string;
+    name: string;
 }
 interface AutocompleteParams {
     amount: number;
@@ -163,15 +163,12 @@ const formDefaults  = {
         ] as AbilityScore[],
         characterClass: {
             id: null,
-            label: "",
+            name: "",
             description: "",
             hitDice: "",
             features: [],
-            subclass: {
-                id: null,
-                title: ""
-            },
-            tools: {
+            subclasses: [""],
+            toolProficiencies: {
                 amount: 0,
                 defaults: []
             }

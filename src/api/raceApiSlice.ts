@@ -24,9 +24,6 @@ export const raceApiSlice = createApi({
         getTools: builder.query<AutocompleteItem[], void>({
             query: () => 'tools',
         }),
-        getSubclasses: builder.query<AutocompleteItem[], void>({
-            query: () => 'subclasses',
-        }),
         addCharacter: builder.mutation<void, void>({
             query: (body) => ({
                 url: 'characters',
@@ -45,5 +42,4 @@ export const {
     useGetBackgroundsQuery,
     useGetLanguagesQuery,
     useGetToolsQuery,
-    useGetSubclassesQuery,
  } = raceApiSlice;

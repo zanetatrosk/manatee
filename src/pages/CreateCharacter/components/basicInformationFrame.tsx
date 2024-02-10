@@ -84,7 +84,7 @@ export default function BasicInformation() {
             value={basicInfo.sources}
             options={sources || []}
             multiple
-            getOptionLabel={(option) => option.title}
+            getOptionLabel={(option) => option.name}
             onChange={(_, value) => {
               if (!value) return;
               setInfo({ ...basicInfo, sources: value });
@@ -146,20 +146,20 @@ export default function BasicInformation() {
 
 //generate sources for dnd5e
 const sourcesTh: AutocompleteItem[] = [
-  { id: 0, title: "Player's Handbook" },
-  { id: 1, title: "Dungeon Master's Guide" },
-  { id: 2, title: "Monster Manual" },
-  { id: 3, title: "Volo's Guide to Monsters" },
-  { id: 4, title: "Mordenkainen's Tome of Foes" },
-  { id: 5, title: "Xanathar's Guide to Everything" },
-  { id: 6, title: "Guildmasters' Guide to Ravnica" },
-  { id: 7, title: "Acquisitions Incorporated" },
-  { id: 8, title: "Eberron: Rising from the Last War" },
-  { id: 9, title: "Explorer's Guide to Wildemount" },
-  { id: 10, title: "Mythic Odysseys of Theros" },
-  { id: 11, title: "Tasha's Cauldron of Everything" },
-  { id: 12, title: "Van Richten's Guide to Ravenloft" },
-  { id: 13, title: "Fizban's Treasury of Dragons" },
-  { id: 14, title: "Strixhaven: A Curriculum of Chaos" },
-  { id: 15, title: "The Wild Beyond the Witchlight" },
+  { id: 0, name: "Player's Handbook" },
+  { id: 1, name: "Dungeon Master's Guide" },
+  { id: 2, name: "Monster Manual" },
+  { id: 3, name: "Volo's Guide to Monsters" },
+  { id: 4, name: "Mordenkainen's Tome of Foes" },
+  { id: 5, name: "Xanathar's Guide to Everything" },
+  { id: 6, name: "Guildmasters' Guide to Ravnica" },
+  { id: 7, name: "Acquisitions Incorporated" },
+  { id: 8, name: "Eberron: Rising from the Last War" },
+  { id: 9, name: "Explorer's Guide to Wildemount" },
+  { id: 10, name: "Mythic Odysseys of Theros" },
+  { id: 11, name: "Tasha's Cauldron of Everything" },
+  { id: 12, name: "Van Richten's Guide to Ravenloft" },
+  { id: 13, name: "Fizban's Treasury of Dragons" },
+  { id: 14, name: "Strixhaven: A Curriculum of Chaos" },
+  { id: 15, name: "The Wild Beyond the Witchlight" },
 ];
