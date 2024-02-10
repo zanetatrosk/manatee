@@ -3,9 +3,9 @@ import { AutocompleteItem, Background, Class, Race } from "@pages/CreateCharacte
 
 const races: Race[] = [
     {
-    id: 1,
-    label: "Dwarf",
-    languages: {
+    id: "1",
+    name: "Dwarf",
+    languageProficiencies: {
         amount: 2,
         defaults: [{ id: 5, title: "Common Dwarvish" }],
     },
@@ -38,9 +38,9 @@ const races: Race[] = [
     sizeOptions: ["Medium"],
     },
     {
-    id: 2,
-    label: "Elf",
-    languages: {
+    id: "2",
+    name: "Elf",
+    languageProficiencies: {
         amount: 2,
         defaults: [
         { id: 1, title: "Common Elvish" },
@@ -68,9 +68,9 @@ const races: Race[] = [
     sizeOptions: ["Medium"],
     },
     {
-    id: 3,
-    label: "Halfling",
-    languages: {
+    id: "3",
+    name: "Halfling",
+    languageProficiencies: {
         amount: 2,
         defaults: [
         { id: 8, title: "Common Draconic" },
@@ -98,9 +98,9 @@ const races: Race[] = [
     sizeOptions: ["Small"],
     },
     {
-    id: 4,
-    label: "Human",
-    languages: {
+    id: "4",
+    name: "Human",
+    languageProficiencies: {
         amount: 1,
         defaults: [{ id: 1, title: "Common Elvish" }],
     },

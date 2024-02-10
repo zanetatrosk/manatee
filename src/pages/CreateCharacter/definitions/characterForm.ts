@@ -33,17 +33,19 @@ interface AbilityScore {
     modifierUpToTwo: boolean;
 }
 interface Race {
-    id: number | null;
-    label: string;
-    languages: AutocompleteParams;
+    id: string | null;
+    name: string;
+    source?: any;
     description: string;
-    speed: number;
     features: Feature[];
-    //this will be enum
-    abilityScorePlus1?: string[];
-    abilityScorePlus2?: string[];
-    //enum
+    speed: number;
     sizeOptions: string[];
+    //this will be enum
+    abilityScorePlus2?: string[];
+    abilityScorePlus1?: string[];
+    //enum
+    skillProficiencies?: AutocompleteParams;
+    languageProficiencies: AutocompleteParams;
 }
 interface Class {
     id: number | null;
@@ -97,8 +99,8 @@ const formDefaults  = {
         } as BasicInfo,
         race: {
             id: null,
-            label: "",
-            languages: {
+            name: "",
+            languageProficiencies: {
                 amount: 0,
                 defaults: []
             },

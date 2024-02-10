@@ -38,7 +38,7 @@ export default function RaceFrame() {
   //these are the values that are going to be displayed in the multicomplete
   //that are selected by user or by default according to race
   const [features, setFeatures] = React.useState<Feature[]>(raceStore.features);
-  const [languagesRes, setLanguages] = useState<AutocompleteItem[]>(raceStore.languages.defaults);
+  const [languagesRes, setLanguages] = useState<AutocompleteItem[]>(raceStore.languageProficiencies.defaults);
   
   const { data: races, isLoading: loadingRaces } = useGetRacesQuery();
   const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery();
@@ -53,11 +53,11 @@ export default function RaceFrame() {
   }
 
   useEffect(() => {
-    if ( !race.id || race.label === "") return;
+    if ( !race.id || race.name === "") return;
     const a = race;
     setVisibility(true);
     //setting the right properties of race
-    setLanguages(a.languages.defaults);
+    setLanguages(a.languageProficiencies.defaults);
     setSize(a.sizeOptions?.[0] || "");
     setFeatures([{ title: "Speed", text: `${a.speed} ft.` }, ...a.features]);
     //recalculate ability scores acording to a new race
@@ -67,7 +67,7 @@ export default function RaceFrame() {
     dispatch(setAbilityScores(abilities));
   }, [race, dispatch]);
   
-  
+  console.log(races, ' data');
 
   return (
     <Box>
@@ -93,6 +93,7 @@ export default function RaceFrame() {
             clearOnBlur
             data-cy="race"
             options={races || [] }
+            getOptionLabel={(option) => option.name}
             isOptionEqualToValue={(option, value) => option.id === value.id }
             value={race.id ? race : null}
             onChange={(_, value) => {
@@ -145,9 +146,9 @@ export default function RaceFrame() {
                   results={languagesRes}
                   onChange={handleLanguagesChange}
                   label={RACE.LANGUAGES}
-                  helpText={`You can have up to ${race.languages.amount} languages`}
+                  helpText={`You can have up to ${race.languageProficiencies.amount} languages`}
                   placeholder={RACE.LANGUAGES_PLACEHOLDER}
-                  maxItems={race.languages.amount}
+                  maxItems={race.languageProficiencies.amount}
                 />
               </Grid>
 
@@ -169,7 +170,7 @@ export default function RaceFrame() {
               </Grid>
             </Grid>
             <CardInfo
-              title={race.label}
+              title={race.name}
               features={features}
               description={race.description}
             />

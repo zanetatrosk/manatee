@@ -52,7 +52,7 @@ export default function CharacterSheet() {
                       },
                       {
                         header: "Race",
-                        value: character.race.label,
+                        value: character.race.name,
                       },
                       {
                         header: "Class & level",
