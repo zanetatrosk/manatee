@@ -62,12 +62,12 @@ interface Feature{
 }
 //interface Background similar as Race
 interface Background {
-    id: number | null;
-    label: string;
+    id: string | null;
+    name: string;
     features: Feature[];
     description: string;
-    languages: AutocompleteParams;
-    tools: AutocompleteParams;
+    languageProficiencies: AutocompleteParams;
+    toolProficiencies: AutocompleteParams;
 }
 interface Source extends AutocompleteItem {}
 
@@ -111,14 +111,14 @@ const formDefaults  = {
         } as Race,
         background: {
             id: null,
-            label: "",
+            name: "",
             features: [],
             description: "",
-            languages: {
+            languageProficiencies: {
                 amount: 0,
                 defaults: []
             },
-            tools: {
+            toolProficiencies: {
                 amount: 0,
                 defaults: []
             }

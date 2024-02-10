@@ -114,15 +114,15 @@ const races: Race[] = [
 
 const backgrounds: Background[] = [
     {
-      id: 1,
-      label: "Acolyte",
-      languages: {
+      id: "1",
+      name: "Acolyte",
+      languageProficiencies: {
         amount: 1,
         defaults: [
           { id: 1, name: "Common" },
         ],
       },
-      tools: {
+      toolProficiencies: {
         amount: 1,
         defaults: [],
       },
@@ -136,13 +136,13 @@ const backgrounds: Background[] = [
       ],
     },
     {
-      id: 2,
-      label: "Charlatan",
-      languages: {
+      id: "2",
+      name: "Charlatan",
+      languageProficiencies: {
         amount: 0,
         defaults: [],
       },
-      tools: {
+      toolProficiencies: {
         amount: 0,
         defaults: [],
       },

@@ -39,8 +39,8 @@ export default function BackgroundFrame() {
 
   useEffect(() => {
     if (!background.id) return;
-    setLanguages(background.languages?.defaults);
-    setTools(background.tools?.defaults);
+    setLanguages(background.languageProficiencies?.defaults);
+    setTools(background.toolProficiencies?.defaults);
     setVisibility(true);
     const tmpBack = background;
     dispatch(setBackgroundStore(tmpBack));
@@ -67,6 +67,7 @@ export default function BackgroundFrame() {
           <Autocomplete
             options={backgrounds || []}
             value={background.id? background : null}
+            getOptionLabel={(option) => option.name}
             sx={{ my: 2 }}
             onChange={(_, value) => {
               if (!value) return;
@@ -112,9 +113,9 @@ export default function BackgroundFrame() {
                   data_cy="languages"
                   onChange={handleLanguagesChange}
                   label={BACKGROUND.LANGUAGES}
-                  helpText={`You can have up to ${background.languages.amount} languages`}
+                  helpText={`You can have up to ${background.languageProficiencies.amount} languages`}
                   placeholder={BACKGROUND.LANGUAGES_PLACEHOLDER}
-                  maxItems={background.languages.amount}
+                  maxItems={background.languageProficiencies.amount}
                 />
               </Grid>
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
@@ -124,15 +125,15 @@ export default function BackgroundFrame() {
                   data_cy="tools"
                   onChange={handleToolsChange}
                   label={BACKGROUND.TOOLS}
-                  helpText={`You can have up to ${background.tools.amount} tools`}
+                  helpText={`You can have up to ${background.toolProficiencies.amount} tools`}
                   placeholder={BACKGROUND.TOOLS_PLACEHOLDER}
-                  maxItems={background.tools.amount}
+                  maxItems={background.toolProficiencies.amount}
                 />
               </Grid>
             </Grid>
             <Box>
               <CardInfo
-                title={background.label}
+                title={background.name}
                 features={background.features}
                 description={background.description}
               />

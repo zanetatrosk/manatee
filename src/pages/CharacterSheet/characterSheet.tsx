@@ -64,7 +64,7 @@ export default function CharacterSheet() {
                       },
                       {
                         header: "Background",
-                        value: character.background.label,
+                        value: character.background.name,
                       },
                     ],
                   }}
