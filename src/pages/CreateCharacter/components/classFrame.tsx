@@ -5,7 +5,7 @@ import CardInfo from "./cardInfo";
 import { useAppSelector, useAppDispatch } from "@hooks/hooksStore";
 import React, { useEffect } from "react";
 import MultiComplete from "@components/customMultiComplete";
-import { AutocompleteItem, Class } from "../definitions/characterForm";
+import { AutocompleteItem, Class, Source } from "../definitions/characterForm";
 import { setClass as setStoreClass } from "reducers/characterReducer";
 import { useGetClassesQuery, useGetToolsQuery } from "api/raceApiSlice";
 
@@ -22,8 +22,8 @@ export default function ClassFrame() {
   const [isVisible, setVisibility] = React.useState(false);
   const [toolsValue, setTools] = React.useState<AutocompleteItem[]>(classStore.toolProficiencies.defaults);
 
-  const { data: classes, isLoading: loadingClasses } = useGetClassesQuery();
-  const { data: tools, isLoading: toolsLoading } = useGetToolsQuery();
+  const { data: classes, isLoading: loadingClasses } = useGetClassesQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
+  const { data: tools, isLoading: toolsLoading } = useGetToolsQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
 
   const handleToolsChange = (value: AutocompleteItem[]): void => {
     setTools(value);

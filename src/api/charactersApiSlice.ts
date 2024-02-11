@@ -8,6 +8,7 @@ export interface Character {
       characterClass: {
         name: string;
         id: string;
+        subclass?: string;
       },
       background: {
         name: string;
@@ -19,6 +20,10 @@ export interface Character {
       sheetPhotoUrl: string;
       id: string;
       level: number;
+      //----------------
+      sources?: string[];
+      languageProficiencies?: string[];
+      toolProficiencies?: string[];
 }
 
 export const charactersApiSlice = createApi({

@@ -14,6 +14,7 @@ import {
   Race,
   AutocompleteItem,
   Feature,
+  Source,
 } from "@pages/CreateCharacter/definitions/characterForm";
 import {
   setAbilityScores,
@@ -40,8 +41,8 @@ export default function RaceFrame() {
   const [features, setFeatures] = React.useState<Feature[]>(raceStore.features);
   const [languagesRes, setLanguages] = useState<AutocompleteItem[]>(raceStore.languageProficiencies.defaults);
   
-  const { data: races, isLoading: loadingRaces } = useGetRacesQuery();
-  const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery();
+  const { data: races, isLoading: loadingRaces } = useGetRacesQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
+  const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
 
   function handleChange(event: SelectChangeEvent) {
     setSize(event.target.value);
@@ -171,7 +172,6 @@ export default function RaceFrame() {
             </Grid>
             <CardInfo
               title={race.name}
-              features={features}
               description={race.description}
             />
           </div>

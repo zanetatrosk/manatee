@@ -1,17 +1,17 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import characterReducer from '../reducers/characterReducer';
-import { raceApiSlice } from '../api/raceApiSlice';
+import { generalContentApiSlice } from '../api/raceApiSlice';
 import { charactersApiSlice } from 'api/charactersApiSlice';
 // ...
 
 const store = configureStore({
   reducer: {
-    [raceApiSlice.reducerPath]: raceApiSlice.reducer,
+    [generalContentApiSlice.reducerPath]: generalContentApiSlice.reducer,
     [charactersApiSlice.reducerPath]: charactersApiSlice.reducer,
     character: characterReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(raceApiSlice.middleware).concat(charactersApiSlice.middleware),
+    getDefaultMiddleware().concat(generalContentApiSlice.middleware).concat(charactersApiSlice.middleware),
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

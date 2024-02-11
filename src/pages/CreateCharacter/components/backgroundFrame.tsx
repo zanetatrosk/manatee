@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import {
   Background,
   AutocompleteItem,
+  Source,
 } from "@pages/CreateCharacter/definitions/characterForm";
 import CardInfo from "./cardInfo";
 import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
@@ -25,9 +26,9 @@ export default function BackgroundFrame() {
   const [background, setBackground] = useState<Background>(backgroundStore);
   const [toolsValue, setTools] = useState<AutocompleteItem[]>([]);
 
-  const {data: backgrounds, isLoading: loadingBackgrounds} = useGetBackgroundsQuery();
-  const {data: languages, isLoading: loadingLanguages} = useGetLanguagesQuery();
-  const {data: tools, isLoading: loadingTools} = useGetToolsQuery();
+  const {data: backgrounds, isLoading: loadingBackgrounds} = useGetBackgroundsQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
+  const {data: languages, isLoading: loadingLanguages} = useGetLanguagesQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
+  const {data: tools, isLoading: loadingTools} = useGetToolsQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
 
   const handleToolsChange = (value: AutocompleteItem[]): void => {
     setTools(value);

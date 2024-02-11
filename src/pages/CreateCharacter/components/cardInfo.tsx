@@ -5,7 +5,7 @@ import { Feature } from "@pages/CreateCharacter/definitions/characterForm";
 
 interface PropsParams {
   title: string;
-  features: Feature[];
+  features?: Feature[];
   description: string;
 }
 
@@ -38,7 +38,7 @@ export default function CardInfo(props: PropsParams) {
           }}
         >
           <div style={{ width: "100%" }}>
-            {props.features.map((feature, idx) => (
+            {props.features?.map((feature, idx) => (
               <Grid container my={1.5} key={feature.title}>
               <Grid item xs={12} sm={2} pr={0.5}>
                 <Typography variant="body1" data-cy={"feat-" + idx}>{feature.title}</Typography>

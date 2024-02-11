@@ -21,7 +21,7 @@ enum Size {
 interface BasicInfo {
     characterName: string;
     playerName: string;
-    sources: AutocompleteItem[];
+    sources: Source[];
     sheetPhoto: string | null;
     cardPhoto: string | null;
 }
@@ -69,11 +69,14 @@ interface Background {
     languageProficiencies: AutocompleteParams;
     toolProficiencies: AutocompleteParams;
 }
-interface Source extends AutocompleteItem {}
+interface Source {
+    abbreviation: string;
+    name: string;
+}
 
 //interface used for autocomplete
 interface AutocompleteItem {
-    id: number | null;
+    id: string | null;
     name: string;
 }
 interface AutocompleteParams {
@@ -83,8 +86,8 @@ interface AutocompleteParams {
 interface CharacterSheet {
     id: number | null;
     basicInfo: BasicInfo;
-    race: Race ;
-    background: Background ;
+    race: Race;
+    background: Background;
     abilityScores: AbilityScore[];
     characterClass: Class;
 }
