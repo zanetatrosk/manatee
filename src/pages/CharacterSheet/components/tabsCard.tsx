@@ -49,7 +49,12 @@ export default function TabsCard() {
           <Box
             sx={{ borderBottom: 1, borderColor: "divider", display: "flex" }}
           >
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
+            <TabList
+              onChange={handleChange}
+              aria-label="lab API tabs example"
+              scrollButtons="auto"
+              variant="scrollable"
+            >
               <Tab label="Attacks and Armor" value="1" />
               <Tab label="Spellcasting" value="2" />
               <Tab label="Other prof. & languages" value="3" />
@@ -76,15 +81,19 @@ export default function TabsCard() {
                 <Grid item sm={7} xs={12}>
                   <StatsGrid
                     title="Magic"
-                    items={[{ header: "speed", value: "12 ft" }, { header: "Initiative", value: "+2" }, { header: "Prof. Bonus", value: "+2" }]}
+                    items={[
+                      { header: "speed", value: "12 ft" },
+                      { header: "Initiative", value: "+2" },
+                      { header: "Prof. Bonus", value: "+2" },
+                    ]}
                   />
                 </Grid>
                 <Grid item container sm xs={12}>
-                    <AttacksTable
-                      rows={slotsData}
-                      headers={["level", "count"]}
-                      showDescription={false}
-                    />
+                  <AttacksTable
+                    rows={slotsData}
+                    headers={["level", "count"]}
+                    showDescription={false}
+                  />
                 </Grid>
               </Grid>
               <Grid item>
