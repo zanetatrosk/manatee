@@ -10,75 +10,20 @@ import { useNavigate } from "react-router-dom";
 import { CHARACTERS } from "constants/characterDefinition";
 import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
 import { resetState } from "reducers/characterReducer";
+import { Character, useGetCharactersQuery } from "api/charactersApiSlice";
 
 
-interface Item {
-  characterName: string;
-  race: string;
-  img: string;
-}
 
-const characters: Item[] = [
-  {
-    characterName: "Lianna",
-    race: "Half Elf",
-    img: "https://cdn.pixabay.com/photo/2023/06/10/02/04/digital-art-8052936_960_720.jpg",
-  },
-  {
-    characterName: "Lianna",
-    race: "Half Elf",
-    img: "https://cdn.mos.cms.futurecdn.net/Hv6uftXQZC4XRQx7QG33cF.jpg",
-  },
-  {
-    characterName: "Lianna",
-    race: "Half Elf",
-    img: "https://cdn.pixabay.com/photo/2023/06/10/02/04/digital-art-8052936_960_720.jpg",
-  },
-  {
-    characterName: "Lianna",
-    race: "Half Elf",
-    img: "https://assetsio.reedpopcdn.com/dnd-5e-dragonlance-shadow-of-the-dragon-queen-artwork-chapter-1-header.png?width=1200&height=1200&fit=bounds&quality=70&format=jpg&auto=webp",
-  },
-  {
-    characterName: "Lianna",
-    race: "Half Elf",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzRpRVNWdBp5Ywel88mn2DDdwVsTORJrhdeQ&usqp=CAU",
-  },
-  {
-    characterName: "Lianna",
-    race: "Half Elf",
-    img: "https://cdn.pixabay.com/photo/2023/06/10/02/04/digital-art-8052936_960_720.jpg",
-  },
-  {
-    characterName: "Lianna",
-    race: "Half Elf",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzRpRVNWdBp5Ywel88mn2DDdwVsTORJrhdeQ&usqp=CAU",
-  },
-  {
-    characterName: "Lianna",
-    race: "Half Elf",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzRpRVNWdBp5Ywel88mn2DDdwVsTORJrhdeQ&usqp=CAU",
-  },
-  {
-    characterName: "Lianna",
-    race: "Half Elf",
-    img: "https://cdn.pixabay.com/photo/2023/06/10/02/04/digital-art-8052936_960_720.jpg",
-  },
-  {
-    characterName: "Lianna",
-    race: "Half Elf",
-    img: "https://cdn.mos.cms.futurecdn.net/Hv6uftXQZC4XRQx7QG33cF.jpg",
-  },
 
-]
-function CharacterCard( { props }: { props: Item}) {
+
+function CharacterCard( { props }: { props: Character }) {
   return (
     <Card sx={{ width: "100%" }} data-cy="character-card">
       <CardMedia
         sx={{ maxHeight: 160 }}
         component="img"
         // Picture by pixabay: https://pixabay.com/cs
-        src={props.img}
+        src={props.cardPhotoUrl}
         title="character"
       />
       <CardContent>
@@ -86,7 +31,7 @@ function CharacterCard( { props }: { props: Item}) {
           {props.characterName}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {props.race}
+          {props.race.name}
         </Typography>
       </CardContent>
       <CardActions>
@@ -120,6 +65,7 @@ export default function Characters() {
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const greaterThanMid = useMediaQuery(theme.breakpoints.up("md"));
+  const characters: Character[] = useGetCharactersQuery().data || []; 
   return (
     <Grid container flexDirection={"column"} >
       <Grid container item alignItems={"center"}>
