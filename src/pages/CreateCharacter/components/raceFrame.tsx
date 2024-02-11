@@ -38,7 +38,6 @@ export default function RaceFrame() {
   const [isVisible, setVisibility] = React.useState(false);
   //these are the values that are going to be displayed in the multicomplete
   //that are selected by user or by default according to race
-  const [features, setFeatures] = React.useState<Feature[]>(raceStore.features);
   const [languagesRes, setLanguages] = useState<AutocompleteItem[]>(raceStore.languageProficiencies.defaults);
   
   const { data: races, isLoading: loadingRaces } = useGetRacesQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
@@ -52,6 +51,7 @@ export default function RaceFrame() {
   const handleLanguagesChange = (value: AutocompleteItem[]): void => {
     setLanguages(value);
   }
+  console.log(languagesRes, ' languages');
 
   useEffect(() => {
     if ( !race.id || race.name === "") return;
@@ -60,7 +60,6 @@ export default function RaceFrame() {
     //setting the right properties of race
     setLanguages(a.languageProficiencies.defaults);
     setSize(a.sizeOptions?.[0] || "");
-    setFeatures([{ title: "Speed", text: `${a.speed} ft.` }, ...a.features]);
     //recalculate ability scores acording to a new race
     const abilities = createAbilityData(a);
 
@@ -144,7 +143,7 @@ export default function RaceFrame() {
                 <MultiComplete
                   values={languages || []}
                   data_cy="languages"
-                  results={languagesRes}
+                  results={languagesRes }
                   onChange={handleLanguagesChange}
                   label={RACE.LANGUAGES}
                   helpText={`You can have up to ${race.languageProficiencies.amount} languages`}
@@ -172,6 +171,7 @@ export default function RaceFrame() {
             </Grid>
             <CardInfo
               title={race.name}
+              features={race.features}
               description={race.description}
             />
           </div>

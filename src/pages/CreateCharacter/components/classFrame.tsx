@@ -12,7 +12,6 @@ import { useGetClassesQuery, useGetToolsQuery } from "api/raceApiSlice";
 const CLASS = CREATE_CHARACTER.CLASS;
 
 
-
 export default function ClassFrame() {
 
   const classStore = useAppSelector((state) => state.character.characterClass);
@@ -21,7 +20,7 @@ export default function ClassFrame() {
   const [characterClass, setClass] = React.useState<Class>(classStore); 
   const [isVisible, setVisibility] = React.useState(false);
   const [toolsValue, setTools] = React.useState<AutocompleteItem[]>(classStore.toolProficiencies.defaults);
-
+  
   const { data: classes, isLoading: loadingClasses } = useGetClassesQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
   const { data: tools, isLoading: toolsLoading } = useGetToolsQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
 
@@ -32,7 +31,9 @@ export default function ClassFrame() {
   useEffect(() => {
     if( !characterClass.id ) return;
     const tmpClass = characterClass;
+    console.log('i wanna cry', tmpClass);
     setVisibility(true);
+    setTools(characterClass.toolProficiencies.defaults);
     dispatch(setStoreClass(tmpClass));
   }, [characterClass, dispatch]);
 
