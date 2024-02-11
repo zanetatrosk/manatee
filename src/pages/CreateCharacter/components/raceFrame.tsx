@@ -51,7 +51,7 @@ export default function RaceFrame() {
   const handleLanguagesChange = (value: AutocompleteItem[]): void => {
     setLanguages(value);
   }
-  console.log(languagesRes, ' languages');
+  console.log(languages, " languages ", languagesRes, " languagesRes");
 
   useEffect(() => {
     if ( !race.id || race.name === "") return;
