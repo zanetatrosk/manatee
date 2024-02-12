@@ -52,6 +52,7 @@ export default function RaceFrame() {
     setLanguages(value);
   }
   console.log(languages, " languages ", languagesRes, " languagesRes");
+  if(languages && (languages[0] === languagesRes[0])) console.log('languages are the same');
 
   useEffect(() => {
     if ( !race.id || race.name === "") return;
@@ -143,7 +144,7 @@ export default function RaceFrame() {
                 <MultiComplete
                   values={languages || []}
                   data_cy="languages"
-                  results={languagesRes }
+                  results={languagesRes}
                   onChange={handleLanguagesChange}
                   label={RACE.LANGUAGES}
                   helpText={`You can have up to ${race.languageProficiencies.amount} languages`}

@@ -31,7 +31,6 @@ export default function ClassFrame() {
   useEffect(() => {
     if( !characterClass.id ) return;
     const tmpClass = characterClass;
-    console.log('i wanna cry', tmpClass);
     setVisibility(true);
     setTools(characterClass.toolProficiencies.defaults);
     dispatch(setStoreClass(tmpClass));
@@ -104,7 +103,7 @@ export default function ClassFrame() {
                 options={characterClass.subclasses || []}
                 onChange={(_, value) => {
                   if(!value) return;
-                  //setClass({...characterClass, subclasses: value});
+                  // setClass({...characterClass, subclasses: [value]});
                 }}
                 renderInput={(params) => (
                   <TextField
