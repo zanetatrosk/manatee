@@ -10,28 +10,31 @@ import {
   AutocompleteItem,
   BasicInfo,
 } from "@pages/CreateCharacter/definitions/characterForm";
-import React, { useEffect } from "react";
+import React, { Ref, forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 import { setBasicInfo } from "reducers/characterReducer";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import { useGetSourcesQuery } from "api/raceApiSlice";
+import { StepperForm } from "../definitions/stepperForm";
+import { get } from "http";
 
 const BASIC_INFO = CREATE_CHARACTER.BASIC_INFO;
 
-export default function BasicInformation() {
+interface BasicInformationFrameHandles {
+  getData: () => any | null;
+}
+function BasicInformation(props?: {}, ref?: Ref<BasicInformationFrameHandles>){
   const { basicInfo: basicInfoFromStore } = useAppSelector(
     (state) => state.character
   );
-  const dispatch = useAppDispatch();
+  
   const [basicInfo, setInfo] = React.useState<BasicInfo>(basicInfoFromStore);
-  //this is uneffective, bcs it is called every time user inputs something
-  useEffect(() => {
-    const basicInfoTmp = {
-      ...basicInfo,
-      sources: basicInfo.sources.map((s) => s),
-    };
-    console.log(basicInfoTmp, "basicInfoTmp");
-    dispatch(setBasicInfo(basicInfoTmp));
-  }, [basicInfo, dispatch]);
+  useImperativeHandle(ref, () => ({
+    getData: () => {
+      return basicInfo;
+    }
+  }));
+
+  
 
   //fetch data sources only first time when component is mounted
   const { data: sources, isLoading: loading } = useGetSourcesQuery();
@@ -144,22 +147,4 @@ export default function BasicInformation() {
   );
 }
 
-//generate sources for dnd5e
-const sourcesTh: AutocompleteItem[] = [
-  { id: "0", name: "Player's Handbook" },
-  { id: "1", name: "Dungeon Master's Guide" },
-  { id: "2", name: "Monster Manual" },
-  { id: "3", name: "Volo's Guide to Monsters" },
-  { id: "4", name: "Mordenkainen's Tome of Foes" },
-  { id: "5", name: "Xanathar's Guide to Everything" },
-  { id: "6", name: "Guildmasters' Guide to Ravnica" },
-  { id: "7", name: "Acquisitions Incorporated" },
-  { id: "8", name: "Eberron: Rising from the Last War" },
-  { id: "9", name: "Explorer's Guide to Wildemount" },
-  { id: "10", name: "Mythic Odysseys of Theros" },
-  { id: "11", name: "Tasha's Cauldron of Everything" },
-  { id: "12", name: "Van Richten's Guide to Ravenloft" },
-  { id: "13", name: "Fizban's Treasury of Dragons" },
-  { id: "14", name: "Strixhaven: A Curriculum of Chaos" },
-  { id: "15", name: "The Wild Beyond the Witchlight" },
-];
+export default forwardRef(BasicInformation);

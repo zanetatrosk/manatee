@@ -12,12 +12,16 @@ import Abilities from "./abilitiesFrame";
 import Background from "./backgroundFrame";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import { useNavigate } from "react-router-dom";
+import { StepperForm } from "../definitions/stepperForm";
+import { formDefaults } from "../definitions/defaults";
+import { BasicInfo } from "../definitions/characterForm";
 
 const steps = ["Basic information", "Class", "Race", "Abilities", "Background"];
 
 interface ComponentRegister {
   id: number;
   component: React.ReactElement;
+  form?: StepperForm;
 }
 
 export default function HorizontalLinearStepper() {
@@ -26,8 +30,14 @@ export default function HorizontalLinearStepper() {
 
   const navigate = useNavigate();
 
+  const [form, setData] = React.useState<StepperForm>(formDefaults);
+  const ref = React.useRef(null);
+
+  React.useEffect(() => {
+    console.log(form, "form");
+  }, [form]);
   const components: ComponentRegister[] = [
-    { id: 0, component: <BasicInformation /> },
+    { id: 0, component: <BasicInformation ref={ref} /> },
     { id: 1, component: <Class /> },
     { id: 2, component: <Race /> },
     { id: 3, component: <Abilities /> },
@@ -42,6 +52,11 @@ export default function HorizontalLinearStepper() {
   };
 
   const handleNext = () => {
+    if (ref) {
+      // @ts-ignore
+      const childData = ref.current.getData();
+      console.log(childData, 'aaaa');
+    }
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());
@@ -139,7 +154,7 @@ export default function HorizontalLinearStepper() {
               onClick={
                 activeStep === steps.length - 1 ? handleFinish : handleNext
               }
-              data-cy={activeStep === steps.length - 1 ? "finish" : "next" }
+              data-cy={activeStep === steps.length - 1 ? "finish" : "next"}
             >
               {activeStep === steps.length - 1
                 ? CREATE_CHARACTER.CARD_ACTIONS.FINISH

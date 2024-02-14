@@ -1,6 +1,5 @@
 
 
-
 enum Ability {  
     STRENGTH = "Strength",
     DEXTERITY = "Dexterity",
@@ -32,6 +31,7 @@ interface AbilityScore {
     modifierUpToOne: boolean;
     modifierUpToTwo: boolean;
 }
+
 interface Race {
     id: string | null;
     name: string;
@@ -47,6 +47,7 @@ interface Race {
     skillProficiencies?: AutocompleteParams;
     languageProficiencies: AutocompleteParams;
 }
+
 interface Class {
     id: string | null;
     name: string;
@@ -56,10 +57,12 @@ interface Class {
     features: Feature[];
     toolProficiencies: AutocompleteParams;
 }
+
 interface Feature{
     title: string;
     text: string;
 }
+
 //interface Background similar as Race
 interface Background {
     id: string | null;
@@ -69,19 +72,26 @@ interface Background {
     languageProficiencies: AutocompleteParams;
     toolProficiencies: AutocompleteParams;
 }
+
 interface Source {
     abbreviation: string;
     name: string;
 }
 
 //interface used for autocomplete
-interface AutocompleteItem {
+interface BaseItem {
     id: string | null;
     name: string;
 }
+
+interface Sourceable extends BaseItem {
+    source: Source;
+}
+
+
 interface AutocompleteParams {
     amount: number;
-    defaults: AutocompleteItem[];
+    defaults: BaseItem[];
 }
 interface CharacterSheet {
     id: number | null;
@@ -179,5 +189,5 @@ const formDefaults  = {
 } as CharacterSheet
 
 
-export type {Race, AutocompleteItem, Background, AbilityScore, AutocompleteParams, Feature, BasicInfo, CharacterSheet, Class, Source}
+export type {Race, BaseItem as AutocompleteItem, Background, AbilityScore, AutocompleteParams, Feature, BasicInfo, CharacterSheet, Class, Source, Sourceable}
 export {Ability, Size, formDefaults}
