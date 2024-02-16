@@ -1,5 +1,11 @@
 import * as React from "react";
-import { Box, Autocomplete, Divider, Grid, CircularProgress } from "@mui/material";
+import {
+  Box,
+  Autocomplete,
+  Divider,
+  Grid,
+  CircularProgress,
+} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import MultiComplete from "@components/customMultiComplete";
 import TextField from "@mui/material/TextField";
@@ -12,8 +18,12 @@ import {
 import CardInfo from "./cardInfo";
 import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
 import { setBackground as setBackgroundStore } from "reducers/characterReducer";
-import {CREATE_CHARACTER} from "constants/characterDefinition";
-import { useGetBackgroundsQuery, useGetLanguagesQuery, useGetToolsQuery } from "api/raceApiSlice";
+import { CREATE_CHARACTER } from "constants/characterDefinition";
+import {
+  useGetBackgroundsQuery,
+  useGetLanguagesQuery,
+  useGetToolsQuery,
+} from "api/raceApiSlice";
 
 const BACKGROUND = CREATE_CHARACTER.BACKGROUND;
 
@@ -26,26 +36,30 @@ export default function BackgroundFrame() {
   const [background, setBackground] = useState<Background>(backgroundStore);
   const [toolsValue, setTools] = useState<AutocompleteItem[]>([]);
 
-  const {data: backgrounds, isLoading: loadingBackgrounds} = useGetBackgroundsQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
-  const {data: languages, isLoading: loadingLanguages} = useGetLanguagesQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
-  const {data: tools, isLoading: loadingTools} = useGetToolsQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
+  const { data: backgrounds, isLoading: loadingBackgrounds } =
+    useGetBackgroundsQuery(
+      useAppSelector((state) => state.character.basicInfo.sources).map(
+        (s: Source) => s.abbreviation
+      )
+    );
+  const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(
+    useAppSelector((state) => state.character.basicInfo.sources).map(
+      (s: Source) => s.abbreviation
+    )
+  );
+  const { data: tools, isLoading: loadingTools } = useGetToolsQuery(
+    useAppSelector((state) => state.character.basicInfo.sources).map(
+      (s: Source) => s.abbreviation
+    )
+  );
 
   const handleToolsChange = (value: AutocompleteItem[]): void => {
     setTools(value);
-  }
+  };
 
   const handleLanguagesChange = (value: AutocompleteItem[]): void => {
     setLanguages(value);
-  }
-
-  useEffect(() => {
-    if (!background.id) return;
-    setLanguages(background.languageProficiencies?.defaults);
-    setTools(background.toolProficiencies?.defaults);
-    setVisibility(true);
-    const tmpBack = background;
-    dispatch(setBackgroundStore(tmpBack));
-  }, [background, dispatch]);
+  };
 
   return (
     <Box>
@@ -67,11 +81,13 @@ export default function BackgroundFrame() {
         <Grid item lg={7} xs={12}>
           <Autocomplete
             options={backgrounds || []}
-            value={background.id? background : null}
+            value={background.id ? background : null}
             getOptionLabel={(option) => option.name}
             sx={{ my: 2 }}
             onChange={(_, value) => {
               if (!value) return;
+              setVisibility(true);
+              dispatch(setBackgroundStore(value));
               setBackground(value);
             }}
             data-cy="background"
@@ -86,7 +102,9 @@ export default function BackgroundFrame() {
                   ...params.InputProps,
                   endAdornment: (
                     <React.Fragment>
-                      {loadingBackgrounds ? <CircularProgress color="inherit" size={23} /> : null }
+                      {loadingBackgrounds ? (
+                        <CircularProgress color="inherit" size={23} />
+                      ) : null}
                       {params.InputProps.endAdornment}
                     </React.Fragment>
                   ),
@@ -107,7 +125,7 @@ export default function BackgroundFrame() {
               </Divider>
             </Box>
             <Grid container sx={{ py: 2 }} columnSpacing={8}>
-              <Grid item lg={6} xs={12} sx={{ py: 2 }} >
+              <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
                   values={languages || []}
                   results={languagesValue}

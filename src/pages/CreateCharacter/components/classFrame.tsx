@@ -8,33 +8,35 @@ import MultiComplete from "@components/customMultiComplete";
 import { AutocompleteItem, Class, Source } from "../definitions/characterForm";
 import { setClass as setStoreClass } from "reducers/characterReducer";
 import { useGetClassesQuery, useGetToolsQuery } from "api/raceApiSlice";
+import { get } from "http";
+import { ClassForm, StepperForm } from "../definitions/stepperForm";
 
 const CLASS = CREATE_CHARACTER.CLASS;
 
 
-export default function ClassFrame() {
+export default function ClassFrame({ classForm, setForm }: {classForm: ClassForm, setForm: React.Dispatch<React.SetStateAction<StepperForm>>}) {
 
-  const classStore = useAppSelector((state) => state.character.characterClass);
-  const dispatch = useAppDispatch();
   
-  const [characterClass, setClass] = React.useState<Class>(classStore); 
-  const [isVisible, setVisibility] = React.useState(false);
-  const [toolsValue, setTools] = React.useState<AutocompleteItem[]>(classStore.toolProficiencies.defaults);
   
   const { data: classes, isLoading: loadingClasses } = useGetClassesQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
   const { data: tools, isLoading: toolsLoading } = useGetToolsQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
-
-  const handleToolsChange = (value: AutocompleteItem[]): void => {
-    setTools(value);
+  
+  const getClass = (id: string | null) => {
+    return classes?.find(c => c.id === id);
   }
 
-  useEffect(() => {
-    if( !characterClass.id ) return;
-    const tmpClass = characterClass;
-    setVisibility(true);
-    setTools(characterClass.toolProficiencies.defaults);
-    dispatch(setStoreClass(tmpClass));
-  }, [characterClass, dispatch]);
+  const [characterClass, setClass] = React.useState<Class>(getClass(classForm.id) || {} as Class); 
+  const [isVisible, setVisibility] = React.useState<boolean>(!!classForm.id);
+
+
+  
+  const setPropertyInForm = (property: string, value: any) => {
+    setForm(prev => ({...prev, class: {...classForm, [property]: value}}));
+  }
+  
+  const handleToolsChange = (value: AutocompleteItem[]): void => {
+    setPropertyInForm("toolsId", value.map((v) => v.id));
+  }
 
 
   return (
@@ -59,11 +61,13 @@ export default function ClassFrame() {
             id="combo-box-demo"
             options={classes || []}
             getOptionLabel={(option) => option.name}
-            value={characterClass.id ? characterClass : null}
+            value={characterClass?.id ? characterClass : null}
             sx={{ my: 2 }}
             onChange={(_, value) => {
               if(!value) return;
               setClass(value);
+              setPropertyInForm("id", value.id);
+              setVisibility(true);
             }}
             data-cy="class"
             isOptionEqualToValue={(option, value) => option.id === value.id}
@@ -101,9 +105,10 @@ export default function ClassFrame() {
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <Autocomplete
                 options={characterClass.subclasses || []}
+                defaultValue={classForm.subclass}
                 onChange={(_, value) => {
                   if(!value) return;
-                  // setClass({...characterClass, subclasses: [value]});
+                  setPropertyInForm("subclass", value);
                 }}
                 renderInput={(params) => (
                   <TextField
@@ -117,7 +122,7 @@ export default function ClassFrame() {
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
                   values={tools || []}
-                  results={toolsValue}
+                  results={classForm.toolsId.map((id) => tools?.find((t) => t.id === id) || {} as AutocompleteItem)}
                   onChange={handleToolsChange}
                   label={CLASS.TOOLS}
                   helpText={`You can have up to ${characterClass.toolProficiencies.amount} tools`}

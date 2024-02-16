@@ -6,36 +6,17 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import {
-  AutocompleteItem,
-  BasicInfo,
-} from "@pages/CreateCharacter/definitions/characterForm";
-import React, { Ref, forwardRef, useEffect, useImperativeHandle, useRef } from "react";
-import { setBasicInfo } from "reducers/characterReducer";
+import React from "react";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import { useGetSourcesQuery } from "api/raceApiSlice";
 import { StepperForm } from "../definitions/stepperForm";
-import { get } from "http";
+
 
 const BASIC_INFO = CREATE_CHARACTER.BASIC_INFO;
 
-interface BasicInformationFrameHandles {
-  getData: () => any | null;
-}
-function BasicInformation(props?: {}, ref?: Ref<BasicInformationFrameHandles>){
-  const { basicInfo: basicInfoFromStore } = useAppSelector(
-    (state) => state.character
-  );
+function BasicInformation({ form, setForm }: {form: StepperForm, setForm: React.Dispatch<React.SetStateAction<StepperForm>>}){
   
-  const [basicInfo, setInfo] = React.useState<BasicInfo>(basicInfoFromStore);
-  useImperativeHandle(ref, () => ({
-    getData: () => {
-      return basicInfo;
-    }
-  }));
-
   
-
   //fetch data sources only first time when component is mounted
   const { data: sources, isLoading: loading } = useGetSourcesQuery();
 
@@ -51,10 +32,11 @@ function BasicInformation(props?: {}, ref?: Ref<BasicInformationFrameHandles>){
           <TextField
             fullWidth
             data-cy="character-name"
-            value={basicInfo.characterName}
-            onChange={(e) =>
-              setInfo({ ...basicInfo, characterName: e.target.value })
-            }
+            value={form.basicInfo.characterName}
+            onChange={(e) => {
+              setForm({ ...form, basicInfo: { ...form.basicInfo, characterName: e.target.value } })
+            }}
+           
             inputProps={{ "id": "input" }}
             variant="filled"
             label={BASIC_INFO.CHARACTER_NAME}
@@ -66,9 +48,9 @@ function BasicInformation(props?: {}, ref?: Ref<BasicInformationFrameHandles>){
             data-cy="player-name"
             fullWidth
             label={BASIC_INFO.PLAYER_NAME}
-            value={basicInfo.playerName}
+            value={form.basicInfo.playerName}
             onChange={(e) =>
-              setInfo({ ...basicInfo, playerName: e.target.value })
+              setForm({ ...form, basicInfo: { ...form.basicInfo, playerName: e.target.value } })
             }
             inputProps={{ "id": "input" }}
           ></TextField>
@@ -84,13 +66,13 @@ function BasicInformation(props?: {}, ref?: Ref<BasicInformationFrameHandles>){
         <Grid item xs>
           <Autocomplete
             id="combo-box-demo"
-            value={basicInfo.sources}
+            value={form.basicInfo.sources}
             options={sources || []}
             multiple
             getOptionLabel={(option) => option.name}
             onChange={(_, value) => {
               if (!value) return;
-              setInfo({ ...basicInfo, sources: value });
+              setForm({ ...form, basicInfo: { ...form.basicInfo, sources: value } });
             }}
             renderInput={(params) => (
               <TextField
@@ -122,9 +104,9 @@ function BasicInformation(props?: {}, ref?: Ref<BasicInformationFrameHandles>){
         <Grid item xs={12} lg={6}>
           <TextField
             fullWidth
-            value={basicInfo.cardPhoto}
+            value={form.basicInfo.cardPhoto}
             onChange={(e) =>
-              setInfo({ ...basicInfo, cardPhoto: e.target.value })
+              setForm({ ...form, basicInfo: { ...form.basicInfo, cardPhoto: e.target.value } })
             }
             variant="filled"
             label={BASIC_INFO.CARD_PHOTO}
@@ -136,10 +118,10 @@ function BasicInformation(props?: {}, ref?: Ref<BasicInformationFrameHandles>){
             variant="filled"
             fullWidth
             onChange={(e) =>
-              setInfo({ ...basicInfo, sheetPhoto: e.target.value })
+              setForm({ ...form, basicInfo: { ...form.basicInfo, sheetPhoto: e.target.value } })
             }
             label={BASIC_INFO.SHEET_PHOTO}
-            value={basicInfo.sheetPhoto}
+            value={form.basicInfo.sheetPhoto}
           ></TextField>
         </Grid>
       </Grid>
@@ -147,4 +129,4 @@ function BasicInformation(props?: {}, ref?: Ref<BasicInformationFrameHandles>){
   );
 }
 
-export default forwardRef(BasicInformation);
+export default BasicInformation;
