@@ -36,22 +36,14 @@ export default function ClassFrame({
     )
   );
 
-  const getClass = (id: string | null) => {
-    const cl = classes?.find((c) => c.id === id);
-    debugger;
-    return cl;
-  };
-
-  const [characterClass, setClass] = React.useState<Class>(
-    getClass(classForm.id) || ({} as Class)
-  );
+  const [characterClass, setClass] = React.useState<Class>(classes?.find((c) => c.id === classForm.id) || {} as Class);
   const [isVisible, setVisibility] = React.useState<boolean>(!!classForm.id);
 
   
   const setPropertyInForm = (property: string, value: any) => {
     setForm((prev) => ({
       ...prev,
-      class: { ...classForm, [property]: value },
+      class: { ...prev.class, [property]: value },
     }));
   };
 
@@ -89,10 +81,10 @@ export default function ClassFrame({
             onChange={(_, value) => {
               if (!value) return;
               setClass(value);
-              setPropertyInForm("id", value);
+              setPropertyInForm("id", value.id);
               setPropertyInForm("subclass", null);
-              setPropertyInForm("toolsId", []);
-
+              setPropertyInForm("toolsId", value.toolProficiencies.defaults.map((t) => t.id));
+              debugger;
               setVisibility(true);
             }}
             data-cy="class"
@@ -132,10 +124,9 @@ export default function ClassFrame({
             <Grid container sx={{ py: 2 }} columnSpacing={8}>
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <Autocomplete
-                  options={characterClass.subclasses || []}
-                  defaultValue={classForm.subclass}
+                  options={characterClass?.subclasses || []}
+                  value={classForm.subclass}
                   onChange={(_, value) => {
-                    if (!value) return;
                     setPropertyInForm("subclass", value);
                   }}
                   renderInput={(params) => (
@@ -153,17 +144,17 @@ export default function ClassFrame({
                   results={tools?.filter((t) => classForm.toolsId.includes(t.id)) || []}
                   onChange={handleToolsChange}
                   label={CLASS.TOOLS}
-                  helpText={`You can have up to ${characterClass.toolProficiencies.amount} tools`}
+                  helpText={`You can have up to ${characterClass?.toolProficiencies.amount} tools`}
                   placeholder={CLASS.TOOLS_PLACEHOLDER}
-                  maxItems={characterClass.toolProficiencies.amount}
+                  maxItems={characterClass?.toolProficiencies.amount || 0}
                 />
               </Grid>
             </Grid>
             <Box>
               <CardInfo
-                title={characterClass.name}
-                features={characterClass.features}
-                description={characterClass.description}
+                title={characterClass?.name || ""}
+                features={characterClass?.features}
+                description={characterClass?.description || ""}
               />
             </Box>
           </div>
