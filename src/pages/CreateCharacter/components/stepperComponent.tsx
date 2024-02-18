@@ -40,7 +40,7 @@ export default function HorizontalLinearStepper() {
     { id: 1, component: <Class classForm={form.class} setForm={setData} /> },
     { id: 2, component: <Race raceForm={form.race} setForm={setData} /> },
     { id: 3, component: <Abilities abilitiesForm={form.abilityScores} setForm={setData}/> },
-    { id: 4, component: <Background /> },
+    { id: 4, component: <Background backgroundForm={form.background} setForm={setData}/> },
   ];
   const isStepOptional = (step: number) => {
     return step === 0;

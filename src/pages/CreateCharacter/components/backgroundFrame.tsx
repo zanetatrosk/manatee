@@ -24,41 +24,45 @@ import {
   useGetLanguagesQuery,
   useGetToolsQuery,
 } from "api/raceApiSlice";
+import { BackgroundForm, StepperForm } from "../definitions/stepperForm";
 
 const BACKGROUND = CREATE_CHARACTER.BACKGROUND;
 
-export default function BackgroundFrame() {
-  const backgroundStore = useAppSelector((state) => state.character.background);
-  const dispatch = useAppDispatch();
+export default function BackgroundFrame({ backgroundForm, setForm }: { backgroundForm: BackgroundForm, setForm: React.Dispatch<React.SetStateAction<StepperForm>> }) {
+  
 
-  const [isVisible, setVisibility] = React.useState(false);
-  const [languagesValue, setLanguages] = useState<AutocompleteItem[]>([]);
-  const [background, setBackground] = useState<Background>(backgroundStore);
-  const [toolsValue, setTools] = useState<AutocompleteItem[]>([]);
-
-  const { data: backgrounds, isLoading: loadingBackgrounds } =
-    useGetBackgroundsQuery(
+  
+    const { data: backgrounds, isLoading: loadingBackgrounds } =
+      useGetBackgroundsQuery(
+        useAppSelector((state) => state.character.basicInfo.sources).map(
+          (s: Source) => s.abbreviation
+        )
+      );
+    const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(
       useAppSelector((state) => state.character.basicInfo.sources).map(
         (s: Source) => s.abbreviation
       )
     );
-  const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(
-    useAppSelector((state) => state.character.basicInfo.sources).map(
-      (s: Source) => s.abbreviation
-    )
-  );
-  const { data: tools, isLoading: loadingTools } = useGetToolsQuery(
-    useAppSelector((state) => state.character.basicInfo.sources).map(
-      (s: Source) => s.abbreviation
-    )
-  );
+    const { data: tools, isLoading: loadingTools } = useGetToolsQuery(
+      useAppSelector((state) => state.character.basicInfo.sources).map(
+        (s: Source) => s.abbreviation
+      )
+    );
+
+  const [isVisible, setVisibility] = React.useState(false);
+  const [background, setBackground] = useState<Background>(backgrounds?.find((b) => b.id === backgroundForm.id) || ({} as Background));
+
+  const setPropertyInForm = (property: string, value: any) => {
+    setForm(prev => ({...prev, background: {...prev.background, [property]: value}}));
+  };
 
   const handleToolsChange = (value: AutocompleteItem[]): void => {
-    setTools(value);
+    setPropertyInForm("toolsId", value.map((v) => v.id));
+    debugger;
   };
 
   const handleLanguagesChange = (value: AutocompleteItem[]): void => {
-    setLanguages(value);
+    setPropertyInForm("languagesId", value.map((v) => v.id));
   };
 
   return (
@@ -81,13 +85,15 @@ export default function BackgroundFrame() {
         <Grid item lg={7} xs={12}>
           <Autocomplete
             options={backgrounds || []}
-            value={background.id ? background : null}
+            value={background?.id ? background : null}
             getOptionLabel={(option) => option.name}
             sx={{ my: 2 }}
             onChange={(_, value) => {
               if (!value) return;
               setVisibility(true);
-              dispatch(setBackgroundStore(value));
+              setPropertyInForm("id", value.id);
+              handleLanguagesChange(value.languageProficiencies.defaults);
+              handleToolsChange(value.toolProficiencies.defaults);
               setBackground(value);
             }}
             data-cy="background"
@@ -128,7 +134,7 @@ export default function BackgroundFrame() {
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
                   values={languages || []}
-                  results={languagesValue}
+                  results={languages?.filter((l) => backgroundForm.languagesId.includes(l.id)) || []}
                   data_cy="languages"
                   onChange={handleLanguagesChange}
                   label={BACKGROUND.LANGUAGES}
@@ -140,7 +146,7 @@ export default function BackgroundFrame() {
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
                   values={tools || []}
-                  results={toolsValue}
+                  results={tools?.filter((t) => backgroundForm.toolsId.includes(t.id)) || []}
                   data_cy="tools"
                   onChange={handleToolsChange}
                   label={BACKGROUND.TOOLS}
