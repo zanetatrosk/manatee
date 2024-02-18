@@ -19,13 +19,8 @@ import { CREATE_CHARACTER } from "constants/characterDefinition";
 import {
   Race,
   AutocompleteItem,
-  Feature,
   Source,
 } from "@pages/CreateCharacter/definitions/characterForm";
-import {
-  setAbilityScores,
-  setRace as setRaceStore,
-} from "reducers/characterReducer";
 import CardInfo from "./cardInfo";
 import createAbilityData from "utils/abilityUtils";
 import { useGetLanguagesQuery, useGetRacesQuery } from "api/raceApiSlice";
@@ -58,25 +53,18 @@ export default function RaceFrame({
   };
 
   const [race, setRace] = useState<Race>(getRace(raceForm.id) || ({} as Race));
-  const [isVisible, setVisibility] = React.useState(false);
+  const [isVisible, setVisibility] = React.useState(!!raceForm.id);
   //these are the values that are going to be displayed in the multicomplete
   //that are selected by user or by default according to race
-  const [languagesRes, setLanguages] = useState<AutocompleteItem[]>(
-    raceForm.languagesId.map(
-      (id) => languages?.find((l) => l.id === id) || ({} as AutocompleteItem)
-    )
-  );
-
   const setPropertyInForm = (property: string, value: any) => {
-    setForm(prev => ({...prev, race: {...raceForm, [property]: value}}));
-  }
-
-  function handleChange(event: SelectChangeEvent) {
-    setPropertyInForm("size", event.target.value);
+    setForm(prev => ({...prev, race: {...prev.race, [property]: value}}));
   }
 
   const handleLanguagesChange = (value: AutocompleteItem[]): void => {
-    setLanguages(value);
+    setPropertyInForm(
+      "languagesId",
+      value.map((v) => v.id)
+    );
   };
 
 
@@ -117,14 +105,6 @@ export default function RaceFrame({
               setPropertyInForm("id", value.id);
               setPropertyInForm("size", value.sizeOptions[0]);
               setPropertyInForm("languagesId", value.languageProficiencies.defaults.map(l => l.id));
-              
-              // if this is not set, I get following error:
-              /*
-              You have provided an out-of-range value `Medium` for the select component.
-              Consider providing a value that matches one of the available options or ''.
-              The available values are `Small`.
-              */
-              //I do not understand why this is happening
             }}
             renderInput={(params) => (
               <TextField
@@ -163,7 +143,7 @@ export default function RaceFrame({
                 <MultiComplete
                   values={languages || []}
                   data_cy="languages"
-                  results={languagesRes}
+                  results={languages?.filter((l) => raceForm.languagesId.includes(l.id)) || []}
                   onChange={handleLanguagesChange}
                   label={RACE.LANGUAGES}
                   helpText={`You can have up to ${race.languageProficiencies.amount} languages`}
@@ -178,7 +158,9 @@ export default function RaceFrame({
                   <Select
                     value={raceForm.size}
                     label={RACE.SIZE}
-                    onChange={handleChange}
+                    onChange={(e: SelectChangeEvent) => {
+                      setPropertyInForm("size", e.target.value);
+                    }}
                   >
                     {race.sizeOptions?.map((option) => (
                       <MenuItem key={option} value={option}>
