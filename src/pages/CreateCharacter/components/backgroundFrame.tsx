@@ -58,7 +58,6 @@ export default function BackgroundFrame({ backgroundForm, setForm }: { backgroun
 
   const handleToolsChange = (value: AutocompleteItem[]): void => {
     setPropertyInForm("toolsId", value.map((v) => v.id));
-    debugger;
   };
 
   const handleLanguagesChange = (value: AutocompleteItem[]): void => {

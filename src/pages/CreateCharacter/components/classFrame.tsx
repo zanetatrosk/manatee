@@ -84,7 +84,6 @@ export default function ClassFrame({
               setPropertyInForm("id", value.id);
               setPropertyInForm("subclass", null);
               setPropertyInForm("toolsId", value.toolProficiencies.defaults.map((t) => t.id));
-              debugger;
               setVisibility(true);
             }}
             data-cy="class"

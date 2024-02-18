@@ -134,7 +134,6 @@ export default function Abilities({
                     onChange={(e) => {
                       let value = parseInt(e.target.value, BASE_10) as number;
                       setPropertyInForm("score", idx, setScore(value));
-                      debugger;
                     }}
                   />
                 </TableCell>
