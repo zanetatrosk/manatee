@@ -25,7 +25,7 @@ describe("Automation TC05", () => {
         .type(this.raceName);
     });
     cy.contains(this.raceName).click();
-    cy.get(".MuiSelect-select").contains("Medium");
+    cy.get(".MuiSelect-select").contains("medium");
     cy.get('[data-cy="languages"]').within(() => {
       cy.get("input").click();
       cy.get("input").should(

@@ -173,7 +173,7 @@ export default function RaceFrame({
             </Grid>
             <CardInfo
               title={race.name}
-              features={race.features}
+              features={[{ title: "Speed", text: race.speed.toString() + " ft" }, ...race.features ]}
               description={race.description}
             />
           </div>

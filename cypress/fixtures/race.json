@@ -1,14 +1,14 @@
 {
         "id": 2,
-        "label": "Elf",
+        "label": "Half-Elf",
         "languages": {
             "amount": 2,
             "defaults": [
-                { "id": 1, "title": "Common Elvish" },
-                { "id": 2, "title": "High Elvish" }
+                { "id": 2, "title": "Elvish" },
+                { "id": 1, "title": "Common" }
             ]
         },
-        "description": "Elves are a magical people of otherworldly grace, living in the world but not entirely part of it.",
+        "description": "Walking in two worlds but truly belonging to neither, half-elves combine what some say are the best qualities of their elf and human parents: human curiosity, inventiveness, and ambition tempered by the refined senses, love of nature, and artistic tastes of the elves. Some half-elves live among humans, set apart by their emotional and physical differences, watching friends and loved ones age while time barely touches them. Others live with the elves, growing to adulthood while their peers continue to live as children, growing restless in the timeless elven realms.",
         "speed": 30,
         "features": [
             {
@@ -18,12 +18,8 @@
             {
                 "title": "Fey Ancestry",
                 "text": "The elf has advantage on saving throws against being charmed, and magic can’t put the elf to sleep."
-            },
-            {
-                "title": "Skill Versatility",
-                "text": "..."
             }
         ],
         "abilityScorePlus2": ["DEXTERITY"],
-        "sizeOptions": ["Medium"]
+        "sizeOptions": ["medium"]
 }
