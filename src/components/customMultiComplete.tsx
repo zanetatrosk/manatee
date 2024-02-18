@@ -20,37 +20,15 @@ export default function MultiComplete(props: PropsParams) {
     <div>
       <Autocomplete
         multiple
+        isOptionEqualToValue={ (option, value) => option.id === value.id }
         value={props.results}
-        defaultValue={props.results}
-        freeSolo
         data-cy={props.data_cy}
         options={props.values}
-        getOptionLabel={(option) =>
-          typeof option == "string" ? option : option.name
-        }
-        isOptionEqualToValue={(option, value) => option.id === value.id}
+        getOptionLabel={(option) => option.name}
         getOptionDisabled={() => props.results.length === props.maxItems}
         inputValue={item}
         onInputChange={(_, v) => setItem(v)}
-        onBlur={() => {
-          if (
-            item.trim() === "" ||
-            props.results.length === props.maxItems ||
-            props.results.find((i) => i.name === item) ||
-            props.values.find((i) => i.name === item)
-          ) {
-            setItem("");
-            return;
-          }
-          const tmp: AutocompleteItem[] = [
-            { id: null, name: item },
-            ...props.results,
-          ];
-          setItem("");
-          props.onChange(tmp);
-        }}
         onChange={(e, value) => {
-          // @ts-ignore
           props.onChange(value);
         }}
         renderTags={(value: readonly AutocompleteItem[], getTagProps) =>

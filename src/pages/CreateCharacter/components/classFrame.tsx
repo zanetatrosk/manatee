@@ -1,43 +1,66 @@
-import { Autocomplete, Box, CircularProgress, Divider, Grid, TextField } from "@mui/material";
-import Typography  from "@mui/material/Typography";
-import {CREATE_CHARACTER} from "constants/characterDefinition";
+import {
+  Autocomplete,
+  Box,
+  CircularProgress,
+  Divider,
+  Grid,
+  TextField,
+} from "@mui/material";
+import Typography from "@mui/material/Typography";
+import { CREATE_CHARACTER } from "constants/characterDefinition";
 import CardInfo from "./cardInfo";
 import { useAppSelector, useAppDispatch } from "@hooks/hooksStore";
 import React, { useEffect } from "react";
 import MultiComplete from "@components/customMultiComplete";
 import { AutocompleteItem, Class, Source } from "../definitions/characterForm";
-import { setClass as setStoreClass } from "reducers/characterReducer";
 import { useGetClassesQuery, useGetToolsQuery } from "api/raceApiSlice";
-import { get } from "http";
 import { ClassForm, StepperForm } from "../definitions/stepperForm";
 
 const CLASS = CREATE_CHARACTER.CLASS;
 
+export default function ClassFrame({
+  classForm,
+  setForm,
+}: {
+  classForm: ClassForm;
+  setForm: React.Dispatch<React.SetStateAction<StepperForm>>;
+}) {
+  const { data: classes, isLoading: loadingClasses } = useGetClassesQuery(
+    useAppSelector((state) => state.character.basicInfo.sources).map(
+      (s: Source) => s.abbreviation
+    )
+  );
+  const { data: tools, isLoading: toolsLoading } = useGetToolsQuery(
+    useAppSelector((state) => state.character.basicInfo.sources).map(
+      (s: Source) => s.abbreviation
+    )
+  );
 
-export default function ClassFrame({ classForm, setForm }: {classForm: ClassForm, setForm: React.Dispatch<React.SetStateAction<StepperForm>>}) {
-
-  
-  
-  const { data: classes, isLoading: loadingClasses } = useGetClassesQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
-  const { data: tools, isLoading: toolsLoading } = useGetToolsQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
-  
   const getClass = (id: string | null) => {
-    return classes?.find(c => c.id === id);
-  }
+    const cl = classes?.find((c) => c.id === id);
+    debugger;
+    return cl;
+  };
 
-  const [characterClass, setClass] = React.useState<Class>(getClass(classForm.id) || {} as Class); 
+  const [characterClass, setClass] = React.useState<Class>(
+    getClass(classForm.id) || ({} as Class)
+  );
   const [isVisible, setVisibility] = React.useState<boolean>(!!classForm.id);
-
 
   
   const setPropertyInForm = (property: string, value: any) => {
-    setForm(prev => ({...prev, class: {...classForm, [property]: value}}));
-  }
-  
-  const handleToolsChange = (value: AutocompleteItem[]): void => {
-    setPropertyInForm("toolsId", value.map((v) => v.id));
-  }
+    setForm((prev) => ({
+      ...prev,
+      class: { ...classForm, [property]: value },
+    }));
+  };
 
+  const handleToolsChange = (value: AutocompleteItem[]): void => {
+    setPropertyInForm(
+      "toolsId",
+      value.map((v) => v.id)
+    );
+  };
 
   return (
     <Box>
@@ -64,9 +87,12 @@ export default function ClassFrame({ classForm, setForm }: {classForm: ClassForm
             value={characterClass?.id ? characterClass : null}
             sx={{ my: 2 }}
             onChange={(_, value) => {
-              if(!value) return;
+              if (!value) return;
               setClass(value);
-              setPropertyInForm("id", value.id);
+              setPropertyInForm("id", value);
+              setPropertyInForm("subclass", null);
+              setPropertyInForm("toolsId", []);
+
               setVisibility(true);
             }}
             data-cy="class"
@@ -81,7 +107,9 @@ export default function ClassFrame({ classForm, setForm }: {classForm: ClassForm
                   ...params.InputProps,
                   endAdornment: (
                     <React.Fragment>
-                      {loadingClasses ? <CircularProgress color="inherit" size={23} /> : null }
+                      {loadingClasses ? (
+                        <CircularProgress color="inherit" size={23} />
+                      ) : null}
                       {params.InputProps.endAdornment}
                     </React.Fragment>
                   ),
@@ -104,25 +132,25 @@ export default function ClassFrame({ classForm, setForm }: {classForm: ClassForm
             <Grid container sx={{ py: 2 }} columnSpacing={8}>
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <Autocomplete
-                options={characterClass.subclasses || []}
-                defaultValue={classForm.subclass}
-                onChange={(_, value) => {
-                  if(!value) return;
-                  setPropertyInForm("subclass", value);
-                }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label={CLASS.SUBCLASS}
-                    variant="filled"
+                  options={characterClass.subclasses || []}
+                  defaultValue={classForm.subclass}
+                  onChange={(_, value) => {
+                    if (!value) return;
+                    setPropertyInForm("subclass", value);
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label={CLASS.SUBCLASS}
+                      variant="filled"
                     />
-                )}
+                  )}
                 />
               </Grid>
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
                   values={tools || []}
-                  results={classForm.toolsId.map((id) => tools?.find((t) => t.id === id) || {} as AutocompleteItem)}
+                  results={tools?.filter((t) => classForm.toolsId.includes(t.id)) || []}
                   onChange={handleToolsChange}
                   label={CLASS.TOOLS}
                   helpText={`You can have up to ${characterClass.toolProficiencies.amount} tools`}
@@ -144,6 +172,3 @@ export default function ClassFrame({ classForm, setForm }: {classForm: ClassForm
     </Box>
   );
 }
-
-
-

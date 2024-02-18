@@ -80,7 +80,7 @@ interface Source {
 
 //interface used for autocomplete
 interface BaseItem {
-    id: string | null;
+    id: string;
     name: string;
 }
 

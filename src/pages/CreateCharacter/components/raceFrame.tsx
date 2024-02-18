@@ -1,5 +1,11 @@
 import * as React from "react";
-import { Box, Autocomplete, Divider, Grid, CircularProgress } from "@mui/material";
+import {
+  Box,
+  Autocomplete,
+  Divider,
+  Grid,
+  CircularProgress,
+} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import MultiComplete from "@components/customMultiComplete";
 import TextField from "@mui/material/TextField";
@@ -9,7 +15,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@hooks/hooksStore";
-import {CREATE_CHARACTER} from "constants/characterDefinition";
+import { CREATE_CHARACTER } from "constants/characterDefinition";
 import {
   Race,
   AutocompleteItem,
@@ -23,52 +29,56 @@ import {
 import CardInfo from "./cardInfo";
 import createAbilityData from "utils/abilityUtils";
 import { useGetLanguagesQuery, useGetRacesQuery } from "api/raceApiSlice";
+import { RaceForm, StepperForm } from "../definitions/stepperForm";
 
 const RACE = CREATE_CHARACTER.RACE;
 
-export default function RaceFrame() {
-  const raceStore = useAppSelector((state) => state.character.race);
-  const dispatch = useAppDispatch();
-
+export default function RaceFrame({
+  raceForm,
+  setForm,
+}: {
+  raceForm: RaceForm;
+  setForm: React.Dispatch<React.SetStateAction<StepperForm>>;
+}) {
   //calling api to get all races, in future this will be called when create character button is clicked
-  
 
-  const [size, setSize] = useState<string>("");
-  const [race, setRace] = useState<Race>(raceStore);
+  const { data: races, isLoading: loadingRaces } = useGetRacesQuery(
+    useAppSelector((state) => state.character.basicInfo.sources).map(
+      (s: Source) => s.abbreviation
+    )
+  );
+  const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(
+    useAppSelector((state) => state.character.basicInfo.sources).map(
+      (s: Source) => s.abbreviation
+    )
+  );
+
+  const getRace = (id: string | null) => {
+    return races?.find((r) => r.id === id);
+  };
+
+  const [race, setRace] = useState<Race>(getRace(raceForm.id) || ({} as Race));
   const [isVisible, setVisibility] = React.useState(false);
   //these are the values that are going to be displayed in the multicomplete
   //that are selected by user or by default according to race
-  const [languagesRes, setLanguages] = useState<AutocompleteItem[]>(raceStore.languageProficiencies.defaults);
-  
-  const { data: races, isLoading: loadingRaces } = useGetRacesQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
-  const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(useAppSelector((state) => state.character.basicInfo.sources).map((s: Source) => s.abbreviation));
+  const [languagesRes, setLanguages] = useState<AutocompleteItem[]>(
+    raceForm.languagesId.map(
+      (id) => languages?.find((l) => l.id === id) || ({} as AutocompleteItem)
+    )
+  );
+
+  const setPropertyInForm = (property: string, value: any) => {
+    setForm(prev => ({...prev, race: {...raceForm, [property]: value}}));
+  }
 
   function handleChange(event: SelectChangeEvent) {
-    setSize(event.target.value);
-    console.log(event.target.value);
+    setPropertyInForm("size", event.target.value);
   }
 
   const handleLanguagesChange = (value: AutocompleteItem[]): void => {
     setLanguages(value);
-  }
-  console.log(languages, " languages ", languagesRes, " languagesRes");
-  if(languages && (languages[0] === languagesRes[0])) console.log('languages are the same');
+  };
 
-  useEffect(() => {
-    if ( !race.id || race.name === "") return;
-    const a = race;
-    setVisibility(true);
-    //setting the right properties of race
-    setLanguages(a.languageProficiencies.defaults);
-    setSize(a.sizeOptions?.[0] || "");
-    //recalculate ability scores acording to a new race
-    const abilities = createAbilityData(a);
-
-    dispatch(setRaceStore(a));
-    dispatch(setAbilityScores(abilities));
-  }, [race, dispatch]);
-  
-  console.log(races, ' data');
 
   return (
     <Box>
@@ -79,12 +89,12 @@ export default function RaceFrame() {
           </Typography>
         </Grid>
         <Grid item>
-          { !isVisible && 
-          (<Typography gutterBottom variant="body2" color="text.secondary">
-            {/* todo implement point buy */}
-            {RACE.SUBTITLE}
-          </Typography>)}
-          
+          {!isVisible && (
+            <Typography gutterBottom variant="body2" color="text.secondary">
+              {/* todo implement point buy */}
+              {RACE.SUBTITLE}
+            </Typography>
+          )}
         </Grid>
       </Grid>
       <Grid container>
@@ -93,33 +103,42 @@ export default function RaceFrame() {
             sx={{ my: 2 }}
             clearOnBlur
             data-cy="race"
-            options={races || [] }
+            options={races || []}
             getOptionLabel={(option) => option.name}
-            isOptionEqualToValue={(option, value) => option.id === value.id }
+            isOptionEqualToValue={(option, value) => option.id === value.id}
             value={race.id ? race : null}
             onChange={(_, value) => {
               if (!value) return;
               setRace(value);
+              setVisibility(true);
+              //setting the right properties of race
+              //recalculate ability scores acording to a new race
+              const abilities = createAbilityData(value);
+              setPropertyInForm("id", value.id);
+              setPropertyInForm("size", value.sizeOptions[0]);
+              setPropertyInForm("languagesId", value.languageProficiencies.defaults.map(l => l.id));
+              
               // if this is not set, I get following error:
               /*
               You have provided an out-of-range value `Medium` for the select component.
               Consider providing a value that matches one of the available options or ''.
               The available values are `Small`.
               */
-             //I do not understand why this is happening
-              setSize("");
+              //I do not understand why this is happening
             }}
             renderInput={(params) => (
               <TextField
                 {...params}
                 label={RACE.HEADING}
                 variant="filled"
-                placeholder={ RACE.PLACEHOLDER}
+                placeholder={RACE.PLACEHOLDER}
                 InputProps={{
                   ...params.InputProps,
                   endAdornment: (
                     <React.Fragment>
-                      {loadingRaces? <CircularProgress color="inherit" size={23} /> : null }
+                      {loadingRaces ? (
+                        <CircularProgress color="inherit" size={23} />
+                      ) : null}
                       {params.InputProps.endAdornment}
                     </React.Fragment>
                   ),
@@ -157,7 +176,7 @@ export default function RaceFrame() {
                 <FormControl variant="filled" fullWidth>
                   <InputLabel data-cy="size">Size</InputLabel>
                   <Select
-                    value={size}
+                    value={raceForm.size}
                     label={RACE.SIZE}
                     onChange={handleChange}
                   >
@@ -181,4 +200,3 @@ export default function RaceFrame() {
     </Box>
   );
 }
-

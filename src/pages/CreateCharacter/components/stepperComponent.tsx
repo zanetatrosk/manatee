@@ -32,17 +32,15 @@ export default function HorizontalLinearStepper() {
 
   const [form, setData] = React.useState<StepperForm>(formDefaults);
 
-
-
   React.useEffect(() => {
     console.log(form, "form was edited");
   }, [form]);
   const components: ComponentRegister[] = [
-    { id: 0, component: <BasicInformation form={form} setForm={setData}/> },
-    { id: 1, component: <Class classForm={form.class} setForm={setData}/> },
-    { id: 2, component: <Race /> },
+    { id: 0, component: <BasicInformation form={form} setForm={setData} /> },
+    { id: 1, component: <Class classForm={form.class} setForm={setData} /> },
+    { id: 2, component: <Race raceForm={form.race} setForm={setData} /> },
     { id: 3, component: <Abilities /> },
-    { id: 4, component: <Background/> },
+    { id: 4, component: <Background /> },
   ];
   const isStepOptional = (step: number) => {
     return step === 0;
@@ -53,7 +51,6 @@ export default function HorizontalLinearStepper() {
   };
 
   const handleNext = () => {
-    
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());
