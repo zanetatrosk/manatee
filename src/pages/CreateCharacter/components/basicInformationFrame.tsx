@@ -10,15 +10,26 @@ import React from "react";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import { useGetSourcesQuery } from "api/raceApiSlice";
 import { StepperForm } from "../definitions/stepperForm";
-
+import { BasicInfo } from "../definitions/characterForm";
 
 const BASIC_INFO = CREATE_CHARACTER.BASIC_INFO;
 
-function BasicInformation({ form, setForm }: {form: StepperForm, setForm: React.Dispatch<React.SetStateAction<StepperForm>>}){
-  
-  
+function BasicInformation({
+  form,
+  setForm,
+}: {
+  form: BasicInfo;
+  setForm: React.Dispatch<React.SetStateAction<StepperForm>>;
+}) {
   //fetch data sources only first time when component is mounted
   const { data: sources, isLoading: loading } = useGetSourcesQuery();
+
+  const setPropertyInForm = (property: string, value: any) => {
+    setForm((prev) => ({
+      ...prev,
+      basicInfo: { ...prev.basicInfo, [property]: value },
+    }));
+  };
 
   return (
     <Grid container spacing={10}>
@@ -32,12 +43,11 @@ function BasicInformation({ form, setForm }: {form: StepperForm, setForm: React.
           <TextField
             fullWidth
             data-cy="character-name"
-            value={form.basicInfo.characterName}
+            value={form.characterName}
             onChange={(e) => {
-              setForm({ ...form, basicInfo: { ...form.basicInfo, characterName: e.target.value } })
+              setPropertyInForm("characterName", e.target.value);
             }}
-           
-            inputProps={{ "id": "input" }}
+            inputProps={{ id: "input" }}
             variant="filled"
             label={BASIC_INFO.CHARACTER_NAME}
           ></TextField>
@@ -48,11 +58,11 @@ function BasicInformation({ form, setForm }: {form: StepperForm, setForm: React.
             data-cy="player-name"
             fullWidth
             label={BASIC_INFO.PLAYER_NAME}
-            value={form.basicInfo.playerName}
-            onChange={(e) =>
-              setForm({ ...form, basicInfo: { ...form.basicInfo, playerName: e.target.value } })
-            }
-            inputProps={{ "id": "input" }}
+            value={form.playerName}
+            onChange={(e) => {
+              setPropertyInForm("playerName", e.target.value);
+            }}
+            inputProps={{ id: "input" }}
           ></TextField>
         </Grid>
       </Grid>
@@ -66,13 +76,13 @@ function BasicInformation({ form, setForm }: {form: StepperForm, setForm: React.
         <Grid item xs>
           <Autocomplete
             id="combo-box-demo"
-            value={form.basicInfo.sources}
+            value={form.sources}
             options={sources || []}
             multiple
             getOptionLabel={(option) => option.name}
             onChange={(_, value) => {
               if (!value) return;
-              setForm({ ...form, basicInfo: { ...form.basicInfo, sources: value } });
+              setPropertyInForm("sources", value);
             }}
             renderInput={(params) => (
               <TextField
@@ -104,10 +114,10 @@ function BasicInformation({ form, setForm }: {form: StepperForm, setForm: React.
         <Grid item xs={12} lg={6}>
           <TextField
             fullWidth
-            value={form.basicInfo.cardPhoto}
-            onChange={(e) =>
-              setForm({ ...form, basicInfo: { ...form.basicInfo, cardPhoto: e.target.value } })
-            }
+            value={form.cardPhoto}
+            onChange={(e) => {
+              setPropertyInForm("cardPhoto", e.target.value);
+            }}
             variant="filled"
             label={BASIC_INFO.CARD_PHOTO}
           ></TextField>
@@ -117,11 +127,9 @@ function BasicInformation({ form, setForm }: {form: StepperForm, setForm: React.
             data-cy="sheet-photo"
             variant="filled"
             fullWidth
-            onChange={(e) =>
-              setForm({ ...form, basicInfo: { ...form.basicInfo, sheetPhoto: e.target.value } })
-            }
+            onChange={(e) => setPropertyInForm("sheetPhoto", e.target.value)}
             label={BASIC_INFO.SHEET_PHOTO}
-            value={form.basicInfo.sheetPhoto}
+            value={form.sheetPhoto}
           ></TextField>
         </Grid>
       </Grid>

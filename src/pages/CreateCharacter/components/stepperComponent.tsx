@@ -36,7 +36,7 @@ export default function HorizontalLinearStepper() {
     console.log(form, "form was edited");
   }, [form]);
   const components: ComponentRegister[] = [
-    { id: 0, component: <BasicInformation form={form} setForm={setData} /> },
+    { id: 0, component: <BasicInformation form={form.basicInfo} setForm={setData} /> },
     { id: 1, component: <Class classForm={form.class} setForm={setData} /> },
     { id: 2, component: <Race raceForm={form.race} setForm={setData} /> },
     { id: 3, component: <Abilities abilitiesForm={form.abilityScores} setForm={setData}/> },
