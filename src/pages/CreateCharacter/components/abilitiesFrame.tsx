@@ -16,10 +16,8 @@ import {
   Box,
 } from "@mui/material";
 import { AbilityScore } from "@pages/CreateCharacter/definitions/characterForm";
-import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
-import { setAbilityScores } from "reducers/characterReducer";
-import { useEffect } from "react";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
+import { StepperForm } from "../definitions/stepperForm";
 
 //declaring constants
 const MIN = 1;
@@ -69,28 +67,29 @@ function calculateFullScore(row: AbilityScore): number {
 function setModifiersValues(row: AbilityScore): number {
   return Math.floor((calculateFullScore(row) - 10) / 2);
 }
-export default function Abilities() {
-  const { abilityScores } = useAppSelector((state) => state.character);
-  const dispatch = useAppDispatch();
 
-  //deep copy of abilityScores from store
-  const [rows, setRows] = React.useState<AbilityScore[]>(
-    abilityScores.map((row) => ({ ...row }))
-  );
-  /*this is called every time some value in rows changes
-  it is unoptimized, in future todo optimize*/
-  useEffect(() => {
-    console.log(rows, "rows");
-    //do a deep copy of row
-    const a = rows.map((row) => ({ ...row }));
-    dispatch(setAbilityScores(a));
-  }, [rows, dispatch]);
+export default function Abilities({
+  abilitiesForm,
+  setForm,
+}: {
+  abilitiesForm: AbilityScore[];
+  setForm: React.Dispatch<React.SetStateAction<StepperForm>>;
+}) {
 
   //setting the row with new values
-  const setRow = (idx: number, param: string, value: number | boolean) => {
-    const newRows = [...rows];
-    newRows[idx] = { ...rows[idx], [param]: value };
-    setRows(newRows);
+  const setRow = (idx: number, param: string, value: number | boolean, abilities: AbilityScore[]): AbilityScore[] => {
+    const newRows = [...abilities];
+    newRows[idx] = { ...abilities[idx], [param]: value };
+    return newRows;
+  };
+
+  const setPropertyInForm = (property: string, idx: number, value: any) => {
+    setForm((prev) => 
+      ({
+        ...prev,
+        abilityScores: setRow(idx, property, value, prev.abilityScores)
+      })
+    );
   };
 
   return (
@@ -116,7 +115,7 @@ export default function Abilities() {
             </TableRow>
           </TableHead>
           <TableBody data-cy="content-table">
-            {rows.map((row, idx) => (
+            {abilitiesForm.map((row, idx) => (
               <TableRow
                 key={row.label}
                 data-cy="ability-row"
@@ -134,7 +133,8 @@ export default function Abilities() {
                     inputProps={{ min: MIN, max: MAX }}
                     onChange={(e) => {
                       let value = parseInt(e.target.value, BASE_10) as number;
-                      setRow(idx, "score", setScore(value));
+                      setPropertyInForm("score", idx, setScore(value));
+                      debugger;
                     }}
                   />
                 </TableCell>
@@ -145,11 +145,15 @@ export default function Abilities() {
                   <Checkbox
                     data-cy="ability-up-one"
                     inputProps={{
-                      "id": "checkbox-input",
+                      id: "checkbox-input",
                     }}
                     checked={row.modifierUpToOne && !row.modifierUpToTwo}
                     onChange={() => {
-                      setRow(idx, "modifierUpToOne", !row.modifierUpToOne);
+                      setPropertyInForm(
+                        "modifierUpToOne",
+                        idx,
+                        !row.modifierUpToOne
+                      );
                     }}
                     value={row.modifierUpToOne}
                     disabled={row.modifierUpToTwo}
@@ -160,11 +164,15 @@ export default function Abilities() {
                     data-cy="ability-up-two"
                     value={row.modifierUpToTwo}
                     inputProps={{
-                      "id": "checkbox-input",
+                      id: "checkbox-input",
                     }}
                     checked={row.modifierUpToTwo && !row.modifierUpToOne}
                     onChange={() => {
-                      setRow(idx, "modifierUpToTwo", !row.modifierUpToTwo);
+                      setPropertyInForm(
+                        "modifierUpToTwo",
+                        idx,
+                        !row.modifierUpToTwo
+                      );
                     }}
                     disabled={row.modifierUpToOne}
                   />
