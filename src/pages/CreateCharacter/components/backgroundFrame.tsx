@@ -49,7 +49,7 @@ export default function BackgroundFrame({ backgroundForm, setForm }: { backgroun
       )
     );
 
-  const [isVisible, setVisibility] = React.useState(false);
+  const [isVisible, setVisibility] = React.useState(!!backgroundForm.id);
   const [background, setBackground] = useState<Background>(backgrounds?.find((b) => b.id === backgroundForm.id) || ({} as Background));
 
   const setPropertyInForm = (property: string, value: any) => {
