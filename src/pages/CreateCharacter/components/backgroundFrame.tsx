@@ -35,17 +35,17 @@ export default function BackgroundFrame({ backgroundForm, setForm }: { backgroun
     const { data: backgrounds, isLoading: loadingBackgrounds } =
       useGetBackgroundsQuery(
         useAppSelector((state) => state.character.basicInfo.sources).map(
-          (s: Source) => s.abbreviation
+          (s: Source) => s.id
         )
       );
     const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(
       useAppSelector((state) => state.character.basicInfo.sources).map(
-        (s: Source) => s.abbreviation
+        (s: Source) => s.id
       )
     );
     const { data: tools, isLoading: loadingTools } = useGetToolsQuery(
       useAppSelector((state) => state.character.basicInfo.sources).map(
-        (s: Source) => s.abbreviation
+        (s: Source) => s.id
       )
     );
 

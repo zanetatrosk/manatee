@@ -27,12 +27,12 @@ export default function ClassFrame({
 }) {
   const { data: classes, isLoading: loadingClasses } = useGetClassesQuery(
     useAppSelector((state) => state.character.basicInfo.sources).map(
-      (s: Source) => s.abbreviation
+      (s: Source) => s.id
     )
   );
   const { data: tools, isLoading: toolsLoading } = useGetToolsQuery(
     useAppSelector((state) => state.character.basicInfo.sources).map(
-      (s: Source) => s.abbreviation
+      (s: Source) => s.id
     )
   );
 

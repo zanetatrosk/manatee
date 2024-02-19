@@ -32,6 +32,15 @@ interface AbilityScore {
     modifierUpToTwo: boolean;
 }
 
+
+interface AbilityI extends AbilityScore {
+    result: number;
+    modifier: number;
+}
+    
+
+
+
 interface Race {
     id: string | null;
     name: string;
@@ -73,9 +82,7 @@ interface Background {
     toolProficiencies: AutocompleteParams;
 }
 
-interface Source {
-    abbreviation: string;
-    name: string;
+interface Source extends BaseItem {
 }
 
 //interface used for autocomplete
@@ -100,6 +107,38 @@ interface CharacterSheet {
     background: Background;
     abilityScores: AbilityScore[];
     characterClass: Class;
+}
+
+//-----begin with character sheet interfaces
+
+interface SheetHeaderInfo extends BasicInfo {
+    subclass: string;
+    level: number;
+    race: BaseItem;
+    dndClass: BaseItem;
+    background: BaseItem;
+}
+
+interface Stats {
+    speed: number;
+    initiative: number;
+    proficiencyBonus: number;
+    hitDice: {
+        amount: number;
+        sides: number;
+        notation: string;
+    };
+    hitPoints: number;
+    armorClass: number;
+}
+
+interface CharacterSheetI {
+    id: string;
+    basicInfo: SheetHeaderInfo;
+    stats: Stats;
+    abilities: AbilityI[];
+    
+
 }
 
 const formDefaults  = {

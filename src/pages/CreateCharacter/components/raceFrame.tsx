@@ -39,12 +39,12 @@ export default function RaceFrame({
 
   const { data: races, isLoading: loadingRaces } = useGetRacesQuery(
     useAppSelector((state) => state.character.basicInfo.sources).map(
-      (s: Source) => s.abbreviation
+      (s: Source) => s.id
     )
   );
   const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(
     useAppSelector((state) => state.character.basicInfo.sources).map(
-      (s: Source) => s.abbreviation
+      (s: Source) => s.id
     )
   );
 
