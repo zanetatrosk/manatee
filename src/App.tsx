@@ -42,7 +42,7 @@ function App() {
                 element={<CreateCharacter />}
               />
               <Route path="/characters/character-sheet"
-                element={<CharacterSheet character={characterSheetDefaults}/>} />
+                element={<CharacterSheet />} />
             </Routes>
           </Container>
           {/* todo footer */}

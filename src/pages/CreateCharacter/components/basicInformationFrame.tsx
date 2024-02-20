@@ -114,7 +114,7 @@ function BasicInformation({
         <Grid item xs={12} lg={6}>
           <TextField
             fullWidth
-            value={form.cardPhoto}
+            value={form.cardPhotoUrl}
             onChange={(e) => {
               setPropertyInForm("cardPhoto", e.target.value);
             }}
@@ -129,7 +129,7 @@ function BasicInformation({
             fullWidth
             onChange={(e) => setPropertyInForm("sheetPhoto", e.target.value)}
             label={BASIC_INFO.SHEET_PHOTO}
-            value={form.sheetPhoto}
+            value={form.sheetPhotoUrl}
           ></TextField>
         </Grid>
       </Grid>

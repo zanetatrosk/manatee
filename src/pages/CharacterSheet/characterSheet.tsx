@@ -6,20 +6,22 @@ import StatsGrid from "./components/statsGrid";
 import TabsCard from "./components/tabsCard";
 import React from "react";
 import { CharacterSheet as CharSheet  } from "@pages/CreateCharacter/definitions/characterForm";
+import { useGetCharacterByIdQuery } from "api/charactersApiSlice";
 
-interface Item {
-  header: string;
-  value: string;
-}
 
-export default function CharacterSheet({character}: {character: CharSheet}) {
 
-  const stats = [ {header: "speed", value: character.stats.speed.toString()}, 
-                  {header: "prof bonus", value: character.stats.proficiencyBonus.toString()},
-                  {header: "armor class", value: character.stats.armorClass.toString()},
-                  {header: "hit points", value: character.stats.hitPoints.toString()},
-                  {header: "hit dice", value: character.stats.hitDice.amount.toString() + "d" + character.stats.hitDice.notation.toString()},
-                  {header: "initiative", value: character.stats.initiative.toString()},
+export default function CharacterSheet() {
+
+
+  const {data : character} = useGetCharacterByIdQuery("65d4bb28bcadf637e82b1109");
+  if( !character ) return (<div>loading...</div>)
+
+  const stats = [ {header: "speed", value: character?.stats.speed.toString()}, 
+                  {header: "prof. bonus", value: character?.stats.proficiencyBonus.toString()},
+                  {header: "armor class", value: character?.stats.armorClass.toString()},
+                  {header: "hit points", value: character?.stats.hitPoints.toString()},
+                  {header: "hit dice", value: character?.stats.hitDice.notation },
+                  {header: "initiative", value: character?.stats.initiative.toString()},
                 ]
   return (
     <React.Fragment>
@@ -27,15 +29,15 @@ export default function CharacterSheet({character}: {character: CharSheet}) {
         <Grid container flexDirection={"column"} spacing={5}>
           {/* first row */}
           <Grid item container spacing={2}>
-            {character.info.sheetPhoto && (
+            {character?.info.sheetPhotoUrl && (
               <Grid item>
                 <Card sx={{ maxWidth: 250, height: "100%", maxHeight: 345 }}>
                   <CardMedia
                     sx={{ height: "100%" }}
                     component="img"
                     // Picture by internet user:
-                    src={character.info.sheetPhoto}
-                    title="character"
+                    src={character?.info.sheetPhotoUrl}
+                    title="character?"
                   />
                 </Card>
               </Grid>
@@ -43,41 +45,41 @@ export default function CharacterSheet({character}: {character: CharSheet}) {
             <Grid
               item
               container
-              xs={!!character.info.sheetPhoto}
+              xs={!!character?.info.sheetPhotoUrl}
               spacing={3}
               justifyContent="center"
             >
               <Grid item xs>
                 <HeaderCard
                   props={{
-                    title: character.info.characterName,
+                    title: character?.info.characterName,
                     headers: [
                       {
                         header: "Player",
-                        value: character.info.playerName,
+                        value: character?.info.playerName,
                       },
                       {
                         header: "Race",
-                        value: character.info.race.name,
+                        value: character?.info.race.name,
                       },
                       {
                         header: "Class & level",
-                        value: character.info.dndClass.name,
+                        value: character?.info.class.name,
                       },
                       {
                         header: "Subclass",
-                        value: character.info.subclass,
+                        value: character?.info.subclass,
                       },
                       {
                         header: "Background",
-                        value: character.info.background.name,
+                        value: character?.info.background.name,
                       },
                     ],
                   }}
                 />
               </Grid>
               <Grid item container spacing={3} justifyContent="center">
-                {character.abilities.map((i, idx) => (
+                {character?.abilities.map((i, idx) => (
                   <Grid item key={idx}>
                     <AbilityCard
                       ability={i.label}
@@ -94,11 +96,11 @@ export default function CharacterSheet({character}: {character: CharSheet}) {
             <Grid item>
               <SkillTable
                 name="Skills"
-                tableData={character.skills.map((i) => ({
+                tableData={character?.skills.map((i) => ({
                   label: i.label,
                   score: i.modifier,
                   checked: i.proficient
-                }))
+                })) || []
                 }
               />
             </Grid>
@@ -107,15 +109,15 @@ export default function CharacterSheet({character}: {character: CharSheet}) {
                 <Grid item sm={4.5} xs={12}>
                   <SkillTable
                     name="Saving Throws"
-                    tableData={character.savingThrows.map((i) => ({
+                    tableData={character?.savingThrows.map((i) => ({
                       label: i.label,
                       score: i.modifier,
                       checked: i.proficient,
-                    }))}
+                    })) || []}
                   />
                 </Grid>
                 <Grid item container xs justifyContent="center">
-                  <StatsGrid title="Stats" items={stats}/>
+                  <StatsGrid title="Stats" items={stats || []}/>
                 </Grid>
               </Grid>
               <Grid container item xs>

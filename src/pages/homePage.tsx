@@ -2,9 +2,12 @@ import {
   Box,
   Button,
   Card,
+  CardContent,
   CardHeader,
   Collapse,
+  Icon,
   IconButton,
+  SvgIcon,
   Table,
   TableBody,
   TableCell,
@@ -12,87 +15,39 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { useState } from "react";
 import React from "react";
+import WhiteDragon from "@assets/whiteDragon";
 
 export default function HomePage() {
-  function createData(name: string, calories: number, fat: number) {
-    return { name, calories, fat };
-  }
-
-  //generate data as dnd attacks
-  const rows = [
-    createData("Attack 1", 159, 6.0),
-    createData("Attack 2", 237, 9.0),
-    createData("Attack 3", 262, 16.0),
-    createData("Attack 4", 305, 3.7),
-    createData("Attack 5", 356, 16.0),
-  ];
-
-  function Row(props: { row: ReturnType<typeof createData> }) {
-    const { row } = props;
-    const [open, setOpen] = useState(false);
-    return (
-      <React.Fragment>
-              <TableRow
-                key={row.name}
-                sx={{ "& > *": { borderBottom: "unset" } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell>{row.calories}</TableCell>
-                <TableCell>{row.fat}</TableCell>
-                <TableCell align="right">
-                  <IconButton
-                    aria-label="expand row"
-                    size="small"
-                    onClick={() => setOpen(!open)}
-                  >
-                    {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-              <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                  <Box py={2}>
-                    <Typography variant="body2" gutterBottom component="div">
-                      lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                    </Typography>
-                  </Box>
-                </Collapse>
-              </TableCell>
-            </TableRow>
-            </React.Fragment>
-    )
-
-  }
   return (
     <Box data-cy="home">
-      <Typography variant="h4">Welcome to D&D App</Typography>
+      <Typography variant="h3">Welcome to D&D App</Typography>
+
       <Card>
         <CardHeader
-          title={<Typography variant="h4">Attacks</Typography>}
-          action={<Button variant="contained">Add attack</Button>}
+          title={<Typography variant="h4">Armor</Typography>}
+          subheader={
+            <Typography variant="body1" sx={{ pt: 1 }}>
+              Light Armor, Medium Armor, Shields
+            </Typography>
+          }
+          action={
+            <SvgIcon sx={{ fontSize: 59 }}>
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 48 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M27.1266 6.37972C25.954 6.39 24.765 6.68527 23.6273 7.30545C26.2521 7.1148 28.5595 7.9191 29.2032 9.8508C19.5387 8.5869 9.68445 18.3513 26.8242 28.2398C31.4746 30.9228 28.2777 37.8244 19.0009 33.872C6.63705 28.6042 7.53525 18.8145 11.9883 13.6921C12.5374 14.6167 12.9946 15.6567 13.4085 16.7484C14.8385 13.1038 17.6376 11.6019 20.4281 10.0875C16.5133 8.244 12.7774 8.97877 9.11017 10.7179C9.88732 11.1487 10.543 11.7307 11.1093 12.4219C2.59245 17.5156 5.27632 33.452 16.4647 39.9117C30.7037 48.1325 47.5737 29.9938 32.0765 24.082C20.7187 19.7493 23.6986 13.5892 29.2243 14.6203L29.4211 17.8172L40.0219 20.7703L41.5899 16.2211C39.4194 15.2826 37.6744 14.2278 36.258 12.9328C36.3531 10.8145 35.4585 8.69497 33.715 6.5766C33.7717 7.61107 33.7602 8.64525 33.5956 9.6798C31.9298 7.5735 29.5656 6.35827 27.1268 6.3798L27.1266 6.37972ZM30.3844 11.2828C32.1094 11.8279 33.7385 12.8477 35.0344 14.5898C32.5046 15.7763 29.8501 14.1908 30.3844 11.2828V11.2828Z"
+                  fill="black"
+                />
+              </svg>
+            </SvgIcon>
+          }
         ></CardHeader>
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Attack bonus</TableCell>
-              <TableCell>Damage type</TableCell>
-            <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <Row row={row} key={row.name}/>
-            ))}
-          </TableBody>
-        </Table>
       </Card>
     </Box>
   );

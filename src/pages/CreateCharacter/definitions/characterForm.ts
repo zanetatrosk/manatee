@@ -23,8 +23,8 @@ interface BasicInfo {
     characterName: string;
     playerName: string;
     sources: Source[];
-    sheetPhoto: string | null;
-    cardPhoto: string | null;
+    sheetPhotoUrl: string | null;
+    cardPhotoUrl: string | null;
 }
 
 interface AbilityScore {
@@ -110,7 +110,7 @@ interface SheetHeaderInfo extends BasicInfo {
     subclass: string;
     level: number;
     race: BaseItem;
-    dndClass: BaseItem;
+    class: BaseItem;
     background: BaseItem;
 }
 
@@ -160,11 +160,11 @@ const characterSheetDefaults: CharacterSheet = {
         characterName: "Character Name",
         playerName: "Player name",
         sources: [],
-        sheetPhoto: "",
-        cardPhoto: "",
+        sheetPhotoUrl: "",
+        cardPhotoUrl: "",
         subclass: "Assasin",
         level: 1,
-        dndClass: {
+        class: {
             id: "",
             name: "Barbarian"
         },
@@ -184,7 +184,7 @@ const characterSheetDefaults: CharacterSheet = {
         hitDice: {
             amount: 0,
             sides: 0,
-            notation: ""
+            notation: "5d8"
         },
         hitPoints: 0,
         armorClass: 0

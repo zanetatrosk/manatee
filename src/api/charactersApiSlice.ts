@@ -1,3 +1,4 @@
+import { CharacterSheet } from "@pages/CreateCharacter/definitions/characterForm";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export interface Character {
@@ -33,6 +34,9 @@ export const charactersApiSlice = createApi({
         getCharacters: builder.query<Character[], void>({
         query: () => 'characters',
         }),
+        getCharacterById: builder.query<CharacterSheet, string>({
+        query: (id) => `characters/${id}`,
+        }),
         addCharacter: builder.mutation<void, Character>({
         query: (body) => ({
             url: 'characters',
@@ -48,4 +52,4 @@ export const charactersApiSlice = createApi({
         }),
     }),
     });
-    export const { useGetCharactersQuery } = charactersApiSlice;
+    export const { useGetCharactersQuery, useGetCharacterByIdQuery } = charactersApiSlice;

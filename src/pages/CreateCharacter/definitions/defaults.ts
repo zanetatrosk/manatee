@@ -50,8 +50,8 @@ const formDefaults: StepperForm = {
     characterName: "New Character Name",
     playerName: "Player Name",
     sources: [],
-    sheetPhoto: "",
-    cardPhoto: "",
+    sheetPhotoUrl: "",
+    cardPhotoUrl: "",
   } as BasicInfo,
   abilityScores: abilitiesDefaults as AbilityScore[],
   race: {
