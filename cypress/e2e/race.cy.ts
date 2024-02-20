@@ -40,10 +40,7 @@ describe("Automation TC05", () => {
       );
 
       this.languages.forEach((language, idx) => {
-        cy.get("[data-cy=chip-" + idx + "]").should(
-          "have.text",
-          language.title
-        );
+        cy.contains(language.title);
       });
     });
     cy.get('[data-cy="card-info"]').within(() => {

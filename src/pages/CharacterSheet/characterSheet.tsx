@@ -37,7 +37,7 @@ export default function CharacterSheet() {
                     component="img"
                     // Picture by internet user:
                     src={character.info.sheetPhotoUrl}
-                    title="character?"
+                    title="character"
                   />
                 </Card>
               </Grid>

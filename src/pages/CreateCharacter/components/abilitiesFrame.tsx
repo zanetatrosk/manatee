@@ -149,7 +149,7 @@ export default function Abilities({
                     checked={row.upByOne && !row.upByTwo}
                     onChange={() => {
                       setPropertyInForm(
-                        "modifierUpToOne",
+                        "upByOne",
                         idx,
                         !row.upByOne
                       );
@@ -168,7 +168,7 @@ export default function Abilities({
                     checked={row.upByTwo && !row.upByOne}
                     onChange={() => {
                       setPropertyInForm(
-                        "modifierUpToTwo",
+                        "upByTwo",
                         idx,
                         !row.upByTwo
                       );
