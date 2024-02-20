@@ -31,7 +31,7 @@ export const charactersApiSlice = createApi({
     reducerPath: 'charactersApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/api/' }),
     endpoints: (builder) => ({
-        getCharacters: builder.query<Character[], void>({
+        getCharacters: builder.query<CharacterSheet[], void>({
         query: () => 'characters',
         }),
         getCharacterById: builder.query<CharacterSheet, string>({

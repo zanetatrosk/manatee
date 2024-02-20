@@ -41,7 +41,7 @@ function App() {
                 path="/characters/create-character"
                 element={<CreateCharacter />}
               />
-              <Route path="/characters/character-sheet"
+              <Route path="/characters/:id/character-sheet"
                 element={<CharacterSheet />} />
             </Routes>
           </Container>

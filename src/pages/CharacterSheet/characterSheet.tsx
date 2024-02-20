@@ -6,13 +6,14 @@ import StatsGrid from "./components/statsGrid";
 import TabsCard from "./components/tabsCard";
 import React from "react";
 import { useGetCharacterByIdQuery } from "api/charactersApiSlice";
+import { useParams } from "react-router-dom";
 
 
 
 export default function CharacterSheet() {
 
-
-  const {data : character} = useGetCharacterByIdQuery("65d4bb28bcadf637e82b1109");
+  let { id } = useParams();
+  const {data : character} = useGetCharacterByIdQuery(id!);
   if( !character ) return (<div>loading...</div>)
 
   const stats = [ {header: "speed", value: character.stats.speed.toString()}, 
@@ -51,11 +52,11 @@ export default function CharacterSheet() {
               <Grid item xs>
                 <HeaderCard
                   props={{
-                    title: character?.info.characterName,
+                    title: character.info.characterName,
                     headers: [
                       {
                         header: "Player",
-                        value: character?.info.playerName,
+                        value: character.info.playerName,
                       },
                       {
                         header: "Race",
@@ -63,15 +64,15 @@ export default function CharacterSheet() {
                       },
                       {
                         header: "Class & level",
-                        value: character?.info.class.name,
+                        value: character.info.class.name + " " + character.info.level,
                       },
                       {
                         header: "Subclass",
-                        value: character?.info.subclass,
+                        value: character.info.subclass,
                       },
                       {
                         header: "Background",
-                        value: character?.info.background.name,
+                        value: character.info.background.name,
                       },
                     ],
                   }}

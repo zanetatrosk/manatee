@@ -9,38 +9,37 @@ import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import { CHARACTERS } from "constants/characterDefinition";
 import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
-import { Character, useGetCharactersQuery } from "api/charactersApiSlice";
+import {  useGetCharactersQuery } from "api/charactersApiSlice";
+import { CharacterSheet } from "@pages/CreateCharacter/definitions/characterForm";
 
 
 
 
 
-function CharacterCard( { props }: { props: Character }) {
+function CharacterCard( { props }: { props: CharacterSheet }) {
+  let navigate = useNavigate();
   return (
     <Card sx={{ width: "100%" }} data-cy="character-card">
       <CardMedia
         sx={{ maxHeight: 160 }}
         component="img"
         // Picture by pixabay: https://pixabay.com/cs
-        src={props.cardPhotoUrl}
+        src={props.info.cardPhotoUrl || "https://source.unsplash.com/random"}
         title="character"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {props.characterName}
+          {props.info.characterName}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {props.race.name}
+          {props.info.race.name}
         </Typography>
       </CardContent>
       <CardActions>
         <Grid container direction="row" justifyContent="flex-start">
           <Grid item xs>
-            <Button variant="outlined" size="small" sx={{ mx: 1 }}>
+            <Button variant="outlined" size="small" sx={{ mx: 1 }} onClick={() => { navigate('/characters/' + props.id + '/character-sheet') }}>
               {CHARACTERS.VIEW}
-            </Button>
-            <Button variant="outlined" size="small">
-              {CHARACTERS.EDIT}
             </Button>
           </Grid>
           <Grid>
@@ -64,7 +63,7 @@ export default function Characters() {
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const greaterThanMid = useMediaQuery(theme.breakpoints.up("md"));
-  const characters: Character[] = useGetCharactersQuery().data || []; 
+  const characters: CharacterSheet[] = useGetCharactersQuery().data || []; 
   return (
     <Grid container flexDirection={"column"} >
       <Grid container item alignItems={"center"}>
