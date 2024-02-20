@@ -11,7 +11,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import PersonIcon from "@mui/icons-material/Person";
-import DragonLogo from "@assets/whiteDragon";
+import DragonLogo from "@assets/icons/whiteDragon";
 import { Link } from "react-router-dom";
 
 const pages = ["characters", "content"];

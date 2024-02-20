@@ -43,6 +43,7 @@ function App() {
               />
               <Route path="/characters/:id/character-sheet"
                 element={<CharacterSheet />} />
+                <Route path="/*" element={<div>No route here</div>}/>
             </Routes>
           </Container>
           {/* todo footer */}
