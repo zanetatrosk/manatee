@@ -1,3 +1,4 @@
+import { LanguagesProficiency, ToolsProficiency } from "./stepperForm";
 
 
 enum Ability {  
@@ -17,6 +18,7 @@ enum Size {
     GARGANTUAN = "Gargantuan"
 }
 
+
 interface BasicInfo {
     characterName: string;
     playerName: string;
@@ -28,17 +30,16 @@ interface BasicInfo {
 interface AbilityScore {
     label: string;
     score: number;
-    modifierUpToOne: boolean;
-    modifierUpToTwo: boolean;
+    upByOne: boolean;
+    upByTwo: boolean;
 }
 
 
-interface AbilityI extends AbilityScore {
+interface AbilitySheet extends AbilityScore {
     result: number;
     modifier: number;
 }
     
-
 
 
 interface Race {
@@ -96,18 +97,12 @@ interface Sourceable extends BaseItem {
 }
 
 
+
 interface AutocompleteParams {
     amount: number;
     defaults: BaseItem[];
 }
-interface CharacterSheet {
-    id: number | null;
-    basicInfo: BasicInfo;
-    race: Race;
-    background: Background;
-    abilityScores: AbilityScore[];
-    characterClass: Class;
-}
+
 
 //-----begin with character sheet interfaces
 
@@ -117,6 +112,19 @@ interface SheetHeaderInfo extends BasicInfo {
     race: BaseItem;
     dndClass: BaseItem;
     background: BaseItem;
+}
+
+
+
+interface ProficienciesSheet<T extends Sourceable>{
+    item: T;
+    from: string;
+} 
+
+interface Skill {
+    label: string;
+    modifier: number;
+    proficient: boolean;
 }
 
 interface Stats {
@@ -132,101 +140,230 @@ interface Stats {
     armorClass: number;
 }
 
-interface CharacterSheetI {
+interface CharacterSheet {
     id: string;
-    basicInfo: SheetHeaderInfo;
+    info: SheetHeaderInfo;
     stats: Stats;
-    abilities: AbilityI[];
-    
+    abilities: AbilitySheet[];
+    skills: Skill[];
+    savingThrows: Skill[];
+    tools: ProficienciesSheet<ToolsProficiency>[];
+    languages: ProficienciesSheet<LanguagesProficiency>[];
+    features: Feature[];
+}
+
+//-----end with character sheet interfaces
+
+const characterSheetDefaults: CharacterSheet = {
+    id: "",
+    info: {
+        characterName: "Character Name",
+        playerName: "Player name",
+        sources: [],
+        sheetPhoto: "",
+        cardPhoto: "",
+        subclass: "Assasin",
+        level: 1,
+        dndClass: {
+            id: "",
+            name: "Barbarian"
+        },
+        background: {
+            id: "",
+            name: "Acolyte"
+        },
+        race: {
+            id: "",
+            name: "Human"
+        }
+    },
+    stats: {
+        speed: 0,
+        initiative: 0,
+        proficiencyBonus: 0,
+        hitDice: {
+            amount: 0,
+            sides: 0,
+            notation: ""
+        },
+        hitPoints: 0,
+        armorClass: 0
+    },
+    abilities: [
+        {
+            label: Ability.STRENGTH,
+            score: 0,
+            upByOne: false,
+            upByTwo: false,
+            result: 0,
+            modifier: 0
+        },
+        {
+            label: Ability.DEXTERITY,
+            score: 0,
+            upByOne: false,
+            upByTwo: false,
+            result: 0,
+            modifier: 0
+        },
+        {
+            label: Ability.CONSTITUTION,
+            score: 0,
+            upByOne: false,
+            upByTwo: false,
+            result: 0,
+            modifier: 0
+        },
+        {
+            label: Ability.INTELLIGENCE,
+            score: 0,
+            upByOne: false,
+            upByTwo: false,
+            result: 0,
+            modifier: 0
+        },
+        {
+            label: Ability.WISDOM,
+            score: 0,
+            upByOne: false,
+            upByTwo: false,
+            result: 0,
+            modifier: 0
+        },
+        {
+            label: Ability.CHARISMA,
+            score: 0,
+            upByOne: false,
+            upByTwo: false,
+            result: 0,
+            modifier: 0
+        }  
+    ],
+    skills: [
+        {
+            label: "Animal Handling (Wis)",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Arcana (Int)",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Athletics (Str)",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Deception (Cha)",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "History (Int)",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Insight (Wis)",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Intimidation (Cha)",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Investigation (Int)",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Medicine (Wis)",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Nature (Int)",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Perception (Wis)",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Performance (Cha)",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Persuasion (Cha)",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Religion (Int)",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Sleight of Hand (Dex)",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Stealth (Dex)",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Survival (Wis)",
+            modifier: 0,
+            proficient: false
+        }
+    ],
+    savingThrows: [
+        {
+            label: "Strength",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Dexterity",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Constitution",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Intelligence",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Wisdom",
+            modifier: 0,
+            proficient: false
+        },
+        {
+            label: "Charisma",
+            modifier: 0,
+            proficient: false
+        }
+    ],
+    tools: [],
+    languages: [],
+    features: []
 
 }
 
-const formDefaults  = {
-        basicInfo: {
-            characterName: 'New Character Name',
-            playerName: 'Player Name',
-            sources: [],
-            sheetPhoto: "",
-            cardPhoto: "",
-        } as BasicInfo,
-        race: {
-            id: null,
-            name: "",
-            languageProficiencies: {
-                amount: 0,
-                defaults: []
-            },
-            description: "",
-            speed: 0,
-            features: [],
-            sizeOptions: []
-        } as Race,
-        background: {
-            id: null,
-            name: "",
-            features: [],
-            description: "",
-            languageProficiencies: {
-                amount: 0,
-                defaults: []
-            },
-            toolProficiencies: {
-                amount: 0,
-                defaults: []
-            }
-        } as Background,
-        abilityScores: [
-            {
-                label: Ability.STRENGTH,
-                score: 8,
-                modifierUpToOne: false,
-                modifierUpToTwo: false
-            },
-            {
-                label: Ability.DEXTERITY,
-                score: 8,
-                modifierUpToOne: false,
-                modifierUpToTwo: false
-            },
-            {
-                label: Ability.CONSTITUTION,
-                score: 8,
-                modifierUpToOne: false,
-                modifierUpToTwo: false
-            },
-            {
-                label: Ability.INTELLIGENCE,
-                score: 8,
-                modifierUpToOne: false,
-                modifierUpToTwo: false
-            },
-            {
-                label: Ability.WISDOM,
-                score: 8,
-                modifierUpToOne: false,
-                modifierUpToTwo: false
-            },
-            {
-                label: Ability.CHARISMA,
-                score: 8,
-                modifierUpToOne: false,
-                modifierUpToTwo: false
-            }
-        ] as AbilityScore[],
-        characterClass: {
-            id: null,
-            name: "",
-            description: "",
-            hitDice: "",
-            features: [],
-            subclasses: [""],
-            toolProficiencies: {
-                amount: 0,
-                defaults: []
-            }
-        } as Class,
-} as CharacterSheet
-
 
 export type {Race, BaseItem as AutocompleteItem, Background, AbilityScore, AutocompleteParams, Feature, BasicInfo, CharacterSheet, Class, Source, Sourceable}
-export {Ability, Size, formDefaults}
+export {Ability, Size, characterSheetDefaults}

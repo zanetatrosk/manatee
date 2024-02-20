@@ -17,7 +17,6 @@ import {
 } from "@pages/CreateCharacter/definitions/characterForm";
 import CardInfo from "./cardInfo";
 import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
-import { setBackground as setBackgroundStore } from "reducers/characterReducer";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import {
   useGetBackgroundsQuery,
@@ -34,17 +33,17 @@ export default function BackgroundFrame({ backgroundForm, setForm }: { backgroun
   
     const { data: backgrounds, isLoading: loadingBackgrounds } =
       useGetBackgroundsQuery(
-        useAppSelector((state) => state.character.basicInfo.sources).map(
+        useAppSelector((state) => []).map(
           (s: Source) => s.id
         )
       );
     const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(
-      useAppSelector((state) => state.character.basicInfo.sources).map(
+      useAppSelector((state) => []).map(
         (s: Source) => s.id
       )
     );
     const { data: tools, isLoading: loadingTools } = useGetToolsQuery(
-      useAppSelector((state) => state.character.basicInfo.sources).map(
+      useAppSelector((state) => []).map(
         (s: Source) => s.id
       )
     );

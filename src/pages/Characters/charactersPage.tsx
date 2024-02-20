@@ -9,7 +9,6 @@ import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import { CHARACTERS } from "constants/characterDefinition";
 import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
-import { resetState } from "reducers/characterReducer";
 import { Character, useGetCharactersQuery } from "api/charactersApiSlice";
 
 
@@ -87,7 +86,6 @@ export default function Characters() {
             variant="outlined"
             size="small"
             onClick={() => {
-              dispatch(resetState());
               navigate("/characters/create-character");
             }}
             endIcon={<AddIcon />}

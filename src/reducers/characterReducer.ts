@@ -1,33 +1,32 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Race, Background, AbilityScore, BasicInfo, formDefaults, Class } from "@pages/CreateCharacter/definitions/characterForm";
+import { Race, Background, AbilityScore, BasicInfo,  Class, characterSheetDefaults } from "@pages/CreateCharacter/definitions/characterForm";
 
-const initialState = formDefaults;
+const initialState = characterSheetDefaults;
 export const characterReducer = createSlice({
     name: 'character',
     initialState,
     reducers: {
-        setRace (state, action: PayloadAction<Race>) {
-            state.race = action.payload;
-        },
-        setBackground (state, action: PayloadAction<Background>){
-            state.background = action.payload;
-        },
-        setAbilityScores (state, action: PayloadAction<AbilityScore[]>){
-            state.abilityScores = action.payload;
-        },
-        setBasicInfo (state, action: PayloadAction<BasicInfo>){
-            state.basicInfo = action.payload;
-        },
-        setClass (state, action: PayloadAction<Class>){
-            state.characterClass = action.payload;
-        },
-        resetState (){
-            return formDefaults;
-        }
+        // setRace (state, action: PayloadAction<Race>) {
+        //     state.race = action.payload;
+        // },
+        // setBackground (state, action: PayloadAction<Background>){
+        //     state.background = action.payload;
+        // },
+        // setAbilityScores (state, action: PayloadAction<AbilityScore[]>){
+        //     state.abilityScores = action.payload;
+        // },
+        // setBasicInfo (state, action: PayloadAction<BasicInfo>){
+        //     state.basicInfo = action.payload;
+        // },
+        // setClass (state, action: PayloadAction<Class>){
+        //     state.characterClass = action.payload;
+        // },
+        // resetState (){
+        //     return formDefaults;
+        // }
     }
 });
 
 
-export const { setRace, setBackground, setAbilityScores, setBasicInfo, setClass, resetState } = characterReducer.actions
 
 export default characterReducer.reducer;

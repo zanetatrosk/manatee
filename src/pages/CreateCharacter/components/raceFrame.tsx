@@ -22,7 +22,6 @@ import {
   Source,
 } from "@pages/CreateCharacter/definitions/characterForm";
 import CardInfo from "./cardInfo";
-import createAbilityData from "utils/abilityUtils";
 import { useGetLanguagesQuery, useGetRacesQuery } from "api/raceApiSlice";
 import { RaceForm, StepperForm } from "../definitions/stepperForm";
 
@@ -38,12 +37,12 @@ export default function RaceFrame({
   //calling api to get all races, in future this will be called when create character button is clicked
 
   const { data: races, isLoading: loadingRaces } = useGetRacesQuery(
-    useAppSelector((state) => state.character.basicInfo.sources).map(
+    useAppSelector((state) => []).map(
       (s: Source) => s.id
     )
   );
   const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(
-    useAppSelector((state) => state.character.basicInfo.sources).map(
+    useAppSelector((state) => []).map(
       (s: Source) => s.id
     )
   );
@@ -101,7 +100,6 @@ export default function RaceFrame({
               setVisibility(true);
               //setting the right properties of race
               //recalculate ability scores acording to a new race
-              const abilities = createAbilityData(value);
               setPropertyInForm("id", value.id);
               setPropertyInForm("size", value.sizeOptions[0]);
               setPropertyInForm("languagesId", value.languageProficiencies.defaults.map(l => l.id));

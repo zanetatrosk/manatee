@@ -9,11 +9,14 @@ import HomePage from "@pages/homePage";
 import { Container } from "@mui/material";
 import CharacterSheet from "@pages/CharacterSheet/characterSheet";
 import ContentPage from "@pages/Content/contentPage";
+import { characterSheetDefaults } from "@pages/CreateCharacter/definitions/characterForm";
 const darkTheme = createTheme({
   palette: {
     mode: "light",
   },
 });
+
+
 
 function App() {
   return (
@@ -39,7 +42,7 @@ function App() {
                 element={<CreateCharacter />}
               />
               <Route path="/characters/character-sheet"
-                element={<CharacterSheet/>} />
+                element={<CharacterSheet character={characterSheetDefaults}/>} />
             </Routes>
           </Container>
           {/* todo footer */}

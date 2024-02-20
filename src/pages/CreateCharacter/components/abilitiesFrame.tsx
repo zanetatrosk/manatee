@@ -58,8 +58,8 @@ function setScore(value: number): number {
 //function that calculates the full score
 function calculateFullScore(row: AbilityScore): number {
   let score = row.score;
-  if (row.modifierUpToOne) score += 1;
-  if (row.modifierUpToTwo) score += 2;
+  if (row.upByOne) score += 1;
+  if (row.upByTwo) score += 2;
   return Math.min(score, MAX);
 }
 
@@ -146,34 +146,34 @@ export default function Abilities({
                     inputProps={{
                       id: "checkbox-input",
                     }}
-                    checked={row.modifierUpToOne && !row.modifierUpToTwo}
+                    checked={row.upByOne && !row.upByTwo}
                     onChange={() => {
                       setPropertyInForm(
                         "modifierUpToOne",
                         idx,
-                        !row.modifierUpToOne
+                        !row.upByOne
                       );
                     }}
-                    value={row.modifierUpToOne}
-                    disabled={row.modifierUpToTwo}
+                    value={row.upByOne}
+                    disabled={row.upByTwo}
                   />
                 </StyledModifier>
                 <StyledModifier align="center">
                   <Checkbox
                     data-cy="ability-up-two"
-                    value={row.modifierUpToTwo}
+                    value={row.upByTwo}
                     inputProps={{
                       id: "checkbox-input",
                     }}
-                    checked={row.modifierUpToTwo && !row.modifierUpToOne}
+                    checked={row.upByTwo && !row.upByOne}
                     onChange={() => {
                       setPropertyInForm(
                         "modifierUpToTwo",
                         idx,
-                        !row.modifierUpToTwo
+                        !row.upByTwo
                       );
                     }}
-                    disabled={row.modifierUpToOne}
+                    disabled={row.upByOne}
                   />
                 </StyledModifier>
                 <StyledModifier align="center" data-cy="ability-total-score">

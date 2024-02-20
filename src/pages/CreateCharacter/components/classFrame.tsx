@@ -26,12 +26,12 @@ export default function ClassFrame({
   setForm: React.Dispatch<React.SetStateAction<StepperForm>>;
 }) {
   const { data: classes, isLoading: loadingClasses } = useGetClassesQuery(
-    useAppSelector((state) => state.character.basicInfo.sources).map(
+    useAppSelector((state) => []).map(
       (s: Source) => s.id
     )
   );
   const { data: tools, isLoading: toolsLoading } = useGetToolsQuery(
-    useAppSelector((state) => state.character.basicInfo.sources).map(
+    useAppSelector((state) => []).map(
       (s: Source) => s.id
     )
   );
