@@ -35,7 +35,7 @@ export interface RowData {
 }
 
 interface Table {
-  title?: string;
+  title: string;
   headers: string[];
   rows: RowData[];
   actionButton?: ButtonSettings;
@@ -93,8 +93,7 @@ export default function AttacksTable(props: Table) {
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box py={2}>
                 <Typography variant="body2" gutterBottom component="div">
-                  lorem ipsum dolor sit amet consectetur adipisicing elit sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua
+                  {row.description}
                 </Typography>
               </Box>
             </Collapse>
@@ -109,7 +108,7 @@ export default function AttacksTable(props: Table) {
     <Box display="flex" flexGrow={1}>
     <Card elevation={2} sx={{ flexGrow: 1 }}>
       <CardHeader
-        title="Attacks"
+        title={props.title}
         action={props.actionButton ? <Button variant="contained">Add attack</Button> : null}
       ></CardHeader>
       <TableContainer>

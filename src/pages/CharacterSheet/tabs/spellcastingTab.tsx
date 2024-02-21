@@ -48,6 +48,7 @@ export default function SpellcastingTab() {
           </Grid>
           <Grid item container sm xs={12}>
             <AttacksTable
+              title="Spell Slots"
               rows={slotsData}
               headers={["level", "count"]}
               showDescription={false}
@@ -56,6 +57,7 @@ export default function SpellcastingTab() {
         </Grid>
         <Grid item>
           <AttacksTable
+            title="Spells"
             rows={rows}
             headers={["Name", "Attack bonus", "Damage type"]}
             showDescription

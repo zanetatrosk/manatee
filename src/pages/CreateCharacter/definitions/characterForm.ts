@@ -121,10 +121,15 @@ interface ProficienciesSheet<T extends Sourceable>{
     from: string;
 } 
 
-interface Skill {
+interface BaseSkill {
     label: string;
     modifier: number;
     proficient: boolean;
+}
+
+interface Skill extends BaseSkill {
+    ability: Ability;
+    displayName: string;
 }
 
 interface Stats {
@@ -146,7 +151,7 @@ interface CharacterSheet {
     stats: Stats;
     abilities: AbilitySheet[];
     skills: Skill[];
-    savingThrows: Skill[];
+    savingThrows: BaseSkill[];
     tools: ProficienciesSheet<ToolsProficiency>[];
     languages: ProficienciesSheet<LanguagesProficiency>[];
     features: Feature[];
@@ -241,90 +246,103 @@ const characterSheetDefaults: CharacterSheet = {
     ],
     skills: [
         {
-            label: "Animal Handling (Wis)",
+            label: "Acrobatics",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.DEXTERITY,
+            displayName: "Acrobatics"
         },
         {
-            label: "Arcana (Int)",
+            label: "Animal Handling",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.WISDOM,
+            displayName: "Animal Handling"
         },
         {
-            label: "Athletics (Str)",
+            label: "Arcana",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.INTELLIGENCE,
+            displayName: "Arcana"
         },
         {
-            label: "Deception (Cha)",
+            label: "Athletics",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.STRENGTH,
+            displayName: "Athletics"
         },
         {
-            label: "History (Int)",
+            label: "Deception",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.CHARISMA,
+            displayName: "Deception"
         },
         {
-            label: "Insight (Wis)",
+            label: "History",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.INTELLIGENCE,
+            displayName: "History"
         },
         {
-            label: "Intimidation (Cha)",
+            label: "Insight",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.WISDOM,
+            displayName: "Insight"
         },
         {
-            label: "Investigation (Int)",
+            label: "Intimidation",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.CHARISMA,
+            displayName: "Intimidation"
         },
         {
-            label: "Medicine (Wis)",
+            label: "Investigation",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.INTELLIGENCE,
+            displayName: "Investigation"
         },
         {
-            label: "Nature (Int)",
+            label: "Medicine",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.WISDOM,
+            displayName: "Medicine"
         },
         {
-            label: "Perception (Wis)",
+            label: "Nature",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.INTELLIGENCE,
+            displayName: "Nature"
         },
         {
-            label: "Performance (Cha)",
+            label: "Perception",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.WISDOM,
+            displayName: "Perception"
         },
         {
-            label: "Persuasion (Cha)",
+            label: "Performance",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.CHARISMA,
+            displayName: "Performance"
         },
         {
-            label: "Religion (Int)",
+            label: "Persuasion",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.CHARISMA,
+            displayName: "Persuasion"
         },
-        {
-            label: "Sleight of Hand (Dex)",
-            modifier: 0,
-            proficient: false
-        },
-        {
-            label: "Stealth (Dex)",
-            modifier: 0,
-            proficient: false
-        },
-        {
-            label: "Survival (Wis)",
-            modifier: 0,
-            proficient: false
-        }
     ],
     savingThrows: [
         {

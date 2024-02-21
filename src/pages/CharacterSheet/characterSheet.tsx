@@ -97,7 +97,7 @@ export default function CharacterSheet() {
               <SkillTable
                 name="Skills"
                 tableData={character.skills.map((i) => ({
-                  label: i.label,
+                  label: i.displayName,
                   score: i.modifier,
                   checked: i.proficient
                 }))

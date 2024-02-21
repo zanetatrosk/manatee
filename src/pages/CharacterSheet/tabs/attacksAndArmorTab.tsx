@@ -18,12 +18,14 @@ export default function AttacksAndArmorTab(){
     return (
         <>
         <AttacksTable
+              title="Attacks"
               rows={rows}
               headers={["Name", "Attack bonus", "Damage type"]}
               showDescription
             />
             <div style={{ margin: 30 }} />
             <AttacksTable
+              title="Armor"
               rows={rows}
               headers={["Name", "Attack bonus", "Damage type"]}
               showDescription

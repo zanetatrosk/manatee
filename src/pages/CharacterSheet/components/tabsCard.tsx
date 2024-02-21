@@ -10,6 +10,7 @@ import StatsGrid from "./statsGrid";
 import AttacksAndArmorTab from "../tabs/attacksAndArmorTab";
 import SpellcastingTab from "../tabs/spellcastingTab";
 import OtherProficienciesTab from "../tabs/otherProficienciesTab";
+import FeaturesTab from "../tabs/featuresTab";
 
 export default function TabsCard() {
   const [value, setValue] = React.useState("1");
@@ -63,7 +64,7 @@ export default function TabsCard() {
           <TabPanel value="3">
             <OtherProficienciesTab/>
           </TabPanel>
-          <TabPanel value="4">Features</TabPanel>
+          <TabPanel value="4"><FeaturesTab/></TabPanel>
         </TabContext>
       </Card>
     </Box>
