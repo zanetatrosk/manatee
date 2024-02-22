@@ -4,31 +4,37 @@ import Armor from "@assets/icons/armor";
 import WeaponIcon from "@assets/icons/weapon";
 import ToolsIcon from "@assets/icons/tools";
 import LanguagesIcon from "@assets/icons/languages";
+import { useAppSelector } from "@hooks/hooksStore";
 
     
-const data = [
-    { 
-        title: "Armor",
-        data: "Light Armor, Medium Armor, Shields",
-        icon: <Armor/>
-    },
-    { 
-        title: "Weapons",
-        data: "Simple Weapons, Martial Weapons",
-        icon: <WeaponIcon/>
-    },
-    { 
-        title: "Tools",
-        data: "None",
-        icon: <ToolsIcon/>
-    },
-    { 
-        title: "Languages",
-        data: "Common, Elvish",
-        icon: <LanguagesIcon/>
-    }
-]
 export default function OtherProficienciesTab() {
+  const { languages, tools } = useAppSelector((state) => state.character);
+  const data = [
+      { 
+          title: "Armor",
+          data: "None",
+          icon: <Armor/>
+      },
+      { 
+          title: "Weapons",
+          data: "None",
+          icon: <WeaponIcon/>
+      },
+      { 
+          title: "Tools",
+          data: "None",
+          icon: <ToolsIcon/>
+      },
+      { 
+          title: "Languages",
+          data: "None",
+          icon: <LanguagesIcon/>
+      }
+  ]
+
+  if(languages.length > 0) data[3].data = languages.map(l => l.item.name).join(", ");
+  if(tools.length > 0) data[2].data = tools.map(t => t.item.name).join(", ");
+
   return (
     <>
       <Grid container spacing={2}>
