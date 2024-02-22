@@ -1,55 +1,65 @@
 import { Grid } from "@mui/material";
 import AttacksTable, { RowData } from "../components/attacksTable";
 import StatsGrid from "../components/statsGrid";
-
-
+import { useAppSelector } from "@hooks/hooksStore";
+import { Slot, Spell } from "@pages/CreateCharacter/definitions/characterForm";
 
 const rows: RowData[] = [
-    {
-      columns: ["Longsword", "+5", "Slashing"],
-      description: "lorem ipsum dolor sit amet consectetur adipisicing elit",
-    },
-    {
-      columns: ["Dagger", "+3", "Piercing"],
-      description: "lorem ipsum dolor sit amet consectetur adipisicing elit",
-    },
-    {
-      columns: ["Fireball", "+8", "Fire"],
-      description: "lorem ipsum dolor sit amet consectetur adipisicing elit",
-    },
+  {
+    columns: ["Longsword", "+5", "Slashing"],
+    description: "lorem ipsum dolor sit amet consectetur adipisicing elit",
+  },
+  {
+    columns: ["Dagger", "+3", "Piercing"],
+    description: "lorem ipsum dolor sit amet consectetur adipisicing elit",
+  },
+  {
+    columns: ["Fireball", "+8", "Fire"],
+    description: "lorem ipsum dolor sit amet consectetur adipisicing elit",
+  },
 ];
 
 const slotsData = [
-    {
-      columns: ["1", "5"],
-    },
-    {
-      columns: ["2", "3"],
-    },
-    {
-      columns: ["3", "1"],
-    },
+  {
+    columns: ["1", "5"],
+  },
+  {
+    columns: ["2", "3"],
+  },
+  {
+    columns: ["3", "1"],
+  },
 ];
 
 export default function SpellcastingTab() {
+  const { spellcasting } = useAppSelector((state) => state.character);
+  if (!spellcasting) return null;
+
   return (
     <>
       <Grid container spacing={2} flexDirection={"column"}>
         <Grid container item spacing={2}>
-          <Grid item sm={7} xs={12}>
+          <Grid item sm={7} xs={12} container>
             <StatsGrid
               title="Magic"
               items={[
-                { header: "speed", value: "12 ft" },
-                { header: "Initiative", value: "+2" },
-                { header: "Prof. Bonus", value: "+2" },
+                { header: "ability", value: spellcasting.ability.slice(0, 4)},
+                {
+                  header: "modifiers",
+                  value: spellcasting.modifier.toString(),
+                },
+                { header: "saveDc", value: spellcasting.saveDc.toString()},
               ]}
             />
           </Grid>
           <Grid item container sm xs={12}>
             <AttacksTable
               title="Spell Slots"
-              rows={slotsData}
+              rows={spellcasting.slots.map((slot: Slot) => {
+                return {
+                  columns: [slot.level.toString(), slot.count.toString()],
+                };
+              })}
               headers={["level", "count"]}
               showDescription={false}
             />
@@ -58,8 +68,13 @@ export default function SpellcastingTab() {
         <Grid item>
           <AttacksTable
             title="Spells"
-            rows={rows}
-            headers={["Name", "Attack bonus", "Damage type"]}
+            rows={spellcasting.spells.map((spell: Spell) => {
+              return {
+                columns: [spell.name, spell.level.toString(), spell.range],
+                description: spell.description,
+              };
+            })}
+            headers={["Name", "Level", "Range"]}
             showDescription
           />
         </Grid>

@@ -11,6 +11,7 @@ import AttacksAndArmorTab from "../tabs/attacksAndArmorTab";
 import SpellcastingTab from "../tabs/spellcastingTab";
 import OtherProficienciesTab from "../tabs/otherProficienciesTab";
 import FeaturesTab from "../tabs/featuresTab";
+import { useAppSelector } from "@hooks/hooksStore";
 
 export default function TabsCard() {
   const [value, setValue] = React.useState("1");
@@ -19,22 +20,7 @@ export default function TabsCard() {
     setValue(newValue);
   };
 
-  const rows: RowData[] = [
-    {
-      columns: ["Longsword", "+5", "Slashing"],
-      description: "lorem ipsum dolor sit amet consectetur adipisicing elit",
-    },
-    {
-      columns: ["Dagger", "+3", "Piercing"],
-      description: "lorem ipsum dolor sit amet consectetur adipisicing elit",
-    },
-    {
-      columns: ["Fireball", "+8", "Fire"],
-      description: "lorem ipsum dolor sit amet consectetur adipisicing elit",
-    },
-  ];
-
- 
+  const { spellcasting } = useAppSelector((state) => state.character);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -50,21 +36,23 @@ export default function TabsCard() {
               variant="scrollable"
             >
               <Tab label="Attacks and Armor" value="1" />
-              <Tab label="Spellcasting" value="2" />
+              {spellcasting && <Tab label="Spellcasting" value="2" />}
               <Tab label="Other prof. & languages" value="3" />
               <Tab label="Features" value="4" />
             </TabList>
           </Box>
           <TabPanel value="1">
-            <AttacksAndArmorTab/>
+            <AttacksAndArmorTab />
           </TabPanel>
           <TabPanel value="2">
-            <SpellcastingTab/>
+            <SpellcastingTab />
           </TabPanel>
           <TabPanel value="3">
-            <OtherProficienciesTab/>
+            <OtherProficienciesTab />
           </TabPanel>
-          <TabPanel value="4"><FeaturesTab/></TabPanel>
+          <TabPanel value="4">
+            <FeaturesTab />
+          </TabPanel>
         </TabContext>
       </Card>
     </Box>

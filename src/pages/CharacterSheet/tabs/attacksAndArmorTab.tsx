@@ -1,3 +1,4 @@
+import { useAppSelector } from "@hooks/hooksStore";
 import AttacksTable, { RowData } from "../components/attacksTable";
 
 const rows: RowData[] = [
@@ -15,6 +16,7 @@ const rows: RowData[] = [
     },
   ];
 export default function AttacksAndArmorTab(){
+  const { armor } = useAppSelector((state) => state.character);
     return (
         <>
         <AttacksTable
@@ -26,8 +28,8 @@ export default function AttacksAndArmorTab(){
             <div style={{ margin: 30 }} />
             <AttacksTable
               title="Armor"
-              rows={rows}
-              headers={["Name", "Attack bonus", "Damage type"]}
+              rows={[ {columns: [armor.name, armor.baseArmorClass.toString(), armor.type], description: armor.description } ]}
+              headers={["Name", "Base armor class", "Damage type"]}
               showDescription
             />
         </>

@@ -1,3 +1,4 @@
+import { B } from "msw/lib/glossary-de6278a9";
 import { LanguagesProficiency, ToolsProficiency } from "./stepperForm";
 
 
@@ -115,7 +116,34 @@ interface SheetHeaderInfo extends BasicInfo {
     background: BaseItem;
 }
 
+export interface Armor extends Sourceable {
+    type: string;
+    baseArmorClass: number;
+    strengthRequirement: number;
+    stealthDisadvantage: boolean;
+    description: string;
+}
+export interface Slot {
+    level: number;
+    count: number;
+}
+export interface Spell extends Sourceable {
+    level: number;
+    school: string;
+    castingTime: string;
+    range: string;
+    duration: string;
+    description: string;
+    higherLevel: string;
+}
 
+interface Spellcasting {
+    ability: Ability;
+    modifier: number;
+    saveDc: number;
+    slots: Slot[];
+    spells: Spell[];
+}
 
 interface ProficienciesSheet<T extends Sourceable>{
     item: T;
@@ -156,6 +184,8 @@ interface CharacterSheet {
     tools: ProficienciesSheet<ToolsProficiency>[];
     languages: ProficienciesSheet<LanguagesProficiency>[];
     features: Feature[];
+    spellcasting?: Spellcasting;
+    armor: Armor;
 }
 
 //-----end with character sheet interfaces
@@ -379,10 +409,23 @@ const characterSheetDefaults: CharacterSheet = {
     ],
     tools: [],
     languages: [],
-    features: []
+    features: [],
+    armor: {
+        id: "",
+        name: "",
+        type: "",
+        baseArmorClass: 0,
+        strengthRequirement: 0,
+        stealthDisadvantage: false,
+        description: "",
+        source: {
+            id: "",
+            name: ""
+        }
+    }
 
 }
 
 
-export type {Race, BaseItem as AutocompleteItem, Background, AbilityScore, AutocompleteParams, Feature, BasicInfo, CharacterSheet, Class, Source, Sourceable}
+export type {Race, BaseItem as AutocompleteItem, Background, AbilityScore, AutocompleteParams, Feature, BasicInfo, CharacterSheet, Class, Source, Sourceable, Spellcasting}
 export {Ability, Size, characterSheetDefaults}

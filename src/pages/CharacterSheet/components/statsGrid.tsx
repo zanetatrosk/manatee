@@ -13,8 +13,8 @@ function LittleCard({item}: {item: Item}) {
             {item.header}
           </Typography>
         </Grid>
-        <Grid item container justifyContent="center">
-          <Typography variant="h4">{item.value}</Typography>
+        <Grid item container justifyContent="center" component="div">
+          <Typography variant="h4" sx={{ textOverflow: 'ellipsis' }} noWrap>{item.value}</Typography>
         </Grid>
       </Grid>
     </Paper>
@@ -33,14 +33,14 @@ export default function StatsGrid(props: Props) {
 
   return (
     <Box display="flex" flexGrow={1}>
-      <Card sx={{ p: 4, justifyContent: "center", flexGrow: 1 }} >
+      <Card sx={{ p: 4 }}>
         <Grid container flexDirection={"column"} spacing={3} >
           <Grid item>
             <Typography variant="h5" component="div">
               {props.title}
             </Typography>
           </Grid>
-          <Grid container item spacing={{ xs: 2, md: 3 }} columns={{ xs: 12, md: 12 }} >
+          <Grid container item spacing={{ xs: 2, md: 3 }} columns={{ xs: 12, md: 12 }}>
             {props.items.map((i: Item) => (
               <Grid item container justifyContent={"center"} xs={6} md={6} lg={4} xl={4} key={i.header}>
                 <LittleCard 
