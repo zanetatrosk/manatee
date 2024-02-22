@@ -15,23 +15,13 @@ const races: Race[] = [
     features: [
         {
         title: "Darkvision",
-        text: "As an action, you touch a stone object no larger than 3 feet in any dimension and imbue it with magic. For the duration, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. If you chose a sphere, the radius is doubled. Once used, this trait can’t be used again until you finish a long rest.",
+        text: "...",
+        levelMinimum: 1,
         },
         {
         title: "Dwarven Resilience",
-        text: "The hit point maximum of a dwarf is increased by 1, and it increases by 1 every time the dwarf gains a level.",
-        },
-        {
-        title: "Dwarven Combat Training",
-        text: "As an action, you can touch a piece of nonmagical metal and imbue it with one of your smith’s specialties, as if you had cast the magic weapon spell on it. For the purpose of this trait, a martial weapon is a melee or ranged weapon that requires an Attack roll, and a ranged weapon is any weapon that can be used to make a ranged Attack.",
-        },
-        {
-        title: "Tool Proficiency",
-        text: "This trait grants you proficiency with the artisan’s tools of your choice: smith’s tools, brewer’s supplies, or mason’s tools.",
-        },
-        {
-        title: "Stonecunning",
-        text: "The dwarf has advantage on Intelligence (History) checks related to the origin of stonework, and it can make such checks untrained.",
+        text: "...",
+        levelMinimum: 1,
         },
     ],
     abilityScorePlus2: ["CONSTITUTION"],
@@ -54,14 +44,17 @@ const races: Race[] = [
         {
         title: "Darkvision",
         text: "...",
+        levelMinimum: 1,
         },
         {
         title: "Fey Ancestry",
         text: "The elf has advantage on saving throws against being charmed, and magic can’t put the elf to sleep.",
+        levelMinimum: 1,
         },
         {
         title: "Skill Versatility",
         text: "...",
+        levelMinimum: 1,
         },
     ],
     abilityScorePlus2: ["DEXTERITY"],
@@ -84,14 +77,17 @@ const races: Race[] = [
         {
         title: "Lucky",
         text: "...",
+        levelMinimum: 1,
         },
         {
         title: "Brave",
         text: "...",
+        levelMinimum: 1,
         },
         {
         title: "Halfling Nimbleness",
         text: "...",
+        levelMinimum: 1,
         },
     ],
     abilityScorePlus2: ["DEXTERITY"],
@@ -132,6 +128,7 @@ const backgrounds: Background[] = [
         {
           title: "Shelter of the Faithful",
           text: "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.",
+          levelMinimum: 1,
         },
       ],
     },
@@ -152,6 +149,7 @@ const backgrounds: Background[] = [
         {
           title: "False Identity",
           text: "You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona. Additionally, you can forge documents including official papers and personal letters, as long as you have seen an example of the kind of document or the handwriting you are trying to copy.",
+          levelMinimum: 1
         },
       ],
     },
@@ -236,12 +234,14 @@ const sources: AutocompleteItem[] = [
           title: "Rage",
           text:
             "In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action. While raging, you gain the following benefits if you aren’t wearing heavy armor: You have advantage on Strength checks and Strength saving throws. When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table. You have resistance to bludgeoning, piercing, and slashing damage. If you are able to cast spells, you can’t cast them or concentrate on them while raging. Your rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven’t attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action. Once you have raged the number of times shown for your barbarian level in the Rages column of the Barbarian table, you must finish a long rest before you can rage again.",
-        },
+          levelMinimum: 1,
+          },
         {
           title: "Unarmored Defense",
           text:
             "While you are not wearing any armor, your Armor Class equals 10 +T your Dexterity modifier + your Constitution modifier. You can use a shield and still gain this benefit.",
-        },
+          levelMinimum: 1,
+          },
       ],
       description:
         "For some, their rage springs from a communion with fierce animal spirits. Others draw from a roiling reservoir of anger at a world full of pain. For every barbarian, rage is a power that fuels not just a battle frenzy but also uncanny reflexes, resilience, and feats of strength.",
@@ -260,12 +260,14 @@ const sources: AutocompleteItem[] = [
           title: "Spellcasting",
           text:
             "You have learned to untangle and reshape the fabric of reality in harmony with your wishes and music. Your spells are part of your vast repertoire, magic that you can tune to different situations. See chapter 10 for the general rules of spellcasting and chapter 11 for the bard spell list.",
-        },
+          levelMinimum: 1,
+          },
         {
           title: "Bardic Inspiration",
           text:
             "You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6. Once within the next 10 minutes, the creature can roll the die and add the number rolled to one ability check, attack roll, or saving throw it makes. The creature can wait until after it rolls the d20 before deciding to use the Bardic Inspiration die, but must decide before the DM says whether the roll succeeds or fails. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time. You can use this feature a number of times equal to your proficiency bonus, and you regain all expended uses when you finish a long rest.",
-        },
+          levelMinimum: 1,
+          },
       ],
       description:
         "Humming as she traces her fingers over an ancient monument in a long-forgotten ruin, a half-elf in rugged leathers finds knowledge springing into her mind, conjured forth by the magic of her song—knowledge of the people who constructed the monument and the mythic saga it depicts.",

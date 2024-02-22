@@ -71,6 +71,7 @@ interface Class {
 interface Feature{
     title: string;
     text: string;
+    levelMinimum?: number;
 }
 
 //interface Background similar as Race

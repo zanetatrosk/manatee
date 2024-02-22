@@ -19,7 +19,6 @@ export default function CharacterSheet() {
   const dispatch = useAppDispatch();
   useEffect(() => {
     if(character) dispatch(setCharacterSheet({...character}));
-    debugger;
   }, [character]);
   
   if( !character ) return (<div>loading...</div>)

@@ -1,6 +1,7 @@
 import { useAppSelector } from "@hooks/hooksStore";
 import AttacksTable, { RowData } from "../components/attacksTable";
 import { features } from "process";
+import { Feature } from "@pages/CreateCharacter/definitions/characterForm";
 
 const rows: RowData[] = [
   {
@@ -23,9 +24,9 @@ export default function FeaturesTab() {
     <>
       <AttacksTable
         title="Features"
-        rows={features?.map((f) => {
+        rows={features?.map((f: Feature) => {
           return {
-            columns: [f.title, '1'],
+            columns: [f.title, f.levelMinimum?.toString() || "Not known"],
             description: f.text,
           };
         })}
