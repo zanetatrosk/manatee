@@ -4,16 +4,24 @@ import AbilityCard from "./components/abilityCard";
 import SkillTable from "./components/skillTable";
 import StatsGrid from "./components/statsGrid";
 import TabsCard from "./components/tabsCard";
-import React from "react";
+import React, { useEffect } from "react";
 import { useGetCharacterByIdQuery } from "api/charactersApiSlice";
 import { useParams } from "react-router-dom";
+import { useAppDispatch } from "@hooks/hooksStore";
+import { setCharacterSheet } from "reducers/characterReducer";
 
 
 
 export default function CharacterSheet() {
 
   let { id } = useParams();
-  const {data : character} = useGetCharacterByIdQuery(id!);
+  const {data : character } = useGetCharacterByIdQuery(id!);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if(character) dispatch(setCharacterSheet({...character}));
+    debugger;
+  }, [character]);
+  
   if( !character ) return (<div>loading...</div>)
 
   const stats = [ {header: "speed", value: character.stats.speed.toString()}, 

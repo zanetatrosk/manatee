@@ -1,4 +1,6 @@
+import { useAppSelector } from "@hooks/hooksStore";
 import AttacksTable, { RowData } from "../components/attacksTable";
+import { features } from "process";
 
 const rows: RowData[] = [
   {
@@ -16,14 +18,20 @@ const rows: RowData[] = [
 ];
 
 export default function FeaturesTab() {
+  const {features} = useAppSelector((state) => state.character);
   return (
-    <div>
+    <>
       <AttacksTable
         title="Features"
-        rows={rows}
-        headers={["Name", "Attack bonus", "Damage type"]}
+        rows={features?.map((f) => {
+          return {
+            columns: [f.title, '1'],
+            description: f.text,
+          };
+        })}
+        headers={["title", "level minimum"]}
         showDescription
       />
-    </div>
+    </>
   );
 }
