@@ -1,4 +1,4 @@
-import { AutocompleteItem, Background, Class, Race, Source } from '@pages/CreateCharacter/definitions/characterForm';
+import { AutocompleteItem, Background, Class, Race, Source, Spell } from '@pages/CreateCharacter/definitions/characterForm';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 
@@ -44,13 +44,12 @@ export const generalContentApiSlice = createApi({
                 params: { source: src },
             })
         }),
-        addCharacter: builder.mutation<void, void>({
-            query: (body) => ({
-                url: 'characters',
-                method: 'POST',
-                body,
-            }),
-        }),    
+        getSpells: builder.query<Spell[], void>({
+            query: (src) => ({
+                url: '/spells',
+                method: 'GET',
+            })
+        }),
         
     }),
 });
@@ -62,4 +61,5 @@ export const {
     useGetBackgroundsQuery,
     useGetLanguagesQuery,
     useGetToolsQuery,
+    useGetSpellsQuery,
  } = generalContentApiSlice;

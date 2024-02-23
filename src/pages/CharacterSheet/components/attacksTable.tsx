@@ -34,7 +34,7 @@ export interface RowData {
   description?: string;
 }
 
-interface Table {
+export interface Table {
   title: string;
   headers: string[];
   rows: RowData[];
@@ -42,6 +42,7 @@ interface Table {
   showDescription?: boolean;
   pagination?: Pagination;
 }
+
 //styles to override padding none in cell
 export default function AttacksTable(props: Table) {
   const [page, setPage] = useState(0);
@@ -83,7 +84,7 @@ export default function AttacksTable(props: Table) {
                 size="small"
                 onClick={() => setOpen(!open)}
               >
-                {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon />}
               </IconButton>
             </TableCell>
           )}
