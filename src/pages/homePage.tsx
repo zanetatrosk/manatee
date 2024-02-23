@@ -30,6 +30,7 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  TextField,
   Toolbar,
   Typography,
   alpha,
@@ -170,7 +171,9 @@ function EnhancedTable() {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        {selected.length > 0 && <EnhancedTableToolbar numSelected={selected.length} />}
+        {selected.length > 0 && (
+          <EnhancedTableToolbar numSelected={selected.length} />
+        )}
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -180,7 +183,7 @@ function EnhancedTable() {
           >
             <TableHead>
               <TableRow>
-                <TableCell/>
+                <TableCell />
                 <TableCell>Dessert (100g serving)</TableCell>
                 <TableCell align="right">Calories</TableCell>
                 <TableCell align="right">Fat&nbsp;(g)</TableCell>
@@ -261,12 +264,21 @@ export default function HomePage() {
         Open dialog
       </Button>
       <Dialog fullWidth open={open} onClose={handleClose} maxWidth="lg">
-        <DialogTitle>Add a spell</DialogTitle>
+        <DialogTitle>
+          Add a spell 
+          <TextField variant="outlined" label="Search" fullWidth sx={{mt: 3}}/>
+        </DialogTitle>
+
         <DialogContent>
           <EnhancedTable />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
+          <Button variant="outlined" onClick={handleClose}>
+            Add Selected
+          </Button>
+          <Button variant="outlined" onClick={handleClose}>
+            Close
+          </Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

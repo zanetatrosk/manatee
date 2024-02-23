@@ -8,7 +8,7 @@ const rows: RowData[] = [
     },
     {
       columns: ["Dagger", "+3", "Piercing"],
-      description: "lorem ipsum dolor sit amet consectetur adipisicing elit",
+      description: " lorem ipsum dolor sit amet consectetur adipisicing elitlorem ipsum dolor sit amet consecte",
     },
     {
       columns: ["Fireball", "+8", "Fire"],
