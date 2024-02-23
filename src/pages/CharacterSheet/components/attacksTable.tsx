@@ -30,6 +30,7 @@ interface Pagination {
 }
 
 export interface RowData {
+  id?: string;
   columns: string[];
   description?: string;
 }

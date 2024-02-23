@@ -1,0 +1,190 @@
+import { Toolbar, alpha, Typography, TableRow, TableCell, Checkbox, IconButton, Collapse, Box, Paper, TableContainer, Table, TableHead, TableBody, TablePagination } from "@mui/material";
+import { RowData } from "@pages/CharacterSheet/components/attacksTable";
+import { useGetSpellsQuery } from "api/raceApiSlice";
+import React, { useState } from "react";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+
+
+function EnhancedTableToolbar({ numSelected }: { numSelected: number }) {
+    return (
+      <Toolbar
+        sx={{
+          pl: { sm: 2 },
+          pr: { xs: 1, sm: 1 },
+          ...(numSelected > 0 && {
+            bgcolor: (theme) =>
+              alpha(
+                theme.palette.primary.main,
+                theme.palette.action.activatedOpacity
+              ),
+          }),
+        }}
+      >
+        {numSelected > 0 && (
+          <Typography
+            sx={{ flex: "1 1 100%" }}
+            color="inherit"
+            variant="subtitle1"
+            component="div"
+          >
+            {numSelected} selected
+          </Typography>
+        )}
+      </Toolbar>
+    );
+  }
+  
+  export const useSpells = (page: number, size: number, query: string): RowData[] => {
+  
+    const spellsInfo = useGetSpellsQuery({page: page, size: size, query: query}).data; 
+    debugger;
+    if (spellsInfo) {
+  
+        return spellsInfo.content.map((spell) => {
+          return {
+            id: spell.id,
+            columns: [spell.name, spell.level.toString(), spell.range],
+            description: spell.description,
+          };
+        })
+    }
+    return [];
+  }
+  
+  function Row(props: { row: RowData; idx: number; lastIdx: number, handleClick: (event: React.MouseEvent<unknown>, id: string) => void, selected: boolean}) {
+    const { row, idx, lastIdx, selected } = props;
+    const [open, setOpen] = useState(false);
+  
+    return (
+      <React.Fragment>
+        <TableRow
+          key={idx}
+          aria-checked={selected}
+          tabIndex={-1}
+          selected={selected}
+         
+        >
+          <>
+            <TableCell padding="checkbox">
+              <Checkbox
+                color="primary"
+                checked={selected}
+                onClick={(event) => { debugger; props.handleClick(event, row.id!)}}
+              />
+            </TableCell>
+            {row.columns.map((col) => (
+              <TableCell component="th" scope="row">
+                <Typography variant="body2">{col}</Typography>
+              </TableCell>
+            ))}
+          </>
+          {row.description && (
+            <TableCell align="right" padding="checkbox">
+              <IconButton
+                sx={{ mr: 1 }}
+                aria-label="expand row"
+                size="small"
+                onClick={() => setOpen(!open)}
+              >
+                {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+              </IconButton>
+            </TableCell>
+          )}
+        </TableRow>
+        <TableRow sx={[!open && { "& > *": { borderBottom: 0 } }]}>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <Box py={2} display="flex" flexGrow={1} sx={{ overflow: "auto" }}>
+                <Typography variant="body2" gutterBottom>
+                  {row.description}
+                </Typography>
+              </Box>
+            </Collapse>
+          </TableCell>
+        </TableRow>
+      </React.Fragment>
+    );
+  }
+
+export default function FilteredTable({rows, totalElements, setPagination }: {rows: RowData[], totalElements: number,  setPagination: (pag: {page: number, size: number, query: string}) => void}){
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  
+  const [selected, setSelected] = React.useState<Set<string>>(new Set());
+  const isSelected = (id: string) => selected.has(id);
+   
+
+
+
+  const handleClick = (event: React.MouseEvent<unknown>, id: string) => {
+    const newSelected = new Set(selected);
+    if (newSelected.has(id)) {
+      newSelected.delete(id);
+    } else {
+      newSelected.add(id);
+    }
+    setSelected(newSelected);
+  };
+
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPagination({page: newPage, size: rowsPerPage, query: ""});
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+    setPagination({page: 0, size: parseInt(event.target.value, 10), query: ""});
+  };
+
+  // Avoid a layout jump when reaching the last page with empty rows.
+  const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+
+  return (
+    <Box sx={{ width: "100%" }} >
+      <Paper sx={{ width: "100%", mb: 2 }} elevation={3}>
+        {selected.size > 0 && (
+          <EnhancedTableToolbar numSelected={selected.size} />
+        )}
+        <TableContainer>
+          <Table
+            sx={{ minWidth: 750 }}
+            aria-labelledby="tableTitle"
+            stickyHeader
+            
+          >
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell>Name</TableCell>
+                <TableCell>Level</TableCell>
+                <TableCell>Range</TableCell>
+                <TableCell align="right" />
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row, index) => 
+                  <Row key={row.id} row={row} idx={index} lastIdx={rows.length - 1} handleClick={(event, str) => handleClick(event, str)} selected={isSelected(row.id!)} />
+                )}
+              
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={totalElements || 0}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Paper>
+    </Box>
+  );
+}
