@@ -113,9 +113,6 @@ export default function FilteredTable({rows, totalElements, setPagination }: {ro
   
   const [selected, setSelected] = React.useState<Set<string>>(new Set());
   const isSelected = (id: string) => selected.has(id);
-   
-
-
 
   const handleClick = (event: React.MouseEvent<unknown>, id: string) => {
     const newSelected = new Set(selected);
