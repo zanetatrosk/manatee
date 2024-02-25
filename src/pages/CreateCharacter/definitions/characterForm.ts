@@ -124,7 +124,7 @@ export interface Armor extends Sourceable {
     description: string;
 }
 
-export interface Demage {
+export interface Damage {
     amount: number;
     sides: number;
     notation: string;
@@ -135,8 +135,8 @@ export interface Weapon extends Sourceable {
     type: string;
     range: number;
     properties: string[];
-    demageType: string;
-    demage: Demage;
+    damageType: string;
+    damage: Damage;
 }
 
 export interface Slot {
