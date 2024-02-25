@@ -20,7 +20,6 @@ export default function HomePage() {
   const closeDialog = () => {
     setOpen(false);
     setPagination({ page: 0, size: 5, query: "" });
-    setSelected([]);
   };
 
   const saveSelected = () => {

@@ -1,4 +1,4 @@
-import { CharacterSheet } from "@pages/CreateCharacter/definitions/characterForm";
+import { CharacterSheet, Spell } from "@pages/CreateCharacter/definitions/characterForm";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 
@@ -12,6 +12,13 @@ export const charactersApiSlice = createApi({
         }),
         getCharacterById: builder.query<CharacterSheet, string>({
         query: (id) => `characters/${id}`,
+        }),
+        postSpellsByCharacterId: builder.mutation<Spell[], {id: string, spells: string[]}>({
+        query: ({id, spells}) => ({
+            url: `characters/${id}/spells`,
+            method: 'PUT',
+            body: spells,
+        }),
         }),
         addCharacter: builder.mutation<void, CharacterSheet>({
         query: (body) => ({
@@ -28,4 +35,4 @@ export const charactersApiSlice = createApi({
         }),
     }),
     });
-    export const { useGetCharactersQuery, useGetCharacterByIdQuery } = charactersApiSlice;
+    export const { useGetCharactersQuery, useGetCharacterByIdQuery, usePostSpellsByCharacterIdMutation } = charactersApiSlice;

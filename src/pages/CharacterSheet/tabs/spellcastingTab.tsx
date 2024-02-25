@@ -5,40 +5,39 @@ import { useAppSelector } from "@hooks/hooksStore";
 import { Slot, Spell } from "@pages/CreateCharacter/definitions/characterForm";
 import ButtonAddItems from "../tabsComponents/modalAddItems/buttonAddItems";
 import { useSpells } from "../tabsComponents/modalAddItems/filteredTable";
+import { usePostSpellsByCharacterIdMutation } from "api/charactersApiSlice";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-const rows: RowData[] = [
-  {
-    columns: ["Longsword", "+5", "Slashing"],
-    description: "lorem ipsum dolor sit amet consectetur adipisicing elit",
-  },
-  {
-    columns: ["Dagger", "+3", "Piercing"],
-    description: "lorem ipsum dolor sit amet consectetur adipisicing elit",
-  },
-  {
-    columns: ["Fireball", "+8", "Fire"],
-    description: "lorem ipsum dolor sit amet consectetur adipisicing elit",
-  },
-];
-
-const slotsData = [
-  {
-    columns: ["1", "5"],
-  },
-  {
-    columns: ["2", "3"],
-  },
-  {
-    columns: ["3", "1"],
-  },
-];
 
 export default function SpellcastingTab() {
+  const {id} = useParams();
+  const [postSpellsByCharacterId] = usePostSpellsByCharacterIdMutation();
   const { spellcasting } = useAppSelector((state) => state.character);
+  const [tableSpells, setSpells] = useState<RowData[]>(spellcasting?.spells.map((spell: Spell) => {
+    return {
+      columns: [spell.name, spell.level.toString(), spell.range],
+      id: spell.id,
+      description: spell.description
+    };
+  }) || []);
+  const usePostSpells = (spells: string[]) => {
+    if(id){
+      postSpellsByCharacterId({id, spells}).unwrap().then((s: Spell[]) => {
+        setSpells(s.map((spell: Spell) => {
+          return {
+            columns: [spell.name, spell.level.toString(), spell.range],
+            id: spell.id,
+            description: spell.description
+          };
+        }));
+      });
+    } 
+    
+  };
+  
   if (!spellcasting) return null;
-
-
-  return (
+  return (  
     <>
       <Grid container spacing={2} flexDirection={"column"}>
         <Grid container item spacing={2}>
@@ -71,14 +70,9 @@ export default function SpellcastingTab() {
         <Grid item>
           <AttacksTable
             title="Spells"
-            rows={spellcasting.spells.map((spell: Spell) => {
-              return {
-                columns: [spell.name, spell.level.toString(), spell.range],
-                description: spell.description,
-              };
-            })}
+            rows={tableSpells}
             headers={["Name", "Level", "Range"]}
-            actionButton={<ButtonAddItems usePaginationHook={useSpells} defaults={spellcasting.spells.map( (spell: Spell) => spell.id )}/>}
+            actionButton={<ButtonAddItems usePaginationHook={useSpells} defaults={spellcasting.spells.map( (spell: Spell) => spell.id )} sendToBEHook={usePostSpells}/>}
             showDescription
           />
         </Grid>

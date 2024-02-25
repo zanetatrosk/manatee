@@ -3,9 +3,10 @@ import React from "react";
 import { PaginationParams } from "api/raceApiSlice";
 import FilteredTable, { useSpells } from "./filteredTable";
 import ModalAddItems from "./modal";
+import { send } from "process";
 
 
-export default function ButtonAddItems({usePaginationHook, defaults}: {usePaginationHook: any, defaults: string[]}) {
+export default function ButtonAddItems({usePaginationHook, defaults, sendToBEHook}: {usePaginationHook: any, defaults: string[], sendToBEHook: any}) {
   const [open, setOpen] = React.useState(false);
   const [pagination, setPagination] = React.useState<PaginationParams>({
     page: 0,
@@ -19,12 +20,11 @@ export default function ButtonAddItems({usePaginationHook, defaults}: {usePagina
   const closeDialog = () => {
     setOpen(false);
     setPagination({ page: 0, size: 5, query: "" });
-    setSelected([]);
   };
 
   const saveSelected = () => {
     console.log(selected);
-    //logic for saving todo
+    sendToBEHook(selected);
     closeDialog();
   };
 
