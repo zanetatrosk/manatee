@@ -1,4 +1,4 @@
-import { Card, CardMedia, Grid, Paper } from "@mui/material";
+import { Button, Card, CardMedia, Grid, Paper } from "@mui/material";
 import HeaderCard from "./components/headerCard";
 import AbilityCard from "./components/abilityCard";
 import SkillTable from "./components/skillTable";
@@ -9,6 +9,7 @@ import { useGetCharacterByIdQuery } from "api/charactersApiSlice";
 import { useParams } from "react-router-dom";
 import { useAppDispatch } from "@hooks/hooksStore";
 import { setCharacterSheet } from "reducers/characterReducer";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 
@@ -32,6 +33,14 @@ export default function CharacterSheet() {
                 ]
   return (
     <React.Fragment>
+        <Grid container mb={1}>
+          <Grid item xs={10}>
+            <Button variant="outlined" startIcon={<ArrowBackIcon/>}> Back to Create</Button>
+          </Grid>
+          <Grid item xs={2} container justifyContent={"flex-end"}>
+            <Button variant="contained">Level up</Button>
+          </Grid>  
+        </Grid>
       <Paper sx={{ p: 2 }} elevation={4}>
         <Grid container flexDirection={"column"} spacing={5}>
           {/* first row */}
