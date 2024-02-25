@@ -5,7 +5,7 @@ import FilteredTable, { useSpells } from "./filteredTable";
 import ModalAddItems from "./modal";
 
 
-export default function ButtonAddItems() {
+export default function ButtonAddItems({usePaginationHook, defaults}: {usePaginationHook: any, defaults: string[]}) {
   const [open, setOpen] = React.useState(false);
   const [pagination, setPagination] = React.useState<PaginationParams>({
     page: 0,
@@ -13,8 +13,8 @@ export default function ButtonAddItems() {
     query: "",
   });
 
-  const [selected, setSelected] = React.useState<string[]>([]);
-  const spells = useSpells(pagination.page, pagination.size, pagination.query);
+  const [selected, setSelected] = React.useState<string[]>(defaults);
+  const spells = usePaginationHook(pagination.page, pagination.size, pagination.query);
 
   const closeDialog = () => {
     setOpen(false);
@@ -35,8 +35,9 @@ export default function ButtonAddItems() {
         onClick={() => {
           setOpen(true);
         }}
+        size="small"
       >
-        Add Items
+        Add Spells
       </Button>
 
       <ModalAddItems

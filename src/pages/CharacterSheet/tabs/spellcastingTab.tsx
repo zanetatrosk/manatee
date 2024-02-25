@@ -4,6 +4,7 @@ import StatsGrid from "../components/statsGrid";
 import { useAppSelector } from "@hooks/hooksStore";
 import { Slot, Spell } from "@pages/CreateCharacter/definitions/characterForm";
 import ButtonAddItems from "../tabsComponents/modalAddItems/buttonAddItems";
+import { useSpells } from "../tabsComponents/modalAddItems/filteredTable";
 
 const rows: RowData[] = [
   {
@@ -35,6 +36,7 @@ const slotsData = [
 export default function SpellcastingTab() {
   const { spellcasting } = useAppSelector((state) => state.character);
   if (!spellcasting) return null;
+
 
   return (
     <>
@@ -76,7 +78,7 @@ export default function SpellcastingTab() {
               };
             })}
             headers={["Name", "Level", "Range"]}
-            actionButton={<ButtonAddItems/>}
+            actionButton={<ButtonAddItems usePaginationHook={useSpells} defaults={spellcasting.spells.map( (spell: Spell) => spell.id )}/>}
             showDescription
           />
         </Grid>
