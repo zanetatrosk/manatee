@@ -14,26 +14,24 @@ export default function SpellcastingTab() {
   const {id} = useParams();
   const [postSpellsByCharacterId] = usePostSpellsByCharacterIdMutation();
   const { spellcasting } = useAppSelector((state) => state.character);
-  const [tableSpells, setSpells] = useState<RowData[]>(spellcasting?.spells.map((spell: Spell) => {
-    return {
-      columns: [spell.name, spell.level.toString(), spell.range],
-      id: spell.id,
-      description: spell.description
-    };
-  }) || []);
+
+  const tranformSpells = (spells: Spell[]) => {
+    return spells.map((spell: Spell) => {
+      return {
+        columns: [spell.name, spell.level.toString(), spell.range],
+        id: spell.id,
+        description: spell.description
+      };
+    });
+  };
+
+  const [tableSpells, setSpells] = useState<RowData[]>(tranformSpells(spellcasting?.spells || []));
   const usePostSpells = (spells: string[]) => {
     if(id){
       postSpellsByCharacterId({id, spells}).unwrap().then((s: Spell[]) => {
-        setSpells(s.map((spell: Spell) => {
-          return {
-            columns: [spell.name, spell.level.toString(), spell.range],
-            id: spell.id,
-            description: spell.description
-          };
-        }));
+        setSpells(tranformSpells(s));
       });
     } 
-    
   };
   
   if (!spellcasting) return null;
@@ -50,7 +48,7 @@ export default function SpellcastingTab() {
                   header: "modifiers",
                   value: spellcasting.modifier.toString(),
                 },
-                { header: "saveDc", value: spellcasting.saveDc.toString()},
+                { header: "save Dc", value: spellcasting.saveDc.toString()},
               ]}
             />
           </Grid>
