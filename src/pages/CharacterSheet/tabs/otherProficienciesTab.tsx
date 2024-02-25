@@ -8,7 +8,7 @@ import { useAppSelector } from "@hooks/hooksStore";
 
     
 export default function OtherProficienciesTab() {
-  const { languages, tools } = useAppSelector((state) => state.character);
+  const { languages, tools, armor, weapons  } = useAppSelector((state) => state.character.proficiencies);
   const data = [
       { 
           title: "Armor",
@@ -32,8 +32,10 @@ export default function OtherProficienciesTab() {
       }
   ]
 
-  if(languages.length > 0) data[3].data = languages.map(l => l.item.name).join(", ");
-  if(tools.length > 0) data[2].data = tools.map(t => t.item.name).join(", ");
+  if(languages.length > 0) data[3].data = languages.join(", ");
+  if(tools.length > 0) data[2].data = tools.join(", ");
+  if(armor) data[0].data = armor.join(", ");
+  if(weapons.length > 0) data[1].data = weapons.join(", ");
 
   return (
     <>

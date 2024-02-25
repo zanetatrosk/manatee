@@ -123,6 +123,22 @@ export interface Armor extends Sourceable {
     stealthDisadvantage: boolean;
     description: string;
 }
+
+export interface Demage {
+    amount: number;
+    sides: number;
+    notation: string;
+    demageType: string;
+}
+
+export interface Weapon extends Sourceable {
+    type: string;
+    range: number;
+    properties: string[];
+    demageType: string;
+    demage: Demage;
+}
+
 export interface Slot {
     level: number;
     count: number;
@@ -174,6 +190,13 @@ interface Stats {
     armorClass: number;
 }
 
+interface Proficiencies {
+    tools: string[];
+    languages: string[];
+    weapons: string[];
+    armor: string[];
+}
+
 interface CharacterSheet {
     id: string;
     info: SheetHeaderInfo;
@@ -186,6 +209,8 @@ interface CharacterSheet {
     features: Feature[];
     spellcasting?: Spellcasting;
     armor: Armor;
+    weapons: Weapon[];
+    proficiencies: Proficiencies;
 }
 
 //-----end with character sheet interfaces
@@ -422,7 +447,15 @@ const characterSheetDefaults: CharacterSheet = {
             id: "",
             name: ""
         }
-    }
+    },
+    weapons: [],
+    proficiencies: {
+        tools: [],
+        languages: [],
+        weapons: [],
+        armor: []
+    },
+    
 
 }
 

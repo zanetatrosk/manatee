@@ -107,7 +107,7 @@ function EnhancedTableToolbar({ numSelected }: { numSelected: number }) {
     );
   }
 
-export default function FilteredTable({rows, totalElements, setPagination }: {rows: RowData[], totalElements: number,  setPagination: (pag: {page: number, size: number, query: string}) => void}){
+export default function FilteredTable({rows, totalElements, setPagination, setSelectedIds }: {rows: RowData[], totalElements: number,  setPagination: (pag: {page: number, size: number, query: string}) => void, setSelectedIds: (ids: string[]) => void}){
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   
@@ -122,6 +122,7 @@ export default function FilteredTable({rows, totalElements, setPagination }: {ro
       newSelected.add(id);
     }
     setSelected(newSelected);
+    setSelectedIds(Array.from(newSelected));
   };
 
 

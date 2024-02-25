@@ -7,10 +7,12 @@ export default function HomePage() {
   return (
     <Box>
       <Typography variant="h4">Welcome to D&D App</Typography>
-      <Button variant="outlined" >
+      <Button variant="outlined" onClick={() => {
+        setOpen(true);
+      }}>
         Future Open dialog
       </Button>
-      {<ModalAddItems />}
+      <ModalAddItems openDialog={open} closeDialog={() => setOpen(false)}/>
     </Box>
   );
 }

@@ -5,30 +5,22 @@ import { PaginationParams, useGetSpellsQuery } from "api/raceApiSlice";
 
 
 
-export default function ModalAddItems() {
-  const [open, setOpen] = React.useState(false);
+export default function ModalAddItems({openDialog, closeDialog}: {openDialog: boolean, closeDialog: () => void}) {
   const [query, setQuery] = React.useState("");
 
   const [pagination, setPagination] = React.useState<PaginationParams>({page: 0, size: 5, query: ""});
   
-  const [selected, setSelected] = React.useState<Set<string>>(new Set());
+  const [selected, setSelected] = React.useState<string[]>([]);
   const spellsInfo = useGetSpellsQuery(pagination).data; 
   const rows = useSpells(pagination.page, pagination.size, query);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
-    setOpen(false);
+    closeDialog();
   };
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open dialog
-      </Button>
-      <Dialog fullWidth open={open} maxWidth="lg">
+      <Dialog fullWidth open={openDialog} maxWidth="lg">
         <DialogTitle>
           Add a spell
           <TextField
@@ -42,11 +34,11 @@ export default function ModalAddItems() {
           />
         </DialogTitle>
         <DialogContent>
-          <FilteredTable rows={rows} totalElements={spellsInfo?.totalElements || 0} setPagination={(pag: PaginationParams) => setPagination({...pag, query: query})}/>
+          <FilteredTable rows={rows} totalElements={spellsInfo?.totalElements || 0} setPagination={(pag: PaginationParams) => setPagination({...pag, query: query})} setSelectedIds={(ids: string[]) => setSelected(ids)}/>
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" onClick={handleClose}>
-            Add Selected
+            Add Selected {selected.length}
           </Button>
           <Button variant="outlined" onClick={handleClose}>
             Close
