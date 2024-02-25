@@ -19,10 +19,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useEffect, useState } from "react";
 import React from "react";
 
-interface ButtonSettings {
-  label: string;
-  onClick: () => void;
-}
+
 
 interface Pagination {
   rowsPerPage: number;
@@ -39,7 +36,7 @@ export interface Table {
   title: string;
   headers: string[];
   rows: RowData[];
-  actionButton?: ButtonSettings;
+  actionButton?: React.ReactNode;
   showDescription?: boolean;
   pagination?: Pagination;
 }
@@ -111,7 +108,7 @@ export default function AttacksTable(props: Table) {
     <Card elevation={2} sx={{ flexGrow: 1 }}>
       <CardHeader
         title={props.title}
-        action={props.actionButton ? <Button variant="contained">Add attack</Button> : null}
+        action={props.actionButton}
       ></CardHeader>
       <TableContainer>
         <Table size="small">

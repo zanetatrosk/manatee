@@ -1,8 +1,9 @@
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import AttacksTable, { RowData } from "../components/attacksTable";
 import StatsGrid from "../components/statsGrid";
 import { useAppSelector } from "@hooks/hooksStore";
 import { Slot, Spell } from "@pages/CreateCharacter/definitions/characterForm";
+import ButtonAddItems from "../tabsComponents/modalAddItems/buttonAddItems";
 
 const rows: RowData[] = [
   {
@@ -75,6 +76,7 @@ export default function SpellcastingTab() {
               };
             })}
             headers={["Name", "Level", "Range"]}
+            actionButton={<ButtonAddItems/>}
             showDescription
           />
         </Grid>

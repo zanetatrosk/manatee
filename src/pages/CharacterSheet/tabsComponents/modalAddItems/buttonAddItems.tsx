@@ -1,12 +1,11 @@
 import { Box, Button, Modal, Typography } from "@mui/material";
-import ModalAddItems from "./CharacterSheet/tabsComponents/modalAddItems/modal";
 import React from "react";
 import { PaginationParams } from "api/raceApiSlice";
-import FilteredTable, {
-  useSpells,
-} from "./CharacterSheet/tabsComponents/modalAddItems/filteredTable";
+import FilteredTable, { useSpells } from "./filteredTable";
+import ModalAddItems from "./modal";
 
-export default function HomePage() {
+
+export default function ButtonAddItems() {
   const [open, setOpen] = React.useState(false);
   const [pagination, setPagination] = React.useState<PaginationParams>({
     page: 0,
@@ -31,14 +30,13 @@ export default function HomePage() {
 
   return (
     <Box>
-      <Typography variant="h4">Welcome to D&D App</Typography>
       <Button
         variant="outlined"
         onClick={() => {
           setOpen(true);
         }}
       >
-        Future Open dialog
+        Add Items
       </Button>
 
       <ModalAddItems
