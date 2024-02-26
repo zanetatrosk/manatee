@@ -36,7 +36,7 @@ export default function TabsCard() {
               variant="scrollable"
             >
               <Tab label="Attacks and Armor" value="1" />
-              {spellcasting && <Tab label="Spellcasting" value="2" />}
+              {!!spellcasting && <Tab label="Spellcasting" value="2" />}
               <Tab label="Other prof. & languages" value="3" />
               <Tab label="Features" value="4" />
             </TabList>
