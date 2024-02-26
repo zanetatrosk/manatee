@@ -3,7 +3,6 @@ import React from "react";
 import { PaginationParams } from "api/raceApiSlice";
 import FilteredTable, { useSpells } from "./filteredTable";
 import ModalAddItems from "./modal";
-import { send } from "process";
 
 
 export default function ButtonAddItems({usePaginationHook, defaults, sendToBEHook}: {usePaginationHook: any, defaults: string[], sendToBEHook: any}) {
@@ -15,8 +14,7 @@ export default function ButtonAddItems({usePaginationHook, defaults, sendToBEHoo
   });
 
   const [selected, setSelected] = React.useState<string[]>(defaults);
-  const spells = usePaginationHook(pagination.page, pagination.size, pagination.query);
-
+  const items = usePaginationHook(pagination.page, pagination.size, pagination.query);
   const closeDialog = () => {
     setOpen(false);
     setPagination({ page: 0, size: 5, query: "" });
@@ -46,8 +44,8 @@ export default function ButtonAddItems({usePaginationHook, defaults, sendToBEHoo
         saveSelected={saveSelected}
       >
         <FilteredTable
-          rows={spells.data}
-          totalElements={spells.totalElements}
+          rows={items.data}
+          totalElements={items.totalElements}
           setPagination={(pag: PaginationParams) => setPagination({ ...pag })}
           setSelectedIds={(ids: string[]) => setSelected(ids)}
           selectedIds={selected}

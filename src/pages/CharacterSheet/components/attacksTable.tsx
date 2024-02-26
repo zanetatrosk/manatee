@@ -42,7 +42,7 @@ export interface Table {
 }
 
 //styles to override padding none in cell
-export default function AttacksTable(props: Table) {
+export default function AttacksTable({title, headers, rows: rowsData, actionButton, showDescription, pagination}: Table) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -50,6 +50,8 @@ export default function AttacksTable(props: Table) {
     setPage(page);
     console.log(page);
   }
+
+  const [rows, setRows] = useState<RowData[]>(rowsData);
 
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -102,38 +104,38 @@ export default function AttacksTable(props: Table) {
     );
   }
   
-
+  debugger;
   return (
     <Box display="flex" flexGrow={1}>
     <Card elevation={2} sx={{ flexGrow: 1 }}>
       <CardHeader
-        title={props.title}
-        action={props.actionButton}
+        title={title}
+        action={actionButton}
       ></CardHeader>
       <TableContainer>
         <Table size="small">
           <TableHead>
             <TableRow>
               {
-              props.headers.map((header) => (
+              headers.map((header) => (
                 <TableCell>{header}</TableCell>))
               }
-              {props.showDescription && <TableCell></TableCell>}
+              {showDescription && <TableCell></TableCell>}
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.rows
+            {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, idx) => (
-                <Row row={row} key={idx} idx={idx} lastIdx={props.rows.length - 1} />
+                <Row row={row} key={idx} idx={idx} lastIdx={rows.length - 1} />
               ))}
           </TableBody>
         </Table>
-        {props.pagination && (
+        {pagination && (
           <TablePagination
             rowsPerPageOptions={[5, 10]}
             component="div"
-            count={props.rows.length}
+            count={rows.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

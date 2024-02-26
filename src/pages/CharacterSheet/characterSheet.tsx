@@ -16,13 +16,13 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 export default function CharacterSheet() {
 
   let { id } = useParams();
-  const {data : character } = useGetCharacterByIdQuery(id!);
+  const {data : character, isLoading } = useGetCharacterByIdQuery(id!);
   const dispatch = useAppDispatch();
   useEffect(() => {
     if(character) dispatch(setCharacterSheet({...character}));
   }, [character]);
   
-  if( !character ) return (<div>loading...</div>)
+  if( !character || isLoading ) return (<div>loading...</div>)
 
   const stats = [ {header: "speed", value: character.stats.speed.toString()}, 
                   {header: "prof. bonus", value: character.stats.proficiencyBonus.toString()},

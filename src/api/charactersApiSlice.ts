@@ -1,4 +1,4 @@
-import { CharacterSheet, Spell } from "@pages/CreateCharacter/definitions/characterForm";
+import { CharacterSheet, Spell, Weapon } from "@pages/CreateCharacter/definitions/characterForm";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 
@@ -20,6 +20,13 @@ export const charactersApiSlice = createApi({
             body: spells,
         }),
         }),
+        postWeaponsByCharacterId: builder.mutation<Weapon[], {id: string, weapons: string[]}>({
+        query: ({id, weapons}) => ({
+            url: `characters/${id}/weapons`,
+            method: 'PUT',
+            body: weapons,
+        }),
+        }),
         addCharacter: builder.mutation<void, CharacterSheet>({
         query: (body) => ({
             url: 'characters',
@@ -35,4 +42,4 @@ export const charactersApiSlice = createApi({
         }),
     }),
     });
-    export const { useGetCharactersQuery, useGetCharacterByIdQuery, usePostSpellsByCharacterIdMutation } = charactersApiSlice;
+    export const { useGetCharactersQuery, useGetCharacterByIdQuery, usePostSpellsByCharacterIdMutation, usePostWeaponsByCharacterIdMutation } = charactersApiSlice;

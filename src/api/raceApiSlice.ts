@@ -1,10 +1,13 @@
 import {
+  Armor,
   AutocompleteItem,
   Background,
   Class,
+  Pageable,
   Race,
   Source,
   Spell,
+  Weapon,
 } from "@pages/CreateCharacter/definitions/characterForm";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -14,14 +17,9 @@ export interface PaginationParams {
   query: string;
 }
 
-interface SpellParams {
-  content: Spell[];
-  totalPages: number;
-  totalElements: number;
-  last: boolean;
-  size: number;
-  number: number;
-}
+
+
+
 export const generalContentApiSlice = createApi({
   reducerPath: "raceApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8080/api/" }),
@@ -64,9 +62,23 @@ export const generalContentApiSlice = createApi({
         params: { source: src },
       }),
     }),
-    getSpells: builder.query<SpellParams, PaginationParams>({
+    getSpells: builder.query<Pageable<Spell>, PaginationParams>({
       query: (src) => ({
         url: "/spells",
+        method: "GET",
+        params: { page: src.page, size: src.size, name: src.query },
+      }),
+    }),
+    getArmor: builder.query<Armor[], PaginationParams>({
+      query: (src) => ({
+        url: "/armor",
+        method: "GET",
+        params: { page: src.page, size: src.size, name: src.query },
+      }),
+    }),
+    getWeapons: builder.query<Pageable<Weapon>, PaginationParams>({
+      query: (src) => ({
+        url: "/weapons",
         method: "GET",
         params: { page: src.page, size: src.size, name: src.query },
       }),
@@ -82,4 +94,6 @@ export const {
   useGetLanguagesQuery,
   useGetToolsQuery,
   useGetSpellsQuery,
+  useGetArmorQuery,
+  useGetWeaponsQuery,
 } = generalContentApiSlice;

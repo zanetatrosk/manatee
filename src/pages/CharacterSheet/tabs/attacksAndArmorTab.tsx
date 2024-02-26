@@ -1,13 +1,78 @@
 import { useAppSelector } from "@hooks/hooksStore";
 import AttacksTable, { RowData } from "../components/attacksTable";
+import {
+  Armor,
+  Weapon,
+} from "@pages/CreateCharacter/definitions/characterForm";
+import { useEffect, useState } from "react";
+import ButtonAddItems from "../tabsComponents/modalAddItems/buttonAddItems";
+import { useGetWeaponsQuery } from "api/raceApiSlice";
+import { useParams } from "react-router-dom";
+import { usePostWeaponsByCharacterIdMutation } from "api/charactersApiSlice";
+import { transform } from "typescript";
+
+const useAttacks = (page: number, size: number, query: string) => {
+  
+  const attacks = useGetWeaponsQuery({
+    page: page,
+    size: size,
+    query: query,
+  }).data;
+  if (attacks) {
+    return {
+      data: attacks.content.map((weapon: Weapon) => {
+        return {
+          columns: [weapon.name, weapon.range.toString(), weapon.damageType],
+        };
+      }),
+      totalElements: attacks.totalElements,
+    };
+  }
+  return { data: [], totalElements: 0 };
+};
 
 export default function AttacksAndArmorTab() {
-  const { armor, weapons } = useAppSelector((state) => state.character);
+  const { armor: armorStore, weapons: weaponsStore } = useAppSelector(
+    (state) => state.character
+    );
+    const {id} = useParams();
+    const [postAttacksByCharacterId] = usePostWeaponsByCharacterIdMutation();
+
+    const usePostAttacks = (weapons: string[]) => {
+      if(id){
+        postAttacksByCharacterId({id, weapons}).unwrap().then((a: Weapon[]) => {
+          setWeapons(transformAttacks(a));
+        });
+      }
+    }
+
+    const tranformArmor = (armor: Armor): RowData => {
+      return {
+        columns: [armor.name, armor.baseArmorClass.toString(), armor.type],
+        description: armor.description,
+      };
+    };
+
+    const transformAttacks = (weapons: Weapon[]): RowData[] => {
+    const wap = weapons.map((weapon: Weapon) => {
+      return {
+        columns: [weapon.name, weapon.range.toString(), weapon.damageType],
+        id: weapon.id,
+      };
+    });
+    return wap;
+  };
+  const [armor, setArmor] = useState<RowData>(tranformArmor(armorStore));
+  const [weapons, setWeapons] = useState<RowData[]>(
+    weaponsStore.length > 0 ? transformAttacks(weaponsStore) : []
+  );
+  
+      
   return (
     <>
       <AttacksTable
         title="Attacks"
-        rows={weapons.map((weapon) => {
+        rows={weaponsStore.map((weapon) => {
           return {
             columns: [
               weapon.name,
@@ -17,19 +82,23 @@ export default function AttacksAndArmorTab() {
           };
         })}
         headers={["Name", "Attack range", "Damage type"]}
+        actionButton={
+          <ButtonAddItems
+            usePaginationHook={useAttacks}
+            defaults={weaponsStore.map((w) => w.id)}
+            sendToBEHook={usePostAttacks}
+          />
+        }
       />
       <div style={{ margin: 30 }} />
       <AttacksTable
         title="Armor"
-        rows={[
-          {
-            columns: [armor.name, armor.baseArmorClass.toString(), armor.type],
-            description: armor.description,
-          },
-        ]}
+        rows={[armor]}
         headers={["Name", "Base armor class", "Damage type"]}
         showDescription
       />
     </>
   );
 }
+
+

@@ -165,6 +165,7 @@ export default function FilteredTable({
 
   const [selected, setSelected] = React.useState<Set<string>>(new Set(selectedIds));
   const isSelected = (id: string) => selected.has(id);
+  debugger;
 
   const handleClick = (event: React.MouseEvent<unknown>, id: string) => {
     const newSelected = new Set(selected);

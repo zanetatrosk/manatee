@@ -139,6 +139,11 @@ export interface Weapon extends Sourceable {
     damage: Damage;
 }
 
+export interface Pageable<T> {
+    content: T[];
+    totalElements: number;
+}
+
 export interface Slot {
     level: number;
     count: number;
