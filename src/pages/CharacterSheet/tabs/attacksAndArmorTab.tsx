@@ -22,6 +22,7 @@ const useAttacks = (page: number, size: number, query: string) => {
     return {
       data: attacks.content.map((weapon: Weapon) => {
         return {
+          id: weapon.id,
           columns: [weapon.name, weapon.range.toString(), weapon.damageType],
         };
       }),
@@ -56,31 +57,22 @@ export default function AttacksAndArmorTab() {
     const transformAttacks = (weapons: Weapon[]): RowData[] => {
     const wap = weapons.map((weapon: Weapon) => {
       return {
-        columns: [weapon.name, weapon.range.toString(), weapon.damageType],
         id: weapon.id,
+        columns: [weapon.name, weapon.range.toString(), weapon.damageType],
       };
     });
     return wap;
   };
   const [armor, setArmor] = useState<RowData>(tranformArmor(armorStore));
   const [weapons, setWeapons] = useState<RowData[]>(
-    weaponsStore.length > 0 ? transformAttacks(weaponsStore) : []
+    transformAttacks(weaponsStore)
   );
   
-      
   return (
     <>
       <AttacksTable
         title="Attacks"
-        rows={weaponsStore.map((weapon) => {
-          return {
-            columns: [
-              weapon.name,
-              weapon.range.toString(),
-              weapon.damageType,
-            ],
-          };
-        })}
+        rows={weapons}
         headers={["Name", "Attack range", "Damage type"]}
         actionButton={
           <ButtonAddItems

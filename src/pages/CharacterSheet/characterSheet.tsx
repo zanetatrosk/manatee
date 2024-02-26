@@ -18,11 +18,15 @@ export default function CharacterSheet() {
   let { id } = useParams();
   const {data : character, isLoading } = useGetCharacterByIdQuery(id!);
   const dispatch = useAppDispatch();
+  const [reduxLoading, setReduxLoading] = React.useState(true);
   useEffect(() => {
-    if(character) dispatch(setCharacterSheet({...character}));
+    if(character){
+      dispatch(setCharacterSheet({...character}));
+      setReduxLoading(false);
+    } 
   }, [character]);
   
-  if( !character || isLoading ) return (<div>loading...</div>)
+  if( !character || isLoading || reduxLoading ) return (<div>loading...</div>)
 
   const stats = [ {header: "speed", value: character.stats.speed.toString()}, 
                   {header: "prof. bonus", value: character.stats.proficiencyBonus.toString()},
