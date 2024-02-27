@@ -130,6 +130,7 @@ export default function CharacterSheet() {
                 <Grid item sm={4.5} xs={12}>
                   <SkillTable
                     name="Saving Throws"
+                    disabled
                     tableData={character.savingThrows.map((i) => ({
                       label: i.label,
                       score: i.modifier,

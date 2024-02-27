@@ -21,6 +21,7 @@ interface TableProps {
   name: string;
   description?: string;
   tableData: RowData[];
+  disabled?: boolean;
 }
 
 export default function SkillTable(props: TableProps) {
@@ -43,6 +44,7 @@ export default function SkillTable(props: TableProps) {
                 <Checkbox
                   color="primary"
                   checked={i.checked}
+                  disabled={tableData.disabled}
                   onChange={(e) => {
                     const newData = tableData.tableData.map((j) => {
                       if (j.label === i.label) {
