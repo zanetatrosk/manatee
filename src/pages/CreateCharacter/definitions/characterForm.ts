@@ -131,6 +131,11 @@ export interface Damage {
     demageType: string;
 }
 
+export interface Attack extends BaseItem {
+    attackBonus: number;
+    damage: string;
+}
+
 export interface Weapon extends Sourceable {
     type: string;
     range: number;
@@ -214,7 +219,7 @@ interface CharacterSheet {
     features: Feature[];
     spellcasting?: Spellcasting;
     armor: Armor;
-    weapons: Weapon[];
+    attacks: Attack[];
     proficiencies: Proficiencies;
 }
 
@@ -453,7 +458,7 @@ const characterSheetDefaults: CharacterSheet = {
             name: ""
         }
     },
-    weapons: [],
+    attacks: [],
     proficiencies: {
         tools: [],
         languages: [],

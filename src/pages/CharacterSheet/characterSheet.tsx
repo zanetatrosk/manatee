@@ -27,6 +27,7 @@ export default function CharacterSheet() {
   }, [character]);
   
   if( !character || isLoading || reduxLoading ) return (<div>loading...</div>)
+  debugger;
 
   const stats = [ {header: "speed", value: character.stats.speed.toString()}, 
                   {header: "prof. bonus", value: character.stats.proficiencyBonus.toString()},
