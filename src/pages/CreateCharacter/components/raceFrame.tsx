@@ -61,7 +61,7 @@ export default function RaceFrame({
 
   const handleLanguagesChange = (value: AutocompleteItem[]): void => {
     setPropertyInForm(
-      "languagesId",
+      "languageIds",
       value.map((v) => v.id)
     );
   };
@@ -102,7 +102,7 @@ export default function RaceFrame({
               //recalculate ability scores acording to a new race
               setPropertyInForm("id", value.id);
               setPropertyInForm("size", value.sizeOptions[0]);
-              setPropertyInForm("languagesId", value.languageProficiencies.defaults.map(l => l.id));
+              setPropertyInForm("languageIds", value.languageProficiencies.defaults.map(l => l.id));
             }}
             renderInput={(params) => (
               <TextField
@@ -141,7 +141,7 @@ export default function RaceFrame({
                 <MultiComplete
                   values={languages || []}
                   data_cy="languages"
-                  results={languages?.filter((l) => raceForm.languagesId.includes(l.id)) || []}
+                  results={languages?.filter((l) => raceForm.languageIds.includes(l.id)) || []}
                   onChange={handleLanguagesChange}
                   label={RACE.LANGUAGES}
                   helpText={`You can have up to ${race.languageProficiencies.amount} languages`}

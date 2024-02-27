@@ -18,19 +18,19 @@ interface ToolsProficiency extends Sourceable{
 interface ClassForm {
     id: string | null;
     subclass: string | null;
-    toolsId: string[];
+    toolIds: string[];
 }
 
 interface RaceForm {
     id: string | null;
     size: string;
-    languagesId: string[];
+    languageIds: string[];
 }
 
 interface BackgroundForm {
     id: string | null;
-    toolsId: string[];
-    languagesId: string[];
+    toolIds: string[];
+    languageIds: string[];
 }
 
 interface StepperForm {

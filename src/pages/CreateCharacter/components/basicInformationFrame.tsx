@@ -76,13 +76,13 @@ function BasicInformation({
         <Grid item xs>
           <Autocomplete
             id="combo-box-demo"
-            value={form.sources}
+            value={sources?.filter((i) => form.sources?.includes(i.id)) || []}
             options={sources || []}
             multiple
             getOptionLabel={(option) => option.name}
             onChange={(_, value) => {
               if (!value) return;
-              setPropertyInForm("sources", value);
+              setPropertyInForm("sources", value.map((v) => v.id));
             }}
             renderInput={(params) => (
               <TextField

@@ -56,11 +56,11 @@ export default function BackgroundFrame({ backgroundForm, setForm }: { backgroun
   };
 
   const handleToolsChange = (value: AutocompleteItem[]): void => {
-    setPropertyInForm("toolsId", value.map((v) => v.id));
+    setPropertyInForm("toolIds", value.map((v) => v.id));
   };
 
   const handleLanguagesChange = (value: AutocompleteItem[]): void => {
-    setPropertyInForm("languagesId", value.map((v) => v.id));
+    setPropertyInForm("languageIds", value.map((v) => v.id));
   };
 
   return (
@@ -132,7 +132,7 @@ export default function BackgroundFrame({ backgroundForm, setForm }: { backgroun
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
                   values={languages || []}
-                  results={languages?.filter((l) => backgroundForm.languagesId.includes(l.id)) || []}
+                  results={languages?.filter((l) => backgroundForm.languageIds.includes(l.id)) || []}
                   data_cy="languages"
                   onChange={handleLanguagesChange}
                   label={BACKGROUND.LANGUAGES}
@@ -144,7 +144,7 @@ export default function BackgroundFrame({ backgroundForm, setForm }: { backgroun
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
                   values={tools || []}
-                  results={tools?.filter((t) => backgroundForm.toolsId.includes(t.id)) || []}
+                  results={tools?.filter((t) => backgroundForm.toolIds.includes(t.id)) || []}
                   data_cy="tools"
                   onChange={handleToolsChange}
                   label={BACKGROUND.TOOLS}

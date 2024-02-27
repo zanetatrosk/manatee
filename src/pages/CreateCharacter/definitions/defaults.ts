@@ -57,17 +57,17 @@ const formDefaults: StepperForm = {
   race: {
     id: null,
     size: "",
-    languagesId: [],
+    languageIds: [],
   },
   background: {
     id: null,
-    toolsId: [],
-    languagesId: [],
+    toolIds: [],
+    languageIds: [],
   },
   class: {
     id: null,
     subclass: null,
-    toolsId: [],
+    toolIds: [],
   },
 };
 

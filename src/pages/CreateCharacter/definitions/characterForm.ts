@@ -22,7 +22,7 @@ enum Size {
 interface BasicInfo {
     characterName: string;
     playerName: string;
-    sources: Source[];
+    sources: string[];
     sheetPhotoUrl: string | null;
     cardPhotoUrl: string | null;
 }

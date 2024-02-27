@@ -49,7 +49,7 @@ export default function ClassFrame({
 
   const handleToolsChange = (value: AutocompleteItem[]): void => {
     setPropertyInForm(
-      "toolsId",
+      "toolIds",
       value.map((v) => v.id)
     );
   };
@@ -83,7 +83,7 @@ export default function ClassFrame({
               setClass(value);
               setPropertyInForm("id", value.id);
               setPropertyInForm("subclass", null);
-              setPropertyInForm("toolsId", value.toolProficiencies.defaults.map((t) => t.id));
+              setPropertyInForm("toolIds", value.toolProficiencies.defaults.map((t) => t.id));
               setVisibility(true);
             }}
             data-cy="class"
@@ -140,7 +140,7 @@ export default function ClassFrame({
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
                   values={tools || []}
-                  results={tools?.filter((t) => classForm.toolsId.includes(t.id)) || []}
+                  results={tools?.filter((t) => classForm.toolIds.includes(t.id)) || []}
                   onChange={handleToolsChange}
                   label={CLASS.TOOLS}
                   helpText={`You can have up to ${characterClass?.toolProficiencies.amount} tools`}
