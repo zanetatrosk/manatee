@@ -5,7 +5,7 @@ import FilteredTable, { useSpells } from "./filteredTable";
 import ModalAddItems from "./modal";
 
 
-export default function ButtonAddItems({usePaginationHook, defaults, sendToBEHook}: {usePaginationHook: any, defaults: string[], sendToBEHook: any}) {
+export default function ButtonAddItems({usePaginationHook, defaults, sendToBEHook, singleChoice}: {usePaginationHook: any, defaults: string[], sendToBEHook: any, singleChoice?: boolean}) {
   const [open, setOpen] = React.useState(false);
   const [pagination, setPagination] = React.useState<PaginationParams>({
     page: 0,
@@ -47,8 +47,11 @@ export default function ButtonAddItems({usePaginationHook, defaults, sendToBEHoo
           rows={items.data}
           totalElements={items.totalElements}
           setPagination={(pag: PaginationParams) => setPagination({ ...pag })}
-          setSelectedIds={(ids: string[]) => setSelected(ids)}
+          setSelectedIds={(ids: string[]) => {
+            setSelected(ids);
+          }}
           selectedIds={selected}
+          singleChoice={singleChoice}
         />
       </ModalAddItems>
     </Box>

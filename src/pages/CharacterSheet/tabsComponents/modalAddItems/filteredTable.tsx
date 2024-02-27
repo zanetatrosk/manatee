@@ -107,7 +107,6 @@ function Row(props: {
               color="primary"
               checked={selected}
               onClick={(event) => {
-                debugger;
                 props.handleClick(event, row.id!);
               }}
             />
@@ -152,12 +151,14 @@ export default function FilteredTable({
   setPagination,
   selectedIds,
   setSelectedIds,
+  singleChoice,
 }: {
   rows: RowData[];
   totalElements: number;
   setPagination: (pag: { page: number; size: number; query: string }) => void;
   selectedIds: string[];
   setSelectedIds: (ids: string[]) => void;
+  singleChoice?: boolean;
 }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -165,9 +166,14 @@ export default function FilteredTable({
 
   const [selected, setSelected] = React.useState<Set<string>>(new Set(selectedIds));
   const isSelected = (id: string) => selected.has(id);
-  debugger;
 
   const handleClick = (event: React.MouseEvent<unknown>, id: string) => {
+    if (singleChoice) {
+      
+      setSelected(new Set([id]));
+      setSelectedIds([id]);
+      return;
+    }
     const newSelected = new Set(selected);
     if (newSelected.has(id)) {
       newSelected.delete(id);

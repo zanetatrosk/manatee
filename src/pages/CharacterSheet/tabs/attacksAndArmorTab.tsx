@@ -6,9 +6,9 @@ import {
 } from "@pages/CreateCharacter/definitions/characterForm";
 import { useEffect, useState } from "react";
 import ButtonAddItems from "../tabsComponents/modalAddItems/buttonAddItems";
-import { useGetWeaponsQuery } from "api/raceApiSlice";
+import { useGetArmorQuery, useGetWeaponsQuery } from "api/raceApiSlice";
 import { useParams } from "react-router-dom";
-import { usePostWeaponsByCharacterIdMutation } from "api/charactersApiSlice";
+import { usePostArmorByCharacterIdMutation, usePostWeaponsByCharacterIdMutation } from "api/charactersApiSlice";
 import { transform } from "typescript";
 
 const useAttacks = (page: number, size: number, query: string) => {
@@ -32,17 +32,48 @@ const useAttacks = (page: number, size: number, query: string) => {
   return { data: [], totalElements: 0 };
 };
 
+const useArmor = (page: number, size: number, query: string) => {
+  const armor = useGetArmorQuery({
+    page: page,
+    size: size,
+    query: query,
+  }).data;
+  if (armor) {
+    return {
+      data: armor.content.map((armor) => {
+        return {
+          id: armor.id,
+          columns: [armor.name, armor.baseArmorClass.toString(), armor.type],
+          description: armor.description,
+        };
+      }),
+      totalElements: armor.totalElements,
+    };
+  
+}
+return { data: [], totalElements: 0 };
+}
+
 export default function AttacksAndArmorTab() {
   const { armor: armorStore, weapons: weaponsStore } = useAppSelector(
     (state) => state.character
     );
     const {id} = useParams();
     const [postAttacksByCharacterId] = usePostWeaponsByCharacterIdMutation();
+    const [postArmorByCharacterId] = usePostArmorByCharacterIdMutation();
 
     const usePostAttacks = (weapons: string[]) => {
       if(id){
         postAttacksByCharacterId({id, weapons}).unwrap().then((a: Weapon[]) => {
           setWeapons(transformAttacks(a));
+        });
+      }
+    }
+
+    const usePostArmor = (armor: string[]) => {
+      if(id){
+        postArmorByCharacterId({id, armor: armor[0]}).unwrap().then((a: Armor) => {
+          setArmor(tranformArmor(a));
         });
       }
     }
@@ -88,6 +119,14 @@ export default function AttacksAndArmorTab() {
         rows={[armor]}
         headers={["Name", "Base armor class", "Damage type"]}
         showDescription
+        actionButton={
+          <ButtonAddItems
+            usePaginationHook={useArmor}
+            defaults={[armorStore.id]}
+            sendToBEHook={usePostArmor}
+            
+          />
+        }
       />
     </>
   );

@@ -42,7 +42,7 @@ export interface Table {
 }
 
 //styles to override padding none in cell
-export default function AttacksTable({title, headers, rows: rowsData, actionButton, showDescription, pagination}: Table) {
+export default function AttacksTable({title, headers, rows, actionButton, showDescription, pagination}: Table) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -51,7 +51,6 @@ export default function AttacksTable({title, headers, rows: rowsData, actionButt
     console.log(page);
   }
 
-  const [rows, setRows] = useState<RowData[]>(rowsData);
 
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -104,7 +103,6 @@ export default function AttacksTable({title, headers, rows: rowsData, actionButt
     );
   }
   
-  debugger;
   return (
     <Box display="flex" flexGrow={1}>
     <Card elevation={2} sx={{ flexGrow: 1 }}>
@@ -125,7 +123,6 @@ export default function AttacksTable({title, headers, rows: rowsData, actionButt
           </TableHead>
           <TableBody>
             {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, idx) => (
                 <Row row={row} key={idx} idx={idx} lastIdx={rows.length - 1} />
               ))}

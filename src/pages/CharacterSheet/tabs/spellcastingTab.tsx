@@ -34,6 +34,7 @@ export default function SpellcastingTab() {
     } 
   };
   
+  debugger;
   if (!spellcasting) return null;
   return (  
     <>
@@ -70,7 +71,7 @@ export default function SpellcastingTab() {
             title="Spells"
             rows={tableSpells}
             headers={["Name", "Level", "Range"]}
-            actionButton={<ButtonAddItems usePaginationHook={useSpells} defaults={spellcasting.spells.map( (spell: Spell) => spell.id )} sendToBEHook={usePostSpells}/>}
+            actionButton={<ButtonAddItems singleChoice usePaginationHook={useSpells} defaults={spellcasting.spells.map( (spell: Spell) => spell.id )} sendToBEHook={usePostSpells}/>}
             showDescription
           />
         </Grid>

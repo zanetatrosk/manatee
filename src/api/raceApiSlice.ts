@@ -69,7 +69,7 @@ export const generalContentApiSlice = createApi({
         params: { page: src.page, size: src.size, name: src.query },
       }),
     }),
-    getArmor: builder.query<Armor[], PaginationParams>({
+    getArmor: builder.query<Pageable<Armor>, PaginationParams>({
       query: (src) => ({
         url: "/armor",
         method: "GET",
