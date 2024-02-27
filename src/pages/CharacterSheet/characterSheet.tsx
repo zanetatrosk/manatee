@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch } from "@hooks/hooksStore";
 import { setCharacterSheet } from "reducers/characterReducer";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Skills from "./skills/Skills";
 
 
 
@@ -114,17 +115,7 @@ export default function CharacterSheet() {
           </Grid>
           {/* second row */}
           <Grid container item spacing={3} columns={{ xs: 12 }}>
-            <Grid item>
-              <SkillTable
-                name="Skills"
-                tableData={character.skills.map((i) => ({
-                  label: i.displayName,
-                  score: i.modifier,
-                  checked: i.proficient
-                }))
-                }
-              />
-            </Grid>
+            <Skills skills={character.skills}/>
             <Grid container item flexDirection={"column"} spacing={3} xs>
               <Grid container item spacing={3}>
                 <Grid item sm={4.5} xs={12}>
@@ -132,6 +123,7 @@ export default function CharacterSheet() {
                     name="Saving Throws"
                     disabled
                     tableData={character.savingThrows.map((i) => ({
+                      id: i.label,
                       label: i.label,
                       score: i.modifier,
                       checked: i.proficient,

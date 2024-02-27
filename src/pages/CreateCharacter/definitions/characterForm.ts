@@ -1,4 +1,3 @@
-import { B } from "msw/lib/glossary-de6278a9";
 import { LanguagesProficiency, ToolsProficiency } from "./stepperForm";
 
 
@@ -182,7 +181,7 @@ interface BaseSkill {
     proficient: boolean;
 }
 
-interface Skill extends BaseSkill {
+export interface Skill extends BaseSkill {
     ability: Ability;
     displayName: string;
 }
@@ -205,6 +204,11 @@ interface Proficiencies {
     languages: string[];
     weapons: string[];
     armor: string[];
+}
+
+export interface Proficient {
+    name: string;
+    proficient: boolean;
 }
 
 interface CharacterSheet {
