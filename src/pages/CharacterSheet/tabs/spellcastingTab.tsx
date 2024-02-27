@@ -71,7 +71,7 @@ export default function SpellcastingTab() {
             title="Spells"
             rows={tableSpells}
             headers={["Name", "Level", "Range"]}
-            actionButton={<ButtonAddItems singleChoice usePaginationHook={useSpells} defaults={spellcasting.spells.map( (spell: Spell) => spell.id )} sendToBEHook={usePostSpells}/>}
+            actionButton={<ButtonAddItems usePaginationHook={useSpells} defaults={spellcasting.spells.map( (spell: Spell) => spell.id )} sendToBEHook={usePostSpells}/>}
             showDescription
           />
         </Grid>

@@ -124,6 +124,7 @@ export default function AttacksAndArmorTab() {
             usePaginationHook={useArmor}
             defaults={[armorStore.id]}
             sendToBEHook={usePostArmor}
+            singleChoice
             
           />
         }
