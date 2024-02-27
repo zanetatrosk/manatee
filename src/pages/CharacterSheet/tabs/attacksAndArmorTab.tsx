@@ -111,9 +111,11 @@ export default function AttacksAndArmorTab() {
         headers={["Name", "Attack range", "Damage type"]}
         actionButton={
           <ButtonAddItems
+            buttonText="Add Attacks"
             usePaginationHook={useAttacks}
             defaults={weaponsStore.map((w) => w.id)}
             sendToBEHook={usePostAttacks}
+            headers={["Name", "Range", "Damage type"]}
           />
         }
       />
@@ -125,10 +127,12 @@ export default function AttacksAndArmorTab() {
         showDescription
         actionButton={
           <ButtonAddItems
+            buttonText="Add Armor"
             usePaginationHook={useArmor}
             defaults={[armorStore.id]}
             sendToBEHook={usePostArmor}
             singleChoice
+            headers={["Name", "Base armor class", "Damage type"]}
 
           />
         }

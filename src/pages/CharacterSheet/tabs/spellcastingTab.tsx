@@ -11,7 +11,7 @@ import { useState } from "react";
 
 
 export default function SpellcastingTab() {
-  const {id} = useParams();
+  const { id } = useParams();
   const [postSpellsByCharacterId] = usePostSpellsByCharacterIdMutation();
   const { spellcasting } = useAppSelector((state) => state.character);
 
@@ -27,15 +27,15 @@ export default function SpellcastingTab() {
 
   const [tableSpells, setSpells] = useState<RowData[]>(tranformSpells(spellcasting?.spells || []));
   const usePostSpells = (spells: string[]) => {
-    if(id){
-      postSpellsByCharacterId({id, spells}).unwrap().then((s: Spell[]) => {
+    if (id) {
+      postSpellsByCharacterId({ id, spells }).unwrap().then((s: Spell[]) => {
         setSpells(tranformSpells(s));
       });
-    } 
+    }
   };
-  
+
   if (!spellcasting) return null;
-  return (  
+  return (
     <>
       <Grid container spacing={2} flexDirection={"column"}>
         <Grid container item spacing={2}>
@@ -43,12 +43,12 @@ export default function SpellcastingTab() {
             <StatsGrid
               title="Magic"
               items={[
-                { header: "ability", value: spellcasting.ability.slice(0, 4)},
+                { header: "ability", value: spellcasting.ability.slice(0, 4) },
                 {
                   header: "modifiers",
                   value: spellcasting.modifier.toString(),
                 },
-                { header: "save Dc", value: spellcasting.saveDc.toString()},
+                { header: "save Dc", value: spellcasting.saveDc.toString() },
               ]}
             />
           </Grid>
@@ -70,7 +70,9 @@ export default function SpellcastingTab() {
             title="Spells"
             rows={tableSpells}
             headers={["Name", "Level", "Range"]}
-            actionButton={<ButtonAddItems usePaginationHook={useSpells} defaults={spellcasting.spells.map( (spell: Spell) => spell.id )} sendToBEHook={usePostSpells}/>}
+            actionButton={
+              <ButtonAddItems buttonText="Add Spells" usePaginationHook={useSpells} defaults={spellcasting.spells.map((spell: Spell) => spell.id)} sendToBEHook={usePostSpells} headers={["Name", "Level", "Range"]} />
+            }
             showDescription
           />
         </Grid>

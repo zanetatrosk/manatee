@@ -152,6 +152,7 @@ export default function FilteredTable({
   selectedIds,
   setSelectedIds,
   singleChoice,
+  headers,
 }: {
   rows: RowData[];
   totalElements: number;
@@ -159,6 +160,7 @@ export default function FilteredTable({
   selectedIds: string[];
   setSelectedIds: (ids: string[]) => void;
   singleChoice?: boolean;
+  headers: string[];
 }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -169,7 +171,6 @@ export default function FilteredTable({
 
   const handleClick = (event: React.MouseEvent<unknown>, id: string) => {
     if (singleChoice) {
-      
       setSelected(new Set([id]));
       setSelectedIds([id]);
       return;
@@ -237,9 +238,11 @@ export default function FilteredTable({
             <TableHead>
               <TableRow>
                 <TableCell />
-                <TableCell>Name</TableCell>
-                <TableCell>Level</TableCell>
-                <TableCell>Range</TableCell>
+                {headers.map((header) => (
+                  <TableCell key={header}>
+                    {header}
+                  </TableCell>
+                ))}
                 <TableCell align="right" />
               </TableRow>
             </TableHead>
