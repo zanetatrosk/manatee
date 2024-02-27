@@ -10,7 +10,6 @@ import ButtonAddItems from "../tabsComponents/modalAddItems/buttonAddItems";
 import { useGetArmorQuery, useGetWeaponsQuery } from "api/raceApiSlice";
 import { useParams } from "react-router-dom";
 import { usePostArmorByCharacterIdMutation, usePostWeaponsByCharacterIdMutation } from "api/charactersApiSlice";
-import { transform } from "typescript";
 
 const transformAttacks = (weapons: Attack[]): RowData[] => {
   const wap = weapons.map((weapon: Attack) => {
@@ -30,15 +29,16 @@ const useAttacks = (page: number, size: number, query: string) => {
     size: size,
     query: query,
   }).data;
+  
   if (attacks) {
     return {
       data: attacks.content.map((weapon: Weapon) => {
         return {
           id: weapon.id,
           columns: [weapon.name, weapon.range, weapon.damageType],
-          totalElements: attacks.totalElements,
         }
-      })
+      }),
+      totalElements: attacks.totalElements,
     }
   }
   return { data: [], totalElements: 0 };
@@ -67,7 +67,6 @@ const useArmor = (page: number, size: number, query: string) => {
 }
 
 export default function AttacksAndArmorTab() {
-  debugger;
   const { armor: armorStore, attacks: weaponsStore } = useAppSelector(
     (state) => state.character
   );

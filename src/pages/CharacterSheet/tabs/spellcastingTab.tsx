@@ -34,7 +34,6 @@ export default function SpellcastingTab() {
     } 
   };
   
-  debugger;
   if (!spellcasting) return null;
   return (  
     <>
