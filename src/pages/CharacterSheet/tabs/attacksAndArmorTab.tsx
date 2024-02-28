@@ -36,6 +36,7 @@ const useAttacks = (page: number, size: number, query: string) => {
         return {
           id: weapon.id,
           columns: [weapon.name, weapon.range, weapon.damageType],
+          description: weapon.properties.join(", "),
         }
       }),
       totalElements: attacks.totalElements,
@@ -108,7 +109,7 @@ export default function AttacksAndArmorTab() {
       <AttacksTable
         title="Attacks"
         rows={weapons}
-        headers={["Name", "Attack range", "Damage type"]}
+        headers={["Name", "Attack bonus", "Damage/type"]}
         actionButton={
           <ButtonAddItems
             buttonText="Add Attacks"

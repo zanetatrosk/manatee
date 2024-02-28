@@ -6,10 +6,8 @@ import { PaginationParams, useGetSpellsQuery } from "api/raceApiSlice";
 
 
 export default function ModalAddItems(
-  {openDialog, closeDialog, children, saveSelected}
-  : {openDialog: boolean, closeDialog: () => void, children?: React.ReactNode, saveSelected: () => void}) {
-
-  
+  {openDialog, closeDialog, children, saveSelected, titleDialog}
+  : {openDialog: boolean, closeDialog: () => void, children?: React.ReactNode, saveSelected: () => void, titleDialog: string}) {
 
   const handleClose = () => {
     closeDialog();
@@ -19,11 +17,9 @@ export default function ModalAddItems(
     <React.Fragment>
       <Dialog fullWidth open={openDialog} maxWidth="lg">
         <DialogTitle>
-          Add a spell
-          
+          {titleDialog}
         </DialogTitle>
         <DialogContent>
-        
           {children}
         </DialogContent>
         <DialogActions>

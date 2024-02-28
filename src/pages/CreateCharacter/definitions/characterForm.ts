@@ -163,7 +163,7 @@ export interface Spell extends Sourceable {
 }
 
 interface Spellcasting {
-    ability: Ability;
+    abilityAbbreviation: string;
     modifier: number;
     saveDc: number;
     slots: Slot[];
@@ -217,7 +217,7 @@ interface CharacterSheet {
     stats: Stats;
     abilities: AbilitySheet[];
     skills: Skill[];
-    savingThrows: BaseSkill[];
+    savingThrows: Skill[];
     tools: ProficienciesSheet<ToolsProficiency>[];
     languages: ProficienciesSheet<LanguagesProficiency>[];
     features: Feature[];
@@ -416,34 +416,46 @@ const characterSheetDefaults: CharacterSheet = {
     ],
     savingThrows: [
         {
-            label: "Strength",
+            label: "strength",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.STRENGTH,
+            displayName: "Strength"
         },
         {
-            label: "Dexterity",
+            label: "dexterity",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.DEXTERITY,
+            displayName: "Dexterity"
         },
         {
-            label: "Constitution",
+            label: "constitution",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.CONSTITUTION,
+            displayName: "Constitution"
         },
         {
-            label: "Intelligence",
+            label: "intelligence",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.INTELLIGENCE,
+            displayName: "Intelligence"
         },
         {
-            label: "Wisdom",
+            label: "wisdom",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.WISDOM,
+            displayName: "Wisdom"
         },
         {
-            label: "Charisma",
+            label: "charisma",
             modifier: 0,
-            proficient: false
+            proficient: false,
+            ability: Ability.CHARISMA,
+            displayName: "Charisma"
         }
     ],
     tools: [],

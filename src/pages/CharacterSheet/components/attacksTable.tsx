@@ -39,18 +39,20 @@ export interface Table {
   actionButton?: React.ReactNode;
   showDescription?: boolean;
   pagination?: Pagination;
+  scrollable?: boolean;
 }
 
 //styles to override padding none in cell
-export default function AttacksTable({title, headers, rows, actionButton, showDescription, pagination}: Table) {
+export default function AttacksTable({title, headers, rows, actionButton, showDescription, pagination, scrollable}: Table) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  debugger;
 
   function handleChangePage(event: unknown, page: number): void {
     setPage(page);
     console.log(page);
   }
-
 
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -105,13 +107,13 @@ export default function AttacksTable({title, headers, rows, actionButton, showDe
   
   return (
     <Box display="flex" flexGrow={1}>
-    <Card elevation={2} sx={{ flexGrow: 1 }}>
+    <Card elevation={2} sx={{flexGrow: 1, ...(!!scrollable && {overflow: 'hidden'})}}>
       <CardHeader
         title={title}
         action={actionButton}
       ></CardHeader>
-      <TableContainer>
-        <Table size="small">
+      <TableContainer sx={{ ...(!!scrollable && {maxHeight: 155}) }}>
+        <Table size="small" stickyHeader>
           <TableHead>
             <TableRow>
               {

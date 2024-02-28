@@ -100,6 +100,7 @@ function Row(props: {
         aria-checked={selected}
         tabIndex={-1}
         selected={selected}
+        sx={[open && { "& > *": { borderBottom: 0 } }]}
       >
         <>
           <TableCell padding="checkbox">
@@ -117,8 +118,8 @@ function Row(props: {
             </TableCell>
           ))}
         </>
-        {row.description && (
-          <TableCell align="right" padding="checkbox">
+        <TableCell align="right" padding="checkbox">
+          {row.description && (
             <IconButton
               sx={{ mr: 1 }}
               aria-label="expand row"
@@ -127,11 +128,11 @@ function Row(props: {
             >
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
-          </TableCell>
-        )}
+          )}
+        </TableCell>
       </TableRow>
-      <TableRow sx={[!open && { "& > *": { borderBottom: 0 } }]}>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6} sx={[!open && { "& > *": { borderTop: 0 } }]}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box py={2} display="flex" flexGrow={1} sx={{ overflow: "auto" }}>
               <Typography variant="body2" gutterBottom>

@@ -41,26 +41,27 @@ export default function SpellcastingTab() {
         <Grid container item spacing={2}>
           <Grid item sm={7} xs={12} container>
             <StatsGrid
-              title="Magic"
+              title="Spellcasting Stats"
               items={[
-                { header: "ability", value: spellcasting.ability.slice(0, 4) },
+                { header: "ability", value: spellcasting.abilityAbbreviation },
                 {
-                  header: "modifiers",
+                  header: "attack mod.",
                   value: spellcasting.modifier.toString(),
                 },
-                { header: "save Dc", value: spellcasting.saveDc.toString() },
+                { header: "save DC", value: spellcasting.saveDc.toString() },
               ]}
             />
           </Grid>
-          <Grid item container sm xs={12}>
+          <Grid item sm xs={12} container>
             <AttacksTable
               title="Spell Slots"
+              scrollable
               rows={spellcasting.slots.map((slot: Slot) => {
                 return {
                   columns: [slot.level.toString(), slot.count.toString()],
                 };
               })}
-              headers={["level", "count"]}
+              headers={["Level", "Slots total"]}
               showDescription={false}
             />
           </Grid>

@@ -5,7 +5,7 @@ import FilteredTable, { useSpells } from "./filteredTable";
 import ModalAddItems from "./modal";
 
 
-export default function ButtonAddItems({ usePaginationHook, defaults, sendToBEHook, singleChoice, headers, buttonText }
+export default function ButtonAddItems({ usePaginationHook, defaults, sendToBEHook, singleChoice, headers, buttonText}
   : { usePaginationHook: any, defaults: string[], sendToBEHook: any, singleChoice?: boolean, headers: string[], buttonText: string }) {
   const [open, setOpen] = React.useState(false);
   const [pagination, setPagination] = React.useState<PaginationParams>({
@@ -43,6 +43,7 @@ export default function ButtonAddItems({ usePaginationHook, defaults, sendToBEHo
         openDialog={open}
         closeDialog={() => closeDialog()}
         saveSelected={saveSelected}
+        titleDialog={buttonText}
       >
         <FilteredTable
           rows={items.data}

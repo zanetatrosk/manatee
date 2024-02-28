@@ -30,12 +30,12 @@ export default function CharacterSheet() {
   if( !character || isLoading || reduxLoading ) return (<div>loading...</div>)
 
 
-  const stats = [ {header: "speed", value: character.stats.speed.toString()}, 
-                  {header: "prof. bonus", value: character.stats.proficiencyBonus.toString()},
-                  {header: "armor class", value: character.stats.armorClass.toString()},
-                  {header: "hit points", value: character.stats.hitPoints.toString()},
-                  {header: "hit dice", value: character.stats.hitDice.notation },
+  const stats = [ {header: "armor class", value: character.stats.armorClass.toString()},
                   {header: "initiative", value: character.stats.initiative.toString()},
+                  {header: "speed", value: character.stats.speed.toString()}, 
+                  {header: "prof. bonus", value: character.stats.proficiencyBonus.toString()},
+                  {header: "hit point max", value: character.stats.hitPoints.toString()},
+                  {header: "hit dice", value: character.stats.hitDice.notation },
                 ]
   return (
     <React.Fragment>
@@ -124,7 +124,7 @@ export default function CharacterSheet() {
                     disabled
                     tableData={character.savingThrows.map((i) => ({
                       id: i.label,
-                      label: i.label,
+                      label: i.displayName,
                       score: i.modifier,
                       checked: i.proficient,
                     }))}
