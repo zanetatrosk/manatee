@@ -1,53 +1,93 @@
-import { Button, Card, CardMedia, Grid, Paper } from "@mui/material";
+import { Box, Button, Card, CardMedia, CircularProgress, Grid, Paper } from "@mui/material";
 import HeaderCard from "./components/headerCard";
 import AbilityCard from "./components/abilityCard";
 import SkillTable from "./components/skillTable";
 import StatsGrid from "./components/statsGrid";
 import TabsCard from "./components/tabsCard";
 import React, { useEffect } from "react";
-import { useGetCharacterByIdQuery } from "api/charactersApiSlice";
+import { useGetCharacterByIdQuery, usePostLevelUpByCharacterIdMutation } from "api/charactersApiSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch } from "@hooks/hooksStore";
 import { setCharacterSheet } from "reducers/characterReducer";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Skills from "./skills/Skills";
 import { addPlusOrMinus } from "utils/textUtils";
+import ConfirmationDialog from "@components/confirmationDialog";
+import LoadingButton from '@mui/lab/LoadingButton';
 
 
 
 export default function CharacterSheet() {
-
   let { id } = useParams();
-  const {data : character, isLoading } = useGetCharacterByIdQuery(id!);
+  const { data: character, isLoading } = useGetCharacterByIdQuery(id!);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [postLevelUp, { isLoading: loadingLevel }] = usePostLevelUpByCharacterIdMutation();
+  const [open, setOpen] = React.useState(false);
   const [reduxLoading, setReduxLoading] = React.useState(true);
-  useEffect(() => {
-    if(character){
-      dispatch(setCharacterSheet({...character}));
-      setReduxLoading(false);
-    } 
-  }, [character]);
-  
-  if( !character || isLoading || reduxLoading ) return (<div>loading...</div>)
 
-  const stats = [ {header: "armor class", value: character.stats.armorClass.toString()},
-                  {header: "initiative", value: addPlusOrMinus(character.stats.initiative)},
-                  {header: "speed", value: character.stats.speed.toString() + " ft"}, 
-                  {header: "prof. bonus", value: addPlusOrMinus(character.stats.proficiencyBonus)},
-                  {header: "hit point max", value: character.stats.hitPoints.toString()},
-                  {header: "hit dice", value: character.stats.hitDice.notation },
-                ]
+  const closeDialog = () => {
+    setOpen(false);
+  }
+
+
+  useEffect(() => {
+    if (character) {
+      dispatch(setCharacterSheet({ ...character }));
+      setReduxLoading(false);
+    }
+  }, [character]);
+
+  if (!character || isLoading || reduxLoading)
+    return (<Box sx={{ display: 'flex', justifyContent: "center", mt: 5 }}>
+      <CircularProgress />
+    </Box>)
+
+  const confirmAction = () => {
+    postLevelUp({ id: character.id });
+    closeDialog();
+  }
+
+
+  const stats = [{ header: "armor class", value: character.stats.armorClass.toString() },
+  { header: "initiative", value: addPlusOrMinus(character.stats.initiative) },
+  { header: "speed", value: character.stats.speed.toString() + " ft" },
+  { header: "prof. bonus", value: addPlusOrMinus(character.stats.proficiencyBonus) },
+  { header: "hit point max", value: character.stats.hitPoints.toString() },
+  { header: "hit dice", value: character.stats.hitDice.notation },
+  ]
   return (
     <React.Fragment>
-        <Grid container mb={1}>
-          <Grid item xs={10}>
-            <Button variant="outlined" startIcon={<ArrowBackIcon/>} onClick={() => navigate('/characters')}>Back</Button>
+      <Grid container mb={1}>
+        <Grid item container>
+          <Grid item>
+            <Button variant="outlined" startIcon={<ArrowBackIcon />} onClick={() => navigate('/characters')}>Back</Button>
           </Grid>
-          <Grid item xs={2} container justifyContent={"flex-end"}>
-            <Button variant="contained">Level up</Button>
-          </Grid>  
+          <Grid item xs container justifyContent={"flex-end"} spacing={2}>
+            <Grid item>
+              <Button variant="outlined" onClick={() => navigate('/characters/create-character/' + character.id)}>
+                Remake character
+              </Button>
+            </Grid>
+            <Grid item>
+              {character.info.level < 20 && 
+              <LoadingButton
+                variant="contained"
+                onClick={() => setOpen(true)}
+                loading={loadingLevel}
+              >
+                Level up
+                <ConfirmationDialog
+                  title="Level up"
+                  description={`Are you sure you want to level up character ${character.info.characterName} to level ${character.info.level + 1}?`}
+                  openDialog={open}
+                  confirmAction={confirmAction}
+                  closeDialog={closeDialog} />
+              </LoadingButton>}
+            </Grid>
+          </Grid>
         </Grid>
+      </Grid>
       <Paper sx={{ p: 2 }} elevation={4}>
         <Grid container flexDirection={"column"} spacing={5}>
           {/* first row */}
@@ -116,7 +156,7 @@ export default function CharacterSheet() {
           </Grid>
           {/* second row */}
           <Grid container item spacing={3} columns={{ xs: 12 }}>
-            <Skills skills={character.skills}/>
+            <Skills skills={character.skills} />
             <Grid container item flexDirection={"column"} spacing={3} xs>
               <Grid container item spacing={3}>
                 <Grid item sm={4.5} xs={12}>
@@ -132,7 +172,7 @@ export default function CharacterSheet() {
                   />
                 </Grid>
                 <Grid item container xs justifyContent="center">
-                  <StatsGrid title="Stats" items={stats}/>
+                  <StatsGrid title="Stats" items={stats} />
                 </Grid>
               </Grid>
               <Grid container item xs>

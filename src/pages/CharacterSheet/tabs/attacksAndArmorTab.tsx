@@ -7,7 +7,7 @@ import {
 } from "@pages/CreateCharacter/definitions/characterForm";
 import { useEffect, useState } from "react";
 import ButtonAddItems from "../tabsComponents/modalAddItems/buttonAddItems";
-import { useGetArmorQuery, useGetWeaponsQuery } from "api/raceApiSlice";
+import { useGetArmorQuery, useGetWeaponsQuery } from "api/generalContentApiSlice";
 import { useParams } from "react-router-dom";
 import { usePostArmorByCharacterIdMutation, usePostWeaponsByCharacterIdMutation } from "api/charactersApiSlice";
 import { addPlusOrMinus } from "utils/textUtils";

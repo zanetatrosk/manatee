@@ -7,12 +7,15 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const charactersApiSlice = createApi({
     reducerPath: 'charactersApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/api/' }),
+    tagTypes: ['CharacterList', 'CharacterSheet'],
     endpoints: (builder) => ({
         getCharacters: builder.query<CharacterSheet[], void>({
             query: () => 'characters',
+            providesTags: ['CharacterList'],
         }),
         getCharacterById: builder.query<CharacterSheet, string>({
             query: (id) => `characters/${id}`,
+            providesTags: ['CharacterSheet'],
         }),
         postSpellsByCharacterId: builder.mutation<Spell[], { id: string, spells: string[] }>({
             query: ({ id, spells }) => ({
@@ -42,18 +45,27 @@ export const charactersApiSlice = createApi({
                 body: skills,
             }),
         }),
+        postLevelUpByCharacterId: builder.mutation<CharacterSheet, { id: string }>({
+            query: ({ id }) => ({
+                url: `characters/${id}/levelup`,
+                method: 'POST',
+            }),
+            invalidatesTags: ['CharacterSheet'],
+        }),
         addCharacter: builder.mutation<CharacterSheet, StepperForm>({
             query: (body) => ({
                 url: 'characters',
                 method: 'POST',
                 body,
             }),
+            invalidatesTags: ['CharacterList'],
         }),
-        deleteCharacter: builder.mutation<void, number>({
+        deleteCharacter: builder.mutation<void, string>({
             query: (id) => ({
                 url: `characters/${id}`,
                 method: 'DELETE',
             }),
+            invalidatesTags: ['CharacterList'],
         }),
     }),
 });
@@ -65,4 +77,6 @@ export const {
     usePostArmorByCharacterIdMutation, 
     usePostSkillsByCharacterIdMutation, 
     useAddCharacterMutation,
+    useDeleteCharacterMutation,
+    usePostLevelUpByCharacterIdMutation,
     } = charactersApiSlice;

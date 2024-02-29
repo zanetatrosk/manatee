@@ -109,6 +109,7 @@ interface AutocompleteParams {
 
 interface SheetHeaderInfo extends BasicInfo {
     subclass: string;
+    size: string;
     level: number;
     race: BaseItem;
     class: BaseItem;
@@ -170,7 +171,7 @@ interface Spellcasting {
     spells: Spell[];
 }
 
-interface ProficienciesSheet<T extends Sourceable>{
+export interface ProficienciesSheet<T extends Sourceable>{
     item: T;
     from: string;
 } 
@@ -211,9 +212,12 @@ export interface Proficient {
     proficient: boolean;
 }
 
-interface CharacterSheet {
+interface CharacterInfo {
     id: string;
     info: SheetHeaderInfo;
+}
+
+interface CharacterSheet extends CharacterInfo {
     stats: Stats;
     abilities: AbilitySheet[];
     skills: Skill[];
@@ -235,6 +239,7 @@ const characterSheetDefaults: CharacterSheet = {
         characterName: "Character Name",
         playerName: "Player name",
         sourceIds: [],
+        size: "medium",
         sheetPhotoUrl: "",
         cardPhotoUrl: "",
         subclass: "Assasin",
@@ -486,5 +491,5 @@ const characterSheetDefaults: CharacterSheet = {
 }
 
 
-export type {Race, BaseItem as AutocompleteItem, Background, AbilityScore, AutocompleteParams, Feature, BasicInfo, CharacterSheet, Class, Source, Sourceable, Spellcasting}
+export type {Race, BaseItem as AutocompleteItem, Background, AbilityScore, AutocompleteParams, Feature, BasicInfo, CharacterInfo, CharacterSheet, Class, Source, Sourceable, Spellcasting}
 export {Ability, Size, characterSheetDefaults}

@@ -22,7 +22,7 @@ import {
   Source,
 } from "@pages/CreateCharacter/definitions/characterForm";
 import CardInfo from "./cardInfo";
-import { useGetLanguagesQuery, useGetRacesQuery } from "api/raceApiSlice";
+import { useGetLanguagesQuery, useGetRacesQuery } from "api/generalContentApiSlice";
 import { RaceForm, StepperForm } from "../definitions/stepperForm";
 
 const RACE = CREATE_CHARACTER.RACE;

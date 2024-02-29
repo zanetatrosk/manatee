@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
-import { useGetSourcesQuery } from "api/raceApiSlice";
+import { useGetSourcesQuery } from "api/generalContentApiSlice";
 import { StepperForm } from "../definitions/stepperForm";
 import { BasicInfo } from "../definitions/characterForm";
 

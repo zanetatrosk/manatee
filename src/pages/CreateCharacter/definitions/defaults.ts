@@ -43,32 +43,36 @@ const abilitiesDefaults: AbilityScore[] = [
 const proficiencyDefault: Proficiencies<Sourceable> = {
   amount: 0,
   defaults: [],
+  from: "",
 };
 
-const formDefaults: StepperForm = {
-  basicInfo: {
-    characterName: "New Character Name",
-    playerName: "Player Name",
-    sourceIds: [],
-    sheetPhotoUrl: "",
-    cardPhotoUrl: "",
-  } as BasicInfo,
-  abilityScores: abilitiesDefaults as AbilityScore[],
-  race: {
-    id: null,
-    size: "",
-    languageIds: [],
-  },
-  background: {
-    id: null,
-    toolIds: [],
-    languageIds: [],
-  },
-  class: {
-    id: null,
-    subclass: null,
-    toolIds: [],
-  },
-};
+export const returnDefaults = () => {
+  return {
+    basicInfo: {
+      characterName: "New Character Name",
+      playerName: "Player Name",
+      sourceIds: [],
+      sheetPhotoUrl: "",
+      cardPhotoUrl: "",
+    } as BasicInfo,
+    abilityScores: abilitiesDefaults,
+    race: {
+      id: null,
+      size: "",
+      languageIds: [],
+    },
+    background: {
+      id: null,
+      toolIds: [],
+      languageIds: [],
+    },
+    class: {
+      id: null,
+      subclass: null,
+      toolIds: [],
+    },
+  };
+}
 
-export { abilitiesDefaults, proficiencyDefault, formDefaults };
+
+export { abilitiesDefaults, proficiencyDefault };

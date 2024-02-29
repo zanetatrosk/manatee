@@ -17,7 +17,7 @@ import {
   TextField,
 } from "@mui/material";
 import { RowData } from "@pages/CharacterSheet/components/attacksTable";
-import { useGetSpellsQuery } from "api/raceApiSlice";
+import { useGetSpellsQuery } from "api/generalContentApiSlice";
 import React, { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";

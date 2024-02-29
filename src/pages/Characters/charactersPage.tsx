@@ -8,16 +8,20 @@ import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import { CHARACTERS } from "constants/characterDefinition";
-import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
-import {  useGetCharactersQuery } from "api/charactersApiSlice";
-import { CharacterSheet } from "@pages/CreateCharacter/definitions/characterForm";
+import { useDeleteCharacterMutation, useGetCharactersQuery } from "api/charactersApiSlice";
+import { CharacterInfo } from "@pages/CreateCharacter/definitions/characterForm";
+import ConfirmationDialog from "@components/confirmationDialog";
 
-
-
-
-
-function CharacterCard( { props }: { props: CharacterSheet }) {
+function CharacterCard({ props }: { props: CharacterInfo }) {
   let navigate = useNavigate();
+
+  const [deleteCharacter] = useDeleteCharacterMutation();
+  const [open, setOpen] = React.useState(false);
+
+  const closeDialog = () => {
+    setOpen(false);
+  }
+
   return (
     <Card sx={{ width: "100%" }} data-cy="character-card">
       <CardMedia
@@ -48,8 +52,20 @@ function CharacterCard( { props }: { props: CharacterSheet }) {
               size="small"
               color="error"
               sx={{ mr: 1 }}
+              onClick={() => {
+                setOpen(true);
+              }}
             >
               {CHARACTERS.DELETE}
+              <ConfirmationDialog
+                title="Delete character"
+                description={`Are you sure you want to delete character ${props.info.characterName}?`}
+                openDialog={open}
+                confirmAction={() => {
+                  deleteCharacter(props.id);
+                  closeDialog();
+                }}
+                closeDialog={closeDialog} />
             </Button>
           </Grid>
         </Grid>
@@ -60,10 +76,9 @@ function CharacterCard( { props }: { props: CharacterSheet }) {
 
 export default function Characters() {
   let navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const theme = useTheme();
   const greaterThanMid = useMediaQuery(theme.breakpoints.up("md"));
-  const characters: CharacterSheet[] = useGetCharactersQuery().data || []; 
+  const characters: CharacterInfo[] = useGetCharactersQuery().data || [];
   return (
     <Grid container flexDirection={"column"} >
       <Grid container item alignItems={"center"}>

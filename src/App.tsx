@@ -28,7 +28,7 @@ function App() {
           <Container
             sx={{
               mt: 6,
-              mb: 4, 
+              mb: 4,
             }}
             maxWidth="lg"
             component="main"
@@ -36,14 +36,21 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/characters" element={<Characters />} />
-              <Route path="/content" element={<ContentPage/>}/>
+              <Route path="/content" element={<ContentPage />} />
               <Route
                 path="/characters/create-character"
                 element={<CreateCharacter />}
               />
               <Route path="/characters/:id/character-sheet"
-                element={<CharacterSheet />} />
-                <Route path="/*" element={<div>No route here</div>}/>
+                element={<CharacterSheet />}
+              />
+              <Route path="/characters/create-character/:id"
+                element={<CreateCharacter />}
+              />
+              <Route
+                path="/*"
+                element={<div>No route here</div>}
+              />
             </Routes>
           </Container>
           {/* todo footer */}

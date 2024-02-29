@@ -1,7 +1,5 @@
-import { Button, Dialog, DialogTitle, TextField, DialogContent, DialogActions } from "@mui/material";
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import React from "react";
-import FilteredTable, { useSpells } from "./filteredTable";
-import { PaginationParams, useGetSpellsQuery } from "api/raceApiSlice";
 
 
 

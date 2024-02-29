@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import characterReducer from '../reducers/characterReducer';
-import { generalContentApiSlice } from '../api/raceApiSlice';
+import { generalContentApiSlice } from '../api/generalContentApiSlice';
 import { charactersApiSlice } from 'api/charactersApiSlice';
 // ...
 

@@ -13,7 +13,7 @@ import { useAppSelector, useAppDispatch } from "@hooks/hooksStore";
 import React, { useEffect } from "react";
 import MultiComplete from "@components/customMultiComplete";
 import { AutocompleteItem, Class, Source } from "../definitions/characterForm";
-import { useGetClassesQuery, useGetToolsQuery } from "api/raceApiSlice";
+import { useGetClassesQuery, useGetToolsQuery } from "api/generalContentApiSlice";
 import { ClassForm, StepperForm } from "../definitions/stepperForm";
 
 const CLASS = CREATE_CHARACTER.CLASS;

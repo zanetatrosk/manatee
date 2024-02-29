@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 function LittleCard({item}: {item: Item}) {
   return (
     <Paper
-      elevation={12}
+      elevation={5}
       sx={{ borderRadius: 1, py: 1, pb: 0.3, width: 128, height: 84}}
     >
       <Grid container flexDirection="column" justifyItems="center">

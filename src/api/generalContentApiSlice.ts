@@ -21,7 +21,7 @@ export interface PaginationParams {
 
 
 export const generalContentApiSlice = createApi({
-  reducerPath: "raceApi",
+  reducerPath: "contentApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8080/api/" }),
   endpoints: (builder) => ({
     getRaces: builder.query<Race[], string[]>({

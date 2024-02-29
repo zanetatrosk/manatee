@@ -22,7 +22,7 @@ import {
   useGetBackgroundsQuery,
   useGetLanguagesQuery,
   useGetToolsQuery,
-} from "api/raceApiSlice";
+} from "api/generalContentApiSlice";
 import { BackgroundForm, StepperForm } from "../definitions/stepperForm";
 
 const BACKGROUND = CREATE_CHARACTER.BACKGROUND;
