@@ -11,11 +11,12 @@ import {
 import Box from "@mui/material/Box";
 import { table } from "console";
 import React from "react";
+import { addPlusOrMinus } from "utils/textUtils";
 
 export interface RowSkillData {
   id: string;
   label: string;
-  score: number;
+  modifier: number;
   checked: boolean;
 }
 
@@ -69,7 +70,7 @@ export default function SkillTable({ name, description, tableData, disabled, sen
               </TableCell>
               <TableCell>{i.label}</TableCell>
               <TableCell align="right">
-                <Typography variant="h6">{i.score}</Typography>
+                <Typography variant="h6">{addPlusOrMinus(i.modifier)}</Typography>
               </TableCell>
             </TableRow>
           ))}

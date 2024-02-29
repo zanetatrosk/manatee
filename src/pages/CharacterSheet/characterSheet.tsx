@@ -11,6 +11,7 @@ import { useAppDispatch } from "@hooks/hooksStore";
 import { setCharacterSheet } from "reducers/characterReducer";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Skills from "./skills/Skills";
+import { addPlusOrMinus } from "utils/textUtils";
 
 
 
@@ -30,11 +31,10 @@ export default function CharacterSheet() {
   
   if( !character || isLoading || reduxLoading ) return (<div>loading...</div>)
 
-
   const stats = [ {header: "armor class", value: character.stats.armorClass.toString()},
-                  {header: "initiative", value: character.stats.initiative.toString()},
-                  {header: "speed", value: character.stats.speed.toString()}, 
-                  {header: "prof. bonus", value: character.stats.proficiencyBonus.toString()},
+                  {header: "initiative", value: addPlusOrMinus(character.stats.initiative)},
+                  {header: "speed", value: character.stats.speed.toString() + " ft"}, 
+                  {header: "prof. bonus", value: addPlusOrMinus(character.stats.proficiencyBonus)},
                   {header: "hit point max", value: character.stats.hitPoints.toString()},
                   {header: "hit dice", value: character.stats.hitDice.notation },
                 ]
@@ -126,7 +126,7 @@ export default function CharacterSheet() {
                     tableData={character.savingThrows.map((i) => ({
                       id: i.label,
                       label: i.displayName,
-                      score: i.modifier,
+                      modifier: i.modifier,
                       checked: i.proficient,
                     }))}
                   />

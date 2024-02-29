@@ -47,8 +47,6 @@ export default function AttacksTable({title, headers, rows, actionButton, showDe
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  debugger;
-
   function handleChangePage(event: unknown, page: number): void {
     setPage(page);
     console.log(page);
@@ -94,7 +92,7 @@ export default function AttacksTable({title, headers, rows, actionButton, showDe
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit >
               <Box py={2} display="flex" flexGrow={1} sx={{ overflow: 'auto' }}>
-                <Typography variant="body2" gutterBottom >
+                <Typography variant="body2" gutterBottom>
                   {row.description}
                 </Typography>
               </Box>

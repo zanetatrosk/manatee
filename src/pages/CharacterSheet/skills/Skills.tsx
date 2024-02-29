@@ -4,6 +4,7 @@ import { Skill } from "@pages/CreateCharacter/definitions/characterForm";
 import { usePostSkillsByCharacterIdMutation } from "api/charactersApiSlice";
 import { useParams } from "react-router-dom";
 import React from "react";
+import { addPlusOrMinus } from "utils/textUtils";
 
 
 export default function Skills({ skills} : {skills: Skill[]}) {
@@ -12,7 +13,7 @@ export default function Skills({ skills} : {skills: Skill[]}) {
 	const [skillsGiven, setSkillsGiven] = React.useState<RowSkillData[]>(skills.map((i) => ({
 		id: i.label,
 		label: i.displayName,
-		score: i.modifier,
+		modifier: i.modifier,
 		checked: i.proficient
 	})));
 	if( !id ) return null;
@@ -28,7 +29,7 @@ export default function Skills({ skills} : {skills: Skill[]}) {
 			setSkillsGiven(data.map((i) => ({
 				id: i.label,
 				label: i.displayName,
-				score: i.modifier,
+				modifier: i.modifier,
 				checked: i.proficient
 			})));
 		});

@@ -10,11 +10,11 @@ export default function FeaturesTab() {
         title="Features"
         rows={features?.map((f: Feature) => {
           return {
-            columns: [f.title, f.levelMinimum?.toString() || "Not known"],
+            columns: [f.title, f.levelMinimum.toString()],
             description: f.text,
           };
         })}
-        headers={["title", "level minimum"]}
+        headers={["Title", "Level gained"]}
         showDescription
       />
     </>

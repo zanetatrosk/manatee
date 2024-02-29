@@ -70,7 +70,7 @@ export const useSpells = (
       data: spellsInfo.content.map((spell) => {
         return {
           id: spell.id,
-          columns: [spell.name, spell.level.toString(), spell.range],
+          columns: [spell.name, spell.level.toString(), spell.castingTime],
           description: spell.description,
         };
       }),

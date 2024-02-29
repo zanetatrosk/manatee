@@ -1,5 +1,6 @@
 import { Card, Grid, Typography, styled } from "@mui/material";
 import Box from "@mui/material/Box";
+import { addPlusOrMinus } from "utils/textUtils";
 
 const StyledModifier = styled(Box)({
   width: 82,
@@ -40,6 +41,7 @@ interface AbilityCardProps {
     score: number;
     modifier: number;
 }
+
 export default function AbilityCard(props: AbilityCardProps) {
   return (
     <Box>
@@ -50,7 +52,7 @@ export default function AbilityCard(props: AbilityCardProps) {
           </Grid>
           <Grid item container flexDirection="column" alignItems="center">
             <StyledModifier>
-              <Typography variant="h4">{props.modifier}</Typography>
+              <Typography variant="h4">{addPlusOrMinus(props.modifier)}</Typography>
             </StyledModifier>
 
             <StyledAbilityScore>

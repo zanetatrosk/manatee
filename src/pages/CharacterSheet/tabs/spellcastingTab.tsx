@@ -8,6 +8,7 @@ import { useSpells } from "../tabsComponents/modalAddItems/filteredTable";
 import { usePostSpellsByCharacterIdMutation } from "api/charactersApiSlice";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { addPlusOrMinus } from "utils/textUtils";
 
 
 export default function SpellcastingTab() {
@@ -15,12 +16,14 @@ export default function SpellcastingTab() {
   const [postSpellsByCharacterId] = usePostSpellsByCharacterIdMutation();
   const { spellcasting } = useAppSelector((state) => state.character);
 
+  
+
   const tranformSpells = (spells: Spell[]) => {
     return spells.map((spell: Spell) => {
       return {
-        columns: [spell.name, spell.level.toString(), spell.range],
+        columns: [spell.name, spell.level.toString(), spell.castingTime],
         id: spell.id,
-        description: spell.description
+        description: spell.description,
       };
     });
   };
@@ -46,7 +49,7 @@ export default function SpellcastingTab() {
                 { header: "ability", value: spellcasting.abilityAbbreviation },
                 {
                   header: "attack mod.",
-                  value: spellcasting.modifier.toString(),
+                  value: addPlusOrMinus(spellcasting.modifier),
                 },
                 { header: "save DC", value: spellcasting.saveDc.toString() },
               ]}
@@ -70,9 +73,9 @@ export default function SpellcastingTab() {
           <AttacksTable
             title="Spells"
             rows={tableSpells}
-            headers={["Name", "Level", "Range"]}
+            headers={["Name", "Level", "Casting time"]}
             actionButton={
-              <ButtonAddItems buttonText="Add Spells" usePaginationHook={useSpells} defaults={spellcasting.spells.map((spell: Spell) => spell.id)} sendToBEHook={usePostSpells} headers={["Name", "Level", "Range"]} />
+              <ButtonAddItems buttonText="Add Spells" usePaginationHook={useSpells} defaults={spellcasting.spells.map((spell: Spell) => spell.id)} sendToBEHook={usePostSpells} headers={["Name", "Level", "Casting time"]} />
             }
             showDescription
           />

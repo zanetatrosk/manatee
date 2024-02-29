@@ -10,12 +10,13 @@ import ButtonAddItems from "../tabsComponents/modalAddItems/buttonAddItems";
 import { useGetArmorQuery, useGetWeaponsQuery } from "api/raceApiSlice";
 import { useParams } from "react-router-dom";
 import { usePostArmorByCharacterIdMutation, usePostWeaponsByCharacterIdMutation } from "api/charactersApiSlice";
+import { addPlusOrMinus } from "utils/textUtils";
 
 const transformAttacks = (weapons: Attack[]): RowData[] => {
   const wap = weapons.map((weapon: Attack) => {
     return {
       id: weapon.name,
-      columns: [weapon.name, weapon.attackBonus.toString(), weapon.damage],
+      columns: [weapon.name, addPlusOrMinus(weapon.attackBonus), weapon.damage],
     };
   });
   return wap;
@@ -124,17 +125,16 @@ export default function AttacksAndArmorTab() {
       <AttacksTable
         title="Armor"
         rows={[armor]}
-        headers={["Name", "Base armor class", "Damage type"]}
+        headers={["Name", "Base AC", "Armor type"]}
         showDescription
         actionButton={
           <ButtonAddItems
-            buttonText="Add Armor"
+            buttonText="Change Armor"
             usePaginationHook={useArmor}
             defaults={[armorStore.id]}
             sendToBEHook={usePostArmor}
             singleChoice
-            headers={["Name", "Base armor class", "Damage type"]}
-
+            headers={["Name", "Base AC", "Armor type"]}
           />
         }
       />
