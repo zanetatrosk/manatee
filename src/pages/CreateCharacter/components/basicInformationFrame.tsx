@@ -76,13 +76,13 @@ function BasicInformation({
         <Grid item xs>
           <Autocomplete
             id="combo-box-demo"
-            value={sources?.filter((i) => form.sources?.includes(i.id)) || []}
+            value={sources?.filter((s) => form.sourceIds?.includes(s.id)) || []}
             options={sources || []}
             multiple
             getOptionLabel={(option) => option.name}
+            isOptionEqualToValue={(option, value) => option.id === value.id}
             onChange={(_, value) => {
-              if (!value) return;
-              setPropertyInForm("sources", value.map((v) => v.id));
+              setPropertyInForm("sourceIds", value.map((v) => v.id));
             }}
             renderInput={(params) => (
               <TextField
@@ -116,7 +116,7 @@ function BasicInformation({
             fullWidth
             value={form.cardPhotoUrl}
             onChange={(e) => {
-              setPropertyInForm("cardPhoto", e.target.value);
+              setPropertyInForm("cardPhotoUrl", e.target.value);
             }}
             variant="filled"
             label={BASIC_INFO.CARD_PHOTO}
@@ -127,7 +127,7 @@ function BasicInformation({
             data-cy="sheet-photo"
             variant="filled"
             fullWidth
-            onChange={(e) => setPropertyInForm("sheetPhoto", e.target.value)}
+            onChange={(e) => setPropertyInForm("sheetPhotoUrl", e.target.value)}
             label={BASIC_INFO.SHEET_PHOTO}
             value={form.sheetPhotoUrl}
           ></TextField>

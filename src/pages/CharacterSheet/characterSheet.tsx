@@ -6,7 +6,7 @@ import StatsGrid from "./components/statsGrid";
 import TabsCard from "./components/tabsCard";
 import React, { useEffect } from "react";
 import { useGetCharacterByIdQuery } from "api/charactersApiSlice";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch } from "@hooks/hooksStore";
 import { setCharacterSheet } from "reducers/characterReducer";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -19,6 +19,7 @@ export default function CharacterSheet() {
   let { id } = useParams();
   const {data : character, isLoading } = useGetCharacterByIdQuery(id!);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [reduxLoading, setReduxLoading] = React.useState(true);
   useEffect(() => {
     if(character){
@@ -41,7 +42,7 @@ export default function CharacterSheet() {
     <React.Fragment>
         <Grid container mb={1}>
           <Grid item xs={10}>
-            <Button variant="outlined" startIcon={<ArrowBackIcon/>}> Back to Create</Button>
+            <Button variant="outlined" startIcon={<ArrowBackIcon/>} onClick={() => navigate('/characters')}>Back</Button>
           </Grid>
           <Grid item xs={2} container justifyContent={"flex-end"}>
             <Button variant="contained">Level up</Button>

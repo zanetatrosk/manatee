@@ -25,20 +25,15 @@ export default function ClassFrame({
   classForm: ClassForm;
   setForm: React.Dispatch<React.SetStateAction<StepperForm>>;
 }) {
-  const { data: classes, isLoading: loadingClasses } = useGetClassesQuery(
-    useAppSelector((state) => []).map(
-      (s: Source) => s.id
-    )
-  );
-  const { data: tools, isLoading: toolsLoading } = useGetToolsQuery(
-    useAppSelector((state) => []).map(
-      (s: Source) => s.id
-    )
-  );
+  const { data: classes, isLoading: loadingClasses } = useGetClassesQuery([]);
+  const { data: tools, isLoading: toolsLoading } = useGetToolsQuery([]);
+  const [characterClass, setClass] = React.useState<Class|null>(null);
+  const [isVisible, setVisibility] = React.useState<boolean>(!!characterClass?.id);
 
-  const [characterClass, setClass] = React.useState<Class>(classes?.find((c) => c.id === classForm.id) || {} as Class);
-  const [isVisible, setVisibility] = React.useState<boolean>(!!classForm.id);
-
+  if (classes && classForm.id && !characterClass) {
+    setClass(classes.find((c) => c.id === classForm.id) || null);
+    setVisibility(true);
+  }
   
   const setPropertyInForm = (property: string, value: any) => {
     setForm((prev) => ({

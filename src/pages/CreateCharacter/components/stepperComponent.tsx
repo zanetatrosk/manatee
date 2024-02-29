@@ -14,6 +14,8 @@ import { CREATE_CHARACTER } from "constants/characterDefinition";
 import { useNavigate } from "react-router-dom";
 import { StepperForm } from "../definitions/stepperForm";
 import { formDefaults } from "../definitions/defaults";
+import { useAddCharacterMutation } from "api/charactersApiSlice";
+import { CharacterSheet } from "../definitions/characterForm";
 
 const steps = ["Basic information", "Class", "Race", "Abilities", "Background"];
 
@@ -29,12 +31,14 @@ export default function HorizontalLinearStepper() {
   const [skipped, setSkipped] = React.useState(new Set<number>());
 
   const navigate = useNavigate();
+  const [postCharacter] = useAddCharacterMutation();
 
   const [form, setData] = React.useState<StepperForm>(formDefaults);
 
   React.useEffect(() => {
     console.log(form, "form was edited");
   }, [form]);
+
   const components: ComponentRegister[] = [
     { id: 0, component: <BasicInformation form={form.basicInfo} setForm={setData} /> },
     { id: 1, component: <Class classForm={form.class} setForm={setData} /> },
@@ -42,6 +46,7 @@ export default function HorizontalLinearStepper() {
     { id: 3, component: <Abilities abilitiesForm={form.abilityScores} setForm={setData}/> },
     { id: 4, component: <Background backgroundForm={form.background} setForm={setData}/> },
   ];
+  
   const isStepOptional = (step: number) => {
     return step === 0;
   };
@@ -56,7 +61,6 @@ export default function HorizontalLinearStepper() {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
-
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
   };
@@ -85,7 +89,10 @@ export default function HorizontalLinearStepper() {
   };
 
   const handleFinish = () => {
-    navigate("/characters/character-sheet");
+    const tmpForm = { ...form, abilityScores: form.abilityScores.map((a) => ({ ...a, label: a.label.toLowerCase() }))};
+    postCharacter(tmpForm).unwrap().then((res: CharacterSheet) => {
+      navigate("/characters/" + res.id + "/character-sheet"); 
+      });
   };
 
   return (

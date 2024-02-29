@@ -49,7 +49,7 @@ const formDefaults: StepperForm = {
   basicInfo: {
     characterName: "New Character Name",
     playerName: "Player Name",
-    sources: [],
+    sourceIds: [],
     sheetPhotoUrl: "",
     cardPhotoUrl: "",
   } as BasicInfo,

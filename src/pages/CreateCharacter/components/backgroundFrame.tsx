@@ -28,31 +28,20 @@ import { BackgroundForm, StepperForm } from "../definitions/stepperForm";
 const BACKGROUND = CREATE_CHARACTER.BACKGROUND;
 
 export default function BackgroundFrame({ backgroundForm, setForm }: { backgroundForm: BackgroundForm, setForm: React.Dispatch<React.SetStateAction<StepperForm>> }) {
-  
 
-  
-    const { data: backgrounds, isLoading: loadingBackgrounds } =
-      useGetBackgroundsQuery(
-        useAppSelector((state) => []).map(
-          (s: Source) => s.id
-        )
-      );
-    const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(
-      useAppSelector((state) => []).map(
-        (s: Source) => s.id
-      )
-    );
-    const { data: tools, isLoading: loadingTools } = useGetToolsQuery(
-      useAppSelector((state) => []).map(
-        (s: Source) => s.id
-      )
-    );
+  const { data: backgrounds, isLoading: loadingBackgrounds } = useGetBackgroundsQuery([]);
+  const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery([]);
+  const { data: tools, isLoading: loadingTools } = useGetToolsQuery([]);
+  const [isVisible, setVisibility] = React.useState(false); 
 
-  const [isVisible, setVisibility] = React.useState(!!backgroundForm.id);
-  const [background, setBackground] = useState<Background>(backgrounds?.find((b) => b.id === backgroundForm.id) || ({} as Background));
+  const [background, setBackground] = useState<Background | null>(null);
+  if (backgrounds && backgroundForm.id && !background) {
+    setBackground(backgrounds.find((b) => b.id === backgroundForm.id) || null);
+    setVisibility(true);
+  }
 
   const setPropertyInForm = (property: string, value: any) => {
-    setForm(prev => ({...prev, background: {...prev.background, [property]: value}}));
+    setForm(prev => ({ ...prev, background: { ...prev.background, [property]: value } }));
   };
 
   const handleToolsChange = (value: AutocompleteItem[]): void => {
@@ -119,7 +108,7 @@ export default function BackgroundFrame({ backgroundForm, setForm }: { backgroun
         </Grid>
       </Grid>
       <React.Fragment>
-        {isVisible && (
+        {isVisible && !!background && (
           <div>
             <Box>
               <Divider sx={{ py: 2 }}>

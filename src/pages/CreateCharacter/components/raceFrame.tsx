@@ -36,29 +36,25 @@ export default function RaceFrame({
 }) {
   //calling api to get all races, in future this will be called when create character button is clicked
 
-  const { data: races, isLoading: loadingRaces } = useGetRacesQuery(
-    useAppSelector((state) => []).map(
-      (s: Source) => s.id
-    )
-  );
-  const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(
-    useAppSelector((state) => []).map(
-      (s: Source) => s.id
-    )
-  );
+  const { data: races, isLoading: loadingRaces } = useGetRacesQuery([]);
+  const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery([]);
 
   const getRace = (id: string | null) => {
+    setVisibility(true);
     return races?.find((r) => r.id === id);
   };
 
-  const [race, setRace] = useState<Race>(getRace(raceForm.id) || ({} as Race));
-  const [isVisible, setVisibility] = React.useState(!!raceForm.id);
+  const [race, setRace] = useState<Race|null>(null);
+  const [isVisible, setVisibility] = React.useState(!!race);
+  if( !race && races && raceForm.id) {
+    setRace(getRace(raceForm.id) || null);
+    setVisibility(true);
+  }
   //these are the values that are going to be displayed in the multicomplete
   //that are selected by user or by default according to race
   const setPropertyInForm = (property: string, value: any) => {
     setForm(prev => ({...prev, race: {...prev.race, [property]: value}}));
   }
-
   const handleLanguagesChange = (value: AutocompleteItem[]): void => {
     setPropertyInForm(
       "languageIds",
@@ -93,16 +89,16 @@ export default function RaceFrame({
             options={races || []}
             getOptionLabel={(option) => option.name}
             isOptionEqualToValue={(option, value) => option.id === value.id}
-            value={race.id ? race : null}
+            value={race?.id ? race : null}
             onChange={(_, value) => {
               if (!value) return;
-              setRace(value);
               setVisibility(true);
               //setting the right properties of race
               //recalculate ability scores acording to a new race
               setPropertyInForm("id", value.id);
               setPropertyInForm("size", value.sizeOptions[0]);
               setPropertyInForm("languageIds", value.languageProficiencies.defaults.map(l => l.id));
+              setRace(value);
             }}
             renderInput={(params) => (
               <TextField
@@ -127,7 +123,7 @@ export default function RaceFrame({
         </Grid>
       </Grid>
       <React.Fragment>
-        {isVisible && (
+        {isVisible && !!race && (
           <div>
             <Box>
               <Divider sx={{ py: 2 }}>

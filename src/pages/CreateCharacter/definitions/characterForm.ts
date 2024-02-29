@@ -22,7 +22,7 @@ enum Size {
 interface BasicInfo {
     characterName: string;
     playerName: string;
-    sources: string[];
+    sourceIds: string[];
     sheetPhotoUrl: string | null;
     cardPhotoUrl: string | null;
 }
@@ -234,7 +234,7 @@ const characterSheetDefaults: CharacterSheet = {
     info: {
         characterName: "Character Name",
         playerName: "Player name",
-        sources: [],
+        sourceIds: [],
         sheetPhotoUrl: "",
         cardPhotoUrl: "",
         subclass: "Assasin",
