@@ -30,26 +30,29 @@ const RACE = CREATE_CHARACTER.RACE;
 export default function RaceFrame({
   raceForm,
   setForm,
+  sourceIds,
 }: {
   raceForm: RaceForm;
   setForm: React.Dispatch<React.SetStateAction<StepperForm>>;
+  sourceIds: string[];
 }) {
   //calling api to get all races, in future this will be called when create character button is clicked
 
-  const { data: races, isLoading: loadingRaces } = useGetRacesQuery([]);
-  const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery([]);
+  const { data: races, isLoading: loadingRaces } = useGetRacesQuery(sourceIds);
+  const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(sourceIds);
 
-  const getRace = (id: string | null) => {
-    setVisibility(true);
-    return races?.find((r) => r.id === id);
-  };
+  console.log("render race");
 
   const [race, setRace] = useState<Race|null>(null);
   const [isVisible, setVisibility] = React.useState(!!race);
-  if( !race && races && raceForm.id) {
-    setRace(getRace(raceForm.id) || null);
-    setVisibility(true);
+
+  if( races && raceForm.id && !race ) {
+    const raceTmp = races?.find((r) => r.id === raceForm.id);
+    if(raceTmp) {
+      setRace(raceTmp);
+    }
   }
+  
   //these are the values that are going to be displayed in the multicomplete
   //that are selected by user or by default according to race
   const setPropertyInForm = (property: string, value: any) => {
@@ -72,7 +75,7 @@ export default function RaceFrame({
           </Typography>
         </Grid>
         <Grid item>
-          {!isVisible && (
+          {!race && (
             <Typography gutterBottom variant="body2" color="text.secondary">
               {/* todo implement point buy */}
               {RACE.SUBTITLE}
@@ -123,7 +126,7 @@ export default function RaceFrame({
         </Grid>
       </Grid>
       <React.Fragment>
-        {isVisible && !!race && (
+        {!!race && (
           <div>
             <Box>
               <Divider sx={{ py: 2 }}>

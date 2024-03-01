@@ -36,7 +36,6 @@ const fillDataForm = (character: CharacterSheet): StepperForm => {
 		languageIds: character.languages.filter((l: ProficienciesSheet<LanguagesProficiency>) => l.from === "background").map((l: ProficienciesSheet<LanguagesProficiency>) => l.item.id)
 	}
 	console.log("form was filled");
-	debugger;
 	return form;
 
 }

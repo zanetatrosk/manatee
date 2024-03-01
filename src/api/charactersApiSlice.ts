@@ -22,7 +22,9 @@ export const charactersApiSlice = createApi({
                 url: `characters/${id}/spells`,
                 method: 'PUT',
                 body: spells,
+
             }),
+            invalidatesTags: ['CharacterSheet'],
         }),
         postWeaponsByCharacterId: builder.mutation<Attack[], { id: string, weapons: string[] }>({
             query: ({ id, weapons }) => ({
@@ -30,6 +32,7 @@ export const charactersApiSlice = createApi({
                 method: 'PUT',
                 body: weapons,
             }),
+            invalidatesTags: ['CharacterSheet'],
         }),
         postArmorByCharacterId: builder.mutation<Armor, { id: string, armor: string }>({
             query: ({ id, armor }) => ({
@@ -37,6 +40,7 @@ export const charactersApiSlice = createApi({
                 method: 'PUT',
                 body: { id: armor },
             }),
+            invalidatesTags: ['CharacterSheet'],
         }),
         postSkillsByCharacterId: builder.mutation<Skill[], { id: string, skills: Proficient[] }>({
             query: ({ id, skills }) => ({
@@ -44,6 +48,7 @@ export const charactersApiSlice = createApi({
                 method: 'PUT',
                 body: skills,
             }),
+            invalidatesTags: ['CharacterSheet'],
         }),
         postLevelUpByCharacterId: builder.mutation<CharacterSheet, { id: string }>({
             query: ({ id }) => ({

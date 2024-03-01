@@ -21,27 +21,34 @@ const CLASS = CREATE_CHARACTER.CLASS;
 export default function ClassFrame({
   classForm,
   setForm,
+  sourceIds,
 }: {
   classForm: ClassForm;
   setForm: React.Dispatch<React.SetStateAction<StepperForm>>;
+  sourceIds: string[];
 }) {
-  const { data: classes, isLoading: loadingClasses } = useGetClassesQuery([]);
-  const { data: tools, isLoading: toolsLoading } = useGetToolsQuery([]);
+  const { data: classes, isLoading: loadingClasses } = useGetClassesQuery(sourceIds);
+  const { data: tools, isLoading: toolsLoading } = useGetToolsQuery(sourceIds);
   const [characterClass, setClass] = React.useState<Class|null>(null);
   const [isVisible, setVisibility] = React.useState<boolean>(!!characterClass?.id);
 
-  if (classes && classForm.id && !characterClass) {
-    setClass(classes.find((c) => c.id === classForm.id) || null);
-    setVisibility(true);
+  if(classForm.id && !characterClass){
+      const classTmp = classes?.find((c) => c.id === classForm.id);
+      if( classTmp ) {
+        setClass(classTmp);
+        setVisibility(true);
+      }
   }
-  
+
+  console.log("render class");
+
   const setPropertyInForm = (property: string, value: any) => {
     setForm((prev) => ({
       ...prev,
       class: { ...prev.class, [property]: value },
     }));
   };
-
+  
   const handleToolsChange = (value: AutocompleteItem[]): void => {
     setPropertyInForm(
       "toolIds",
@@ -73,7 +80,7 @@ export default function ClassFrame({
             getOptionLabel={(option) => option.name}
             value={characterClass?.id ? characterClass : null}
             sx={{ my: 2 }}
-            onChange={(_, value) => {
+            onChange={(e, value) => {
               if (!value) return;
               setClass(value);
               setPropertyInForm("id", value.id);

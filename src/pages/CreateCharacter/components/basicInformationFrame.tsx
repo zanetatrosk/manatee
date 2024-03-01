@@ -32,9 +32,7 @@ function BasicInformation({
     }));
   };
 
-  useEffect(() => {
-    debugger;
-  }, [setForm]);
+  console.log("rendering basic info");
 
   return (
     <Grid container spacing={10}>
@@ -122,7 +120,6 @@ function BasicInformation({
             value={form.cardPhotoUrl}
             onChange={(e) => {
               setPropertyInForm("cardPhotoUrl", e.target.value);
-              debugger;
             }}
             variant="filled"
             label={BASIC_INFO.CARD_PHOTO}

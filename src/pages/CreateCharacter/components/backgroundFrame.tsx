@@ -27,18 +27,19 @@ import { BackgroundForm, StepperForm } from "../definitions/stepperForm";
 
 const BACKGROUND = CREATE_CHARACTER.BACKGROUND;
 
-export default function BackgroundFrame({ backgroundForm, setForm }: { backgroundForm: BackgroundForm, setForm: React.Dispatch<React.SetStateAction<StepperForm>> }) {
+export default function BackgroundFrame({ backgroundForm, setForm, sourceIds }: { backgroundForm: BackgroundForm, setForm: React.Dispatch<React.SetStateAction<StepperForm>>, sourceIds: string[] }) {
 
-  const { data: backgrounds, isLoading: loadingBackgrounds } = useGetBackgroundsQuery([]);
-  const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery([]);
+  const { data: backgrounds, isLoading: loadingBackgrounds } = useGetBackgroundsQuery(sourceIds);
+  const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(sourceIds);
   const { data: tools, isLoading: loadingTools } = useGetToolsQuery([]);
-  const [isVisible, setVisibility] = React.useState(false); 
-
+  
   const [background, setBackground] = useState<Background | null>(null);
+
   if (backgrounds && backgroundForm.id && !background) {
     setBackground(backgrounds.find((b) => b.id === backgroundForm.id) || null);
-    setVisibility(true);
   }
+
+  console.log('background render');
 
   const setPropertyInForm = (property: string, value: any) => {
     setForm(prev => ({ ...prev, background: { ...prev.background, [property]: value } }));
@@ -61,7 +62,7 @@ export default function BackgroundFrame({ backgroundForm, setForm }: { backgroun
           </Typography>
         </Grid>
         <Grid item>
-          {!isVisible && (
+          {!background && (
             <Typography gutterBottom variant="body2" color="text.secondary">
               {BACKGROUND.SUBTITLE}
             </Typography>
@@ -77,10 +78,9 @@ export default function BackgroundFrame({ backgroundForm, setForm }: { backgroun
             sx={{ my: 2 }}
             onChange={(_, value) => {
               if (!value) return;
-              setVisibility(true);
-              setPropertyInForm("id", value.id);
-              handleLanguagesChange(value.languageProficiencies.defaults);
-              handleToolsChange(value.toolProficiencies.defaults);
+              const toolIds = value.toolProficiencies.defaults.map((t) => t.id);
+              const languageIds = value.languageProficiencies.defaults.map((l) => l.id);
+              setForm(prev => ({ ...prev, background: { id: value.id, toolIds: toolIds, languageIds: languageIds } }));
               setBackground(value);
             }}
             data-cy="background"
@@ -108,7 +108,7 @@ export default function BackgroundFrame({ backgroundForm, setForm }: { backgroun
         </Grid>
       </Grid>
       <React.Fragment>
-        {isVisible && !!background && (
+        {!!background && (
           <div>
             <Box>
               <Divider sx={{ py: 2 }}>

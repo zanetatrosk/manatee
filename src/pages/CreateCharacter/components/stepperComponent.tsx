@@ -40,14 +40,15 @@ export default function HorizontalLinearStepper({character}: {character?: Steppe
     return returnDefaults();
   });
 
-
   const components: ComponentRegister[] = [
     { id: 0, component: <BasicInformation form={form.basicInfo} setForm={setData} /> },
-    { id: 1, component: <Class classForm={form.class} setForm={setData} /> },
-    { id: 2, component: <Race raceForm={form.race} setForm={setData} /> },
+    { id: 1, component: <Class classForm={form.class} setForm={setData} sourceIds={form.basicInfo.sourceIds}/> },
+    { id: 2, component: <Race raceForm={form.race} setForm={setData} sourceIds={form.basicInfo.sourceIds}/> },
     { id: 3, component: <Abilities abilitiesForm={form.abilityScores} setForm={setData} /> },
-    { id: 4, component: <Background backgroundForm={form.background} setForm={setData} /> },
+    { id: 4, component: <Background backgroundForm={form.background} setForm={setData} sourceIds={form.basicInfo.sourceIds}/> },
   ];
+
+  console.log("render stepper");
 
   const isStepOptional = (step: number) => {
     return step === 0;
