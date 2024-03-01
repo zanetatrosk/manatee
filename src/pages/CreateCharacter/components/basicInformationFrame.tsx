@@ -6,7 +6,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import { useGetSourcesQuery } from "api/generalContentApiSlice";
 import { StepperForm } from "../definitions/stepperForm";
@@ -25,11 +25,16 @@ function BasicInformation({
   const { data: sources, isLoading: loading } = useGetSourcesQuery();
 
   const setPropertyInForm = (property: string, value: any) => {
+    
     setForm((prev) => ({
       ...prev,
       basicInfo: { ...prev.basicInfo, [property]: value },
     }));
   };
+
+  useEffect(() => {
+    debugger;
+  }, [setForm]);
 
   return (
     <Grid container spacing={10}>
@@ -81,7 +86,7 @@ function BasicInformation({
             multiple
             getOptionLabel={(option) => option.name}
             isOptionEqualToValue={(option, value) => option.id === value.id}
-            onChange={(_, value) => {
+            onChange={(e, value) => {
               setPropertyInForm("sourceIds", value.map((v) => v.id));
             }}
             renderInput={(params) => (
@@ -117,6 +122,7 @@ function BasicInformation({
             value={form.cardPhotoUrl}
             onChange={(e) => {
               setPropertyInForm("cardPhotoUrl", e.target.value);
+              debugger;
             }}
             variant="filled"
             label={BASIC_INFO.CARD_PHOTO}

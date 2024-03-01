@@ -14,7 +14,7 @@ import { CREATE_CHARACTER } from "constants/characterDefinition";
 import { useNavigate, useParams } from "react-router-dom";
 import { LanguagesProficiency, StepperForm, ToolsProficiency } from "../definitions/stepperForm";
 import { returnDefaults } from "../definitions/defaults";
-import { useAddCharacterMutation, useGetCharacterByIdQuery } from "api/charactersApiSlice";
+import { useAddCharacterMutation, useGetCharacterByIdQuery, usePutCharacterMutation } from "api/charactersApiSlice";
 import { Ability, AbilityScore, BasicInfo, CharacterSheet, ProficienciesSheet } from "../definitions/characterForm";
 
 const steps = ["Basic information", "Class", "Race", "Abilities", "Background"];
@@ -26,46 +26,16 @@ interface ComponentRegister {
   setForm?: React.Dispatch<React.SetStateAction<StepperForm>>;
 }
 
-const fillDataForm = (character: CharacterSheet): StepperForm => {
-  const form: StepperForm = {} as StepperForm;
-  form.basicInfo = character.info;
-  form.class = {
-    id: character.info.class.id,
-    subclass: character.info.subclass,
-    toolIds: character.tools.filter((t: ProficienciesSheet<ToolsProficiency>) => t.from === "class").map((t: ProficienciesSheet<ToolsProficiency>) => t.item.id)
-  }
-  form.race = {
-    id: character.info.race.id,
-    size: character.info.size,
-    languageIds: character.languages.filter((l: ProficienciesSheet<LanguagesProficiency>) => l.from === "race").map((l: ProficienciesSheet<LanguagesProficiency>) => l.item.id)
-  }
-  form.abilityScores = character.abilities;
-  form.background = {
-    id: character.info.background.id,
-    toolIds: character.tools.filter((t: ProficienciesSheet<ToolsProficiency>) => t.from === "background").map((t: ProficienciesSheet<ToolsProficiency>) => t.item.id),
-    languageIds: character.languages.filter((l: ProficienciesSheet<LanguagesProficiency>) => l.from === "background").map((l: ProficienciesSheet<LanguagesProficiency>) => l.item.id)
-  }
-  console.log("form was filled");
-  return form;
+export default function HorizontalLinearStepper({character}: {character?: StepperForm}) {
 
-}
-
-
-export default function HorizontalLinearStepper() {
-  const { id } = useParams();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
-
   const navigate = useNavigate();
   const [postCharacter] = useAddCharacterMutation();
-  const { data: character, isLoading } = useGetCharacterByIdQuery(id!, { skip: !id });
-
-
-
+  const [putCharacter] = usePutCharacterMutation();
   const [form, setData] = React.useState<StepperForm>(() => {
-    debugger;
-    if (character) {
-      return fillDataForm(character);
+    if(character) {
+      return character;
     }
     return returnDefaults();
   });
@@ -111,7 +81,6 @@ export default function HorizontalLinearStepper() {
       // it should never occur unless someone's actively trying to break something.
       throw new Error("You can't skip a step that isn't optional.");
     }
-
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped((prevSkipped) => {
       const newSkipped = new Set(prevSkipped.values());
@@ -126,6 +95,12 @@ export default function HorizontalLinearStepper() {
 
   const handleFinish = () => {
     const tmpForm = { ...form, abilityScores: form.abilityScores.map((a) => ({ ...a, label: a.label.toLowerCase() })) };
+    if(tmpForm.id) {
+      putCharacter(tmpForm).unwrap().then((res: CharacterSheet) => {
+        navigate("/characters/" + res.id + "/character-sheet");
+      });
+      return;
+    }
     postCharacter(tmpForm).unwrap().then((res: CharacterSheet) => {
       navigate("/characters/" + res.id + "/character-sheet");
     });

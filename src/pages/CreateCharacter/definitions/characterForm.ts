@@ -228,6 +228,7 @@ interface CharacterSheet extends CharacterInfo {
     spellcasting?: Spellcasting;
     armor: Armor;
     attacks: Attack[];
+    sources: Source[];
     proficiencies: Proficiencies;
 }
 
@@ -235,6 +236,7 @@ interface CharacterSheet extends CharacterInfo {
 
 const characterSheetDefaults: CharacterSheet = {
     id: "",
+    sources: [],
     info: {
         characterName: "Character Name",
         playerName: "Player name",

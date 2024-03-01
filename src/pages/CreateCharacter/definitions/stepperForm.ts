@@ -35,6 +35,7 @@ interface BackgroundForm {
 }
 
 interface StepperForm {
+    id?: string;
     basicInfo: BasicInfo;
     abilityScores: AbilityScore[];
     class: ClassForm;

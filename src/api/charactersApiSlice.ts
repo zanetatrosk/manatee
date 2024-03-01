@@ -52,6 +52,14 @@ export const charactersApiSlice = createApi({
             }),
             invalidatesTags: ['CharacterSheet'],
         }),
+        putCharacter: builder.mutation<CharacterSheet, StepperForm>({
+            query: (body) => ({
+                url: `characters/${body.id}`,
+                method: 'PUT',
+                body,
+            }),
+            invalidatesTags: ['CharacterSheet'],
+        }),
         addCharacter: builder.mutation<CharacterSheet, StepperForm>({
             query: (body) => ({
                 url: 'characters',
@@ -79,4 +87,5 @@ export const {
     useAddCharacterMutation,
     useDeleteCharacterMutation,
     usePostLevelUpByCharacterIdMutation,
+    usePutCharacterMutation
     } = charactersApiSlice;

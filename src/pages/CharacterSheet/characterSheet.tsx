@@ -30,7 +30,6 @@ export default function CharacterSheet() {
     setOpen(false);
   }
 
-
   useEffect(() => {
     if (character) {
       dispatch(setCharacterSheet({ ...character }));
@@ -47,7 +46,6 @@ export default function CharacterSheet() {
     postLevelUp({ id: character.id });
     closeDialog();
   }
-
 
   const stats = [{ header: "armor class", value: character.stats.armorClass.toString() },
   { header: "initiative", value: addPlusOrMinus(character.stats.initiative) },

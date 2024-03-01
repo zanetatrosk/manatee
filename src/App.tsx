@@ -10,6 +10,7 @@ import { Container } from "@mui/material";
 import CharacterSheet from "@pages/CharacterSheet/characterSheet";
 import ContentPage from "@pages/Content/contentPage";
 import { characterSheetDefaults } from "@pages/CreateCharacter/definitions/characterForm";
+import EditCharacter from "@pages/CreateCharacter/components/editCharacter";
 const darkTheme = createTheme({
   palette: {
     mode: "light",
@@ -45,7 +46,7 @@ function App() {
                 element={<CharacterSheet />}
               />
               <Route path="/characters/create-character/:id"
-                element={<CreateCharacter />}
+                element={<EditCharacter />}
               />
               <Route
                 path="/*"
