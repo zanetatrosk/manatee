@@ -7,6 +7,7 @@ import { CharacterSheet, ProficienciesSheet } from "../definitions/characterForm
 import { StepperForm, ToolsProficiency, LanguagesProficiency } from "../definitions/stepperForm";
 import { useParams } from "react-router-dom";
 import { Box, CircularProgress } from "@mui/material";
+import Spinner from "@components/spinner";
 
 const fillDataForm = (character: CharacterSheet): StepperForm => {
 	const form: StepperForm = {} as StepperForm;
@@ -48,13 +49,14 @@ export default function EditCharacter() {
 			setForm(fillDataForm(character));
 		}
 	}
+	if( isLoading ) {
+		return <Spinner/>
+	} 
 	return (
 		<React.Fragment>
 			<Card>
 				<CardContent>
-					{isLoading ? (<Box sx={{ display: 'flex', justifyContent: "center", mt: 5 }}>
-						<CircularProgress />
-					</Box>) : <HorizontalLinearStepper character={form} />}
+					<HorizontalLinearStepper character={form} />
 				</CardContent>
 			</Card>
 		</React.Fragment>

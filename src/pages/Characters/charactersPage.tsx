@@ -11,6 +11,7 @@ import { CHARACTERS } from "constants/characterDefinition";
 import { useDeleteCharacterMutation, useGetCharactersQuery } from "api/charactersApiSlice";
 import { CharacterInfo } from "@pages/CreateCharacter/definitions/characterForm";
 import ConfirmationDialog from "@components/confirmationDialog";
+import Spinner from "@components/spinner";
 
 function CharacterCard({ props }: { props: CharacterInfo }) {
   let navigate = useNavigate();
@@ -78,7 +79,7 @@ export default function Characters() {
   let navigate = useNavigate();
   const theme = useTheme();
   const greaterThanMid = useMediaQuery(theme.breakpoints.up("md"));
-  const characters: CharacterInfo[] = useGetCharactersQuery().data || [];
+  const {data: characters, isLoading } = useGetCharactersQuery();
   return (
     <Grid container flexDirection={"column"} >
       <Grid container item alignItems={"center"}>
@@ -112,7 +113,7 @@ export default function Characters() {
           </Button>
         </Grid>
 
-        {characters.map((character, index) => (
+        { isLoading ? <Spinner/> : characters?.map((character, index) => (
           <Grid
             item
             container
