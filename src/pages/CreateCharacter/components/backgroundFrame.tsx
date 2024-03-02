@@ -16,7 +16,6 @@ import {
   Source,
 } from "@pages/CreateCharacter/definitions/characterForm";
 import CardInfo from "./cardInfo";
-import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import {
   useGetBackgroundsQuery,
