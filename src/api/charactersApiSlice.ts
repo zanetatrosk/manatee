@@ -22,7 +22,6 @@ export const charactersApiSlice = createApi({
                 url: `characters/${id}/spells`,
                 method: 'PUT',
                 body: spells,
-
             }),
             invalidatesTags: ['CharacterSheet'],
         }),
@@ -63,7 +62,7 @@ export const charactersApiSlice = createApi({
                 method: 'PUT',
                 body,
             }),
-            invalidatesTags: ['CharacterSheet'],
+            invalidatesTags: ['CharacterSheet', 'CharacterList'],
         }),
         addCharacter: builder.mutation<CharacterSheet, StepperForm>({
             query: (body) => ({

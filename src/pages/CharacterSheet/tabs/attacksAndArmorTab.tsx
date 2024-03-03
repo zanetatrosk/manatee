@@ -78,17 +78,13 @@ export default function AttacksAndArmorTab() {
 
   const usePostAttacks = (weapons: string[]) => {
     if (id) {
-      postAttacksByCharacterId({ id, weapons }).unwrap().then((a: Attack[]) => {
-        setWeapons(transformAttacks(a));
-      });
+      postAttacksByCharacterId({ id, weapons });
     }
   }
 
   const usePostArmor = (armor: string[]) => {
     if (id) {
-      postArmorByCharacterId({ id, armor: armor[0] }).unwrap().then((a: Armor) => {
-        setArmor(tranformArmor(a));
-      });
+      postArmorByCharacterId({ id, armor: armor[0] });
     }
   }
 
@@ -98,12 +94,19 @@ export default function AttacksAndArmorTab() {
       description: armor.description,
     };
   };
+  
+  useEffect(() => {
+    setWeapons(transformAttacks(weaponsStore));
+  }, [weaponsStore]);
 
+  useEffect(() => {
+    if (armorStore) {
+      setArmor(tranformArmor(armorStore));
+    }
+  }, [armorStore]);
 
-  const [armor, setArmor] = useState<RowData>(tranformArmor(armorStore));
-  const [weapons, setWeapons] = useState<RowData[]>(
-    transformAttacks(weaponsStore)
-  );
+  const [armor, setArmor] = useState<RowData>();
+  const [weapons, setWeapons] = useState<RowData[]>([]);
 
   return (
     <>
@@ -124,7 +127,7 @@ export default function AttacksAndArmorTab() {
       <div style={{ margin: 30 }} />
       <AttacksTable
         title="Armor"
-        rows={[armor]}
+        rows={armor ? [armor] : []}
         headers={["Name", "Base AC", "Armor type"]}
         showDescription
         actionButton={

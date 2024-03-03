@@ -18,6 +18,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useEffect, useState } from "react";
 import React from "react";
+import { BorderBottom } from "@mui/icons-material";
 
 
 
@@ -74,19 +75,18 @@ export default function AttacksTable({title, headers, rows, actionButton, showDe
                 <Typography variant="body2">{col}</Typography>
               </TableCell>
             ))}
-          </>
           {row.description && (
-            <TableCell align="right" padding="checkbox">
+            <TableCell sx={[open && {borderBottom: 0}]} component="th" scope="row" align="right" padding="checkbox">
               <IconButton
                 sx={{ mr: 1 }}
-                aria-label="expand row"
                 size="small"
                 onClick={() => setOpen(!open)}
-              >
+                >
                 {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon />}
               </IconButton>
             </TableCell>
           )}
+          </>
         </TableRow>
         <TableRow sx={[!open && { "& > *": { borderBottom: 0 } }]}>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
