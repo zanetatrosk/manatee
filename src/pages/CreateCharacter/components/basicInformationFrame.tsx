@@ -28,7 +28,7 @@ function BasicInformation({
     
     setForm((prev) => ({
       ...prev,
-      basicInfo: { ...prev.basicInfo, [property]: value },
+      info: { ...prev.info, [property]: value },
     }));
   };
 

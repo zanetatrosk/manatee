@@ -12,7 +12,7 @@ import Spinner from "@components/spinner";
 const fillDataForm = (character: CharacterSheet): StepperForm => {
 	const form: StepperForm = {} as StepperForm;
 	form.id = character.id;
-	form.basicInfo = {
+	form.info = {
 		characterName: character.info.characterName,
 		playerName: character.info.playerName,
 		sourceIds: character.sources.map((s) => s.id),

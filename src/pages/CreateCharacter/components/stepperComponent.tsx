@@ -41,11 +41,11 @@ export default function HorizontalLinearStepper({character}: {character?: Steppe
   });
 
   const components: ComponentRegister[] = [
-    { id: 0, component: <BasicInformation form={form.basicInfo} setForm={setData} /> },
-    { id: 1, component: <Class classForm={form.class} setForm={setData} sourceIds={form.basicInfo.sourceIds}/> },
-    { id: 2, component: <Race raceForm={form.race} setForm={setData} sourceIds={form.basicInfo.sourceIds}/> },
+    { id: 0, component: <BasicInformation form={form.info} setForm={setData} /> },
+    { id: 1, component: <Class classForm={form.class} setForm={setData} sourceIds={form.info.sourceIds}/> },
+    { id: 2, component: <Race raceForm={form.race} setForm={setData} sourceIds={form.info.sourceIds}/> },
     { id: 3, component: <Abilities abilitiesForm={form.abilityScores} setForm={setData} /> },
-    { id: 4, component: <Background backgroundForm={form.background} setForm={setData} sourceIds={form.basicInfo.sourceIds}/> },
+    { id: 4, component: <Background backgroundForm={form.background} setForm={setData} sourceIds={form.info.sourceIds}/> },
   ];
 
   console.log("render stepper");

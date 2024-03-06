@@ -18,6 +18,7 @@ import {
 import { AbilityScore } from "@pages/CreateCharacter/definitions/characterForm";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import { StepperForm } from "../definitions/stepperForm";
+import { addPlusOrMinus } from "utils/textUtils";
 
 //declaring constants
 const MIN = 1;
@@ -138,7 +139,7 @@ export default function Abilities({
                                     />
                                 </TableCell>
                                 <StyledModifier data-cy="ability-mod" align="center">
-                                    {setModifiersValues(row)}
+                                    {addPlusOrMinus(setModifiersValues(row))}
                                 </StyledModifier>
                                 <StyledModifier align="center">
                                     <Checkbox

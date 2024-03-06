@@ -46,9 +46,9 @@ const proficiencyDefault: Proficiencies<Sourceable> = {
   from: "",
 };
 
-export const returnDefaults = () => {
+export const returnDefaults = (): StepperForm => {
   return {
-    basicInfo: {
+    info: {
       characterName: "New Character Name",
       playerName: "Player Name",
       sourceIds: [],
