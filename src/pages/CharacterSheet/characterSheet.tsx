@@ -14,6 +14,7 @@ import Skills from "./skills/Skills";
 import { addPlusOrMinus } from "utils/textUtils";
 import ConfirmationDialog from "@components/confirmationDialog";
 import LoadingButton from '@mui/lab/LoadingButton';
+import Spinner from "@components/spinner";
 
 
 
@@ -37,10 +38,7 @@ export default function CharacterSheet() {
     }
   }, [character]);
 
-  if (!character || isLoading || reduxLoading)
-    return (<Box sx={{ display: 'flex', justifyContent: "center", mt: 5 }}>
-      <CircularProgress />
-    </Box>)
+  if (!character || isLoading || reduxLoading) return <Spinner/>
 
   const confirmAction = () => {
     postLevelUp({ id: character.id });
