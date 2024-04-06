@@ -17,7 +17,7 @@ describe("Automation TC08 check that information that was entered in the form is
     cy.intercept("GET", "/api/classes?source=", {
       fixture: "general-data/classes.json",
     }).as("getClasses");
-    cy.intercept("GET", "/api/language?source=", {
+    cy.intercept("GET", "/api/languages?source=", {
       fixture: "general-data/languages.json",
       }).as("getLanguages");
     cy.intercept("GET", "/api/tools?source=", {

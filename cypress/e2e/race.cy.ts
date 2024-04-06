@@ -8,6 +8,9 @@ describe("Automation TC05", () => {
     cy.intercept("GET", "/api/races?source=", {
       fixture: "general-data/races.json",
     }).as("getRaces");
+    cy.intercept("GET", "/api/languages?source=", {
+      fixture: "general-data/languages.json",
+    }).as("getLanguages");
     cy.get('[data-cy="next"]').click();
     cy.fixture("race.json").then((race) => {
       this.raceName = race.label;

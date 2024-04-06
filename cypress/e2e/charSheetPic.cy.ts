@@ -19,7 +19,7 @@ describe("Automation TC07 Character sheet picture", () => {
     cy.intercept("GET", "/api/classes?source=", {
       fixture: "general-data/classes.json",
     }).as("getClasses");
-    cy.intercept("GET", "/api/language?source=", {
+    cy.intercept("GET", "/api/languages?source=", {
       fixture: "general-data/languages.json",
       }).as("getLanguages");
     cy.intercept("GET", "/api/tools?source=", {
