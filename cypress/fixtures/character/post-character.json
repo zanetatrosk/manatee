@@ -1,0 +1,67 @@
+{
+    "info": {
+        "characterName": "Test Character name",
+        "playerName": "Test Player name",
+        "sourceIds": [],
+        "sheetPhotoUrl": "",
+        "cardPhotoUrl": ""
+    },
+    "abilityScores": [
+        {
+            "label": "strength",
+            "score": 8,
+            "upByOne": false,
+            "upByTwo": false
+        },
+        {
+            "label": "dexterity",
+            "score": 8,
+            "upByOne": false,
+            "upByTwo": false
+        },
+        {
+            "label": "constitution",
+            "score": 8,
+            "upByOne": false,
+            "upByTwo": false
+        },
+        {
+            "label": "intelligence",
+            "score": 8,
+            "upByOne": false,
+            "upByTwo": false
+        },
+        {
+            "label": "wisdom",
+            "score": 8,
+            "upByOne": false,
+            "upByTwo": false
+        },
+        {
+            "label": "charisma",
+            "score": 8,
+            "upByOne": false,
+            "upByTwo": false
+        }
+    ],
+    "race": {
+        "id": "660d8ab159c37f01fbad266f",
+        "size": "medium",
+        "languageIds": [
+            "660d8ab159c37f01fbad2653",
+            "660d8ab159c37f01fbad2655"
+        ]
+    },
+    "background": {
+        "id": "660d8ab159c37f01fbad266b",
+        "toolIds": [
+            "660d8ab159c37f01fbad2645"
+        ],
+        "languageIds": []
+    },
+    "class": {
+        "id": "660d8ab259c37f01fbad2699",
+        "subclass": null,
+        "toolIds": []
+    }
+}

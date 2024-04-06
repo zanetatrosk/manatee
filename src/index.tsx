@@ -24,7 +24,7 @@ root.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'test') {
 
   const { worker } = require('./mock/browser')
 

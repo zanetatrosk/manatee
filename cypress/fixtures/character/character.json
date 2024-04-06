@@ -1,0 +1,372 @@
+{
+    "id": "1",
+    "info": {
+        "characterName": "Test Character name",
+        "playerName": "Test Player name",
+        "cardPhotoUrl": "",
+        "sheetPhotoUrl": "https://cdn.pixabay.com/photo/2023/05/25/20/09/ai-generated-8018229_960_720.jpg",
+        "race": {
+            "id": "660d8ab159c37f01fbad266f",
+            "name": "Half-Elf"
+        },
+        "background": {
+            "id": "660d8ab159c37f01fbad266b",
+            "name": "Charlatan"
+        },
+        "level": 1,
+        "size": "medium",
+        "subclass": null,
+        "class": {
+            "id": "660d8ab259c37f01fbad2699",
+            "name": "Barbarian"
+        }
+    },
+    "stats": {
+        "speed": 30,
+        "initiative": -1,
+        "proficiencyBonus": 2,
+        "hitDice": {
+            "amount": 1,
+            "sides": 12,
+            "notation": "1d12"
+        },
+        "hitPoints": 11,
+        "armorClass": 9
+    },
+    "sources": [],
+    "abilities": [
+        {
+            "label": "strength",
+            "score": 8,
+            "upByOne": false,
+            "upByTwo": false,
+            "result": 8,
+            "modifier": -1,
+            "displayName": "Strength"
+        },
+        {
+            "label": "dexterity",
+            "score": 8,
+            "upByOne": false,
+            "upByTwo": false,
+            "result": 8,
+            "modifier": -1,
+            "displayName": "Dexterity"
+        },
+        {
+            "label": "constitution",
+            "score": 8,
+            "upByOne": false,
+            "upByTwo": false,
+            "result": 8,
+            "modifier": -1,
+            "displayName": "Constitution"
+        },
+        {
+            "label": "intelligence",
+            "score": 8,
+            "upByOne": false,
+            "upByTwo": false,
+            "result": 8,
+            "modifier": -1,
+            "displayName": "Intelligence"
+        },
+        {
+            "label": "wisdom",
+            "score": 8,
+            "upByOne": false,
+            "upByTwo": false,
+            "result": 8,
+            "modifier": -1,
+            "displayName": "Wisdom"
+        },
+        {
+            "label": "charisma",
+            "score": 8,
+            "upByOne": false,
+            "upByTwo": false,
+            "result": 8,
+            "modifier": -1,
+            "displayName": "Charisma"
+        }
+    ],
+    "skills": [
+        {
+            "label": "acrobatics",
+            "ability": "dexterity",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Acrobatics (Dex)"
+        },
+        {
+            "label": "animal_handling",
+            "ability": "wisdom",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Animal Handling (Wis)"
+        },
+        {
+            "label": "arcana",
+            "ability": "intelligence",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Arcana (Int)"
+        },
+        {
+            "label": "athletics",
+            "ability": "strength",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Athletics (Str)"
+        },
+        {
+            "label": "deception",
+            "ability": "charisma",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Deception (Cha)"
+        },
+        {
+            "label": "history",
+            "ability": "intelligence",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "History (Int)"
+        },
+        {
+            "label": "insight",
+            "ability": "wisdom",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Insight (Wis)"
+        },
+        {
+            "label": "intimidation",
+            "ability": "charisma",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Intimidation (Cha)"
+        },
+        {
+            "label": "investigation",
+            "ability": "intelligence",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Investigation (Int)"
+        },
+        {
+            "label": "medicine",
+            "ability": "wisdom",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Medicine (Wis)"
+        },
+        {
+            "label": "nature",
+            "ability": "intelligence",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Nature (Int)"
+        },
+        {
+            "label": "perception",
+            "ability": "wisdom",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Perception (Wis)"
+        },
+        {
+            "label": "performance",
+            "ability": "charisma",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Performance (Cha)"
+        },
+        {
+            "label": "persuasion",
+            "ability": "charisma",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Persuasion (Cha)"
+        },
+        {
+            "label": "religion",
+            "ability": "intelligence",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Religion (Int)"
+        },
+        {
+            "label": "sleight_of_hand",
+            "ability": "dexterity",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Sleight of Hand (Dex)"
+        },
+        {
+            "label": "stealth",
+            "ability": "dexterity",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Stealth (Dex)"
+        },
+        {
+            "label": "survival",
+            "ability": "wisdom",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Survival (Wis)"
+        }
+    ],
+    "savingThrows": [
+        {
+            "label": "strength",
+            "ability": "strength",
+            "modifier": 1,
+            "proficient": true,
+            "displayName": "Strength"
+        },
+        {
+            "label": "dexterity",
+            "ability": "dexterity",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Dexterity"
+        },
+        {
+            "label": "constitution",
+            "ability": "constitution",
+            "modifier": 1,
+            "proficient": true,
+            "displayName": "Constitution"
+        },
+        {
+            "label": "intelligence",
+            "ability": "intelligence",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Intelligence"
+        },
+        {
+            "label": "wisdom",
+            "ability": "wisdom",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Wisdom"
+        },
+        {
+            "label": "charisma",
+            "ability": "charisma",
+            "modifier": -1,
+            "proficient": false,
+            "displayName": "Charisma"
+        }
+    ],
+    "armor": {
+        "id": "660d8ab159c37f01fbad267d",
+        "name": "Unarmored",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "unarmored",
+        "baseArmorClass": 10,
+        "strengthRequirement": 0,
+        "stealthDisadvantage": false,
+        "bonuses": [
+            {
+                "ability": "dexterity",
+                "max": 10
+            }
+        ],
+        "description": "No armor at all"
+    },
+    "attacks": [],
+    "spellcasting": null,
+    "proficiencies": {
+        "armor": [
+            "Unarmored",
+            "Light Armor",
+            "Medium Armor",
+            "Shields"
+        ],
+        "weapons": [
+            "Simple Weapons",
+            "Martial Weapons"
+        ],
+        "tools": [
+            "Disguise kit"
+        ],
+        "languages": [
+            "Common",
+            "Elvish"
+        ]
+    },
+    "tools": [
+        {
+            "item": {
+                "id": "660d8ab159c37f01fbad2645",
+                "name": "Disguise kit",
+                "source": {
+                    "id": "SRD",
+                    "name": "System Reference Document"
+                },
+                "type": "other"
+            },
+            "from": "background"
+        }
+    ],
+    "languages": [
+        {
+            "item": {
+                "id": "660d8ab159c37f01fbad2653",
+                "name": "Common",
+                "source": {
+                    "id": "SRD",
+                    "name": "System Reference Document"
+                },
+                "exotic": false
+            },
+            "from": "race"
+        },
+        {
+            "item": {
+                "id": "660d8ab159c37f01fbad2655",
+                "name": "Elvish",
+                "source": {
+                    "id": "SRD",
+                    "name": "System Reference Document"
+                },
+                "exotic": false
+            },
+            "from": "race"
+        }
+    ],
+    "features": [
+        {
+            "title": "False Identity",
+            "text": "Something about false identity",
+            "levelMinimum": 1
+        },
+        {
+            "title": "Darkvision",
+            "text": "Thanks to your elf blood, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray.",
+            "levelMinimum": 1
+        },
+        {
+            "title": "Fey Ancestry",
+            "text": "You have advantage on saving throws against being charmed, and magic can't put you to sleep.",
+            "levelMinimum": 1
+        },
+        {
+            "title": "Rage",
+            "text": "In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action. While raging, you gain the following benefits if you aren't wearing heavy armor: [Paragraphed text would follow here.]",
+            "levelMinimum": 1
+        },
+        {
+            "title": "Unarmored Defense",
+            "text": "While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier + your Constitution modifier. You can use a shield and still gain this benefit.",
+            "levelMinimum": 1
+        }
+    ]
+}

@@ -7,6 +7,9 @@ describe("Automation TC04", () => {
     cy.get('[data-cy="next"]').click();
     cy.get('[data-cy="next"]').click();
     cy.get('[data-cy="next"]').click();
+    cy.intercept("GET", "/api/backgrounds?source=", {
+      fixture: "general-data/backgrounds.json",
+    }).as("getBackgrounds");
     cy.get('[data-cy="next"]').click();
     cy.fixture('background.json').as('background').then((background) => {
       this.backgr = background.label;
@@ -19,6 +22,7 @@ describe("Automation TC04", () => {
     })
   });
   it("check that data rendered by selected background on background page are correct", () => {
+    cy.wait('@getBackgrounds');
     cy.get('[data-cy="background"]').within(() => {
       cy.get("input").click();
       cy.get("input")

@@ -5,6 +5,9 @@ describe("Automation TC05", () => {
   before(() => {
     cy.visit("http://localhost:3000/characters/create-character");
     cy.get('[data-cy="next"]').click();
+    cy.intercept("GET", "/api/races?source=", {
+      fixture: "general-data/races.json",
+    }).as("getRaces");
     cy.get('[data-cy="next"]').click();
     cy.fixture("race.json").then((race) => {
       this.raceName = race.label;
@@ -18,6 +21,7 @@ describe("Automation TC05", () => {
     });
   });
   it("check if the chosen race spawn the correct data", () => {
+    cy.wait("@getRaces");
     cy.get('[data-cy="race"]').within(() => {
       cy.get("input").click();
       cy.get("input")

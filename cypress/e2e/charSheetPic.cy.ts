@@ -1,9 +1,38 @@
 const srcPic =
   "https://cdn.pixabay.com/photo/2023/05/25/20/09/ai-generated-8018229_960_720.jpg";
 
+const className = "Barbarian";
+const race = "Half-Elf";
+const background = "Charlatan";
+const subclass = "";
+const playerName = "Test Player name";
+const characterName = "Test Character name";
 describe("Automation TC07 Character sheet picture", () => {
   before(() => {
     cy.visit("http://localhost:3000/characters/create-character");
+    cy.intercept("GET", "/api/races?source=", {
+      fixture: "general-data/races.json",
+    }).as("getRaces");
+    cy.intercept("GET", "/api/backgrounds?source=", {
+      fixture: "general-data/backgrounds.json",
+    }).as("getBackgrounds");
+    cy.intercept("GET", "/api/classes?source=", {
+      fixture: "general-data/classes.json",
+    }).as("getClasses");
+    cy.intercept("GET", "/api/language?source=", {
+      fixture: "general-data/languages.json",
+      }).as("getLanguages");
+    cy.intercept("GET", "/api/tools?source=", {
+      fixture: "general-data/tools.json",
+    }).as("getTools");
+
+    cy.intercept("POST", "/api/characters", {
+      fixture: "character/character.json",
+    }).as("postCharacter");
+
+    cy.intercept("GET", "/api/characters/1", {
+      fixture: "character/character.json",
+    }).as("postCharacter");
   });
 
   const checkPage = (page: string) => {
@@ -16,12 +45,18 @@ describe("Automation TC07 Character sheet picture", () => {
     cy.get('[data-cy="sheet-photo"]').type(srcPic);
     cy.get('[data-cy="next"]').click();
     checkPage("Class");
+    cy.get('[data-cy="class"]').click();
+    cy.contains("Barbarian").click();
     cy.get('[data-cy="next"]').click();
-    checkPage("Race")
+    checkPage("Race");
+    cy.get('[data-cy="race"]').click();
+    cy.contains(race).click();
     cy.get('[data-cy="next"]').click();
-    checkPage("Abilities")
+    checkPage("Abilities");
     cy.get('[data-cy="next"]').click();
     checkPage("Background");
+    cy.get('[data-cy="background"]').click();
+    cy.contains(background).click();
     cy.get('[data-cy="finish"]').click();
 
     cy.get("img").should("have.attr", "src", srcPic);

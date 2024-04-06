@@ -27,7 +27,7 @@ describe('Automation TC03 check abilities', () => {
         cy.get('[data-cy="content-table"] > :nth-child(1) > [data-cy="ability-mod"]').should('have.text', '-5');;       
         cy.get('[data-cy="content-table"] > :nth-child(1) > :nth-child(2) > [data-cy="ability-score"]').type('20');
         cy.get('[data-cy="content-table"] > :nth-child(1) > :nth-child(2) > [data-cy="ability-score"]').find('input').invoke('val').should('equal', '20');
-        cy.get('[data-cy="content-table"] > :nth-child(1) > [data-cy="ability-mod"]').should('have.text', '5');
+        cy.get('[data-cy="content-table"] > :nth-child(1) > [data-cy="ability-mod"]').should('have.text', '+5');
     }
 
     );

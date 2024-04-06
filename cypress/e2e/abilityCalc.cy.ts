@@ -16,7 +16,7 @@ describe("Automation TC06 check ability calc", () => {
           .type("{backspace}{moveToEnd}5");
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
-          .should("have.text", "2");
+          .should("have.text", "+2");
         cy.wrap($ability)
           .find('[data-cy="ability-total-score"]')
           .should("have.text", "15");
@@ -26,7 +26,7 @@ describe("Automation TC06 check ability calc", () => {
           .should("be.disabled");
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
-          .should("have.text", "3");
+          .should("have.text", "+3");
         cy.wrap($ability)
           .find('[data-cy="ability-total-score"]')
           .should("have.text", "17");
@@ -40,7 +40,7 @@ describe("Automation TC06 check ability calc", () => {
           .type("{backspace}{moveToEnd}0");
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
-          .should("have.text", "0");
+          .should("have.text", "+0");
         cy.wrap($ability)
           .find('[data-cy="ability-total-score"]')
           .should("have.text", "10");
@@ -54,7 +54,7 @@ describe("Automation TC06 check ability calc", () => {
           .type("{backspace}{moveToEnd}6");
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
-          .should("have.text", "3");
+          .should("have.text", "+3");
         cy.wrap($ability)
           .find('[data-cy="ability-total-score"]')
           .should("have.text", "16");
@@ -68,7 +68,7 @@ describe("Automation TC06 check ability calc", () => {
           .type("{backspace}{moveToEnd}2");
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
-          .should("have.text", "1");
+          .should("have.text", "+1");
         cy.wrap($ability)
           .find('[data-cy="ability-total-score"]')
           .should("have.text", "12");
@@ -82,7 +82,7 @@ describe("Automation TC06 check ability calc", () => {
           .type("{backspace}{moveToEnd}4");
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
-          .should("have.text", "2");
+          .should("have.text", "+2");
         cy.wrap($ability)
           .find('[data-cy="ability-total-score"]')
           .should("have.text", "14");
@@ -96,7 +96,7 @@ describe("Automation TC06 check ability calc", () => {
           .type("{backspace}{moveToEnd}20");
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
-          .should("have.text", "5");
+          .should("have.text", "+5");
         cy.wrap($ability)
           .find('[data-cy="ability-total-score"]')
           .should("have.text", "20");
@@ -107,7 +107,7 @@ describe("Automation TC06 check ability calc", () => {
           .should("be.disabled");
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
-          .should("have.text", "5");
+          .should("have.text", "+5");
         cy.wrap($ability)
           .find('[data-cy="ability-total-score"]')
           .should("have.text", "20");
@@ -133,7 +133,7 @@ describe("Automation TC06 check ability calc", () => {
           .type("{backspace}43");
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
-          .should("have.text", "5");
+          .should("have.text", "+5");
         cy.wrap($ability)
           .find('[data-cy="ability-total-score"]')
           .should("have.text", "20");
@@ -158,7 +158,7 @@ describe("Automation TC06 check ability calc", () => {
 
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
-          .should("have.text", "2");
+          .should("have.text", "+2");
         cy.wrap($ability)
           .find('[data-cy="ability-total-score"]')
           .should("have.text", "15");
@@ -176,7 +176,7 @@ describe("Automation TC06 check ability calc", () => {
           .should("have.text", "16");
         cy.wrap($ability)
           .find('[data-cy="ability-mod"]')
-          .should("have.text", "3");
+          .should("have.text", "+3");
       });
   });
 });

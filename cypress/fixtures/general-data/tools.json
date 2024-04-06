@@ -1,0 +1,218 @@
+[
+    {
+        "id": "660d8ab159c37f01fbad263e",
+        "name": "Carpenter's tools",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "artisan"
+    },
+    {
+        "id": "660d8ab159c37f01fbad263c",
+        "name": "Brewer's supplies",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "artisan"
+    },
+    {
+        "id": "660d8ab159c37f01fbad263b",
+        "name": "Alchemist's supplies",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "artisan"
+    },
+    {
+        "id": "660d8ab159c37f01fbad263d",
+        "name": "Calligrapher's supplies",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "artisan"
+    },
+    {
+        "id": "660d8ab159c37f01fbad2641",
+        "name": "Dulcimer",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "instrument"
+    },
+    {
+        "id": "660d8ab159c37f01fbad2640",
+        "name": "Drum",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "instrument"
+    },
+    {
+        "id": "660d8ab159c37f01fbad2642",
+        "name": "Flute",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "instrument"
+    },
+    {
+        "id": "660d8ab159c37f01fbad263f",
+        "name": "Bagpipes",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "instrument"
+    },
+    {
+        "id": "660d8ab159c37f01fbad2644",
+        "name": "Playing card set",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "gaming"
+    },
+    {
+        "id": "660d8ab159c37f01fbad2643",
+        "name": "Dice set",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "gaming"
+    },
+    {
+        "id": "660d8ab159c37f01fbad2648",
+        "name": "Navigator's tools",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "other"
+    },
+    {
+        "id": "660d8ab159c37f01fbad2647",
+        "name": "Herbalism kit",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "other"
+    },
+    {
+        "id": "660d8ab159c37f01fbad2649",
+        "name": "Poisoner's kit",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "other"
+    },
+    {
+        "id": "660d8ab159c37f01fbad2646",
+        "name": "Forgery kit",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "other"
+    },
+    {
+        "id": "660d8ab159c37f01fbad264a",
+        "name": "Thieves' tools",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "other"
+    },
+    {
+        "id": "660d8ab159c37f01fbad2645",
+        "name": "Disguise kit",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "other"
+    },
+    {
+        "id": "660d8ab159c37f01fbad264c",
+        "name": "Vehicles (water)",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "vehicle"
+    },
+    {
+        "id": "660d8ab159c37f01fbad264b",
+        "name": "Vehicles (land)",
+        "source": {
+            "id": "SRD",
+            "name": "System Reference Document"
+        },
+        "type": "vehicle"
+    },
+    {
+        "id": "660d8ab159c37f01fbad264f",
+        "name": "Test tool 3",
+        "source": {
+            "id": "EXP1",
+            "name": "Experimental Source 1"
+        },
+        "type": "other"
+    },
+    {
+        "id": "660d8ab159c37f01fbad264e",
+        "name": "Test tool 2",
+        "source": {
+            "id": "EXP1",
+            "name": "Experimental Source 1"
+        },
+        "type": "other"
+    },
+    {
+        "id": "660d8ab159c37f01fbad264d",
+        "name": "Test tool 1",
+        "source": {
+            "id": "EXP1",
+            "name": "Experimental Source 1"
+        },
+        "type": "other"
+    },
+    {
+        "id": "660d8ab159c37f01fbad2650",
+        "name": "Another tool 1",
+        "source": {
+            "id": "EXP2",
+            "name": "Experimental Source 2"
+        },
+        "type": "other"
+    },
+    {
+        "id": "660d8ab159c37f01fbad2652",
+        "name": "Another tool 3",
+        "source": {
+            "id": "EXP2",
+            "name": "Experimental Source 2"
+        },
+        "type": "other"
+    },
+    {
+        "id": "660d8ab159c37f01fbad2651",
+        "name": "Another tool 2",
+        "source": {
+            "id": "EXP2",
+            "name": "Experimental Source 2"
+        },
+        "type": "other"
+    }
+]
