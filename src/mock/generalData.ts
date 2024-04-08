@@ -1,4 +1,4 @@
-import { AutocompleteItem, Background, Class, Race } from "@pages/CreateCharacter/definitions/characterForm";
+import { AutocompleteItem, Background, Class, Race, Source } from "@pages/CreateCharacter/definitions/characterForm";
 
 
 const races: Race[] = [
@@ -204,7 +204,7 @@ const languages: AutocompleteItem[] = [
 { id: "27", name: "High Undercommon" },
   ];
 
-const sources: AutocompleteItem[] = [
+const sources: Source[] = [
 { id: "0", name: "Player's Handbook" },
 { id: "1", name: "Dungeon Master's Guide" },
 { id: "2", name: "Monster Manual" },

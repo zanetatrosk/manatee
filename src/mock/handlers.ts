@@ -5,56 +5,56 @@ import { randomInt } from 'crypto';
 
 
 export const handlers = [
-    rest.get('/api/races', (req, res, ctx) => {
+    rest.get('races', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json(races),
         );
     }),
 
-    rest.get('/api/backgrounds', (req, res, ctx) => {
+    rest.get('backgrounds', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json(backgrounds),
         );
     }),
 
-    rest.get('/api/sources', (req, res, ctx) => {
+    rest.get('sources', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json(sources),
         );
     }),
 
-    rest.get('/api/classes', (req, res, ctx) => {
+    rest.get('classes', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json(classes),
         );
     }),
 
-    rest.get('/api/languages', (req, res, ctx) => {
+    rest.get('languages', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json(languages),
         );
     }),
 
-    rest.get('/api/tools', (req, res, ctx) => {
+    rest.get('tools', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json(proficiencyTools),
         );
     }),
 
-    rest.get('/api/subclasses', (req, res, ctx) => {
+    rest.get('subclasses', (req, res, ctx) => {
         return res(
             ctx.status(200),
             ctx.json(subclasses),
         );
     }),
 
-    rest.post('/api/characters', (req, res, ctx) => {
+    rest.post('characters', (req, res, ctx) => {
         const { message } = JSON.parse(req.bodyUsed?.toString() || '');
         return res(
             ctx.status(200),

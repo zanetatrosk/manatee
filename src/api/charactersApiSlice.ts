@@ -1,12 +1,13 @@
 import { Armor, Attack, CharacterSheet, Proficient, Skill, Spell, Weapon } from "@pages/CreateCharacter/definitions/characterForm";
 import { StepperForm } from "@pages/CreateCharacter/definitions/stepperForm";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { env } from "process";
 
 
 
 export const charactersApiSlice = createApi({
     reducerPath: 'charactersApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/api/' }),
+    baseQuery: fetchBaseQuery({ baseUrl: env.API_URL }),
     tagTypes: ['CharacterList', 'CharacterSheet'],
     endpoints: (builder) => ({
         getCharacters: builder.query<CharacterSheet[], void>({

@@ -10,6 +10,7 @@ import {
   Weapon,
 } from "@pages/CreateCharacter/definitions/characterForm";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { env } from "process";
 
 export interface PaginationParams {
   page: number;
@@ -18,15 +19,13 @@ export interface PaginationParams {
 }
 
 
-
-
 export const generalContentApiSlice = createApi({
   reducerPath: "contentApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8080/api/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: env.API_URL }),
   endpoints: (builder) => ({
     getRaces: builder.query<Race[], string[]>({
       query: (src) => ({
-        url: "/races",
+        url: "races",
         method: "GET",
         params: { source: src },
       }),
@@ -36,49 +35,49 @@ export const generalContentApiSlice = createApi({
     }),
     getClasses: builder.query<Class[], string[]>({
       query: (src) => ({
-        url: "/classes",
+        url: "classes",
         method: "GET",
         params: { source: src },
       }),
     }),
     getBackgrounds: builder.query<Background[], string[]>({
       query: (src) => ({
-        url: "/backgrounds",
+        url: "backgrounds",
         method: "GET",
         params: { source: src },
       }),
     }),
     getLanguages: builder.query<AutocompleteItem[], string[]>({
       query: (src) => ({
-        url: "/languages",
+        url: "languages",
         method: "GET",
         params: { source: src },
       }),
     }),
     getTools: builder.query<AutocompleteItem[], string[]>({
       query: (src) => ({
-        url: "/tools",
+        url: "tools",
         method: "GET",
         params: { source: src },
       }),
     }),
     getSpells: builder.query<Pageable<Spell>, PaginationParams>({
       query: (src) => ({
-        url: "/spells",
+        url: "spells",
         method: "GET",
         params: { page: src.page, size: src.size, name: src.query },
       }),
     }),
     getArmor: builder.query<Pageable<Armor>, PaginationParams>({
       query: (src) => ({
-        url: "/armor",
+        url: "armor",
         method: "GET",
         params: { page: src.page, size: src.size, name: src.query },
       }),
     }),
     getWeapons: builder.query<Pageable<Weapon>, PaginationParams>({
       query: (src) => ({
-        url: "/weapons",
+        url: "weapons",
         method: "GET",
         params: { page: src.page, size: src.size, name: src.query },
       }),
