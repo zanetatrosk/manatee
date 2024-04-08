@@ -11,7 +11,7 @@ describe('Automation TC01 check home page after loading an app', () => {
   function checkTitles(titles: Record<string, string>, el: string){
     Object.keys(titles).forEach((key: string) => {
       const title = titles[key];
-      cy.get(el).contains(title);
+      cy.get('[data-cy='+ "\"" + key + "\"" + "]").should('have.text', title);
     })
   }
   

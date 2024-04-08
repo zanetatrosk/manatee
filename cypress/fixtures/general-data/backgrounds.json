@@ -116,7 +116,17 @@
         },
         "languageProficiencies": {
             "amount": 1,
-            "defaults": []
+            "defaults": [
+                {
+                    "id": "660d8ab159c37f01fbad2653",
+                    "name": "Common",
+                    "source": {
+                        "id": "SRD",
+                        "name": "System Reference Document"
+                    },
+                    "exotic": false
+                }
+            ]
         },
         "toolProficiencies": {
             "amount": 1,
@@ -157,11 +167,30 @@
         },
         "languageProficiencies": {
             "amount": 2,
-            "defaults": []
+            "defaults": [
+            {
+                "id": "660d8ab159c37f01fbad2653",
+                "name": "Common",
+                "source": {
+                    "id": "SRD",
+                    "name": "System Reference Document"
+                },
+                "exotic": false
+            }]
         },
         "toolProficiencies": {
-            "amount": 0,
-            "defaults": []
+            "amount": 1,
+            "defaults": [
+                {
+                    "id": "660d8ab159c37f01fbad2645",
+                    "name": "Disguise kit",
+                    "source": {
+                        "id": "SRD",
+                        "name": "System Reference Document"
+                    },
+                    "type": "other"
+                }
+            ]
         }
     }
 ]

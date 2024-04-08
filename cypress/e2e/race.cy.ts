@@ -1,7 +1,7 @@
 //write a test that check that Race elf is correct (check that all data is correct)
 
-const str = "You can have up to";
 describe("Automation TC05", () => {
+  const str = "You can have up to";
   before(() => {
     cy.visit("http://localhost:3000/characters/create-character");
     cy.get('[data-cy="next"]').click();
@@ -14,7 +14,6 @@ describe("Automation TC05", () => {
     cy.get('[data-cy="next"]').click();
     cy.fixture("race.json").then((race) => {
       this.raceName = race.label;
-      console.log(race.languages);
       this.languages = race.languages.defaults;
       this.features = race.features;
       this.sizeOptions = race.sizeOptions;
@@ -40,12 +39,10 @@ describe("Automation TC05", () => {
         "placeholder",
         "Common, Elvish, Dwarvish, ..."
       );
-
       cy.contains(str).should(
         "have.text",
         str + " " + this.amount + " languages"
       );
-
       this.languages.forEach((language, idx) => {
         cy.contains(language.title);
       });

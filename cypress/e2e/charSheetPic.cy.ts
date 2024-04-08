@@ -1,13 +1,10 @@
 const srcPic =
   "https://cdn.pixabay.com/photo/2023/05/25/20/09/ai-generated-8018229_960_720.jpg";
 
-const className = "Barbarian";
-const race = "Half-Elf";
-const background = "Charlatan";
-const subclass = "";
-const playerName = "Test Player name";
-const characterName = "Test Character name";
-describe("Automation TC07 Character sheet picture", () => {
+  describe("Automation TC07 Character sheet picture", () => {
+  const className = "Barbarian";
+  const race = "Half-Elf";
+  const background = "Charlatan";
   before(() => {
     cy.visit("http://localhost:3000/characters/create-character");
     cy.intercept("GET", "/api/races?source=", {
@@ -46,7 +43,7 @@ describe("Automation TC07 Character sheet picture", () => {
     cy.get('[data-cy="next"]').click();
     checkPage("Class");
     cy.get('[data-cy="class"]').click();
-    cy.contains("Barbarian").click();
+    cy.contains(className).click();
     cy.get('[data-cy="next"]').click();
     checkPage("Race");
     cy.get('[data-cy="race"]').click();

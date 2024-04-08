@@ -95,7 +95,7 @@ function ResponsiveAppBar() {
                 <Link to={"/" + page} key={index}>
                   <MenuItem
                     key={page}
-                    data-cy={page}
+                    data-cy={page + "-mobile"}
                     onClick={() => {
                       handleCloseNavMenu(page);
                     }}
@@ -110,7 +110,7 @@ function ResponsiveAppBar() {
           <Typography
             variant="h5"
             noWrap
-            data-cy="app-title"
+            data-cy="app-title-mobile"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -170,7 +170,7 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center" data-cy={setting.toLowerCase()}>{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>

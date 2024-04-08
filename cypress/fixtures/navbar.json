@@ -1,7 +1,8 @@
 {
   "nav": {
     "characters": "characters",
-    "content": "content"
+    "content": "content",
+    "app-title" : "D&D APP"
   },
   "usersChoices": {
     "profile": "Profile",

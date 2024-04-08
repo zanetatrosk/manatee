@@ -1,11 +1,12 @@
-const className = "Barbarian";
-const race = "Half-Elf";
-const background = "Charlatan";
-const subclass = "";
-const playerName = "Test Player name";
-const characterName = "Test Character name";
 
 describe("Automation TC08 check that information that was entered in the form is displayed on the character sheet", () => {
+  const className = "Barbarian";
+  const race = "Half-Elf";
+  const background = "Charlatan";
+  const subclass = "";
+  const playerName = "Test Player name";
+  const characterName = "Test Character name";
+  
   before(() => {
     cy.visit("http://localhost:3000/characters/create-character");
     cy.intercept("GET", "/api/races?source=", {
@@ -33,8 +34,6 @@ describe("Automation TC08 check that information that was entered in the form is
     }).as("postCharacter");
 
   });
-
-  
 
   const checkPage = (page: string) => {
     cy.get(".MuiStepper-root").should("be.visible");
@@ -74,5 +73,6 @@ describe("Automation TC08 check that information that was entered in the form is
     cy.get('[data-cy="Race-value"]').should("have.text", race);
     cy.get('[data-cy="Background-value"]').should("have.text", background);
     cy.get('[data-cy="Subclass-value"]').should("have.text", subclass);
+    
   });
 });
