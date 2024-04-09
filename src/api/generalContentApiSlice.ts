@@ -10,7 +10,6 @@ import {
   Weapon,
 } from "@pages/CreateCharacter/definitions/characterForm";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { env } from "process";
 
 export interface PaginationParams {
   page: number;
@@ -21,7 +20,7 @@ export interface PaginationParams {
 
 export const generalContentApiSlice = createApi({
   reducerPath: "contentApi",
-  baseQuery: fetchBaseQuery({ baseUrl: env.API_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
   endpoints: (builder) => ({
     getRaces: builder.query<Race[], string[]>({
       query: (src) => ({
