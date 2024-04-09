@@ -9,7 +9,7 @@ import { Container } from "@mui/material";
 import ContentPage from "@pages/contentPage";
 import CreateCharacter from "@pages/createCharacter";
 import CharacterSheet from "@pages/characterSheet";
-import EditCharacter from "features/editCharacter/editCharacter";
+import EditCharacter from "@pages/editCharacter";
 
 const darkTheme = createTheme({
   palette: {

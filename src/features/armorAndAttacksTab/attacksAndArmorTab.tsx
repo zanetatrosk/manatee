@@ -2,7 +2,7 @@ import { useAppSelector } from "@hooks/hooksStore";
 import AttacksTable, { RowData } from "../../components/attacksTable";
 
 import { useEffect, useState } from "react";
-import ButtonAddItems from "../../pages/CharacterSheet/tabsComponents/modalAddItems/buttonAddItems";
+import ButtonAddItems from "../modalAddItems/buttonAddItems";
 import { useGetArmorQuery, useGetWeaponsQuery } from "api/generalContentApiSlice";
 import { useParams } from "react-router-dom";
 import { usePostArmorByCharacterIdMutation, usePostWeaponsByCharacterIdMutation } from "api/charactersApiSlice";

@@ -93,4 +93,4 @@ interface AutocompleteParams {
 }
 
 export type { Race, BaseItem, Background, AbilityScore, AutocompleteParams, Feature, BasicInfo, Class, Source, Sourceable }
-export {Ability, Size}
+export { Ability, Size }

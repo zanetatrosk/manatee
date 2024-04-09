@@ -3,7 +3,7 @@ import HeaderCard from "../components/headerCard";
 import AbilityCard from "../components/abilityCard";
 import SkillTable from "../components/skillTable";
 import StatsGrid from "../features/statsGrid/statsGrid";
-import TabsCard from "../features/charactertabs/tabsCard";
+import TabsCard from "../features/characterTabs/tabsCard";
 import React, { useEffect } from "react";
 import { useGetCharacterByIdQuery, usePostLevelUpByCharacterIdMutation } from "api/charactersApiSlice";
 import { useNavigate, useParams } from "react-router-dom";

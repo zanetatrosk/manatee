@@ -1,7 +1,5 @@
 import { AbilityScore, BasicInfo, Sourceable } from "./characterForm";
 
-
-
 interface Proficiencies<T extends Sourceable>{
     amount: number;
     defaults: T[];
