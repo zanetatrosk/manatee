@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import { AbilityScore } from "@pages/CreateCharacter/definitions/characterForm";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
-import { StepperForm } from "../definitions/stepperForm";
+import { StepperForm } from "../../pages/CreateCharacter/definitions/stepperForm";
 import { addPlusOrMinus } from "utils/textUtils";
 
 //declaring constants

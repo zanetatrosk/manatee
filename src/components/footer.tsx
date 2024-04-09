@@ -1,5 +1,4 @@
-import { Box, Paper, Grid } from "@mui/material";
-import * as React from "react";
+import { Box } from "@mui/material";
 export default function Footer() {
   return (
     <Box

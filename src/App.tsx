@@ -3,21 +3,19 @@ import Navbar from "./components/navbar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import Characters from "@pages/Characters/charactersPage";
-import CreateCharacter from "@pages/CreateCharacter/components/createCharacter";
+import Characters from "@pages/charactersPage";
 import HomePage from "@pages/homePage";
 import { Container } from "@mui/material";
-import CharacterSheet from "@pages/CharacterSheet/characterSheet";
-import ContentPage from "@pages/Content/contentPage";
-import { characterSheetDefaults } from "@pages/CreateCharacter/definitions/characterForm";
-import EditCharacter from "@pages/CreateCharacter/components/editCharacter";
+import ContentPage from "@pages/contentPage";
+import CreateCharacter from "@pages/createCharacter";
+import CharacterSheet from "@pages/characterSheet";
+import EditCharacter from "features/editCharacter/editCharacter";
+
 const darkTheme = createTheme({
   palette: {
     mode: "light",
   },
 });
-
-
 
 function App() {
   return (

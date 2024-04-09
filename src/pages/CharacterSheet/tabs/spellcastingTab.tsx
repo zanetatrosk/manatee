@@ -1,14 +1,14 @@
-import { Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import AttacksTable, { RowData } from "../components/attacksTable";
 import StatsGrid from "../components/statsGrid";
 import { useAppSelector } from "@hooks/hooksStore";
-import { Slot, Spell } from "@pages/CreateCharacter/definitions/characterForm";
 import ButtonAddItems from "../tabsComponents/modalAddItems/buttonAddItems";
 import { useSpells } from "../tabsComponents/modalAddItems/filteredTable";
 import { usePostSpellsByCharacterIdMutation } from "api/charactersApiSlice";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { addPlusOrMinus } from "utils/textUtils";
+import { Spell, Slot } from "@pages/CreateCharacter/definitions/characterSheet";
 
 
 export default function SpellcastingTab() {

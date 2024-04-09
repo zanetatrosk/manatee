@@ -9,20 +9,19 @@ import {
 import Typography from "@mui/material/Typography";
 import MultiComplete from "@components/customMultiComplete";
 import TextField from "@mui/material/TextField";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Background,
-  AutocompleteItem,
-  Source,
+  BaseItem
 } from "@pages/CreateCharacter/definitions/characterForm";
-import CardInfo from "./cardInfo";
+import CardInfo from "../../components/cardInfo";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import {
   useGetBackgroundsQuery,
   useGetLanguagesQuery,
   useGetToolsQuery,
 } from "api/generalContentApiSlice";
-import { BackgroundForm, StepperForm } from "../definitions/stepperForm";
+import { BackgroundForm, StepperForm } from "../../pages/CreateCharacter/definitions/stepperForm";
 
 const BACKGROUND = CREATE_CHARACTER.BACKGROUND;
 
@@ -44,11 +43,11 @@ export default function BackgroundFrame({ backgroundForm, setForm, sourceIds }: 
     setForm(prev => ({ ...prev, background: { ...prev.background, [property]: value } }));
   };
 
-  const handleToolsChange = (value: AutocompleteItem[]): void => {
+  const handleToolsChange = (value: BaseItem[]): void => {
     setPropertyInForm("toolIds", value.map((v) => v.id));
   };
 
-  const handleLanguagesChange = (value: AutocompleteItem[]): void => {
+  const handleLanguagesChange = (value: BaseItem[]): void => {
     setPropertyInForm("languageIds", value.map((v) => v.id));
   };
 

@@ -5,17 +5,17 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import BasicInformation from "@pages/CreateCharacter/components/basicInformationFrame";
-import Class from "@pages/CreateCharacter/components/classFrame";
-import Race from "./raceFrame";
-import Abilities from "./abilitiesFrame";
-import Background from "./backgroundFrame";
+import Class from "features/classFrame/classFrame";
+import Race from "../raceFrame/raceFrame";
+import Abilities from "../abilitiesFrame/abilitiesFrame";
+import Background from "../backgroundFrame/backgroundFrame";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
-import { useNavigate, useParams } from "react-router-dom";
-import { LanguagesProficiency, StepperForm, ToolsProficiency } from "../definitions/stepperForm";
-import { returnDefaults } from "../definitions/defaults";
-import { useAddCharacterMutation, useGetCharacterByIdQuery, usePutCharacterMutation } from "api/charactersApiSlice";
-import { Ability, AbilityScore, BasicInfo, CharacterSheet, ProficienciesSheet } from "../definitions/characterForm";
+import { useNavigate } from "react-router-dom";
+import { StepperForm } from "../../pages/CreateCharacter/definitions/stepperForm";
+import { returnDefaults } from "../../pages/CreateCharacter/definitions/defaults";
+import { useAddCharacterMutation, usePutCharacterMutation } from "api/charactersApiSlice";
+import { CharacterSheet } from "../../pages/CreateCharacter/definitions/characterSheet";
+import BasicInformation from "features/basicInfoFrame/basicInformationFrame";
 
 const steps = ["Basic information", "Class", "Race", "Abilities", "Background"];
 

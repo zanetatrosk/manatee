@@ -1,7 +1,6 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Container from "@mui/material/Container";
-import HorizontalLinearStepper from "./stepperComponent";
+import HorizontalLinearStepper from "../features/createCharacterStepper/stepperComponent";
 import React from "react";
 
 export default function CreateCharacter() {

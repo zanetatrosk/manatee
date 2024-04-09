@@ -1,15 +1,8 @@
-import {
-  Armor,
-  AutocompleteItem,
-  Background,
-  Class,
-  Pageable,
-  Race,
-  Source,
-  Spell,
-  Weapon,
-} from "@pages/CreateCharacter/definitions/characterForm";
+import { Race, Source, Class, Background, BaseItem } from "@pages/CreateCharacter/definitions/characterForm";
+import { Pageable, Spell, Armor, Weapon } from "@pages/CreateCharacter/definitions/characterSheet";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+
 
 export interface PaginationParams {
   page: number;
@@ -46,14 +39,14 @@ export const generalContentApiSlice = createApi({
         params: { source: src },
       }),
     }),
-    getLanguages: builder.query<AutocompleteItem[], string[]>({
+    getLanguages: builder.query<BaseItem[], string[]>({
       query: (src) => ({
         url: "languages",
         method: "GET",
         params: { source: src },
       }),
     }),
-    getTools: builder.query<AutocompleteItem[], string[]>({
+    getTools: builder.query<BaseItem[], string[]>({
       query: (src) => ({
         url: "tools",
         method: "GET",

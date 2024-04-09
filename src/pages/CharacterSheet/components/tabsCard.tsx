@@ -4,9 +4,7 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { Card, Grid } from "@mui/material";
-import AttacksTable, { RowData } from "./attacksTable";
-import StatsGrid from "./statsGrid";
+import { Card } from "@mui/material";
 import AttacksAndArmorTab from "../tabs/attacksAndArmorTab";
 import SpellcastingTab from "../tabs/spellcastingTab";
 import OtherProficienciesTab from "../tabs/otherProficienciesTab";
@@ -15,11 +13,9 @@ import { useAppSelector } from "@hooks/hooksStore";
 
 export default function TabsCard() {
   const [value, setValue] = React.useState("1");
-
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
-
   const { spellcasting } = useAppSelector((state) => state.character);
 
   return (

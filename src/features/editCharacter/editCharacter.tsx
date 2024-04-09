@@ -1,13 +1,12 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import HorizontalLinearStepper from "./stepperComponent";
+import HorizontalLinearStepper from "../createCharacterStepper/stepperComponent";
 import React from "react";
 import { useGetCharacterByIdQuery } from "api/charactersApiSlice";
-import { CharacterSheet, ProficienciesSheet } from "../definitions/characterForm";
-import { StepperForm, ToolsProficiency, LanguagesProficiency } from "../definitions/stepperForm";
+import { StepperForm, ToolsProficiency, LanguagesProficiency } from "../../pages/CreateCharacter/definitions/stepperForm";
 import { useParams } from "react-router-dom";
-import { Box, CircularProgress } from "@mui/material";
 import Spinner from "@components/spinner";
+import { CharacterSheet, ProficienciesSheet } from "../../pages/CreateCharacter/definitions/characterSheet";
 
 const fillDataForm = (character: CharacterSheet): StepperForm => {
 	const form: StepperForm = {} as StepperForm;

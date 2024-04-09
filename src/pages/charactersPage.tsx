@@ -2,16 +2,16 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { useMediaQuery, useTheme } from "@mui/material";
 import { Button, CardActions, CardMedia } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import { CHARACTERS } from "constants/characterDefinition";
 import { useDeleteCharacterMutation, useGetCharactersQuery } from "api/charactersApiSlice";
-import { CharacterInfo } from "@pages/CreateCharacter/definitions/characterForm";
 import ConfirmationDialog from "@components/confirmationDialog";
 import Spinner from "@components/spinner";
+import { CharacterInfo } from "@pages/CreateCharacter/definitions/characterSheet";
 
 function CharacterCard({ props }: { props: CharacterInfo }) {
   let navigate = useNavigate();

@@ -1,11 +1,12 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import { Autocomplete, TextField, Chip } from "@mui/material";
-import { AutocompleteItem } from "@pages/CreateCharacter/definitions/characterForm";
+import { BaseItem } from "@pages/CreateCharacter/definitions/characterForm";
+
 //interface used for props
 interface PropsParams {
-  values: AutocompleteItem[];
-  results: AutocompleteItem[];
-  onChange: (value: AutocompleteItem[]) => void;
+  values: BaseItem[];
+  results: BaseItem[];
+  onChange: (value: BaseItem[]) => void;
   label: string;
   helpText?: string;
   placeholder?: string;
@@ -31,8 +32,8 @@ export default function MultiComplete(props: PropsParams) {
         onChange={(e, value) => {
           props.onChange(value);
         }}
-        renderTags={(value: readonly AutocompleteItem[], getTagProps) =>
-          value.map((option: AutocompleteItem, index: number) => (
+        renderTags={(value: readonly BaseItem[], getTagProps) =>
+          value.map((option: BaseItem, index: number) => (
             <Chip
               variant="outlined"
               label={option.name}

@@ -1,4 +1,4 @@
-import { AutocompleteItem, Background, Class, Race, Source } from "@pages/CreateCharacter/definitions/characterForm";
+import { BaseItem, Background, Class, Race, Source } from "@pages/CreateCharacter/definitions/characterForm";
 
 
 const races: Race[] = [
@@ -155,7 +155,7 @@ const backgrounds: Background[] = [
     },
   ];
 
-const languages: AutocompleteItem[] = [
+const languages: BaseItem[] = [
 // Elvish languages
 { id: "1", name: "Common Elvish" },
 { id: "2", name: "High Elvish" },
@@ -279,7 +279,7 @@ const sources: Source[] = [
     },
   ];
 
-  const proficiencyTools: AutocompleteItem[] = [
+  const proficiencyTools: BaseItem[] = [
     { id: "1", name: "Alchemist’s Supplies" },
     { id: "2", name: "Brewer’s Supplies" },
     { id: "3", name: "Calligrapher’s Supplies" },

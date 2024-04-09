@@ -13,17 +13,15 @@ import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useState, useEffect } from "react";
-import { useAppSelector, useAppDispatch } from "@hooks/hooksStore";
+import { useState } from "react";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import {
   Race,
-  AutocompleteItem,
-  Source,
+  BaseItem,
 } from "@pages/CreateCharacter/definitions/characterForm";
-import CardInfo from "./cardInfo";
+import CardInfo from "../../components/cardInfo";
 import { useGetLanguagesQuery, useGetRacesQuery } from "api/generalContentApiSlice";
-import { RaceForm, StepperForm } from "../definitions/stepperForm";
+import { RaceForm, StepperForm } from "../../pages/CreateCharacter/definitions/stepperForm";
 
 const RACE = CREATE_CHARACTER.RACE;
 
@@ -36,15 +34,14 @@ export default function RaceFrame({
   setForm: React.Dispatch<React.SetStateAction<StepperForm>>;
   sourceIds: string[];
 }) {
+  
   //calling api to get all races, in future this will be called when create character button is clicked
-
   const { data: races, isLoading: loadingRaces } = useGetRacesQuery(sourceIds);
   const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(sourceIds);
 
   console.log("render race");
 
   const [race, setRace] = useState<Race|null>(null);
-  const [isVisible, setVisibility] = React.useState(!!race);
 
   if( races && raceForm.id && !race ) {
     const raceTmp = races?.find((r) => r.id === raceForm.id);
@@ -58,13 +55,12 @@ export default function RaceFrame({
   const setPropertyInForm = (property: string, value: any) => {
     setForm(prev => ({...prev, race: {...prev.race, [property]: value}}));
   }
-  const handleLanguagesChange = (value: AutocompleteItem[]): void => {
+  const handleLanguagesChange = (value: BaseItem[]): void => {
     setPropertyInForm(
       "languageIds",
       value.map((v) => v.id)
     );
   };
-
 
   return (
     <Box>
@@ -95,7 +91,6 @@ export default function RaceFrame({
             value={race?.id ? race : null}
             onChange={(_, value) => {
               if (!value) return;
-              setVisibility(true);
               //setting the right properties of race
               //recalculate ability scores acording to a new race
               setPropertyInForm("id", value.id);

@@ -1,7 +1,7 @@
-import { AutocompleteItem, Background, Class, Race } from "@pages/CreateCharacter/definitions/characterForm";
+import { BaseItem, Background, Class, Race } from "@pages/CreateCharacter/definitions/characterForm";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-interface Source extends AutocompleteItem {}
+interface Source extends BaseItem {}
 
 interface IFormDataState {
     races: Race[];

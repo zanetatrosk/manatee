@@ -8,13 +8,12 @@ import {
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
-import CardInfo from "./cardInfo";
-import { useAppSelector, useAppDispatch } from "@hooks/hooksStore";
-import React, { useEffect } from "react";
+import CardInfo from "../../components/cardInfo";
+import React from "react";
 import MultiComplete from "@components/customMultiComplete";
-import { AutocompleteItem, Class, Source } from "../definitions/characterForm";
+import { BaseItem, Class } from "../../pages/CreateCharacter/definitions/characterForm";
 import { useGetClassesQuery, useGetToolsQuery } from "api/generalContentApiSlice";
-import { ClassForm, StepperForm } from "../definitions/stepperForm";
+import { ClassForm, StepperForm } from "../../pages/CreateCharacter/definitions/stepperForm";
 
 const CLASS = CREATE_CHARACTER.CLASS;
 
@@ -49,7 +48,7 @@ export default function ClassFrame({
     }));
   };
   
-  const handleToolsChange = (value: AutocompleteItem[]): void => {
+  const handleToolsChange = (value: BaseItem[]): void => {
     setPropertyInForm(
       "toolIds",
       value.map((v) => v.id)

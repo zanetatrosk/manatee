@@ -1,5 +1,5 @@
+import { CharacterSheet, characterSheetDefaults } from "@pages/CreateCharacter/definitions/characterSheet";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CharacterSheet, characterSheetDefaults } from "@pages/CreateCharacter/definitions/characterForm";
 
 const initialState = characterSheetDefaults;
 export const characterReducer = createSlice({
