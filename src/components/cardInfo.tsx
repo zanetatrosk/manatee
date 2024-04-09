@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box, Card, CardContent, Typography, Grid } from "@mui/material";
-import { Feature } from "@pages/CreateCharacter/definitions/characterForm";
+import { Feature } from "definitions/characterForm";
 
 
 interface PropsParams {

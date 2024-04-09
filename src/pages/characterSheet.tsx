@@ -1,9 +1,9 @@
 import { Button, Card, CardMedia, Grid, Paper } from "@mui/material";
-import HeaderCard from "./CharacterSheet/components/headerCard";
-import AbilityCard from "./CharacterSheet/components/abilityCard";
-import SkillTable from "./CharacterSheet/components/skillTable";
-import StatsGrid from "./CharacterSheet/components/statsGrid";
-import TabsCard from "./CharacterSheet/components/tabsCard";
+import HeaderCard from "../components/headerCard";
+import AbilityCard from "../components/abilityCard";
+import SkillTable from "../components/skillTable";
+import StatsGrid from "../features/statsGrid/statsGrid";
+import TabsCard from "../features/charactertabs/tabsCard";
 import React, { useEffect } from "react";
 import { useGetCharacterByIdQuery, usePostLevelUpByCharacterIdMutation } from "api/charactersApiSlice";
 import { useNavigate, useParams } from "react-router-dom";

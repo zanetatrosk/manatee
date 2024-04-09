@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import ProficiencyCard from "../tabsComponents/proficiencyCard";
+import ProficienciesCard from "../../pages/CharacterSheet/tabsComponents/proficienciesCard";
 import Armor from "@assets/icons/armor";
 import WeaponIcon from "@assets/icons/weapon";
 import ToolsIcon from "@assets/icons/tools";
@@ -42,7 +42,7 @@ export default function OtherProficienciesTab() {
       <Grid container spacing={2}>
         {data.map((proficiency, index) => (
             <Grid item xs={12} key={index}>
-                <ProficiencyCard title={proficiency.title} data={proficiency.data} icon={proficiency.icon} />
+                <ProficienciesCard title={proficiency.title} data={proficiency.data} icon={proficiency.icon} />
             </Grid>
         ))}
       </Grid>

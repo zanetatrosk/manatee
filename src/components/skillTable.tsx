@@ -9,7 +9,6 @@ import {
   Typography,
 } from "@mui/material";
 import Box from "@mui/material/Box";
-import { table } from "console";
 import React from "react";
 import { addPlusOrMinus } from "utils/textUtils";
 
@@ -18,14 +17,6 @@ export interface RowSkillData {
   label: string;
   modifier: number;
   checked: boolean;
-}
-
-interface TableProps {
-  name: string;
-  description?: string;
-  tableData: RowSkillData[];
-  disabled?: boolean;
-  sendData?: any;
 }
 
 export default function SkillTable({ name, description, tableData, disabled, sendData }: {

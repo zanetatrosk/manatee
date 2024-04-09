@@ -9,8 +9,9 @@ import {
 import React, { useEffect } from "react";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import { useGetSourcesQuery } from "api/generalContentApiSlice";
-import { StepperForm } from "../../pages/CreateCharacter/definitions/stepperForm";
-import { BasicInfo } from "../../pages/CreateCharacter/definitions/characterForm";
+import { BasicInfo } from "definitions/characterForm";
+import { StepperForm } from "definitions/stepperForm";
+
 
 const BASIC_INFO = CREATE_CHARACTER.BASIC_INFO;
 

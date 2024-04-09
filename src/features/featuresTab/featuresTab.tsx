@@ -1,6 +1,6 @@
 import { useAppSelector } from "@hooks/hooksStore";
-import AttacksTable, { RowData } from "../components/attacksTable";
-import { Feature } from "@pages/CreateCharacter/definitions/characterForm";
+import AttacksTable, { RowData } from "../../components/attacksTable";
+import { Feature } from "definitions/characterForm";
 
 export default function FeaturesTab() {
   const {features} = useAppSelector((state) => state.character);

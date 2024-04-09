@@ -11,7 +11,7 @@ import { CHARACTERS } from "constants/characterDefinition";
 import { useDeleteCharacterMutation, useGetCharactersQuery } from "api/charactersApiSlice";
 import ConfirmationDialog from "@components/confirmationDialog";
 import Spinner from "@components/spinner";
-import { CharacterInfo } from "@pages/CreateCharacter/definitions/characterSheet";
+import { CharacterInfo } from "definitions/characterSheet";
 
 function CharacterCard({ props }: { props: CharacterInfo }) {
   let navigate = useNavigate();

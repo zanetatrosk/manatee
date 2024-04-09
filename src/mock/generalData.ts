@@ -1,4 +1,4 @@
-import { BaseItem, Background, Class, Race, Source } from "@pages/CreateCharacter/definitions/characterForm";
+import { BaseItem, Background, Class, Race, Source } from "definitions/characterForm";
 
 
 const races: Race[] = [

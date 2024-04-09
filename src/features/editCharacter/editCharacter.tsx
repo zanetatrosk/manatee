@@ -3,10 +3,10 @@ import CardContent from "@mui/material/CardContent";
 import HorizontalLinearStepper from "../createCharacterStepper/stepperComponent";
 import React from "react";
 import { useGetCharacterByIdQuery } from "api/charactersApiSlice";
-import { StepperForm, ToolsProficiency, LanguagesProficiency } from "../../pages/CreateCharacter/definitions/stepperForm";
+import { StepperForm, ToolsProficiency, LanguagesProficiency } from "../../definitions/stepperForm";
 import { useParams } from "react-router-dom";
 import Spinner from "@components/spinner";
-import { CharacterSheet, ProficienciesSheet } from "../../pages/CreateCharacter/definitions/characterSheet";
+import { CharacterSheet, ProficienciesSheet } from "../../definitions/characterSheet";
 
 const fillDataForm = (character: CharacterSheet): StepperForm => {
 	const form: StepperForm = {} as StepperForm;

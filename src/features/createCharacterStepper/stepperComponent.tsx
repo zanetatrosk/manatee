@@ -11,10 +11,10 @@ import Abilities from "../abilitiesFrame/abilitiesFrame";
 import Background from "../backgroundFrame/backgroundFrame";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import { useNavigate } from "react-router-dom";
-import { StepperForm } from "../../pages/CreateCharacter/definitions/stepperForm";
-import { returnDefaults } from "../../pages/CreateCharacter/definitions/defaults";
+import { StepperForm } from "../../definitions/stepperForm";
+import { returnDefaults } from "../../definitions/defaults";
 import { useAddCharacterMutation, usePutCharacterMutation } from "api/charactersApiSlice";
-import { CharacterSheet } from "../../pages/CreateCharacter/definitions/characterSheet";
+import { CharacterSheet } from "../../definitions/characterSheet";
 import BasicInformation from "features/basicInfoFrame/basicInformationFrame";
 
 const steps = ["Basic information", "Class", "Race", "Abilities", "Background"];

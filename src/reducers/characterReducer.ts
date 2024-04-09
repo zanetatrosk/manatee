@@ -1,4 +1,4 @@
-import { CharacterSheet, characterSheetDefaults } from "@pages/CreateCharacter/definitions/characterSheet";
+import { CharacterSheet, characterSheetDefaults } from "definitions/characterSheet";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = characterSheetDefaults;

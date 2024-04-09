@@ -5,10 +5,10 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { Card } from "@mui/material";
-import AttacksAndArmorTab from "../tabs/attacksAndArmorTab";
-import SpellcastingTab from "../tabs/spellcastingTab";
-import OtherProficienciesTab from "../tabs/otherProficienciesTab";
-import FeaturesTab from "../tabs/featuresTab";
+import AttacksAndArmorTab from "../armorAndAttacksTab/attacksAndArmorTab";
+import SpellcastingTab from "../spellcastingTab/spellcastingTab";
+import OtherProficienciesTab from "../otherProfTab/otherProficienciesTab";
+import FeaturesTab from "../featuresTab/featuresTab";
 import { useAppSelector } from "@hooks/hooksStore";
 
 export default function TabsCard() {

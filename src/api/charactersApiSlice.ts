@@ -1,6 +1,6 @@
-import { CharacterSheet, Spell, Attack, Armor, Skill, Proficient } from "@pages/CreateCharacter/definitions/characterSheet";
-import { StepperForm } from "@pages/CreateCharacter/definitions/stepperForm";
+import { StepperForm } from "definitions/stepperForm";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { CharacterSheet, Spell, Attack, Armor, Skill, Proficient } from "definitions/characterSheet";
 
 
 

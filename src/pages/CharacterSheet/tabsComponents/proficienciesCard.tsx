@@ -1,7 +1,7 @@
 import { Card, CardHeader, Typography, SvgIcon } from "@mui/material";
 
 
-export default function ProficiencyCard({title, data, icon} : {title: string, data: string, icon: any}) {
+export default function ProficienciesCard({title, data, icon} : {title: string, data: string, icon: any}) {
     return (
         <Card elevation={4}>
         <CardHeader

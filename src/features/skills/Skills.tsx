@@ -1,9 +1,9 @@
 import { Grid } from "@mui/material";
-import SkillTable, { RowSkillData } from "../../pages/CharacterSheet/components/skillTable";
+import SkillTable, { RowSkillData } from "../../components/skillTable";
 import { usePostSkillsByCharacterIdMutation } from "api/charactersApiSlice";
 import { useParams } from "react-router-dom";
 import React from "react";
-import { Skill } from "@pages/CreateCharacter/definitions/characterSheet";
+import { Skill } from "definitions/characterSheet";
 
 
 export default function Skills({ skills} : {skills: Skill[]}) {

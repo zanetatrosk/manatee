@@ -1,6 +1,6 @@
 import React from "react";
 import { Autocomplete, TextField, Chip } from "@mui/material";
-import { BaseItem } from "@pages/CreateCharacter/definitions/characterForm";
+import { BaseItem } from "definitions/characterForm";
 
 //interface used for props
 interface PropsParams {

@@ -13,7 +13,7 @@ import { useState } from "react";
 import {
   Background,
   BaseItem
-} from "@pages/CreateCharacter/definitions/characterForm";
+} from "definitions/characterForm";
 import CardInfo from "../../components/cardInfo";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import {
@@ -21,7 +21,7 @@ import {
   useGetLanguagesQuery,
   useGetToolsQuery,
 } from "api/generalContentApiSlice";
-import { BackgroundForm, StepperForm } from "../../pages/CreateCharacter/definitions/stepperForm";
+import { BackgroundForm, StepperForm } from "definitions/stepperForm";
 
 const BACKGROUND = CREATE_CHARACTER.BACKGROUND;
 

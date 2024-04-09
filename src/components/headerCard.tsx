@@ -54,28 +54,3 @@ export default function HeaderCard({props: character}: {props: DisplayedData}) {
     </Box>
   );
 }
-// const data = [
-//   {
-//     header: "Player",
-//     value: "Zanetaaaaaa",
-//   },
-//   {
-//     header: "Race",
-//     //add race that has the longest string
-//     value: "Half-Orc",
-//   },
-//   {
-//     header: "Class & level",
-//     value: "Barbarian 123",
-//   },
-//   {
-//     header: "Subclass",
-//     value: "Path of the Totem Warrior",
-//   },
-//   {
-//     header: "Background",
-//     value: "Outlander",
-//   },
- 
-  
-// ];

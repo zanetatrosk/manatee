@@ -12,6 +12,7 @@
       "@pages/*": ["./pages/*"],
       "@hooks/*": ["./hooks/*"],
       "@assets/*": ["./assets/*"],
+      "@features/*": ["./features/*"],
     },
     "allowJs": true,
     "skipLibCheck": true,
@@ -27,4 +28,7 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
+  "include": [
+    "src"
+  ]
 }

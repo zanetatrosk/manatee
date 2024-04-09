@@ -15,10 +15,10 @@ import {
     Checkbox,
     Box,
 } from "@mui/material";
-import { AbilityScore } from "@pages/CreateCharacter/definitions/characterForm";
+import { AbilityScore } from "definitions/characterForm";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
-import { StepperForm } from "../../pages/CreateCharacter/definitions/stepperForm";
 import { addPlusOrMinus } from "utils/textUtils";
+import { StepperForm } from "definitions/stepperForm";
 
 //declaring constants
 const MIN = 1;
