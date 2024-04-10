@@ -3,13 +3,13 @@ import Navbar from "./components/navbar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import Characters from "@pages/charactersPage";
-import HomePage from "@pages/homePage";
+import Characters from "@pages/characters";
 import { Container } from "@mui/material";
-import ContentPage from "@pages/contentPage";
 import CreateCharacter from "@pages/createCharacter";
 import CharacterSheet from "@pages/characterSheet";
 import EditCharacter from "@pages/editCharacter";
+import ContentPage from "@pages/content";
+import HomePage from "@pages/home";
 
 const darkTheme = createTheme({
   palette: {
