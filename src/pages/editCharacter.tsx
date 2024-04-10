@@ -1,6 +1,6 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import HorizontalLinearStepper from "../features/characterStepper/characterStepper";
+import CreateCharacterStepper from "../features/characterStepper/characterStepper";
 import React from "react";
 import { useGetCharacterByIdQuery } from "api/charactersApiSlice";
 import { StepperForm, ToolsProficiency, LanguagesProficiency } from "../definitions/stepperForm";
@@ -54,7 +54,7 @@ export default function EditCharacter() {
 		<React.Fragment>
 			<Card>
 				<CardContent>
-					<HorizontalLinearStepper character={form} />
+					<CreateCharacterStepper character={form} />
 				</CardContent>
 			</Card>
 		</React.Fragment>

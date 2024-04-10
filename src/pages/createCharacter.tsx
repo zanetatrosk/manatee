@@ -1,6 +1,6 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import HorizontalLinearStepper from "../features/characterStepper/characterStepper";
+import CreateCharacterStepper from "../features/characterStepper/characterStepper";
 import React from "react";
 
 export default function CreateCharacter() {
@@ -8,7 +8,7 @@ export default function CreateCharacter() {
     <React.Fragment>
       <Card>
         <CardContent>
-          <HorizontalLinearStepper />
+          <CreateCharacterStepper />
         </CardContent>
       </Card>
     </React.Fragment>

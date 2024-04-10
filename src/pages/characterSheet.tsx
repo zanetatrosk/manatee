@@ -137,7 +137,7 @@ export default function CharacterSheet() {
                   }}
                 />
               </Grid>
-              <Grid item container spacing={3} justifyContent="center">
+              <Grid item container justifyContent="center" spacing={3}>
                 {character.abilities.map((i, idx) => (
                   <Grid item key={idx}>
                     <AbilityCard
@@ -147,15 +147,15 @@ export default function CharacterSheet() {
                     />
                   </Grid>
                 ))}
-              </Grid>
+                </Grid>
             </Grid>
           </Grid>
           {/* second row */}
-          <Grid container item spacing={3} columns={{ xs: 12 }}>
+          <Grid container item spacing={3}>
             <Skills skills={character.skills} />
             <Grid container item flexDirection={"column"} spacing={3} xs>
               <Grid container item spacing={3}>
-                <Grid item sm={4.5} xs={12}>
+                <Grid item md={4.5} xs={12}>
                   <SkillTable
                     name="Saving Throws"
                     disabled

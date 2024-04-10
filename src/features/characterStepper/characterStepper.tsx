@@ -24,7 +24,7 @@ interface ComponentRegister {
   component: React.ReactElement;
 }
 
-export default function HorizontalLinearStepper({character}: {character?: StepperForm}) {
+export default function CreateCharacterStepper({character}: {character?: StepperForm}) {
 
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());

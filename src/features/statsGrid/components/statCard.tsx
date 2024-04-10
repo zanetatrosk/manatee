@@ -13,7 +13,7 @@ export default function StatCard({item}: {item: Item}) {
       >
         <Grid container flexDirection="column" justifyItems="center">
           <Grid item container justifyContent="center">
-            <Typography variant="button" gutterBottom component={"span"} noWrap>
+            <Typography variant="button" sx={{ textOverflow: 'ellipsis' }} gutterBottom component={"span"} noWrap>
               {item.header}
             </Typography>
           </Grid>
