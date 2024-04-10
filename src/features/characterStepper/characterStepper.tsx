@@ -5,17 +5,17 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import Class from "features/classFrame/classFrame";
-import Race from "../raceFrame/raceFrame";
-import Abilities from "../abilitiesFrame/abilitiesFrame";
-import Background from "../backgroundFrame/backgroundFrame";
+import Race from "./components/raceFrame";
+import Abilities from "./components/abilitiesFrame";
+import Background from "./components/backgroundFrame";
+import Class from "./components/classFrame";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import { useNavigate } from "react-router-dom";
 import { StepperForm } from "../../definitions/stepperForm";
 import { returnDefaults } from "../../definitions/defaults";
 import { useAddCharacterMutation, usePutCharacterMutation } from "api/charactersApiSlice";
 import { CharacterSheet } from "../../definitions/characterSheet";
-import BasicInformation from "features/basicInfoFrame/basicInformationFrame";
+import BasicInformation from "./components/basicInformationFrame";
 
 const steps = ["Basic information", "Class", "Race", "Abilities", "Background"];
 

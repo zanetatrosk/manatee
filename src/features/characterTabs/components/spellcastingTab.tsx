@@ -1,14 +1,14 @@
-import AttacksTable, { RowData } from "@components/attacksTable";
+import CrudTable, { RowData } from "@components/crudTable";
 import StatsGrid from "@features/statsGrid/statsGrid";
 import { useAppSelector } from "@hooks/hooksStore";
 import { Grid } from "@mui/material";
-import ButtonAddItems from "@features/modalAddItems/buttonAddItems";
-import { useSpells } from "@features/modalAddItems/filteredTable";
 import { Spell, Slot } from "definitions/characterSheet";
 import { usePostSpellsByCharacterIdMutation } from "api/charactersApiSlice";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { addPlusOrMinus } from "utils/textUtils";
+import ButtonAddItems from "@features/buttonAddItems/buttonAddItems";
+import { useSpells } from "@features/buttonAddItems/components/filteredTable";
 
 
 
@@ -57,7 +57,7 @@ export default function SpellcastingTab() {
             />
           </Grid>
           <Grid item sm xs={12} container>
-            <AttacksTable
+            <CrudTable
               title="Spell Slots"
               scrollable
               rows={spellcasting.slots.map((slot: Slot) => {
@@ -71,7 +71,7 @@ export default function SpellcastingTab() {
           </Grid>
         </Grid>
         <Grid item>
-          <AttacksTable
+          <CrudTable
             title="Spells"
             rows={tableSpells}
             headers={["Name", "Level", "Casting time"]}

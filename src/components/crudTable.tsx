@@ -41,7 +41,7 @@ export interface Table {
 }
 
 //styles to override padding none in cell
-export default function AttacksTable({title, headers, rows, actionButton, showDescription, pagination, scrollable}: Table) {
+export default function CrudTable({title, headers, rows, actionButton, showDescription, pagination, scrollable}: Table) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 

@@ -1,12 +1,12 @@
 import { useAppSelector } from "@hooks/hooksStore";
-import AttacksTable, { RowData } from "../../components/attacksTable";
+import CrudTable, { RowData } from "../../../components/crudTable";
 import { Feature } from "definitions/characterForm";
 
 export default function FeaturesTab() {
   const {features} = useAppSelector((state) => state.character);
   return (
     <>
-      <AttacksTable
+      <CrudTable
         title="Features"
         rows={features?.map((f: Feature) => {
           return {

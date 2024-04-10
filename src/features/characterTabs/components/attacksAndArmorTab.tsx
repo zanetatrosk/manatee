@@ -1,8 +1,8 @@
 import { useAppSelector } from "@hooks/hooksStore";
-import AttacksTable, { RowData } from "../../components/attacksTable";
+import CrudTable, { RowData } from "../../../components/crudTable";
 
 import { useEffect, useState } from "react";
-import ButtonAddItems from "../modalAddItems/buttonAddItems";
+import ButtonAddItems from "../../buttonAddItems/buttonAddItems";
 import { useGetArmorQuery, useGetWeaponsQuery } from "api/generalContentApiSlice";
 import { useParams } from "react-router-dom";
 import { usePostArmorByCharacterIdMutation, usePostWeaponsByCharacterIdMutation } from "api/charactersApiSlice";
@@ -107,7 +107,7 @@ export default function AttacksAndArmorTab() {
 
   return (
     <>
-      <AttacksTable
+      <CrudTable
         title="Attacks"
         rows={weapons}
         headers={["Name", "Attack bonus", "Damage/type"]}
@@ -122,7 +122,7 @@ export default function AttacksAndArmorTab() {
         }
       />
       <div style={{ margin: 30 }} />
-      <AttacksTable
+      <CrudTable
         title="Armor"
         rows={armor ? [armor] : []}
         headers={["Name", "Base AC", "Armor type"]}

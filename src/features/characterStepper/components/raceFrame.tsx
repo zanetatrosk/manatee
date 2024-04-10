@@ -19,9 +19,9 @@ import {
   Race,
   BaseItem,
 } from "definitions/characterForm";
-import CardInfo from "../../components/cardInfo";
+import CardInfo from "../../../components/cardInfo";
 import { useGetLanguagesQuery, useGetRacesQuery } from "api/generalContentApiSlice";
-import { RaceForm, StepperForm } from "../../definitions/stepperForm";
+import { RaceForm, StepperForm } from "../../../definitions/stepperForm";
 
 const RACE = CREATE_CHARACTER.RACE;
 

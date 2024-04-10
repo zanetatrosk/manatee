@@ -1,5 +1,5 @@
 import { Button, Card, CardMedia, Grid, Paper } from "@mui/material";
-import HeaderCard from "../components/headerCard";
+import HeaderCard from "../features/headerCard/headerCard";
 import AbilityCard from "../components/abilityCard";
 import SkillTable from "../components/skillTable";
 import StatsGrid from "../features/statsGrid/statsGrid";
@@ -10,7 +10,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch } from "@hooks/hooksStore";
 import { setCharacterSheet } from "reducers/characterReducer";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import Skills from "../features/skills/Skills";
+import Skills from "../features/skills/skills";
 import { addPlusOrMinus } from "utils/textUtils";
 import ConfirmationDialog from "@components/confirmationDialog";
 import LoadingButton from '@mui/lab/LoadingButton';

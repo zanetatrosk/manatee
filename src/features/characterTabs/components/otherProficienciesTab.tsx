@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import ProficienciesCard from "./components/proficienciesCard";
+import ProficienciesCard from "./proficienciesCard";
 import Armor from "@assets/icons/armor";
 import WeaponIcon from "@assets/icons/weapon";
 import ToolsIcon from "@assets/icons/tools";

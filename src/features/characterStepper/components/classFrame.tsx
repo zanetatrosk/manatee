@@ -8,12 +8,12 @@ import {
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
-import CardInfo from "../../components/cardInfo";
+import CardInfo from "../../../components/cardInfo";
 import React from "react";
 import MultiComplete from "@components/customMultiComplete";
-import { BaseItem, Class } from "../../definitions/characterForm";
+import { BaseItem, Class } from "../../../definitions/characterForm";
 import { useGetClassesQuery, useGetToolsQuery } from "api/generalContentApiSlice";
-import { ClassForm, StepperForm } from "../../definitions/stepperForm";
+import { ClassForm, StepperForm } from "../../../definitions/stepperForm";
 
 const CLASS = CREATE_CHARACTER.CLASS;
 

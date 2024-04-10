@@ -14,7 +14,7 @@ import {
   Background,
   BaseItem
 } from "definitions/characterForm";
-import CardInfo from "../../components/cardInfo";
+import CardInfo from "../../../components/cardInfo";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import {
   useGetBackgroundsQuery,

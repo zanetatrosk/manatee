@@ -1,8 +1,8 @@
 import { Box, Button, Modal, Typography } from "@mui/material";
 import React from "react";
 import { PaginationParams } from "api/generalContentApiSlice";
-import FilteredTable, { useSpells } from "./filteredTable";
-import ModalAddItems from "./modal";
+import FilteredTable, { useSpells } from "./components/filteredTable";
+import ModalAddItems from "./components/modalAddItems";
 
 
 export default function ButtonAddItems({ usePaginationHook, defaults, sendToBEHook, singleChoice, headers, buttonText}
