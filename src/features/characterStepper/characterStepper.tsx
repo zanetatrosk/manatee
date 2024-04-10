@@ -22,8 +22,6 @@ const steps = ["Basic information", "Class", "Race", "Abilities", "Background"];
 interface ComponentRegister {
   id: number;
   component: React.ReactElement;
-  form?: StepperForm;
-  setForm?: React.Dispatch<React.SetStateAction<StepperForm>>;
 }
 
 export default function HorizontalLinearStepper({character}: {character?: StepperForm}) {
