@@ -103,6 +103,7 @@ export default function Characters() {
             onClick={() => {
               navigate("/characters/create-character");
             }}
+            fullWidth={!greaterThanMid}
             endIcon={<AddIcon />}
             sx={{
               px: 4,
