@@ -15,6 +15,7 @@ import {
   TableBody,
   TablePagination,
   TextField,
+  Radio,
 } from "@mui/material";
 import { useGetSpellsQuery } from "api/generalContentApiSlice";
 import React, { useState } from "react";
@@ -87,10 +88,11 @@ function Row(props: {
   row: RowData;
   idx: number;
   lastIdx: number;
-  handleClick: (event: React.MouseEvent<unknown>, id: string) => void;
+  handleClick: (id: string) => void;
   selected: boolean;
+  singleChoice?: boolean;
 }) {
-  const { row, idx, lastIdx, selected } = props;
+  const { row, idx, lastIdx, selected, singleChoice } = props;
   const [open, setOpen] = useState(false);
 
   return (
@@ -104,13 +106,22 @@ function Row(props: {
       >
         <>
           <TableCell padding="checkbox">
+            {singleChoice ? 
+              <Radio
+              color="primary"
+              checked={selected}
+              onChange={() => {
+                props.handleClick(row.id!);
+              }}
+            />
+            : 
             <Checkbox
               color="primary"
               checked={selected}
-              onClick={(event) => {
-                props.handleClick(event, row.id!);
+              onClick={() => {
+                props.handleClick(row.id!);
               }}
-            />
+            />}
           </TableCell>
           {row.columns.map((col) => (
             <TableCell component="th" scope="row">
@@ -170,7 +181,7 @@ export default function FilteredTable({
   const [selected, setSelected] = React.useState<Set<string>>(new Set(selectedIds));
   const isSelected = (id: string) => selected.has(id);
 
-  const handleClick = (event: React.MouseEvent<unknown>, id: string) => {
+  const handleClick = (id: string) => {
     if (singleChoice) {
       setSelected(new Set([id]));
       setSelectedIds([id]);
@@ -211,10 +222,6 @@ export default function FilteredTable({
     });
   };
 
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-
   return (
     <Box sx={{ width: "100%" }}>
       <TextField
@@ -254,8 +261,9 @@ export default function FilteredTable({
                   row={row}
                   idx={index}
                   lastIdx={rows.length - 1}
-                  handleClick={(event, str) => handleClick(event, str)}
+                  handleClick={(str) => handleClick(str)}
                   selected={isSelected(row.id!)}
+                  singleChoice={singleChoice}
                 />
               ))}
             </TableBody>

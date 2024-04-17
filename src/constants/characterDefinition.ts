@@ -68,7 +68,6 @@ const CREATE_CHARACTER = {
 
 };
 
-Object.freeze(CREATE_CHARACTER);
 
 
 export { CHARACTERS, CREATE_CHARACTER};
