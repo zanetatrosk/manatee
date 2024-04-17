@@ -76,7 +76,7 @@ export default function SpellcastingTab() {
             rows={tableSpells}
             headers={["Name", "Level", "Casting time"]}
             actionButton={
-              <ButtonAddItems buttonText="Add Spells" usePaginationHook={useSpells} defaults={spellcasting.spells.map((spell: Spell) => spell.id)} sendToBEHook={usePostSpells} headers={["Name", "Level", "Casting time"]} />
+              <ButtonAddItems buttonText="Add Spells" usePaginationHook={useSpells} defaults={spellcasting.spells?.map((spell: Spell) => spell.id)} sendToBEHook={usePostSpells} headers={["Name", "Level", "Casting time"]} />
             }
             showDescription
           />

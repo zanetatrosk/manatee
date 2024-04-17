@@ -29,7 +29,7 @@ function CharacterCard({ props }: { props: CharacterInfo }) {
         sx={{ maxHeight: 160 }}
         component="img"
         // Picture by pixabay: https://pixabay.com/cs
-        src={props.info.cardPhotoUrl || "https://source.unsplash.com/random"}
+        src={props.info.cardPhotoUrl || "https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"}
         title="character"
       />
       <CardContent>
@@ -43,7 +43,7 @@ function CharacterCard({ props }: { props: CharacterInfo }) {
       <CardActions>
         <Grid container direction="row" justifyContent="flex-start">
           <Grid item xs>
-            <Button variant="outlined" size="small" sx={{ mx: 1 }} onClick={() => { navigate('/characters/' + props.id + '/character-sheet') }}>
+            <Button variant="outlined" size="small" sx={{ mx: 1 }} onClick={() => { navigate('/characters/character-sheet/' + props.id) }}>
               {CHARACTERS.VIEW}
             </Button>
           </Grid>

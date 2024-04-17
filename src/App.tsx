@@ -40,7 +40,7 @@ function App() {
                 path="/characters/create-character"
                 element={<CreateCharacter />}
               />
-              <Route path="/characters/:id/character-sheet"
+              <Route path="/characters/character-sheet/:id"
                 element={<CharacterSheet />}
               />
               <Route path="/characters/create-character/:id"

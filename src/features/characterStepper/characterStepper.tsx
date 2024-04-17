@@ -96,12 +96,12 @@ export default function CreateCharacterStepper({character}: {character?: Stepper
     const tmpForm = { ...form, abilityScores: form.abilityScores.map((a) => ({ ...a, label: a.label.toLowerCase() })) };
     if(tmpForm.id) {
       putCharacter(tmpForm).unwrap().then((res: CharacterSheet) => {
-        navigate("/characters/" + res.id + "/character-sheet");
+        navigate("/characters/character-sheet/" + res.id);
       });
       return;
     }
     postCharacter(tmpForm).unwrap().then((res: CharacterSheet) => {
-      navigate("/characters/" + res.id + "/character-sheet");
+      navigate("/characters/character-sheet/" + res.id);
     });
   };
 
