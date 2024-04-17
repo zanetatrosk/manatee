@@ -9,6 +9,10 @@ const CHARACTERS = {
     CREATE_CHARACTER: "Create a new character",
 };
 
+const CHARACTER_SHEET = {
+    
+};
+
 const CREATE_CHARACTER = {
 
     BASIC_INFO: {
@@ -16,9 +20,9 @@ const CREATE_CHARACTER = {
         CHARACTER_NAME: "Character Name",
         PLAYER_NAME: "Player Name",
         SOURCES: "Sources",
-        CARD_PHOTO: "Card Photo",
+        CARD_PHOTO: "Card image url",
         IMAGES : "Images",
-        SHEET_PHOTO: "Sheet Photo",
+        SHEET_PHOTO: "Sheet image url",
     },
 
     

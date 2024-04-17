@@ -2,7 +2,7 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { CardActionArea, useMediaQuery, useTheme } from "@mui/material";
 import { Button, CardActions, CardMedia } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
@@ -24,7 +24,8 @@ function CharacterCard({ props }: { props: CharacterInfo }) {
   }
 
   return (
-    <Card sx={{ width: "100%" }} data-cy="character-card">
+    <Card sx={{ width: "100%" }} data-cy="character-card" >
+      <CardActionArea onClick={() => navigate('/characters/character-sheet/' + props.id)}>
       <CardMedia
         sx={{ maxHeight: 160 }}
         component="img"
@@ -40,6 +41,7 @@ function CharacterCard({ props }: { props: CharacterInfo }) {
           {props.info.race.name}
         </Typography>
       </CardContent>
+      </CardActionArea>
       <CardActions>
         <Grid container direction="row" justifyContent="flex-start">
           <Grid item xs>
