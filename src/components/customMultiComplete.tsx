@@ -16,7 +16,7 @@ interface PropsParams {
 
 export default function MultiComplete(props: PropsParams) {
   const [item, setItem] = React.useState("");
-
+  if( props.maxItems === 0) return null;
   return (
     <div>
       <Autocomplete
