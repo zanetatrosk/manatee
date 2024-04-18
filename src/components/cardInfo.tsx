@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Box, Card, CardContent, Typography, Grid } from "@mui/material";
+import { Box, CardContent, Typography, Grid } from "@mui/material";
+import Card from "@mui/material/Card";
 import { Feature } from "definitions/characterForm";
 
 
@@ -11,9 +12,6 @@ interface PropsParams {
 
 
 export default function CardInfo(props: PropsParams) {
-  React.useEffect(() => {
-    console.log(props.features, "features");
-  }, [props.features]);
   return (
     <Box display="flex" my={2}>
       <Card
@@ -26,6 +24,7 @@ export default function CardInfo(props: PropsParams) {
           justifyContent: "flex-start",
           flexDirection: "column",
         }}
+        elevation={4}
       >
         <CardContent sx={{ display: "flex", pb: 0 }}>
           <Typography gutterBottom variant="h5" component="div" align="left" data-cy="card-title">

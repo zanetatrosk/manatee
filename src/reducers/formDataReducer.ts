@@ -21,16 +21,16 @@ export const dataForm = createSlice({
     name: 'dataForm',
     initialState: initialState,
     reducers: {
-        setRaces (state, action: PayloadAction<Race[]>) {
+        setRaces(state, action: PayloadAction<Race[]>) {
             state.races = action.payload;
         },
-        setBackgrounds(state, action: PayloadAction<Background[]>){
+        setBackgrounds(state, action: PayloadAction<Background[]>) {
             state.backgrounds = action.payload;
         },
-        setSources(state, action: PayloadAction<Source[]>){
+        setSources(state, action: PayloadAction<Source[]>) {
             state.sources = action.payload;
         },
-        setClasses(state, action: PayloadAction<Class[]>){
+        setClasses(state, action: PayloadAction<Class[]>) {
             state.classes = action.payload;
         },
     }

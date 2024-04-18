@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import PersonIcon from "@mui/icons-material/Person";
 import DragonLogo from "@assets/icons/whiteDragon";
 import { Link } from "react-router-dom";
+import CustomizedSwitch from "./modeSwitch";
 
 const pages = ["characters", "content"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -142,6 +143,7 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+            <CustomizedSwitch/>
             <Tooltip id="user-tooltip" title="Open settings">
               <IconButton
                 onClick={handleOpenUserMenu}

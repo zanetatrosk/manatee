@@ -2,6 +2,7 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import characterReducer from '../reducers/characterReducer';
 import { generalContentApiSlice } from '../api/generalContentApiSlice';
 import { charactersApiSlice } from 'api/charactersApiSlice';
+import { themeReducer } from 'reducers/themeReducer';
 // ...
 
 const store = configureStore({
@@ -9,6 +10,7 @@ const store = configureStore({
     [generalContentApiSlice.reducerPath]: generalContentApiSlice.reducer,
     [charactersApiSlice.reducerPath]: charactersApiSlice.reducer,
     character: characterReducer,
+    theme: themeReducer.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(generalContentApiSlice.middleware).concat(charactersApiSlice.middleware),

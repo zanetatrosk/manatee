@@ -1,3 +1,4 @@
+import CustomizedSwitches from "@components/modeSwitch";
 import { Box, Typography } from "@mui/material";
 
 

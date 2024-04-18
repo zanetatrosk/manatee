@@ -4,24 +4,24 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Characters from "@pages/characters";
-import { Container } from "@mui/material";
+import { Container, PaletteMode } from "@mui/material";
 import CreateCharacter from "@pages/createCharacter";
 import CharacterSheet from "@pages/characterSheet";
 import EditCharacter from "@pages/editCharacter";
 import ContentPage from "@pages/content";
 import HomePage from "@pages/home";
+import { useAppSelector } from "@hooks/hooksStore";
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "light",
-  },
-});
+
 
 function App() {
+  const theme = useAppSelector(
+    (state) => state.theme
+  );
   return (
     <div className="App">
       <Router>
-        <ThemeProvider theme={darkTheme}>
+        <ThemeProvider theme={(outerTheme) => createTheme({ ...outerTheme, palette: { mode: theme as PaletteMode } })}>
           <CssBaseline />
           <Navbar />
           <Container
