@@ -71,7 +71,7 @@ interface Spellcasting {
     spells: Spell[];
 }
 
-export interface ProficienciesSheet<T extends Sourceable>{
+export interface SheetProficiencies<T extends Sourceable>{
     item: T;
     from: string;
 } 
@@ -122,8 +122,8 @@ interface CharacterSheet extends CharacterInfo {
     abilities: AbilitySheet[];
     skills: Skill[];
     savingThrows: Skill[];
-    tools: ProficienciesSheet<ToolsProficiency>[];
-    languages: ProficienciesSheet<LanguagesProficiency>[];
+    tools: SheetProficiencies<ToolsProficiency>[];
+    languages: SheetProficiencies<LanguagesProficiency>[];
     features: Feature[];
     spellcasting?: Spellcasting;
     armor: Armor;
@@ -386,8 +386,6 @@ const characterSheetDefaults: CharacterSheet = {
         weapons: [],
         armor: []
     },
-    
-
 }
 
 export { characterSheetDefaults }

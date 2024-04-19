@@ -1,4 +1,4 @@
-import { Card, Grid, Paper, Typography } from "@mui/material";
+import { Card, Grid, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import StatCard, { Item } from "./components/statCard";
 
@@ -8,8 +8,7 @@ interface Props {
   items: Item[];
 }
 
-export default function StatsGrid(props: Props) {
-
+const StatsGrid = ({ ...props }: Props) =>  {
   return (
     <Box display="flex" flexGrow={1}>
       <Card sx={{ p: 4 }}>
@@ -33,3 +32,4 @@ export default function StatsGrid(props: Props) {
     </Box>
   );
 }
+export default StatsGrid;

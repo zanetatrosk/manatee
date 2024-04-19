@@ -1,12 +1,11 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CreateCharacterStepper from "../features/characterStepper/characterStepper";
-import React from "react";
-import { useGetCharacterByIdQuery } from "api/charactersApiSlice";
-import { StepperForm, ToolsProficiency, LanguagesProficiency } from "../definitions/stepperForm";
-import { useParams } from "react-router-dom";
 import Spinner from "@components/spinner";
-import { CharacterSheet, ProficienciesSheet } from "../definitions/characterSheet";
+import { CharacterSheet, SheetProficiencies } from "@definitions/characterSheet";
+import { StepperForm, ToolsProficiency, LanguagesProficiency } from "@definitions/stepperForm";
+import CreateCharacterStepper from "@features/characterStepper/characterStepper";
+import { Card, CardContent } from "@mui/material";
+import { useGetCharacterByIdQuery } from "api/charactersApiSlice";
+import React from "react";
+import { useParams } from "react-router-dom";
 
 const fillDataForm = (character: CharacterSheet): StepperForm => {
 	const form: StepperForm = {} as StepperForm;
@@ -21,18 +20,18 @@ const fillDataForm = (character: CharacterSheet): StepperForm => {
 	form.class = {
 		id: character.info.class.id,
 		subclass: character.info.subclass,
-		toolIds: character.tools.filter((t: ProficienciesSheet<ToolsProficiency>) => t.from === "class").map((t: ProficienciesSheet<ToolsProficiency>) => t.item.id)
+		toolIds: character.tools.filter((t: SheetProficiencies<ToolsProficiency>) => t.from === "class").map((t: SheetProficiencies<ToolsProficiency>) => t.item.id)
 	}
 	form.race = {
 		id: character.info.race.id,
 		size: character.info.size,
-		languageIds: character.languages.filter((l: ProficienciesSheet<LanguagesProficiency>) => l.from === "race").map((l: ProficienciesSheet<LanguagesProficiency>) => l.item.id)
+		languageIds: character.languages.filter((l: SheetProficiencies<LanguagesProficiency>) => l.from === "race").map((l: SheetProficiencies<LanguagesProficiency>) => l.item.id)
 	}
 	form.abilityScores = character.abilities;
 	form.background = {
 		id: character.info.background.id,
-		toolIds: character.tools.filter((t: ProficienciesSheet<ToolsProficiency>) => t.from === "background").map((t: ProficienciesSheet<ToolsProficiency>) => t.item.id),
-		languageIds: character.languages.filter((l: ProficienciesSheet<LanguagesProficiency>) => l.from === "background").map((l: ProficienciesSheet<LanguagesProficiency>) => l.item.id)
+		toolIds: character.tools.filter((t: SheetProficiencies<ToolsProficiency>) => t.from === "background").map((t: SheetProficiencies<ToolsProficiency>) => t.item.id),
+		languageIds: character.languages.filter((l: SheetProficiencies<LanguagesProficiency>) => l.from === "background").map((l: SheetProficiencies<LanguagesProficiency>) => l.item.id)
 	}
 	return form;
 
