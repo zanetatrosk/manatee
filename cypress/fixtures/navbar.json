@@ -6,8 +6,6 @@
   },
   "usersChoices": {
     "profile": "Profile",
-    "logout": "Logout",
-    "account": "Account",
-    "dashboard": "Dashboard"
+    "logout": "Logout"
   }
 }
