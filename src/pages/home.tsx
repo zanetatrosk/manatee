@@ -1,5 +1,6 @@
 import CustomizedSwitches from "@components/modeSwitch";
 import { Box, Typography } from "@mui/material";
+import { WELCOME } from "constants/characterDefinition";
 
 
 export default function HomePage() {
@@ -7,7 +8,7 @@ export default function HomePage() {
 
   return (
     <Box>
-      <Typography variant="h4">Welcome to D&D App</Typography>
+      <Typography variant="h4">{WELCOME.HEADING}</Typography>
     </Box>
   );
 }

@@ -178,8 +178,17 @@ const CHARACTER_SHEET = {
     ADD_SPELL: "Add spells",
   },
 };
+
 const COMMON = {
   QUESTION_MARK: "?",
+};
+
+const CONTENT = {
+    HEADING: "Content Page",
 }
 
-export { CHARACTERS, CREATE_CHARACTER, NAVBAR, CHARACTER_SHEET, COMMON };
+const WELCOME = {
+    HEADING: "Welcome to the D&D app",
+};
+
+export { CHARACTERS, CREATE_CHARACTER, NAVBAR, CHARACTER_SHEET, COMMON, CONTENT, WELCOME };
