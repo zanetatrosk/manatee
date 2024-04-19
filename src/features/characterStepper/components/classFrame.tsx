@@ -1,19 +1,12 @@
-import {
-  Autocomplete,
-  Box,
-  CircularProgress,
-  Divider,
-  Grid,
-  TextField,
-} from "@mui/material";
-import Typography from "@mui/material/Typography";
-import { CREATE_CHARACTER } from "constants/characterDefinition";
-import CardInfo from "../../../components/cardInfo";
-import React from "react";
+import CardInfo from "@components/cardInfo";
 import MultiComplete from "@components/customMultiComplete";
-import { BaseItem, Class } from "../../../definitions/characterForm";
+import { Class, BaseItem } from "@definitions/characterForm";
+import { ClassForm, StepperForm } from "@definitions/stepperForm";
+import { Box, Grid, Typography, Autocomplete, TextField, CircularProgress, Divider } from "@mui/material";
 import { useGetClassesQuery, useGetToolsQuery } from "api/generalContentApiSlice";
-import { ClassForm, StepperForm } from "../../../definitions/stepperForm";
+import { CREATE_CHARACTER } from "constants/characterDefinition";
+import React from "react";
+
 
 const CLASS = CREATE_CHARACTER.CLASS;
 
@@ -38,8 +31,6 @@ export default function ClassFrame({
         setVisibility(true);
       }
   }
-
-  console.log("render class");
 
   const setPropertyInForm = (property: string, value: any) => {
     setForm((prev) => ({
@@ -144,7 +135,7 @@ export default function ClassFrame({
                   results={tools?.filter((t) => classForm.toolIds.includes(t.id)) || []}
                   onChange={handleToolsChange}
                   label={CLASS.TOOLS}
-                  helpText={`You can have up to ${characterClass?.toolProficiencies.amount} tools`}
+                  helpText={CLASS.MESSAGE + `${characterClass?.toolProficiencies.amount} ` + CLASS.TOOLS}
                   placeholder={CLASS.TOOLS_PLACEHOLDER}
                   maxItems={characterClass?.toolProficiencies.amount || 0}
                 />

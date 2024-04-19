@@ -1,15 +1,13 @@
-import { Race, Source, Class, Background, BaseItem } from "definitions/characterForm";
-import { Pageable, Spell, Armor, Weapon } from "definitions/characterSheet";
+
+import { Race, Source, Class, Background, BaseItem } from "@definitions/characterForm";
+import { Pageable, Spell, Armor, Weapon } from "@definitions/characterSheet";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-
 
 export interface PaginationParams {
   page: number;
   size: number;
   query: string;
 }
-
 
 export const generalContentApiSlice = createApi({
   reducerPath: "contentApi",

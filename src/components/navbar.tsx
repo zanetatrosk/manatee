@@ -14,9 +14,10 @@ import PersonIcon from "@mui/icons-material/Person";
 import DragonLogo from "@assets/icons/whiteDragon";
 import { Link } from "react-router-dom";
 import CustomizedSwitch from "./modeSwitch";
+import { NAVBAR } from "constants/characterDefinition";
 
-const pages = ["characters", "content"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = [NAVBAR.CHARACTERS, NAVBAR.CONTENT];
+const settings = [NAVBAR.USER_ACTIONS.PROFILE, NAVBAR.USER_ACTIONS.LOGOUT];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -60,7 +61,7 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            <Link to="/">D&D APP</Link>
+            <Link to="/">{NAVBAR.NAME}</Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -123,7 +124,7 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            D&D APP
+            {NAVBAR.NAME}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page, index) => (

@@ -10,6 +10,7 @@ import SpellcastingTab from "./components/spellcastingTab";
 import OtherProficienciesTab from "./components/otherProficienciesTab";
 import FeaturesTab from "./components/featuresTab";
 import { useAppSelector } from "@hooks/hooksStore";
+import { CHARACTER_SHEET } from "constants/characterDefinition";
 
 export default function TabsCard() {
   const [value, setValue] = React.useState("1");
@@ -27,14 +28,13 @@ export default function TabsCard() {
           >
             <TabList
               onChange={handleChange}
-              aria-label="lab API tabs example"
               scrollButtons="auto"
               variant="scrollable"
             >
-              <Tab label="Attacks and Armor" value="1" />
-              {!!spellcasting && <Tab label="Spellcasting" value="2" />}
-              <Tab label="Other prof. & languages" value="3" />
-              <Tab label="Features" value="4" />
+              <Tab label={CHARACTER_SHEET.ATTACKS_AND_ARMOR} value="1" />
+              {!!spellcasting && <Tab label={CHARACTER_SHEET.SPELLCASTING.TITLE} value="2" />}
+              <Tab label={CHARACTER_SHEET.OTH_PROFICIENCIES.TITLE} value="3" />
+              <Tab label={CHARACTER_SHEET.FEATURES.TITLE} value="4" />
             </TabList>
           </Box>
           <TabPanel value="1">

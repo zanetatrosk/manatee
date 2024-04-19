@@ -1,4 +1,5 @@
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
+import { CHARACTER_SHEET } from "constants/characterDefinition";
 import React from "react";
 
 
@@ -22,10 +23,10 @@ export default function ModalAddItems(
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" onClick={saveSelected}>
-            Add Selected
+            {CHARACTER_SHEET.MODAL_ADD.ADD}
           </Button>
           <Button variant="outlined" onClick={handleClose}>
-            Close
+            {CHARACTER_SHEET.MODAL_ADD.CLOSE}
           </Button>
         </DialogActions>
       </Dialog>

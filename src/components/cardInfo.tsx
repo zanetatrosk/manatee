@@ -1,7 +1,6 @@
-import * as React from "react";
 import { Box, CardContent, Typography, Grid } from "@mui/material";
 import Card from "@mui/material/Card";
-import { Feature } from "definitions/characterForm";
+import { Feature } from "@definitions/characterForm";
 
 
 interface PropsParams {
@@ -11,7 +10,7 @@ interface PropsParams {
 }
 
 
-export default function CardInfo(props: PropsParams) {
+export default function CardInfo({ ...props }: PropsParams) {
   return (
     <Box display="flex" my={2}>
       <Card

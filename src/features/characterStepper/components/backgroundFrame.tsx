@@ -1,27 +1,12 @@
-import * as React from "react";
-import {
-  Box,
-  Autocomplete,
-  Divider,
-  Grid,
-  CircularProgress,
-} from "@mui/material";
-import Typography from "@mui/material/Typography";
+import CardInfo from "@components/cardInfo";
 import MultiComplete from "@components/customMultiComplete";
-import TextField from "@mui/material/TextField";
-import { useState } from "react";
-import {
-  Background,
-  BaseItem
-} from "definitions/characterForm";
-import CardInfo from "../../../components/cardInfo";
+import { Background, BaseItem } from "@definitions/characterForm";
+import { BackgroundForm, StepperForm } from "@definitions/stepperForm";
+import { Box, Grid, Typography, Autocomplete, TextField, CircularProgress, Divider } from "@mui/material";
+import { useGetBackgroundsQuery, useGetLanguagesQuery, useGetToolsQuery } from "api/generalContentApiSlice";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
-import {
-  useGetBackgroundsQuery,
-  useGetLanguagesQuery,
-  useGetToolsQuery,
-} from "api/generalContentApiSlice";
-import { BackgroundForm, StepperForm } from "definitions/stepperForm";
+import React, { useState } from "react";
+
 
 const BACKGROUND = CREATE_CHARACTER.BACKGROUND;
 
@@ -123,7 +108,7 @@ export default function BackgroundFrame({ backgroundForm, setForm, sourceIds }: 
                   data_cy="languages"
                   onChange={handleLanguagesChange}
                   label={BACKGROUND.LANGUAGES}
-                  helpText={`You can have up to ${background.languageProficiencies.amount} languages`}
+                  helpText={BACKGROUND.MESSAGE + `${background.languageProficiencies.amount} ` + BACKGROUND.LANGUAGES }
                   placeholder={BACKGROUND.LANGUAGES_PLACEHOLDER}
                   maxItems={background.languageProficiencies.amount}
                 />
@@ -135,7 +120,7 @@ export default function BackgroundFrame({ backgroundForm, setForm, sourceIds }: 
                   data_cy="tools"
                   onChange={handleToolsChange}
                   label={BACKGROUND.TOOLS}
-                  helpText={`You can have up to ${background.toolProficiencies.amount} tools`}
+                  helpText={BACKGROUND.MESSAGE + `${background.toolProficiencies.amount} ` + BACKGROUND.TOOLS}
                   placeholder={BACKGROUND.TOOLS_PLACEHOLDER}
                   maxItems={background.toolProficiencies.amount}
                 />

@@ -46,7 +46,6 @@ export default function CreateCharacterStepper({character}: {character?: Stepper
     { id: 4, component: <Background backgroundForm={form.background} setForm={setData} sourceIds={form.info.sourceIds}/> },
   ];
 
-  console.log("render stepper");
 
   const isStepOptional = (step: number) => {
     return step === 0;
@@ -74,24 +73,6 @@ export default function CreateCharacterStepper({character}: {character?: Stepper
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
   const handleFinish = () => {
     const tmpForm = { ...form, abilityScores: form.abilityScores.map((a) => ({ ...a, label: a.label.toLowerCase() })) };
     if(tmpForm.id) {
@@ -115,7 +96,7 @@ export default function CreateCharacterStepper({character}: {character?: Stepper
           } = {};
           if (isStepOptional(index)) {
             labelProps.optional = (
-              <Typography variant="caption">Optional</Typography>
+              <Typography variant="caption">{CREATE_CHARACTER.CARD_ACTIONS.OPTIONAL}</Typography>
             );
           }
           if (isStepSkipped(index)) {
@@ -128,18 +109,7 @@ export default function CreateCharacterStepper({character}: {character?: Stepper
           );
         })}
       </Stepper>
-      {activeStep === steps.length ? (
-        <React.Fragment>
-          {/* <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography> */}
-
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={handleReset}>Reset</Button>
-          </Box>
-        </React.Fragment>
-      ) : (
+              
         <React.Fragment>
           {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
           <Box sx={{ pt: 2, pb: 8, px: 8 }}>
@@ -156,11 +126,6 @@ export default function CreateCharacterStepper({character}: {character?: Stepper
               {CREATE_CHARACTER.CARD_ACTIONS.BACK}
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
-            {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                {CREATE_CHARACTER.CARD_ACTIONS.SKIP}
-              </Button>
-            )}
             <Button
               onClick={
                 activeStep === steps.length - 1 ? handleFinish : handleNext
@@ -174,7 +139,6 @@ export default function CreateCharacterStepper({character}: {character?: Stepper
             </Button>
           </Box>
         </React.Fragment>
-      )}
     </Box>
   );
 }

@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 import { usePostArmorByCharacterIdMutation, usePostWeaponsByCharacterIdMutation } from "api/charactersApiSlice";
 import { addPlusOrMinus } from "utils/textUtils";
 import { Armor, Attack, Weapon } from "definitions/characterSheet";
+import { CHARACTER_SHEET } from "constants/characterDefinition";
+import { Box } from "@mui/material";
 
 const transformAttacks = (weapons: Attack[]): RowData[] => {
   const wap = weapons.map((weapon: Attack) => {
@@ -65,6 +67,8 @@ const useArmor = (page: number, size: number, query: string) => {
   return { data: [], totalElements: 0 };
 }
 
+const ATTACKS = CHARACTER_SHEET.ATTACKS;
+const ARMOR = CHARACTER_SHEET.ARMOR;
 export default function AttacksAndArmorTab() {
   const { armor: armorStore, attacks: weaponsStore } = useAppSelector(
     (state) => state.character
@@ -72,7 +76,9 @@ export default function AttacksAndArmorTab() {
   const { id } = useParams();
   const [postAttacksByCharacterId] = usePostWeaponsByCharacterIdMutation();
   const [postArmorByCharacterId] = usePostArmorByCharacterIdMutation();
-
+  const armorHeaders = [ARMOR.HEADERS.NAME, ARMOR.HEADERS.BASE_ARMOR_CLASS, ARMOR.HEADERS.TYPE];
+  const attackHeaders = [ATTACKS.HEADERS.NAME, ATTACKS.HEADERS.ATTACK_BONUS, ATTACKS.HEADERS.DAMAGE_TYPE];
+  
   const usePostAttacks = (weapons: string[]) => {
     if (id) {
       postAttacksByCharacterId({ id, weapons });
@@ -108,33 +114,33 @@ export default function AttacksAndArmorTab() {
   return (
     <>
       <CrudTable
-        title="Attacks"
+        title={ATTACKS.TITLE}
         rows={weapons}
-        headers={["Name", "Attack bonus", "Damage/type"]}
+        headers={attackHeaders}
         actionButton={
           <ButtonAddItems
-            buttonText="Add Attacks"
+            buttonText={ATTACKS.ADD_ATTACK}
             usePaginationHook={useAttacks}
             defaults={weaponsStore.map((w) => w.id)}
             sendToBEHook={usePostAttacks}
-            headers={["Name", "Range", "Damage type"]}
+            headers={attackHeaders}
           />
         }
       />
-      <div style={{ margin: 30 }} />
+      <Box sx={{ margin: 3 }}/>
       <CrudTable
-        title="Armor"
+        title={ARMOR.TITLE}
         rows={armor ? [armor] : []}
-        headers={["Name", "Base AC", "Armor type"]}
+        headers={armorHeaders}
         showDescription
         actionButton={
           <ButtonAddItems
-            buttonText="Change Armor"
+            buttonText={ARMOR.ADD_ARMOR}
             usePaginationHook={useArmor}
             defaults={[armorStore.id]}
             sendToBEHook={usePostArmor}
             singleChoice
-            headers={["Name", "Base AC", "Armor type"]}
+            headers={armorHeaders}
           />
         }
       />

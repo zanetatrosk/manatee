@@ -42,7 +42,7 @@ interface AbilityCardProps {
     modifier: number;
 }
 
-export default function AbilityCard(props: AbilityCardProps) {
+export default function AbilityCard({ ...props }: AbilityCardProps) {
   return (
     <Box>
       <Card sx={{ py: 1,  borderRadius: 2, width: 115, height: 130 }} >

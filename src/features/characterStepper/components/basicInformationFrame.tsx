@@ -1,4 +1,3 @@
-import { useAppDispatch, useAppSelector } from "@hooks/hooksStore";
 import {
   Autocomplete,
   CircularProgress,
@@ -33,7 +32,6 @@ function BasicInformation({
     }));
   };
 
-  console.log("rendering basic info");
 
   return (
     <Grid container spacing={10}>

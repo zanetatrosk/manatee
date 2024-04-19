@@ -1,4 +1,14 @@
 
+const NAVBAR = {
+  NAME: "D&D APP",
+  CHARACTERS: "Characters",
+  CONTENT: "Content", 
+  USER_ACTIONS: {
+      PROFILE: "Profile",
+      LOGOUT: "Logout",
+  }
+};
+
 const CHARACTERS = {
     HEADING: "Characters",
     SUBTITLE: "Choose your character",
@@ -7,10 +17,12 @@ const CHARACTERS = {
     EDIT: "Edit",
     NO_CHARACTERS: "No characters",
     CREATE_CHARACTER: "Create a new character",
-};
-
-const CHARACTER_SHEET = {
-    
+    DELETE_CHARACTER: {
+        DELETE: "Confirm",
+        CANCEL: "Cancel",
+        DELETE_CHARACTER: "Delete Character",
+        DELETE_CHARACTER_TEXT: "Are you sure you want to delete this character?",
+    },
 };
 
 const CREATE_CHARACTER = {
@@ -32,6 +44,7 @@ const CREATE_CHARACTER = {
         PLACEHOLDER: "Barbarian, Bard, Cleric, ...",
         SUBCLASS: "Subclass",
         TOOLS: "Proficiency Tools",
+        MESSAGE: "You can have up to ",
         TOOLS_PLACEHOLDER: "Thieves' Tools",
     },
 
@@ -40,15 +53,26 @@ const CREATE_CHARACTER = {
         HEADING: "Race",
         SUBTITLE: "Choose your race and you will get some features and languages",
         LANGUAGES: "Languages",
+        MESSAGE: "You can have up to ",
         SIZE: "Size",
         PLACEHOLDER: "Elf, Dwarf, Human, ...",
         LANGUAGES_PLACEHOLDER: "Common, Elvish, Dwarvish, ...",
+        FEAT_SPEED: "Speed",
+        FT_SPEED_UNIT: " ft",
     },
 
 
     ABILITIES: {
         HEADING: "Abilities",
         SUBTITLE: "Choose your abilities",
+        TABLE: {
+            ABILITY: "Ability",
+            SCORE: "Score",
+            MODIFIER: "Modifier",
+            UP_ONE: "Up +1",
+            UP_TWO: "Up +2",
+            TOTAL_SCORE: "Total score",
+        }
     },
 
 
@@ -59,6 +83,7 @@ const CREATE_CHARACTER = {
         LANGUAGES: "Languages",
         LANGUAGES_PLACEHOLDER: "Common",
         TOOLS: "Proficiency Tools",
+        MESSAGE: "You can have up to ",
         TOOLS_PLACEHOLDER: "Thieves' Tools",
     },
 
@@ -68,10 +93,77 @@ const CREATE_CHARACTER = {
         FINISH: "Finish",
         SKIP: "Skip",
         FURTHER_INFO: "Further information",
+        OPTIONAL: "Optional",
     },
-
+    
+    
 };
 
+const CHARACTER_SHEET = {
+    CHARACTER_NAME: "Character Name",
+    PLAYER_NAME: "Player Name",
+    CLASS: "Class",
+    SUBCLASS: "Subclass",
+    MODAL_ADD: {
+        ADD: "Add selected",
+        CLOSE: "Close",
+        SELECTED: "Selected",
+    },
+    ATTACKS_AND_ARMOR: "Attacks and Armor",
+    ATTACKS: {
+        TITLE: "Attacks",
+        HEADERS: {
+            NAME: "Name",
+            ATTACK_BONUS: "Attack bonus",
+            DAMAGE_TYPE: "Damage/type",
+        },       
+        ADD_ATTACK: "Add Attack",
+    },
+    ARMOR: {
+        TITLE: "Armor",
+        HEADERS: {
+            NAME: "Name",
+            BASE_ARMOR_CLASS: "Base Armor Class",
+            TYPE: "Type",
+        },
+        ADD_ARMOR: "Change Armor",
+    },
+    FEATURES: {
+        TITLE: "Features",
+        HEADERS: {
+            TITLE: "Title",
+            LEVEL_GAINED: "Level gained",
+        },
+    },
+    OTH_PROFICIENCIES: {
+        TITLE: "Other Prof. & Languages",
+        ARMOR: "Armor",
+        WEAPONS: "Weapons",
+        TOOLS: "Tools",
+        LANGUAGES: "Languages",
+        NO_DATA: "None",
+    },
+    SPELLCASTING: {
+        TITLE: "Spellcasting",
+        STATS_TITLE: "Spellcasting Stats",
+        SLOTS_TITLE: "Spell Slots",
+        SPELLS_TITLE: "Spells",
+        ABILITY: "Ability",
+        ATTACK_MODIFIER: "Attack mod.",
+        SAVE_DC: "Save DC",
+        VIEW_TABLE_HEADERS: {
+            NAME: "Name",
+            LEVEL: "Level",
+            CASTING_TIME: "Casting time",
+        },
+        SLOTS_TABLE_HEADERS: {
+            LEVEL: "Level",
+            SLOTS_TOTAL: "Slots total",
+        },
+        ADD_SPELL: "Add spells",
+    },
+}
 
 
-export { CHARACTERS, CREATE_CHARACTER};
+
+export { CHARACTERS, CREATE_CHARACTER, NAVBAR, CHARACTER_SHEET };

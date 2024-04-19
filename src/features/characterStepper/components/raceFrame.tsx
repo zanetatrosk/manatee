@@ -1,27 +1,11 @@
-import * as React from "react";
-import {
-  Box,
-  Autocomplete,
-  Divider,
-  Grid,
-  CircularProgress,
-} from "@mui/material";
-import Typography from "@mui/material/Typography";
+import CardInfo from "@components/cardInfo";
 import MultiComplete from "@components/customMultiComplete";
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useState } from "react";
+import { Race, BaseItem } from "@definitions/characterForm";
+import { RaceForm, StepperForm } from "@definitions/stepperForm";
+import { Box, Grid, Typography, Autocomplete, TextField, CircularProgress, Divider, FormControl, InputLabel, Select, SelectChangeEvent, MenuItem } from "@mui/material";
+import { useGetRacesQuery, useGetLanguagesQuery } from "api/generalContentApiSlice";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
-import {
-  Race,
-  BaseItem,
-} from "definitions/characterForm";
-import CardInfo from "../../../components/cardInfo";
-import { useGetLanguagesQuery, useGetRacesQuery } from "api/generalContentApiSlice";
-import { RaceForm, StepperForm } from "../../../definitions/stepperForm";
+import React, { useState } from "react";
 
 const RACE = CREATE_CHARACTER.RACE;
 
@@ -38,9 +22,6 @@ export default function RaceFrame({
   //calling api to get all races, in future this will be called when create character button is clicked
   const { data: races, isLoading: loadingRaces } = useGetRacesQuery(sourceIds);
   const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(sourceIds);
-
-  console.log("render race");
-
   const [race, setRace] = useState<Race|null>(null);
 
   if( races && raceForm.id && !race ) {
@@ -138,7 +119,7 @@ export default function RaceFrame({
                   results={languages?.filter((l) => raceForm.languageIds.includes(l.id)) || []}
                   onChange={handleLanguagesChange}
                   label={RACE.LANGUAGES}
-                  helpText={`You can have up to ${race.languageProficiencies.amount} languages`}
+                  helpText={RACE.MESSAGE + `${race.languageProficiencies.amount} ` + RACE.LANGUAGES}
                   placeholder={RACE.LANGUAGES_PLACEHOLDER}
                   maxItems={race.languageProficiencies.amount}
                 />
@@ -146,7 +127,7 @@ export default function RaceFrame({
 
               <Grid item lg={4} xs={12} sx={{ py: 2, pl: 7 }}>
                 <FormControl variant="filled" fullWidth>
-                  <InputLabel data-cy="size">Size</InputLabel>
+                  <InputLabel data-cy="size">{RACE.SIZE}</InputLabel>
                   <Select
                     value={raceForm.size}
                     label={RACE.SIZE}
@@ -165,7 +146,7 @@ export default function RaceFrame({
             </Grid>
             <CardInfo
               title={race.name}
-              features={[{ title: "Speed", text: race.speed.toString() + " ft", levelMinimum: 1}, ...race.features ]}
+              features={[{ title: RACE.FEAT_SPEED, text: race.speed.toString() + RACE.FT_SPEED_UNIT, levelMinimum: 1}, ...race.features ]}
               description={race.description}
             />
           </div>

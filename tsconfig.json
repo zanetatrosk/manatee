@@ -13,6 +13,7 @@
       "@hooks/*": ["./hooks/*"],
       "@assets/*": ["./assets/*"],
       "@features/*": ["./features/*"],
+      "@definitions/*": ["./definitions/*"],
     },
     "allowJs": true,
     "skipLibCheck": true,

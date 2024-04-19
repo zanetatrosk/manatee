@@ -22,6 +22,7 @@ import React, { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { RowData } from "@components/crudTable";
+import { CHARACTER_SHEET } from "constants/characterDefinition";
 
 function EnhancedTableToolbar({ numSelected }: { numSelected: number }) {
   return (
@@ -45,7 +46,7 @@ function EnhancedTableToolbar({ numSelected }: { numSelected: number }) {
           variant="subtitle1"
           component="div"
         >
-          {numSelected} selected
+          {numSelected + " " + CHARACTER_SHEET.MODAL_ADD.SELECTED} 
         </Typography>
       )}
     </Toolbar>

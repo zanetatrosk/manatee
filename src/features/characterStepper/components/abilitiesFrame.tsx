@@ -25,12 +25,12 @@ const MIN = 1;
 const MAX = 20;
 const BASE_10 = 10;
 const headers = [
-  "Ability",
-  "Score",
-  "Modifier",
-  "Up +1",
-  "Up +2",
-  "Total score",
+  CREATE_CHARACTER.ABILITIES.TABLE.ABILITY,
+  CREATE_CHARACTER.ABILITIES.TABLE.SCORE,
+  CREATE_CHARACTER.ABILITIES.TABLE.MODIFIER,
+  CREATE_CHARACTER.ABILITIES.TABLE.UP_ONE,
+  CREATE_CHARACTER.ABILITIES.TABLE.UP_TWO,
+  CREATE_CHARACTER.ABILITIES.TABLE.TOTAL_SCORE,
 ];
 const ABILITIES = CREATE_CHARACTER.ABILITIES;
 
@@ -52,7 +52,6 @@ function setScore(value: number): number {
   //this is to prevent NaN
   // eslint-disable-next-line
   if (value !== value) return MIN;
-  console.log(value, "value");
   return value < MIN ? Math.max(value, MIN) : Math.min(value, MAX);
 }
 

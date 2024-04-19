@@ -5,29 +5,31 @@ import WeaponIcon from "@assets/icons/weapon";
 import ToolsIcon from "@assets/icons/tools";
 import LanguagesIcon from "@assets/icons/languages";
 import { useAppSelector } from "@hooks/hooksStore";
+import { CHARACTER_SHEET } from "constants/characterDefinition";
 
     
 export default function OtherProficienciesTab() {
   const { languages, tools, armor, weapons  } = useAppSelector((state) => state.character.proficiencies);
+  const OTH_PROFICIENCIES = CHARACTER_SHEET.OTH_PROFICIENCIES;
   const data = [
       { 
-          title: "Armor",
-          data: "None",
+          title: OTH_PROFICIENCIES.ARMOR,
+          data: OTH_PROFICIENCIES.NO_DATA,
           icon: <Armor/>
       },
       { 
-          title: "Weapons",
-          data: "None",
+          title: OTH_PROFICIENCIES.WEAPONS,
+          data: OTH_PROFICIENCIES.NO_DATA,
           icon: <WeaponIcon/>
       },
       { 
-          title: "Tools",
-          data: "None",
+          title: OTH_PROFICIENCIES.TOOLS,
+          data: OTH_PROFICIENCIES.NO_DATA,
           icon: <ToolsIcon/>
       },
       { 
-          title: "Languages",
-          data: "None",
+          title: OTH_PROFICIENCIES.LANGUAGES,
+          data: OTH_PROFICIENCIES.NO_DATA,
           icon: <LanguagesIcon/>
       }
   ]

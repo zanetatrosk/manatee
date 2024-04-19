@@ -5,6 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { CHARACTERS } from 'constants/characterDefinition';
 
 export default function ConfirmationDialog({ title, description, openDialog, confirmAction, closeDialog }: { title: string, description: string, openDialog: boolean, confirmAction: () => void, closeDialog: () => void }) {
 
@@ -32,9 +33,9 @@ export default function ConfirmationDialog({ title, description, openDialog, con
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={closeDialogPrevent}>Cancel</Button>
+          <Button onClick={closeDialogPrevent}>{CHARACTERS.DELETE_CHARACTER.CANCEL}</Button>
           <Button onClick={handleCloseConfirm} >
-            Confirm
+            {CHARACTERS.DELETE_CHARACTER.DELETE}
           </Button>
         </DialogActions>
       </Dialog>
