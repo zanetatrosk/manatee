@@ -4,6 +4,7 @@ import { usePostSkillsByCharacterIdMutation } from "api/charactersApiSlice";
 import { useParams } from "react-router-dom";
 import React from "react";
 import { Skill } from "definitions/characterSheet";
+import { CHARACTER_SHEET } from "constants/characterDefinition";
 
 
 export default function Skills({ skills} : {skills: Skill[]}) {
@@ -38,7 +39,7 @@ export default function Skills({ skills} : {skills: Skill[]}) {
 	<>
 		<Grid item>
 			<SkillTable
-				name="Skills"
+				name={CHARACTER_SHEET.SKILLS}
 				sendData={saveSkills}
 				tableData={skillsGiven}
 				key={skillsGiven.length}

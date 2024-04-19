@@ -15,6 +15,7 @@ import { addPlusOrMinus } from "utils/textUtils";
 import ConfirmationDialog from "@components/confirmationDialog";
 import LoadingButton from '@mui/lab/LoadingButton';
 import Spinner from "@components/spinner";
+import { CHARACTER_SHEET, COMMON } from "constants/characterDefinition";
 
 
 
@@ -45,24 +46,24 @@ export default function CharacterSheet() {
     closeDialog();
   }
 
-  const stats = [{ header: "armor class", value: character.stats.armorClass.toString() },
-  { header: "initiative", value: addPlusOrMinus(character.stats.initiative) },
-  { header: "speed", value: character.stats.speed.toString() + " ft" },
-  { header: "prof. bonus", value: addPlusOrMinus(character.stats.proficiencyBonus) },
-  { header: "hit point max", value: character.stats.hitPoints.toString() },
-  { header: "hit dice", value: character.stats.hitDice.notation },
+  const stats = [{ header: CHARACTER_SHEET.STATS.ARMOR_CLASS, value: character.stats.armorClass.toString() },
+  { header: CHARACTER_SHEET.STATS.INITIATIVE, value: addPlusOrMinus(character.stats.initiative) },
+  { header: CHARACTER_SHEET.STATS.SPEED, value: character.stats.speed.toString() + " ft" },
+  { header: CHARACTER_SHEET.STATS.PROF_BONUS, value: addPlusOrMinus(character.stats.proficiencyBonus) },
+  { header: CHARACTER_SHEET.STATS.HIT_POINT_MAX, value: character.stats.hitPoints.toString() },
+  { header: CHARACTER_SHEET.STATS.HIT_DICE, value: character.stats.hitDice.notation },
   ]
   return (
     <React.Fragment>
       <Grid container mb={1}>
         <Grid item container>
           <Grid item>
-            <Button variant="outlined" startIcon={<ArrowBackIcon />} onClick={() => navigate('/characters')}>Back</Button>
+            <Button variant="outlined" startIcon={<ArrowBackIcon />} onClick={() => navigate('/characters')}>{CHARACTER_SHEET.ACTIONS.BACK}</Button>
           </Grid>
           <Grid item xs container justifyContent={"flex-end"} spacing={2}>
             <Grid item>
               <Button variant="outlined" onClick={() => navigate('/characters/create-character/' + character.id)}>
-                Remake character
+                {CHARACTER_SHEET.ACTIONS.REMAKE_CHARACTER}
               </Button>
             </Grid>
             <Grid item>
@@ -72,10 +73,10 @@ export default function CharacterSheet() {
                 onClick={() => setOpen(true)}
                 loading={loadingLevel}
               >
-                Level up
+                {CHARACTER_SHEET.ACTIONS.LEVEL_UP}
                 <ConfirmationDialog
-                  title="Level up"
-                  description={`Are you sure you want to level up character ${character.info.characterName} to level ${character.info.level + 1}?`}
+                  title={CHARACTER_SHEET.ACTIONS.LEVEL_UP}
+                  description={CHARACTER_SHEET.LEVEL_UP_MODAL.FIRST_PART + ` ${character.info.characterName} ` + CHARACTER_SHEET.LEVEL_UP_MODAL.SECOND_PART + ` ${character.info.level + 1}` + COMMON.QUESTION_MARK}
                   openDialog={open}
                   confirmAction={confirmAction}
                   closeDialog={closeDialog} />
@@ -114,23 +115,23 @@ export default function CharacterSheet() {
                     title: character.info.characterName,
                     headers: [
                       {
-                        header: "Player",
+                        header: CHARACTER_SHEET.HEADER.PLAYER,
                         value: character.info.playerName,
                       },
                       {
-                        header: "Race",
+                        header: CHARACTER_SHEET.HEADER.RACE,
                         value: character?.info.race.name,
                       },
                       {
-                        header: "Class & level",
+                        header: CHARACTER_SHEET.HEADER.CLASS_LEVEL,
                         value: character.info.class.name + " " + character.info.level,
                       },
                       {
-                        header: "Subclass",
+                        header: CHARACTER_SHEET.HEADER.SUBCLASS,
                         value: character.info.subclass,
                       },
                       {
-                        header: "Background",
+                        header: CHARACTER_SHEET.HEADER.BACKGROUND,
                         value: character.info.background.name,
                       },
                     ],
@@ -157,7 +158,7 @@ export default function CharacterSheet() {
               <Grid container item spacing={3}>
                 <Grid item md={4.5} xs={12}>
                   <SkillTable
-                    name="Saving Throws"
+                    name={CHARACTER_SHEET.SAVING_THROWS}
                     disabled
                     tableData={character.savingThrows.map((i) => ({
                       id: i.label,
@@ -168,7 +169,7 @@ export default function CharacterSheet() {
                   />
                 </Grid>
                 <Grid item container xs justifyContent="center">
-                  <StatsGrid title="Stats" items={stats} />
+                  <StatsGrid title={CHARACTER_SHEET.STATS.TITLE} items={stats} />
                 </Grid>
               </Grid>
               <Grid container item xs>
