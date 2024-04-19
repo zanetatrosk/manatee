@@ -9,8 +9,7 @@ const NAVBAR = {
 };
 
 const CHARACTERS = {
-  HEADING: "Characters",
-  SUBTITLE: "Choose your character",
+  HEADING: "My characters",
   VIEW: "View",
   DELETE: "Delete",
   EDIT: "Edit",

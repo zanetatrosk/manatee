@@ -86,7 +86,7 @@ export default function Characters() {
     <Grid container flexDirection={"column"} >
       <Grid container item alignItems={"center"}>
         <Grid container item xs={12} sm={12} md={6} lg={4} p={3}>
-          <Typography variant="h4">My Characters</Typography>
+          <Typography variant="h4">{CHARACTERS.HEADING}</Typography>
         </Grid>
         <Grid item xs={12} sm={12} md="auto" lg={4} />
         <Grid
