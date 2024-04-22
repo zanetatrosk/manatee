@@ -11,8 +11,19 @@ import EditCharacter from "@pages/editCharacter";
 import ContentPage from "@pages/content";
 import HomePage from "@pages/home";
 import { useAppSelector } from "@hooks/hooksStore";
+import ErrorAlert from "@components/errorAlert";
 
 
+
+function fallbackRender({error} : { error: any }) {
+  console.log(error, 'error');
+  return (
+    <div role="alert">
+      <p>Something went wrong:</p>
+      <pre>{error?.message}</pre>
+    </div>
+  )
+}
 
 function App() {
   const theme = useAppSelector(
@@ -24,6 +35,7 @@ function App() {
         <ThemeProvider theme={(outerTheme) => createTheme({ ...outerTheme, palette: { mode: theme as PaletteMode } })}>
           <CssBaseline />
           <Navbar />
+          <ErrorAlert/>
           <Container
             sx={{
               mt: 6,
