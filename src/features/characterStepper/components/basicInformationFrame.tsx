@@ -5,7 +5,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import { useGetSourcesQuery } from "api/generalContentApiSlice";
 import { BasicInfo } from "definitions/characterForm";

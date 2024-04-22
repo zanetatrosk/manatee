@@ -1,5 +1,5 @@
 import { useAppSelector } from "@hooks/hooksStore";
-import CrudTable, { RowData } from "../../../components/crudTable";
+import CrudTable from "../../../components/crudTable";
 import { Feature } from "definitions/characterForm";
 import { CHARACTER_SHEET } from "constants/characterDefinition";
 

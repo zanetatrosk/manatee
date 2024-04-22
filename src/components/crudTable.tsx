@@ -30,7 +30,7 @@ export interface RowData {
   description?: string;
 }
 
-export interface Table {
+export interface TableWrap {
   title: string;
   headers: string[];
   rows: RowData[];
@@ -41,7 +41,7 @@ export interface Table {
 }
 
 //styles to override padding none in cell
-export default function CrudTable({title, headers, rows, actionButton, showDescription, pagination, scrollable}: Table) {
+export default function CrudTable({title, headers, rows, actionButton, showDescription, pagination, scrollable}: TableWrap) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -57,7 +57,7 @@ export default function CrudTable({title, headers, rows, actionButton, showDescr
     setPage(0);
   };
   function Row(props: { row: RowData; idx: number; lastIdx: number }) {
-    const { row, idx, lastIdx } = props;
+    const { row, idx } = props;
     const [open, setOpen] = useState(false);
 
     return (

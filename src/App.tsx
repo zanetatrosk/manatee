@@ -12,18 +12,10 @@ import ContentPage from "@pages/content";
 import HomePage from "@pages/home";
 import { useAppSelector } from "@hooks/hooksStore";
 import ErrorAlert from "@components/errorAlert";
+import NoRoute from "@components/noRoute";
 
 
 
-function fallbackRender({error} : { error: any }) {
-  console.log(error, 'error');
-  return (
-    <div role="alert">
-      <p>Something went wrong:</p>
-      <pre>{error?.message}</pre>
-    </div>
-  )
-}
 
 function App() {
   const theme = useAppSelector(
@@ -60,7 +52,7 @@ function App() {
               />
               <Route
                 path="/*"
-                element={<div>No route here</div>}
+                element={<NoRoute/>}
               />
             </Routes>
           </Container>

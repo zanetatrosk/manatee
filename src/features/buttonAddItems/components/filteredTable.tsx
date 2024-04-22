@@ -93,7 +93,7 @@ function Row(props: {
   selected: boolean;
   singleChoice?: boolean;
 }) {
-  const { row, idx, lastIdx, selected, singleChoice } = props;
+  const { row, idx, selected, singleChoice } = props;
   const [open, setOpen] = useState(false);
 
   return (

@@ -1,7 +1,7 @@
-import { Box, Button, Modal, Typography } from "@mui/material";
-import React from "react";
+import { Box, Button } from "@mui/material";
 import { PaginationParams } from "api/generalContentApiSlice";
-import FilteredTable, { useSpells } from "./components/filteredTable";
+import React from "react";
+import FilteredTable from "./components/filteredTable";
 import ModalAddItems from "./components/modalAddItems";
 
 

@@ -25,7 +25,7 @@ const CHARACTERS = {
 
 const CREATE_CHARACTER = {
   BASIC_INFO: {
-    HEADING: "Basic Information",
+    HEADING: "Basic information",
     CHARACTER_NAME: "Character Name",
     PLAYER_NAME: "Player Name",
     SOURCES: "Sources",
@@ -190,4 +190,12 @@ const WELCOME = {
     HEADING: "Welcome to the D&D app",
 };
 
-export { CHARACTERS, CREATE_CHARACTER, NAVBAR, CHARACTER_SHEET, COMMON, CONTENT, WELCOME };
+const NO_ROUTE = {
+    HEADING: "Page not found",
+};
+
+const ERROR_MESSAGES = {
+  SERVER_NOT_RESPONDING: "Something went wrong during fetching data.",
+  CHARACTER_CREATE_MESSAGE: "You have to fill race, class and background to create a character.",
+}
+export { CHARACTERS, CREATE_CHARACTER, NAVBAR, CHARACTER_SHEET, COMMON, CONTENT, WELCOME, NO_ROUTE, ERROR_MESSAGES };

@@ -1,5 +1,10 @@
+import { NO_ROUTE } from "constants/characterDefinition";
 
 export default function NoRoute(){
     
-    return <h1>404 Not Found</h1>;
+    return (
+        <div>
+            <p>{NO_ROUTE.HEADING}</p>
+        </div>
+    );
 }

@@ -12,8 +12,7 @@ import {
   TextField,
   Typography,
   CardContent,
-  Checkbox,
-  Box,
+  Checkbox
 } from "@mui/material";
 import { AbilityScore } from "definitions/characterForm";
 import { CREATE_CHARACTER } from "constants/characterDefinition";

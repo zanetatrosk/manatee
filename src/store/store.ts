@@ -13,16 +13,14 @@ import alertReducer from "reducers/alertReducer";
 import characterReducer from "reducers/characterReducer";
 import { themeReducer } from "reducers/themeReducer";
 import { showAlert } from "reducers/alertReducer";
+import { ERROR_MESSAGES } from "constants/characterDefinition";
 
 const rtkQueryErrorLogger: Middleware =
   (api: MiddlewareAPI) => (next) => (action) => {
     if (isRejectedWithValue(action)) {
-      const str = "Something went wrong during fetching data. The error is: "      
       api.dispatch(
         showAlert(
-          "data" in action.error
-            ? str + (action.error.data as { message: string }).message 
-            : str + action.error.message
+          ERROR_MESSAGES.SERVER_NOT_RESPONDING
         )
       );
     }

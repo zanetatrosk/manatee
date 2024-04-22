@@ -9,15 +9,16 @@ import Race from "./components/raceFrame";
 import Abilities from "./components/abilitiesFrame";
 import Background from "./components/backgroundFrame";
 import Class from "./components/classFrame";
-import { CREATE_CHARACTER } from "constants/characterDefinition";
+import { CREATE_CHARACTER, ERROR_MESSAGES } from "constants/characterDefinition";
 import { useNavigate } from "react-router-dom";
 import { StepperForm } from "../../definitions/stepperForm";
 import { returnDefaults } from "../../definitions/defaults";
 import { useAddCharacterMutation, usePutCharacterMutation } from "api/charactersApiSlice";
 import { CharacterSheet } from "../../definitions/characterSheet";
 import BasicInformation from "./components/basicInformationFrame";
+import { Tooltip } from "@mui/material";
 
-const steps = ["Basic information", "Class", "Race", "Abilities", "Background"];
+const steps = [CREATE_CHARACTER.BASIC_INFO.HEADING, CREATE_CHARACTER.CLASS.HEADING, CREATE_CHARACTER.RACE.HEADING, CREATE_CHARACTER.ABILITIES.HEADING, CREATE_CHARACTER.BACKGROUND.HEADING];
 
 interface ComponentRegister {
   id: number;
@@ -55,7 +56,7 @@ export default function CreateCharacterStepper({character}: {character?: Stepper
     return skipped.has(step);
   };
 
-  const canFinish = (step: number) => {
+  const canFinish = () => {
     return !!(form.class.id && form.race.id && form.background.id);
   }
 
@@ -111,7 +112,6 @@ export default function CreateCharacterStepper({character}: {character?: Stepper
       </Stepper>
               
         <React.Fragment>
-          {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
           <Box sx={{ pt: 2, pb: 8, px: 8 }}>
             {components.at(activeStep)?.component}
           </Box>
@@ -126,17 +126,21 @@ export default function CreateCharacterStepper({character}: {character?: Stepper
               {CREATE_CHARACTER.CARD_ACTIONS.BACK}
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
+            <Tooltip title={activeStep === steps.length - 1 && !canFinish() ? ERROR_MESSAGES.CHARACTER_CREATE_MESSAGE : ""}>
+            <span>
             <Button
               onClick={
                 activeStep === steps.length - 1 ? handleFinish : handleNext
               }
-              disabled={activeStep === steps.length - 1 ? !canFinish(activeStep) : false}
+              disabled={activeStep === steps.length - 1 ? !canFinish() : false}
               data-cy={activeStep === steps.length - 1 ? "finish" : "next"}
             >
               {activeStep === steps.length - 1
                 ? CREATE_CHARACTER.CARD_ACTIONS.FINISH
                 : CREATE_CHARACTER.CARD_ACTIONS.NEXT}
             </Button>
+            </span>
+            </Tooltip>
           </Box>
         </React.Fragment>
     </Box>
