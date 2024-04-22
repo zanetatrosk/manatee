@@ -108,7 +108,7 @@ export default function BackgroundFrame({ backgroundForm, setForm, sourceIds }: 
                   data_cy="languages"
                   onChange={handleLanguagesChange}
                   label={BACKGROUND.LANGUAGES}
-                  helpText={BACKGROUND.MESSAGE + `${background.languageProficiencies.amount} ` + BACKGROUND.LANGUAGES }
+                  helpText={BACKGROUND.MESSAGE + `${background.languageProficiencies.amount} ` + BACKGROUND.LANGUAGES.toLowerCase() }
                   placeholder={BACKGROUND.LANGUAGES_PLACEHOLDER}
                   maxItems={background.languageProficiencies.amount}
                 />
@@ -119,8 +119,8 @@ export default function BackgroundFrame({ backgroundForm, setForm, sourceIds }: 
                   results={tools?.filter((t) => backgroundForm.toolIds.includes(t.id)) || []}
                   data_cy="tools"
                   onChange={handleToolsChange}
-                  label={BACKGROUND.TOOLS}
-                  helpText={BACKGROUND.MESSAGE + `${background.toolProficiencies.amount} ` + BACKGROUND.TOOLS}
+                  label={BACKGROUND.PROF_TOOLS}
+                  helpText={BACKGROUND.MESSAGE + `${background.toolProficiencies.amount} ` + BACKGROUND.TOOLS.toLowerCase()}
                   placeholder={BACKGROUND.TOOLS_PLACEHOLDER}
                   maxItems={background.toolProficiencies.amount}
                 />

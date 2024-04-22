@@ -16,7 +16,7 @@ describe('Automation TC01 check home page after loading an app', () => {
   }
   
   it("check that loaded page is correct", () => {  
-    cy.get('.App').contains('Welcome to D&D App');
+    cy.get('.App').contains('Welcome to the D&D app');
     cy.url().should('include', '/');
   })
 

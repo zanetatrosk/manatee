@@ -119,7 +119,7 @@ export default function RaceFrame({
                   results={languages?.filter((l) => raceForm.languageIds.includes(l.id)) || []}
                   onChange={handleLanguagesChange}
                   label={RACE.LANGUAGES}
-                  helpText={RACE.MESSAGE + `${race.languageProficiencies.amount} ` + RACE.LANGUAGES}
+                  helpText={RACE.MESSAGE + `${race.languageProficiencies.amount} ` + RACE.LANGUAGES.toLowerCase()}
                   placeholder={RACE.LANGUAGES_PLACEHOLDER}
                   maxItems={race.languageProficiencies.amount}
                 />

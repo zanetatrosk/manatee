@@ -1,7 +1,7 @@
 const NAVBAR = {
   NAME: "D&D APP",
-  CHARACTERS: "Characters",
-  CONTENT: "Content",
+  CHARACTERS: "characters",
+  CONTENT: "content",
   USER_ACTIONS: {
     PROFILE: "Profile",
     LOGOUT: "Logout",
@@ -39,9 +39,10 @@ const CREATE_CHARACTER = {
     SUBTITLE: "Choose your class and you will get some features",
     PLACEHOLDER: "Barbarian, Bard, Cleric, ...",
     SUBCLASS: "Subclass",
-    TOOLS: "Proficiency Tools",
+    PROF_TOOLS: "Proficiency Tools",
     MESSAGE: "You can have up to ",
     TOOLS_PLACEHOLDER: "Thieves' Tools",
+    TOOLS: "Tools",
   },
 
   RACE: {
@@ -75,9 +76,11 @@ const CREATE_CHARACTER = {
     SUBTITLE: "Choose your background and you will get some features",
     LANGUAGES: "Languages",
     LANGUAGES_PLACEHOLDER: "Common",
-    TOOLS: "Proficiency Tools",
+    PROF_TOOLS: "Proficiency Tools",
     MESSAGE: "You can have up to ",
     TOOLS_PLACEHOLDER: "Thieves' Tools",
+    TOOLS: "Tools",
+
   },
 
   CARD_ACTIONS: {

@@ -134,8 +134,8 @@ export default function ClassFrame({
                   values={tools || []}
                   results={tools?.filter((t) => classForm.toolIds.includes(t.id)) || []}
                   onChange={handleToolsChange}
-                  label={CLASS.TOOLS}
-                  helpText={CLASS.MESSAGE + `${characterClass?.toolProficiencies.amount} ` + CLASS.TOOLS}
+                  label={CLASS.PROF_TOOLS}
+                  helpText={CLASS.MESSAGE + `${characterClass?.toolProficiencies.amount} ` + CLASS.TOOLS.toLowerCase()}
                   placeholder={CLASS.TOOLS_PLACEHOLDER}
                   maxItems={characterClass?.toolProficiencies.amount || 0}
                 />
