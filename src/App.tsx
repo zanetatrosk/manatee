@@ -12,7 +12,7 @@ import ContentPage from "@pages/content";
 import HomePage from "@pages/home";
 import { useAppSelector } from "@hooks/hooksStore";
 import ErrorAlert from "@components/errorAlert";
-import NoRoute from "@components/noRoute";
+import NoRoute from "@pages/noRoute";
 
 
 

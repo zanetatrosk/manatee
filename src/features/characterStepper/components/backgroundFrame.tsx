@@ -22,8 +22,6 @@ export default function BackgroundFrame({ backgroundForm, setForm, sourceIds }: 
     setBackground(backgrounds.find((b) => b.id === backgroundForm.id) || null);
   }
 
-  console.log('background render');
-
   const setPropertyInForm = (property: string, value: any) => {
     setForm(prev => ({ ...prev, background: { ...prev.background, [property]: value } }));
   };

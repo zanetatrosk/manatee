@@ -25,7 +25,6 @@ function BasicInformation({
   const { data: sources, isLoading: loading } = useGetSourcesQuery();
 
   const setPropertyInForm = (property: string, value: any) => {
-    
     setForm((prev) => ({
       ...prev,
       info: { ...prev.info, [property]: value },

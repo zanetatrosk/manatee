@@ -23,6 +23,7 @@ const rtkQueryErrorLogger: Middleware =
           ERROR_MESSAGES.SERVER_NOT_RESPONDING
         )
       );
+      console.log(action.payload, 'error');
     }
     return next(action);
   };

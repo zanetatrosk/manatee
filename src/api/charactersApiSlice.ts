@@ -76,6 +76,7 @@ export const charactersApiSlice = createApi({
             query: (id) => ({
                 url: `characters/${id}`,
                 method: 'DELETE',
+                responseHandler: "text"
             }),
             invalidatesTags: ['CharacterList'],
         }),

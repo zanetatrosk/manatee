@@ -22,6 +22,8 @@ const transformAttacks = (weapons: Attack[]): RowData[] => {
 };
 
 
+
+
 const useAttacks = (page: number, size: number, query: string) => {
 
   const attacks = useGetWeaponsQuery({

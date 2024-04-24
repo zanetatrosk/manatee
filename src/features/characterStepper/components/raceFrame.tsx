@@ -36,6 +36,7 @@ export default function RaceFrame({
   const setPropertyInForm = (property: string, value: any) => {
     setForm(prev => ({...prev, race: {...prev.race, [property]: value}}));
   }
+  
   const handleLanguagesChange = (value: BaseItem[]): void => {
     setPropertyInForm(
       "languageIds",

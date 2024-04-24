@@ -9,44 +9,93 @@ import Race from "./components/raceFrame";
 import Abilities from "./components/abilitiesFrame";
 import Background from "./components/backgroundFrame";
 import Class from "./components/classFrame";
-import { CREATE_CHARACTER, ERROR_MESSAGES } from "constants/characterDefinition";
+import {
+  CREATE_CHARACTER,
+  ERROR_MESSAGES,
+} from "constants/characterDefinition";
 import { useNavigate } from "react-router-dom";
 import { StepperForm } from "../../definitions/stepperForm";
 import { returnDefaults } from "../../definitions/defaults";
-import { useAddCharacterMutation, usePutCharacterMutation } from "api/charactersApiSlice";
+import {
+  useAddCharacterMutation,
+  usePutCharacterMutation,
+} from "api/charactersApiSlice";
 import { CharacterSheet } from "../../definitions/characterSheet";
 import BasicInformation from "./components/basicInformationFrame";
-import { Tooltip } from "@mui/material";
+import { StepButton, Tooltip } from "@mui/material";
 
-const steps = [CREATE_CHARACTER.BASIC_INFO.HEADING, CREATE_CHARACTER.CLASS.HEADING, CREATE_CHARACTER.RACE.HEADING, CREATE_CHARACTER.ABILITIES.HEADING, CREATE_CHARACTER.BACKGROUND.HEADING];
+const steps = [
+  CREATE_CHARACTER.BASIC_INFO.HEADING,
+  CREATE_CHARACTER.CLASS.HEADING,
+  CREATE_CHARACTER.RACE.HEADING,
+  CREATE_CHARACTER.ABILITIES.HEADING,
+  CREATE_CHARACTER.BACKGROUND.HEADING,
+];
 
 interface ComponentRegister {
   id: number;
   component: React.ReactElement;
 }
 
-export default function CreateCharacterStepper({character}: {character?: StepperForm}) {
-
+export default function CreateCharacterStepper({
+  character,
+}: {
+  character?: StepperForm;
+}) {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
   const navigate = useNavigate();
   const [postCharacter] = useAddCharacterMutation();
   const [putCharacter] = usePutCharacterMutation();
   const [form, setData] = React.useState<StepperForm>(() => {
-    if(character) {
+    if (character) {
       return character;
     }
     return returnDefaults();
   });
 
   const components: ComponentRegister[] = [
-    { id: 0, component: <BasicInformation form={form.info} setForm={setData} /> },
-    { id: 1, component: <Class classForm={form.class} setForm={setData} sourceIds={form.info.sourceIds}/> },
-    { id: 2, component: <Race raceForm={form.race} setForm={setData} sourceIds={form.info.sourceIds}/> },
-    { id: 3, component: <Abilities abilitiesForm={form.abilityScores} setForm={setData} /> },
-    { id: 4, component: <Background backgroundForm={form.background} setForm={setData} sourceIds={form.info.sourceIds}/> },
+    {
+      id: 0,
+      component: <BasicInformation form={form.info} setForm={setData} />,
+    },
+    {
+      id: 1,
+      component: (
+        <Class
+          classForm={form.class}
+          setForm={setData}
+          sourceIds={form.info.sourceIds}
+        />
+      ),
+    },
+    {
+      id: 2,
+      component: (
+        <Race
+          raceForm={form.race}
+          setForm={setData}
+          sourceIds={form.info.sourceIds}
+        />
+      ),
+    },
+    {
+      id: 3,
+      component: (
+        <Abilities abilitiesForm={form.abilityScores} setForm={setData} />
+      ),
+    },
+    {
+      id: 4,
+      component: (
+        <Background
+          backgroundForm={form.background}
+          setForm={setData}
+          sourceIds={form.info.sourceIds}
+        />
+      ),
+    },
   ];
-
 
   const isStepOptional = (step: number) => {
     return step === 0;
@@ -58,8 +107,9 @@ export default function CreateCharacterStepper({character}: {character?: Stepper
 
   const canFinish = () => {
     return !!(form.class.id && form.race.id && form.background.id);
-  }
+  };
 
+  
   const handleNext = () => {
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
@@ -70,26 +120,40 @@ export default function CreateCharacterStepper({character}: {character?: Stepper
     setSkipped(newSkipped);
   };
 
+  const handleStep = (step: number) => () => {
+    setActiveStep(step);
+  };
+
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const handleFinish = () => {
-    const tmpForm = { ...form, abilityScores: form.abilityScores.map((a) => ({ ...a, label: a.label.toLowerCase() })) };
-    if(tmpForm.id) {
-      putCharacter(tmpForm).unwrap().then((res: CharacterSheet) => {
-        navigate("/characters/character-sheet/" + res.id);
-      });
+    const tmpForm = {
+      ...form,
+      abilityScores: form.abilityScores.map((a) => ({
+        ...a,
+        label: a.label.toLowerCase(),
+      })),
+    };
+    if (tmpForm.id) {
+      putCharacter(tmpForm)
+        .unwrap()
+        .then((res: CharacterSheet) => {
+          navigate("/characters/character-sheet/" + res.id);
+        });
       return;
     }
-    postCharacter(tmpForm).unwrap().then((res: CharacterSheet) => {
-      navigate("/characters/character-sheet/" + res.id);
-    });
+    postCharacter(tmpForm)
+      .unwrap()
+      .then((res: CharacterSheet) => {
+        navigate("/characters/character-sheet/" + res.id);
+      });
   };
 
   return (
     <Box>
-      <Stepper activeStep={activeStep} sx={{ mb: 7 }}>
+      <Stepper nonLinear activeStep={activeStep} sx={{ mb: 7 }}>
         {steps.map((label, index) => {
           const stepProps: { completed?: boolean } = {};
           const labelProps: {
@@ -97,7 +161,9 @@ export default function CreateCharacterStepper({character}: {character?: Stepper
           } = {};
           if (isStepOptional(index)) {
             labelProps.optional = (
-              <Typography variant="caption">{CREATE_CHARACTER.CARD_ACTIONS.OPTIONAL}</Typography>
+              <Typography variant="caption">
+                {CREATE_CHARACTER.CARD_ACTIONS.OPTIONAL}
+              </Typography>
             );
           }
           if (isStepSkipped(index)) {
@@ -105,44 +171,47 @@ export default function CreateCharacterStepper({character}: {character?: Stepper
           }
           return (
             <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
+              <StepButton color="inherit" onClick={handleStep(index)} {...labelProps}>
+              {label}
+            </StepButton>
             </Step>
           );
         })}
       </Stepper>
-              
-        <React.Fragment>
-          <Box sx={{ pt: 2, pb: 8, px: 8 }}>
-            {components.at(activeStep)?.component}
-          </Box>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Button
-              color="inherit"
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              data-cy="back"
-              sx={{ mr: 1 }}
-            >
-              {CREATE_CHARACTER.CARD_ACTIONS.BACK}
-            </Button>
-            <Box sx={{ flex: "1 1 auto" }} />
-            <Tooltip title={activeStep === steps.length - 1 && !canFinish() ? ERROR_MESSAGES.CHARACTER_CREATE_MESSAGE : ""}>
+
+      <React.Fragment>
+        <Box sx={{ pt: 2, pb: 8, px: 8 }}>
+          {components.at(activeStep)?.component}
+        </Box>
+        <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+          <Button
+            color="inherit"
+            disabled={activeStep === 0}
+            onClick={handleBack}
+            data-cy="back"
+            sx={{ mr: 1 }}
+          >
+            {CREATE_CHARACTER.CARD_ACTIONS.BACK}
+          </Button>
+          <Box sx={{ flex: "1 1 auto" }} />
+          <Button onClick={handleNext} data-cy={"next"}>
+            {CREATE_CHARACTER.CARD_ACTIONS.NEXT}
+          </Button>
+          <Tooltip
+            title={!canFinish() ? ERROR_MESSAGES.CHARACTER_CREATE_MESSAGE : ""}
+          >
             <span>
-            <Button
-              onClick={
-                activeStep === steps.length - 1 ? handleFinish : handleNext
-              }
-              disabled={activeStep === steps.length - 1 ? !canFinish() : false}
-              data-cy={activeStep === steps.length - 1 ? "finish" : "next"}
-            >
-              {activeStep === steps.length - 1
-                ? CREATE_CHARACTER.CARD_ACTIONS.FINISH
-                : CREATE_CHARACTER.CARD_ACTIONS.NEXT}
-            </Button>
+              <Button
+                onClick={handleFinish}
+                disabled={!canFinish()}
+                data-cy={"finish"}
+              >
+                {CREATE_CHARACTER.CARD_ACTIONS.FINISH}
+              </Button>
             </span>
-            </Tooltip>
-          </Box>
-        </React.Fragment>
+          </Tooltip>
+        </Box>
+      </React.Fragment>
     </Box>
   );
 }

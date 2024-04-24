@@ -187,7 +187,7 @@ const COMMON = {
 
 const CONTENT = {
     HEADING: "Content Page",
-}
+};
 
 const WELCOME = {
     HEADING: "Welcome to the D&D app",
@@ -200,5 +200,6 @@ const NO_ROUTE = {
 const ERROR_MESSAGES = {
   SERVER_NOT_RESPONDING: "Something went wrong during fetching data.",
   CHARACTER_CREATE_MESSAGE: "You have to fill race, class and background to create a character.",
-}
+};
+
 export { CHARACTERS, CREATE_CHARACTER, NAVBAR, CHARACTER_SHEET, COMMON, CONTENT, WELCOME, NO_ROUTE, ERROR_MESSAGES };
