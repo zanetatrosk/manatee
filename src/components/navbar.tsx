@@ -21,10 +21,10 @@ const settings = [NAVBAR.USER_ACTIONS.PROFILE, NAVBAR.USER_ACTIONS.LOGOUT];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
+    null,
   );
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
+    null,
   );
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -44,7 +44,7 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" id='navbar'>
+    <AppBar position="static" id="navbar">
       <Container maxWidth="lg">
         <Toolbar disableGutters>
           <DragonLogo md="flex" xs="none" />
@@ -144,7 +144,7 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <CustomizedSwitch/>
+            <CustomizedSwitch />
             <Tooltip id="user-tooltip" title="Open settings">
               <IconButton
                 onClick={handleOpenUserMenu}
@@ -152,7 +152,7 @@ function ResponsiveAppBar() {
                 color="inherit"
                 data-cy="user-icon"
               >
-                <PersonIcon  />
+                <PersonIcon />
               </IconButton>
             </Tooltip>
             <Menu
@@ -173,7 +173,12 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center" data-cy={setting.toLowerCase()}>{setting}</Typography>
+                  <Typography
+                    textAlign="center"
+                    data-cy={setting.toLowerCase()}
+                  >
+                    {setting}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>

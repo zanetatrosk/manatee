@@ -4,7 +4,7 @@ import { Feature } from "definitions/characterForm";
 import { CHARACTER_SHEET } from "constants/characterDefinition";
 
 export default function FeaturesTab() {
-  const {features} = useAppSelector((state) => state.character);
+  const { features } = useAppSelector((state) => state.character);
   const FEATURES = CHARACTER_SHEET.FEATURES;
   return (
     <>

@@ -5,13 +5,12 @@ export default function Footer() {
       component="footer"
       sx={{
         mt: "auto",
-        minHeight: '110px',
+        minHeight: "110px",
         backgroundColor: (theme) =>
           theme.palette.mode === "light"
             ? theme.palette.grey[200]
             : theme.palette.grey[800],
       }}
-    >
-    </Box>
+    ></Box>
   );
 }

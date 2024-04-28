@@ -1,13 +1,26 @@
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from "@mui/material";
 import { CHARACTER_SHEET } from "constants/characterDefinition";
 import React from "react";
 
-
-
-export default function ModalAddItems(
-  {openDialog, closeDialog, children, saveSelected, titleDialog}
-  : {openDialog: boolean, closeDialog: () => void, children?: React.ReactNode, saveSelected: () => void, titleDialog: string}) {
-
+export default function ModalAddItems({
+  openDialog,
+  closeDialog,
+  children,
+  saveSelected,
+  titleDialog,
+}: {
+  openDialog: boolean;
+  closeDialog: () => void;
+  children?: React.ReactNode;
+  saveSelected: () => void;
+  titleDialog: string;
+}) {
   const handleClose = () => {
     closeDialog();
   };
@@ -15,12 +28,8 @@ export default function ModalAddItems(
   return (
     <React.Fragment>
       <Dialog fullWidth open={openDialog} maxWidth="lg">
-        <DialogTitle>
-          {titleDialog}
-        </DialogTitle>
-        <DialogContent>
-          {children}
-        </DialogContent>
+        <DialogTitle>{titleDialog}</DialogTitle>
+        <DialogContent>{children}</DialogContent>
         <DialogActions>
           <Button variant="outlined" onClick={saveSelected}>
             {CHARACTER_SHEET.MODAL_ADD.ADD}

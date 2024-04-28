@@ -2,11 +2,21 @@ import CardInfo from "@components/cardInfo";
 import MultiComplete from "@components/customMultiComplete";
 import { Class, BaseItem } from "@definitions/characterForm";
 import { ClassForm, StepperForm } from "@definitions/stepperForm";
-import { Box, Grid, Typography, Autocomplete, TextField, CircularProgress, Divider } from "@mui/material";
-import { useGetClassesQuery, useGetToolsQuery } from "api/generalContentApiSlice";
+import {
+  Box,
+  Grid,
+  Typography,
+  Autocomplete,
+  TextField,
+  CircularProgress,
+  Divider,
+} from "@mui/material";
+import {
+  useGetClassesQuery,
+  useGetToolsQuery,
+} from "api/generalContentApiSlice";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import React from "react";
-
 
 const CLASS = CREATE_CHARACTER.CLASS;
 
@@ -19,17 +29,20 @@ export default function ClassFrame({
   setForm: React.Dispatch<React.SetStateAction<StepperForm>>;
   sourceIds: string[];
 }) {
-  const { data: classes, isLoading: loadingClasses } = useGetClassesQuery(sourceIds);
+  const { data: classes, isLoading: loadingClasses } =
+    useGetClassesQuery(sourceIds);
   const { data: tools, isLoading: toolsLoading } = useGetToolsQuery(sourceIds);
-  const [characterClass, setClass] = React.useState<Class|null>(null);
-  const [isVisible, setVisibility] = React.useState<boolean>(!!characterClass?.id);
+  const [characterClass, setClass] = React.useState<Class | null>(null);
+  const [isVisible, setVisibility] = React.useState<boolean>(
+    !!characterClass?.id,
+  );
 
-  if(classForm.id && !characterClass){
-      const classTmp = classes?.find((c) => c.id === classForm.id);
-      if( classTmp ) {
-        setClass(classTmp);
-        setVisibility(true);
-      }
+  if (classForm.id && !characterClass) {
+    const classTmp = classes?.find((c) => c.id === classForm.id);
+    if (classTmp) {
+      setClass(classTmp);
+      setVisibility(true);
+    }
   }
 
   const setPropertyInForm = (property: string, value: any) => {
@@ -38,11 +51,11 @@ export default function ClassFrame({
       class: { ...prev.class, [property]: value },
     }));
   };
-  
+
   const handleToolsChange = (value: BaseItem[]): void => {
     setPropertyInForm(
       "toolIds",
-      value.map((v) => v.id)
+      value.map((v) => v.id),
     );
   };
 
@@ -75,7 +88,10 @@ export default function ClassFrame({
               setClass(value);
               setPropertyInForm("id", value.id);
               setPropertyInForm("subclass", null);
-              setPropertyInForm("toolIds", value.toolProficiencies.defaults.map((t) => t.id));
+              setPropertyInForm(
+                "toolIds",
+                value.toolProficiencies.defaults.map((t) => t.id),
+              );
               setVisibility(true);
             }}
             data-cy="class"
@@ -132,10 +148,16 @@ export default function ClassFrame({
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
                   values={tools || []}
-                  results={tools?.filter((t) => classForm.toolIds.includes(t.id)) || []}
+                  results={
+                    tools?.filter((t) => classForm.toolIds.includes(t.id)) || []
+                  }
                   onChange={handleToolsChange}
                   label={CLASS.PROF_TOOLS}
-                  helpText={CLASS.MESSAGE + `${characterClass?.toolProficiencies.amount} ` + CLASS.TOOLS.toLowerCase()}
+                  helpText={
+                    CLASS.MESSAGE +
+                    `${characterClass?.toolProficiencies.amount} ` +
+                    CLASS.TOOLS.toLowerCase()
+                  }
                   placeholder={CLASS.TOOLS_PLACEHOLDER}
                   maxItems={characterClass?.toolProficiencies.amount || 0}
                 />

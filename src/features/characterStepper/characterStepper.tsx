@@ -1,28 +1,30 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Race from "./components/raceFrame";
-import Abilities from "./components/abilitiesFrame";
-import Background from "./components/backgroundFrame";
-import Class from "./components/classFrame";
+import { CharacterSheet } from "@definitions/characterSheet";
+import { returnDefaults } from "@definitions/defaults";
+import { StepperForm } from "@definitions/stepperForm";
 import {
-  CREATE_CHARACTER,
-  ERROR_MESSAGES,
-} from "constants/characterDefinition";
-import { useNavigate } from "react-router-dom";
-import { StepperForm } from "../../definitions/stepperForm";
-import { returnDefaults } from "../../definitions/defaults";
+  Box,
+  Stepper,
+  Typography,
+  Step,
+  StepButton,
+  Button,
+  Tooltip,
+} from "@mui/material";
 import {
   useAddCharacterMutation,
   usePutCharacterMutation,
 } from "api/charactersApiSlice";
-import { CharacterSheet } from "../../definitions/characterSheet";
+import {
+  CREATE_CHARACTER,
+  ERROR_MESSAGES,
+} from "constants/characterDefinition";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import Abilities from "./components/abilitiesFrame";
 import BasicInformation from "./components/basicInformationFrame";
-import { StepButton, Tooltip } from "@mui/material";
+import Background from "./components/backgroundFrame";
+import Race from "./components/raceFrame";
+import Class from "./components/classFrame";
 
 const steps = [
   CREATE_CHARACTER.BASIC_INFO.HEADING,
@@ -53,7 +55,6 @@ export default function CreateCharacterStepper({
     }
     return returnDefaults();
   });
-
   const components: ComponentRegister[] = [
     {
       id: 0,
@@ -109,15 +110,8 @@ export default function CreateCharacterStepper({
     return !!(form.class.id && form.race.id && form.background.id);
   };
 
-  
   const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
   };
 
   const handleStep = (step: number) => () => {
@@ -171,9 +165,13 @@ export default function CreateCharacterStepper({
           }
           return (
             <Step key={label} {...stepProps}>
-              <StepButton color="inherit" onClick={handleStep(index)} {...labelProps}>
-              {label}
-            </StepButton>
+              <StepButton
+                color="inherit"
+                onClick={handleStep(index)}
+                {...labelProps}
+              >
+                {label}
+              </StepButton>
             </Step>
           );
         })}

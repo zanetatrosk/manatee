@@ -14,20 +14,22 @@ import { useAppSelector } from "@hooks/hooksStore";
 import ErrorAlert from "@components/errorAlert";
 import NoRoute from "@pages/noRoute";
 
-
-
-
 function App() {
-  const theme = useAppSelector(
-    (state) => state.theme
-  );
+  const theme = useAppSelector((state) => state.theme);
   return (
     <div className="App">
       <Router>
-        <ThemeProvider theme={(outerTheme) => createTheme({ ...outerTheme, palette: { mode: theme as PaletteMode } })}>
+        <ThemeProvider
+          theme={(outerTheme) =>
+            createTheme({
+              ...outerTheme,
+              palette: { mode: theme as PaletteMode },
+            })
+          }
+        >
           <CssBaseline />
           <Navbar />
-          <ErrorAlert/>
+          <ErrorAlert />
           <Container
             sx={{
               mt: 6,
@@ -44,16 +46,15 @@ function App() {
                 path="/characters/create-character"
                 element={<CreateCharacter />}
               />
-              <Route path="/characters/character-sheet/:id"
+              <Route
+                path="/characters/character-sheet/:id"
                 element={<CharacterSheet />}
               />
-              <Route path="/characters/create-character/:id"
+              <Route
+                path="/characters/create-character/:id"
                 element={<EditCharacter />}
               />
-              <Route
-                path="/*"
-                element={<NoRoute/>}
-              />
+              <Route path="/*" element={<NoRoute />} />
             </Routes>
           </Container>
           {/* todo footer */}

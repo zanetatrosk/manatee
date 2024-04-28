@@ -2,9 +2,9 @@
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
-import '@testing-library/jest-dom';
-import { setupServer } from 'msw/node';
-import { handlers } from './mock/handlers';
+import "@testing-library/jest-dom";
+import { setupServer } from "msw/node";
+import { handlers } from "./mock/handlers";
 // Set up a Mock Service Worker server with the provided request handlers
 const server = setupServer(...handlers);
 // Start the server before running your tests

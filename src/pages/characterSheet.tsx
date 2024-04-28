@@ -5,32 +5,34 @@ import SkillTable from "../components/skillTable";
 import StatsGrid from "../features/statsGrid/statsGrid";
 import TabsCard from "../features/characterTabs/tabsCard";
 import React, { useEffect } from "react";
-import { useGetCharacterByIdQuery, usePostLevelUpByCharacterIdMutation } from "api/charactersApiSlice";
+import {
+  useGetCharacterByIdQuery,
+  usePostLevelUpByCharacterIdMutation,
+} from "api/charactersApiSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch } from "@hooks/hooksStore";
 import { setCharacterSheet } from "reducers/characterReducer";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Skills from "../features/skills/skills";
 import { addPlusOrMinus } from "utils/textUtils";
 import ConfirmationDialog from "@components/confirmationDialog";
-import LoadingButton from '@mui/lab/LoadingButton';
+import LoadingButton from "@mui/lab/LoadingButton";
 import Spinner from "@components/spinner";
 import { CHARACTER_SHEET, COMMON } from "constants/characterDefinition";
-
-
 
 export default function CharacterSheet() {
   let { id } = useParams();
   const { data: character, isLoading } = useGetCharacterByIdQuery(id!);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [postLevelUp, { isLoading: loadingLevel }] = usePostLevelUpByCharacterIdMutation();
+  const [postLevelUp, { isLoading: loadingLevel }] =
+    usePostLevelUpByCharacterIdMutation();
   const [open, setOpen] = React.useState(false);
   const [reduxLoading, setReduxLoading] = React.useState(true);
 
   const closeDialog = () => {
     setOpen(false);
-  }
+  };
 
   useEffect(() => {
     if (character) {
@@ -39,48 +41,86 @@ export default function CharacterSheet() {
     }
   }, [character]);
 
-  if (!character || isLoading || reduxLoading) return <Spinner/>
+  if (!character || isLoading || reduxLoading) return <Spinner />;
 
   const confirmAction = () => {
     postLevelUp({ id: character.id });
     closeDialog();
-  }
+  };
 
-  const stats = [{ header: CHARACTER_SHEET.STATS.ARMOR_CLASS, value: character.stats.armorClass.toString() },
-  { header: CHARACTER_SHEET.STATS.INITIATIVE, value: addPlusOrMinus(character.stats.initiative) },
-  { header: CHARACTER_SHEET.STATS.SPEED, value: character.stats.speed.toString() + " ft" },
-  { header: CHARACTER_SHEET.STATS.PROF_BONUS, value: addPlusOrMinus(character.stats.proficiencyBonus) },
-  { header: CHARACTER_SHEET.STATS.HIT_POINT_MAX, value: character.stats.hitPoints.toString() },
-  { header: CHARACTER_SHEET.STATS.HIT_DICE, value: character.stats.hitDice.notation },
-  ]
+  const stats = [
+    {
+      header: CHARACTER_SHEET.STATS.ARMOR_CLASS,
+      value: character.stats.armorClass.toString(),
+    },
+    {
+      header: CHARACTER_SHEET.STATS.INITIATIVE,
+      value: addPlusOrMinus(character.stats.initiative),
+    },
+    {
+      header: CHARACTER_SHEET.STATS.SPEED,
+      value: character.stats.speed.toString() + " ft",
+    },
+    {
+      header: CHARACTER_SHEET.STATS.PROF_BONUS,
+      value: addPlusOrMinus(character.stats.proficiencyBonus),
+    },
+    {
+      header: CHARACTER_SHEET.STATS.HIT_POINT_MAX,
+      value: character.stats.hitPoints.toString(),
+    },
+    {
+      header: CHARACTER_SHEET.STATS.HIT_DICE,
+      value: character.stats.hitDice.notation,
+    },
+  ];
   return (
     <React.Fragment>
       <Grid container mb={1}>
         <Grid item container>
           <Grid item>
-            <Button variant="outlined" startIcon={<ArrowBackIcon />} onClick={() => navigate('/characters')}>{CHARACTER_SHEET.ACTIONS.BACK}</Button>
+            <Button
+              variant="outlined"
+              startIcon={<ArrowBackIcon />}
+              onClick={() => navigate("/characters")}
+            >
+              {CHARACTER_SHEET.ACTIONS.BACK}
+            </Button>
           </Grid>
           <Grid item xs container justifyContent={"flex-end"} spacing={2}>
             <Grid item>
-              <Button variant="outlined" onClick={() => navigate('/characters/create-character/' + character.id)}>
+              <Button
+                variant="outlined"
+                onClick={() =>
+                  navigate("/characters/create-character/" + character.id)
+                }
+              >
                 {CHARACTER_SHEET.ACTIONS.REMAKE_CHARACTER}
               </Button>
             </Grid>
             <Grid item>
-              {character.info.level < 20 && 
-              <LoadingButton
-                variant="contained"
-                onClick={() => setOpen(true)}
-                loading={loadingLevel}
-              >
-                {CHARACTER_SHEET.ACTIONS.LEVEL_UP}
-                <ConfirmationDialog
-                  title={CHARACTER_SHEET.ACTIONS.LEVEL_UP}
-                  description={CHARACTER_SHEET.LEVEL_UP_MODAL.FIRST_PART + ` ${character.info.characterName} ` + CHARACTER_SHEET.LEVEL_UP_MODAL.SECOND_PART + ` ${character.info.level + 1}` + COMMON.QUESTION_MARK}
-                  openDialog={open}
-                  confirmAction={confirmAction}
-                  closeDialog={closeDialog} />
-              </LoadingButton>}
+              {character.info.level < 20 && (
+                <LoadingButton
+                  variant="contained"
+                  onClick={() => setOpen(true)}
+                  loading={loadingLevel}
+                >
+                  {CHARACTER_SHEET.ACTIONS.LEVEL_UP}
+                  <ConfirmationDialog
+                    title={CHARACTER_SHEET.ACTIONS.LEVEL_UP}
+                    description={
+                      CHARACTER_SHEET.LEVEL_UP_MODAL.FIRST_PART +
+                      ` ${character.info.characterName} ` +
+                      CHARACTER_SHEET.LEVEL_UP_MODAL.SECOND_PART +
+                      ` ${character.info.level + 1}` +
+                      COMMON.QUESTION_MARK
+                    }
+                    openDialog={open}
+                    confirmAction={confirmAction}
+                    closeDialog={closeDialog}
+                  />
+                </LoadingButton>
+              )}
             </Grid>
           </Grid>
         </Grid>
@@ -124,7 +164,10 @@ export default function CharacterSheet() {
                       },
                       {
                         header: CHARACTER_SHEET.HEADER.CLASS_LEVEL,
-                        value: character.info.class.name + " " + character.info.level,
+                        value:
+                          character.info.class.name +
+                          " " +
+                          character.info.level,
                       },
                       {
                         header: CHARACTER_SHEET.HEADER.SUBCLASS,
@@ -148,7 +191,7 @@ export default function CharacterSheet() {
                     />
                   </Grid>
                 ))}
-                </Grid>
+              </Grid>
             </Grid>
           </Grid>
           {/* second row */}
@@ -169,7 +212,10 @@ export default function CharacterSheet() {
                   />
                 </Grid>
                 <Grid item container xs justifyContent="center">
-                  <StatsGrid title={CHARACTER_SHEET.STATS.TITLE} items={stats} />
+                  <StatsGrid
+                    title={CHARACTER_SHEET.STATS.TITLE}
+                    items={stats}
+                  />
                 </Grid>
               </Grid>
               <Grid container item xs>
@@ -184,4 +230,3 @@ export default function CharacterSheet() {
     </React.Fragment>
   );
 }
-

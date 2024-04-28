@@ -18,12 +18,8 @@ import { ERROR_MESSAGES } from "constants/characterDefinition";
 const rtkQueryErrorLogger: Middleware =
   (api: MiddlewareAPI) => (next) => (action) => {
     if (isRejectedWithValue(action)) {
-      api.dispatch(
-        showAlert(
-          ERROR_MESSAGES.SERVER_NOT_RESPONDING
-        )
-      );
-      console.log(action.payload, 'error');
+      api.dispatch(showAlert(ERROR_MESSAGES.SERVER_NOT_RESPONDING));
+      console.log(action.payload, "error");
     }
     return next(action);
   };

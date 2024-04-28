@@ -3,9 +3,15 @@ import CrudTable, { RowData } from "../../../components/crudTable";
 
 import { useEffect, useState } from "react";
 import ButtonAddItems from "../../buttonAddItems/buttonAddItems";
-import { useGetArmorQuery, useGetWeaponsQuery } from "api/generalContentApiSlice";
+import {
+  useGetArmorQuery,
+  useGetWeaponsQuery,
+} from "api/generalContentApiSlice";
 import { useParams } from "react-router-dom";
-import { usePostArmorByCharacterIdMutation, usePostWeaponsByCharacterIdMutation } from "api/charactersApiSlice";
+import {
+  usePostArmorByCharacterIdMutation,
+  usePostWeaponsByCharacterIdMutation,
+} from "api/charactersApiSlice";
 import { addPlusOrMinus } from "utils/textUtils";
 import { Armor, Attack, Weapon } from "definitions/characterSheet";
 import { CHARACTER_SHEET } from "constants/characterDefinition";
@@ -21,17 +27,13 @@ const transformAttacks = (weapons: Attack[]): RowData[] => {
   return wap;
 };
 
-
-
-
 const useAttacks = (page: number, size: number, query: string) => {
-
   const attacks = useGetWeaponsQuery({
     page: page,
     size: size,
     query: query,
   }).data;
-  
+
   if (attacks) {
     return {
       data: attacks.content.map((weapon: Weapon) => {
@@ -39,10 +41,10 @@ const useAttacks = (page: number, size: number, query: string) => {
           id: weapon.id,
           columns: [weapon.name, weapon.range, weapon.damageType],
           description: weapon.properties.join(", "),
-        }
+        };
       }),
       totalElements: attacks.totalElements,
-    }
+    };
   }
   return { data: [], totalElements: 0 };
 };
@@ -64,34 +66,41 @@ const useArmor = (page: number, size: number, query: string) => {
       }),
       totalElements: armor.totalElements,
     };
-
   }
   return { data: [], totalElements: 0 };
-}
+};
 
 const ATTACKS = CHARACTER_SHEET.ATTACKS;
 const ARMOR = CHARACTER_SHEET.ARMOR;
 export default function AttacksAndArmorTab() {
   const { armor: armorStore, attacks: weaponsStore } = useAppSelector(
-    (state) => state.character
+    (state) => state.character,
   );
   const { id } = useParams();
   const [postAttacksByCharacterId] = usePostWeaponsByCharacterIdMutation();
   const [postArmorByCharacterId] = usePostArmorByCharacterIdMutation();
-  const armorHeaders = [ARMOR.HEADERS.NAME, ARMOR.HEADERS.BASE_ARMOR_CLASS, ARMOR.HEADERS.TYPE];
-  const attackHeaders = [ATTACKS.HEADERS.NAME, ATTACKS.HEADERS.ATTACK_BONUS, ATTACKS.HEADERS.DAMAGE_TYPE];
-  
+  const armorHeaders = [
+    ARMOR.HEADERS.NAME,
+    ARMOR.HEADERS.BASE_ARMOR_CLASS,
+    ARMOR.HEADERS.TYPE,
+  ];
+  const attackHeaders = [
+    ATTACKS.HEADERS.NAME,
+    ATTACKS.HEADERS.ATTACK_BONUS,
+    ATTACKS.HEADERS.DAMAGE_TYPE,
+  ];
+
   const usePostAttacks = (weapons: string[]) => {
     if (id) {
       postAttacksByCharacterId({ id, weapons });
     }
-  }
+  };
 
   const usePostArmor = (armor: string[]) => {
     if (id) {
       postArmorByCharacterId({ id, armor: armor[0] });
     }
-  }
+  };
 
   const tranformArmor = (armor: Armor): RowData => {
     return {
@@ -99,7 +108,7 @@ export default function AttacksAndArmorTab() {
       description: armor.description,
     };
   };
-  
+
   useEffect(() => {
     setWeapons(transformAttacks(weaponsStore));
   }, [weaponsStore]);
@@ -129,7 +138,7 @@ export default function AttacksAndArmorTab() {
           />
         }
       />
-      <Box sx={{ margin: 3 }}/>
+      <Box sx={{ margin: 3 }} />
       <CrudTable
         title={ARMOR.TITLE}
         rows={armor ? [armor] : []}
@@ -149,5 +158,3 @@ export default function AttacksAndArmorTab() {
     </>
   );
 }
-
-

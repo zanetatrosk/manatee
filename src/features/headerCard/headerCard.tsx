@@ -10,17 +10,21 @@ interface DisplayedData {
   headers: DisplayedHeaders[];
   title: string;
 }
-export default function HeaderCard({props: character}: {props: DisplayedData}) {
+export default function HeaderCard({
+  props: character,
+}: {
+  props: DisplayedData;
+}) {
   return (
-    <Box display="flex" justifyContent={"center"} flexGrow={1} >
-      <Card sx={{  p: 3, width: "100%" }}>
-        <Grid container flexDirection={"column"} spacing={3} >
+    <Box display="flex" justifyContent={"center"} flexGrow={1}>
+      <Card sx={{ p: 3, width: "100%" }}>
+        <Grid container flexDirection={"column"} spacing={3}>
           <Grid item container maxWidth={800} zeroMinWidth>
             <Typography variant="h4" noWrap data-cy="character-name">
               {character.title}
             </Typography>
           </Grid>
-          <Grid item container spacing={4}  rowSpacing={1}>
+          <Grid item container spacing={4} rowSpacing={1}>
             {character.headers.map((i, idx) => (
               <React.Fragment key={idx}>
                 <Grid
@@ -41,7 +45,11 @@ export default function HeaderCard({props: character}: {props: DisplayedData}) {
                     </Typography>
                   </Grid>
                   <Grid item>
-                    <Typography component="span" noWrap data-cy={i.header + "-value"}>
+                    <Typography
+                      component="span"
+                      noWrap
+                      data-cy={i.header + "-value"}
+                    >
                       {i.value}
                     </Typography>
                   </Grid>

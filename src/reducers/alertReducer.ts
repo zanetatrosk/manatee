@@ -1,14 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-interface Error{
-    closed: boolean;
-    message: string;   
+interface Error {
+  closed: boolean;
+  message: string;
 }
 
-
 const alertReducer = createSlice({
-  name: 'alert',
-  initialState: { closed: true, message: '' } as Error,
+  name: "alert",
+  initialState: { closed: true, message: "" } as Error,
   reducers: {
     showAlert: (state, action) => {
       state.closed = false;
@@ -17,7 +16,7 @@ const alertReducer = createSlice({
     },
     hideAlert: (state) => {
       state.closed = true;
-      state.message = '';
+      state.message = "";
     },
   },
 });

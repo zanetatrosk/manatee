@@ -16,12 +16,12 @@ interface PropsParams {
 
 export default function MultiComplete(props: PropsParams) {
   const [item, setItem] = React.useState("");
-  if( props.maxItems === 0) return null;
+  if (props.maxItems === 0) return null;
   return (
     <div>
       <Autocomplete
         multiple
-        isOptionEqualToValue={ (option, value) => option.id === value.id }
+        isOptionEqualToValue={(option, value) => option.id === value.id}
         value={props.results}
         data-cy={props.data_cy}
         options={props.values}

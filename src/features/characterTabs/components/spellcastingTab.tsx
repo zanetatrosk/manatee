@@ -11,12 +11,17 @@ import ButtonAddItems from "@features/buttonAddItems/buttonAddItems";
 import { useSpells } from "@features/buttonAddItems/components/filteredTable";
 import { CHARACTER_SHEET } from "constants/characterDefinition";
 
-
-
 export default function SpellcastingTab() {
   const SPELLCASTING = CHARACTER_SHEET.SPELLCASTING;
-  const slotsHeaders = [SPELLCASTING.SLOTS_TABLE_HEADERS.LEVEL, SPELLCASTING.SLOTS_TABLE_HEADERS.SLOTS_TOTAL];
-  const spellsHeaders = [SPELLCASTING.VIEW_TABLE_HEADERS.NAME, SPELLCASTING.VIEW_TABLE_HEADERS.LEVEL, SPELLCASTING.VIEW_TABLE_HEADERS.CASTING_TIME];
+  const slotsHeaders = [
+    SPELLCASTING.SLOTS_TABLE_HEADERS.LEVEL,
+    SPELLCASTING.SLOTS_TABLE_HEADERS.SLOTS_TOTAL,
+  ];
+  const spellsHeaders = [
+    SPELLCASTING.VIEW_TABLE_HEADERS.NAME,
+    SPELLCASTING.VIEW_TABLE_HEADERS.LEVEL,
+    SPELLCASTING.VIEW_TABLE_HEADERS.CASTING_TIME,
+  ];
   const { id } = useParams();
   const [postSpellsByCharacterId] = usePostSpellsByCharacterIdMutation();
   const { spellcasting } = useAppSelector((state) => state.character);
@@ -31,12 +36,16 @@ export default function SpellcastingTab() {
     });
   };
 
-  const [tableSpells, setSpells] = useState<RowData[]>(tranformSpells(spellcasting?.spells || []));
+  const [tableSpells, setSpells] = useState<RowData[]>(
+    tranformSpells(spellcasting?.spells || []),
+  );
   const usePostSpells = (spells: string[]) => {
     if (id) {
-      postSpellsByCharacterId({ id, spells }).unwrap().then((s: Spell[]) => {
-        setSpells(tranformSpells(s));
-      });
+      postSpellsByCharacterId({ id, spells })
+        .unwrap()
+        .then((s: Spell[]) => {
+          setSpells(tranformSpells(s));
+        });
     }
   };
 
@@ -49,12 +58,18 @@ export default function SpellcastingTab() {
             <StatsGrid
               title={SPELLCASTING.STATS_TITLE}
               items={[
-                { header:  SPELLCASTING.ABILITY,value: spellcasting.abilityAbbreviation },
+                {
+                  header: SPELLCASTING.ABILITY,
+                  value: spellcasting.abilityAbbreviation,
+                },
                 {
                   header: SPELLCASTING.ATTACK_MODIFIER,
                   value: addPlusOrMinus(spellcasting.modifier),
                 },
-                { header: SPELLCASTING.SAVE_DC, value: spellcasting.saveDc.toString() },
+                {
+                  header: SPELLCASTING.SAVE_DC,
+                  value: spellcasting.saveDc.toString(),
+                },
               ]}
             />
           </Grid>
@@ -78,7 +93,13 @@ export default function SpellcastingTab() {
             rows={tableSpells}
             headers={spellsHeaders}
             actionButton={
-              <ButtonAddItems buttonText={SPELLCASTING.ADD_SPELL} usePaginationHook={useSpells} defaults={spellcasting.spells?.map((spell: Spell) => spell.id)} sendToBEHook={usePostSpells} headers={spellsHeaders} />
+              <ButtonAddItems
+                buttonText={SPELLCASTING.ADD_SPELL}
+                usePaginationHook={useSpells}
+                defaults={spellcasting.spells?.map((spell: Spell) => spell.id)}
+                sendToBEHook={usePostSpells}
+                headers={spellsHeaders}
+              />
             }
             showDescription
           />

@@ -34,7 +34,7 @@ function EnhancedTableToolbar({ numSelected }: { numSelected: number }) {
           bgcolor: (theme) =>
             alpha(
               theme.palette.primary.main,
-              theme.palette.action.activatedOpacity
+              theme.palette.action.activatedOpacity,
             ),
         }),
       }}
@@ -46,7 +46,7 @@ function EnhancedTableToolbar({ numSelected }: { numSelected: number }) {
           variant="subtitle1"
           component="div"
         >
-          {numSelected + " " + CHARACTER_SHEET.MODAL_ADD.SELECTED} 
+          {numSelected + " " + CHARACTER_SHEET.MODAL_ADD.SELECTED}
         </Typography>
       )}
     </Toolbar>
@@ -60,7 +60,7 @@ export interface ItemsProps {
 export const useSpells = (
   page: number,
   size: number,
-  query: string
+  query: string,
 ): ItemsProps => {
   const spellsInfo = useGetSpellsQuery({
     page: page,
@@ -107,22 +107,23 @@ function Row(props: {
       >
         <>
           <TableCell padding="checkbox">
-            {singleChoice ? 
+            {singleChoice ? (
               <Radio
-              color="primary"
-              checked={selected}
-              onChange={() => {
-                props.handleClick(row.id!);
-              }}
-            />
-            : 
-            <Checkbox
-              color="primary"
-              checked={selected}
-              onClick={() => {
-                props.handleClick(row.id!);
-              }}
-            />}
+                color="primary"
+                checked={selected}
+                onChange={() => {
+                  props.handleClick(row.id!);
+                }}
+              />
+            ) : (
+              <Checkbox
+                color="primary"
+                checked={selected}
+                onClick={() => {
+                  props.handleClick(row.id!);
+                }}
+              />
+            )}
           </TableCell>
           {row.columns.map((col) => (
             <TableCell component="th" scope="row">
@@ -144,7 +145,11 @@ function Row(props: {
         </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6} sx={[!open && { "& > *": { borderTop: 0 } }]}>
+        <TableCell
+          style={{ paddingBottom: 0, paddingTop: 0 }}
+          colSpan={6}
+          sx={[!open && { "& > *": { borderTop: 0 } }]}
+        >
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box py={2} display="flex" flexGrow={1} sx={{ overflow: "auto" }}>
               <Typography variant="body2" gutterBottom>
@@ -179,7 +184,9 @@ export default function FilteredTable({
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [query, setQuery] = React.useState("");
 
-  const [selected, setSelected] = React.useState<Set<string>>(new Set(selectedIds));
+  const [selected, setSelected] = React.useState<Set<string>>(
+    new Set(selectedIds),
+  );
   const isSelected = (id: string) => selected.has(id);
 
   const handleClick = (id: string) => {
@@ -199,7 +206,7 @@ export default function FilteredTable({
   };
 
   const handleQueryChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setQuery(e.target.value);
     setPagination({ page: 0, size: rowsPerPage, query: e.target.value });
@@ -212,7 +219,7 @@ export default function FilteredTable({
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -248,9 +255,7 @@ export default function FilteredTable({
               <TableRow>
                 <TableCell />
                 {headers.map((header) => (
-                  <TableCell key={header}>
-                    {header}
-                  </TableCell>
+                  <TableCell key={header}>{header}</TableCell>
                 ))}
                 <TableCell align="right" />
               </TableRow>

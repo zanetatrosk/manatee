@@ -72,7 +72,6 @@ export const returnDefaults = (): StepperForm => {
       toolIds: [],
     },
   };
-}
-
+};
 
 export { abilitiesDefaults, proficiencyDefault };

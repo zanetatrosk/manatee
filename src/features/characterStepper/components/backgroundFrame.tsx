@@ -2,20 +2,40 @@ import CardInfo from "@components/cardInfo";
 import MultiComplete from "@components/customMultiComplete";
 import { Background, BaseItem } from "@definitions/characterForm";
 import { BackgroundForm, StepperForm } from "@definitions/stepperForm";
-import { Box, Grid, Typography, Autocomplete, TextField, CircularProgress, Divider } from "@mui/material";
-import { useGetBackgroundsQuery, useGetLanguagesQuery, useGetToolsQuery } from "api/generalContentApiSlice";
+import {
+  Box,
+  Grid,
+  Typography,
+  Autocomplete,
+  TextField,
+  CircularProgress,
+  Divider,
+} from "@mui/material";
+import {
+  useGetBackgroundsQuery,
+  useGetLanguagesQuery,
+  useGetToolsQuery,
+} from "api/generalContentApiSlice";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import React, { useState } from "react";
 
-
 const BACKGROUND = CREATE_CHARACTER.BACKGROUND;
 
-export default function BackgroundFrame({ backgroundForm, setForm, sourceIds }: { backgroundForm: BackgroundForm, setForm: React.Dispatch<React.SetStateAction<StepperForm>>, sourceIds: string[] }) {
-
-  const { data: backgrounds, isLoading: loadingBackgrounds } = useGetBackgroundsQuery(sourceIds);
-  const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(sourceIds);
+export default function BackgroundFrame({
+  backgroundForm,
+  setForm,
+  sourceIds,
+}: {
+  backgroundForm: BackgroundForm;
+  setForm: React.Dispatch<React.SetStateAction<StepperForm>>;
+  sourceIds: string[];
+}) {
+  const { data: backgrounds, isLoading: loadingBackgrounds } =
+    useGetBackgroundsQuery(sourceIds);
+  const { data: languages, isLoading: loadingLanguages } =
+    useGetLanguagesQuery(sourceIds);
   const { data: tools, isLoading: loadingTools } = useGetToolsQuery([]);
-  
+
   const [background, setBackground] = useState<Background | null>(null);
 
   if (backgrounds && backgroundForm.id && !background) {
@@ -23,15 +43,24 @@ export default function BackgroundFrame({ backgroundForm, setForm, sourceIds }: 
   }
 
   const setPropertyInForm = (property: string, value: any) => {
-    setForm(prev => ({ ...prev, background: { ...prev.background, [property]: value } }));
+    setForm((prev) => ({
+      ...prev,
+      background: { ...prev.background, [property]: value },
+    }));
   };
 
   const handleToolsChange = (value: BaseItem[]): void => {
-    setPropertyInForm("toolIds", value.map((v) => v.id));
+    setPropertyInForm(
+      "toolIds",
+      value.map((v) => v.id),
+    );
   };
 
   const handleLanguagesChange = (value: BaseItem[]): void => {
-    setPropertyInForm("languageIds", value.map((v) => v.id));
+    setPropertyInForm(
+      "languageIds",
+      value.map((v) => v.id),
+    );
   };
 
   return (
@@ -60,8 +89,17 @@ export default function BackgroundFrame({ backgroundForm, setForm, sourceIds }: 
             onChange={(_, value) => {
               if (!value) return;
               const toolIds = value.toolProficiencies.defaults.map((t) => t.id);
-              const languageIds = value.languageProficiencies.defaults.map((l) => l.id);
-              setForm(prev => ({ ...prev, background: { id: value.id, toolIds: toolIds, languageIds: languageIds } }));
+              const languageIds = value.languageProficiencies.defaults.map(
+                (l) => l.id,
+              );
+              setForm((prev) => ({
+                ...prev,
+                background: {
+                  id: value.id,
+                  toolIds: toolIds,
+                  languageIds: languageIds,
+                },
+              }));
               setBackground(value);
             }}
             data-cy="background"
@@ -99,26 +137,44 @@ export default function BackgroundFrame({ backgroundForm, setForm, sourceIds }: 
               </Divider>
             </Box>
             <Grid container sx={{ py: 2 }} columnSpacing={8}>
-              <Grid item lg={6} xs={12} sx={{ py: 2 }}>
-                <MultiComplete
-                  values={languages || []}
-                  results={languages?.filter((l) => backgroundForm.languageIds.includes(l.id)) || []}
-                  data_cy="languages"
-                  onChange={handleLanguagesChange}
-                  label={BACKGROUND.LANGUAGES}
-                  helpText={BACKGROUND.MESSAGE + `${background.languageProficiencies.amount} ` + BACKGROUND.LANGUAGES.toLowerCase() }
-                  placeholder={BACKGROUND.LANGUAGES_PLACEHOLDER}
-                  maxItems={background.languageProficiencies.amount}
-                />
-              </Grid>
+              {background.languageProficiencies.amount != 0 && (
+                <Grid item lg={6} xs={12} sx={{ py: 2 }}>
+                  <MultiComplete
+                    values={languages || []}
+                    results={
+                      languages?.filter((l) =>
+                        backgroundForm.languageIds.includes(l.id),
+                      ) || []
+                    }
+                    data_cy="languages"
+                    onChange={handleLanguagesChange}
+                    label={BACKGROUND.LANGUAGES}
+                    helpText={
+                      BACKGROUND.MESSAGE +
+                      `${background.languageProficiencies.amount} ` +
+                      BACKGROUND.LANGUAGES.toLowerCase()
+                    }
+                    placeholder={BACKGROUND.LANGUAGES_PLACEHOLDER}
+                    maxItems={background.languageProficiencies.amount}
+                  />
+                </Grid>
+              )}
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
                   values={tools || []}
-                  results={tools?.filter((t) => backgroundForm.toolIds.includes(t.id)) || []}
+                  results={
+                    tools?.filter((t) =>
+                      backgroundForm.toolIds.includes(t.id),
+                    ) || []
+                  }
                   data_cy="tools"
                   onChange={handleToolsChange}
                   label={BACKGROUND.PROF_TOOLS}
-                  helpText={BACKGROUND.MESSAGE + `${background.toolProficiencies.amount} ` + BACKGROUND.TOOLS.toLowerCase()}
+                  helpText={
+                    BACKGROUND.MESSAGE +
+                    `${background.toolProficiencies.amount} ` +
+                    BACKGROUND.TOOLS.toLowerCase()
+                  }
                   placeholder={BACKGROUND.TOOLS_PLACEHOLDER}
                   maxItems={background.toolProficiencies.amount}
                 />

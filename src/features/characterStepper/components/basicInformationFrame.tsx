@@ -11,7 +11,6 @@ import { useGetSourcesQuery } from "api/generalContentApiSlice";
 import { BasicInfo } from "definitions/characterForm";
 import { StepperForm } from "definitions/stepperForm";
 
-
 const BASIC_INFO = CREATE_CHARACTER.BASIC_INFO;
 
 function BasicInformation({
@@ -30,7 +29,6 @@ function BasicInformation({
       info: { ...prev.info, [property]: value },
     }));
   };
-
 
   return (
     <Grid container spacing={10}>
@@ -83,7 +81,10 @@ function BasicInformation({
             getOptionLabel={(option) => option.name}
             isOptionEqualToValue={(option, value) => option.id === value.id}
             onChange={(e, value) => {
-              setPropertyInForm("sourceIds", value.map((v) => v.id));
+              setPropertyInForm(
+                "sourceIds",
+                value.map((v) => v.id),
+              );
             }}
             renderInput={(params) => (
               <TextField

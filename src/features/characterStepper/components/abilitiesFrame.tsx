@@ -8,12 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Card from "@mui/material/Card";
 import { styled } from "@mui/material/styles";
 import { tableCellClasses } from "@mui/material/TableCell";
-import {
-  TextField,
-  Typography,
-  CardContent,
-  Checkbox
-} from "@mui/material";
+import { TextField, Typography, CardContent, Checkbox } from "@mui/material";
 import { AbilityScore } from "definitions/characterForm";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import { addPlusOrMinus } from "utils/textUtils";
@@ -79,7 +74,7 @@ export default function Abilities({
     idx: number,
     param: string,
     value: number | boolean,
-    abilities: AbilityScore[]
+    abilities: AbilityScore[],
   ): AbilityScore[] => {
     const newRows = [...abilities];
     newRows[idx] = { ...abilities[idx], [param]: value };

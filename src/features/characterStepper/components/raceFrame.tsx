@@ -2,8 +2,24 @@ import CardInfo from "@components/cardInfo";
 import MultiComplete from "@components/customMultiComplete";
 import { Race, BaseItem } from "@definitions/characterForm";
 import { RaceForm, StepperForm } from "@definitions/stepperForm";
-import { Box, Grid, Typography, Autocomplete, TextField, CircularProgress, Divider, FormControl, InputLabel, Select, SelectChangeEvent, MenuItem } from "@mui/material";
-import { useGetRacesQuery, useGetLanguagesQuery } from "api/generalContentApiSlice";
+import {
+  Box,
+  Grid,
+  Typography,
+  Autocomplete,
+  TextField,
+  CircularProgress,
+  Divider,
+  FormControl,
+  InputLabel,
+  Select,
+  SelectChangeEvent,
+  MenuItem,
+} from "@mui/material";
+import {
+  useGetRacesQuery,
+  useGetLanguagesQuery,
+} from "api/generalContentApiSlice";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
 import React, { useState } from "react";
 
@@ -18,29 +34,29 @@ export default function RaceFrame({
   setForm: React.Dispatch<React.SetStateAction<StepperForm>>;
   sourceIds: string[];
 }) {
-  
   //calling api to get all races, in future this will be called when create character button is clicked
   const { data: races, isLoading: loadingRaces } = useGetRacesQuery(sourceIds);
-  const { data: languages, isLoading: loadingLanguages } = useGetLanguagesQuery(sourceIds);
-  const [race, setRace] = useState<Race|null>(null);
+  const { data: languages, isLoading: loadingLanguages } =
+    useGetLanguagesQuery(sourceIds);
+  const [race, setRace] = useState<Race | null>(null);
 
-  if( races && raceForm.id && !race ) {
+  if (races && raceForm.id && !race) {
     const raceTmp = races?.find((r) => r.id === raceForm.id);
-    if(raceTmp) {
+    if (raceTmp) {
       setRace(raceTmp);
     }
   }
-  
+
   //these are the values that are going to be displayed in the multicomplete
   //that are selected by user or by default according to race
   const setPropertyInForm = (property: string, value: any) => {
-    setForm(prev => ({...prev, race: {...prev.race, [property]: value}}));
-  }
-  
+    setForm((prev) => ({ ...prev, race: { ...prev.race, [property]: value } }));
+  };
+
   const handleLanguagesChange = (value: BaseItem[]): void => {
     setPropertyInForm(
       "languageIds",
-      value.map((v) => v.id)
+      value.map((v) => v.id),
     );
   };
 
@@ -77,7 +93,10 @@ export default function RaceFrame({
               //recalculate ability scores acording to a new race
               setPropertyInForm("id", value.id);
               setPropertyInForm("size", value.sizeOptions[0]);
-              setPropertyInForm("languageIds", value.languageProficiencies.defaults.map(l => l.id));
+              setPropertyInForm(
+                "languageIds",
+                value.languageProficiencies.defaults.map((l) => l.id),
+              );
               setRace(value);
             }}
             renderInput={(params) => (
@@ -117,10 +136,18 @@ export default function RaceFrame({
                 <MultiComplete
                   values={languages || []}
                   data_cy="languages"
-                  results={languages?.filter((l) => raceForm.languageIds.includes(l.id)) || []}
+                  results={
+                    languages?.filter((l) =>
+                      raceForm.languageIds.includes(l.id),
+                    ) || []
+                  }
                   onChange={handleLanguagesChange}
                   label={RACE.LANGUAGES}
-                  helpText={RACE.MESSAGE + `${race.languageProficiencies.amount} ` + RACE.LANGUAGES.toLowerCase()}
+                  helpText={
+                    RACE.MESSAGE +
+                    `${race.languageProficiencies.amount} ` +
+                    RACE.LANGUAGES.toLowerCase()
+                  }
                   placeholder={RACE.LANGUAGES_PLACEHOLDER}
                   maxItems={race.languageProficiencies.amount}
                 />
@@ -147,7 +174,14 @@ export default function RaceFrame({
             </Grid>
             <CardInfo
               title={race.name}
-              features={[{ title: RACE.FEAT_SPEED, text: race.speed.toString() + RACE.FT_SPEED_UNIT, levelMinimum: 1}, ...race.features ]}
+              features={[
+                {
+                  title: RACE.FEAT_SPEED,
+                  text: race.speed.toString() + RACE.FT_SPEED_UNIT,
+                  levelMinimum: 1,
+                },
+                ...race.features,
+              ]}
               description={race.description}
             />
           </div>

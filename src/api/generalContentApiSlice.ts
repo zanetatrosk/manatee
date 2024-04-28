@@ -1,5 +1,10 @@
-
-import { Race, Source, Class, Background, BaseItem } from "@definitions/characterForm";
+import {
+  Race,
+  Source,
+  Class,
+  Background,
+  BaseItem,
+} from "@definitions/characterForm";
 import { Pageable, Spell, Armor, Weapon } from "@definitions/characterSheet";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 

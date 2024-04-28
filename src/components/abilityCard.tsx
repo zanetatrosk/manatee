@@ -33,33 +33,33 @@ const StyledAbilityScore = styled(Box)({
   WebkitBorderBottomRightRadius: 7,
   borderTopLeftRadius: 0,
   borderTopRightRadius: 0,
-  
 });
 
 interface AbilityCardProps {
-    ability: string;
-    score: number;
-    modifier: number;
+  ability: string;
+  score: number;
+  modifier: number;
 }
 
 export default function AbilityCard({ ...props }: AbilityCardProps) {
   return (
     <Box>
-      <Card sx={{ py: 1,  borderRadius: 2, width: 115, height: 130 }} >
+      <Card sx={{ py: 1, borderRadius: 2, width: 115, height: 130 }}>
         <Grid alignItems="center" container flexDirection="column" spacing={1}>
           <Grid item>
             <Typography variant="button">{props.ability}</Typography>
           </Grid>
           <Grid item container flexDirection="column" alignItems="center">
             <StyledModifier>
-              <Typography variant="h4">{addPlusOrMinus(props.modifier)}</Typography>
+              <Typography variant="h4">
+                {addPlusOrMinus(props.modifier)}
+              </Typography>
             </StyledModifier>
 
             <StyledAbilityScore>
               <Typography variant="h6">{props.score}</Typography>
             </StyledAbilityScore>
           </Grid>
-          
         </Grid>
       </Card>
     </Box>

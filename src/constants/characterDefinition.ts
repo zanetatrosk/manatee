@@ -80,7 +80,6 @@ const CREATE_CHARACTER = {
     MESSAGE: "You can have up to ",
     TOOLS_PLACEHOLDER: "Thieves' Tools",
     TOOLS: "Tools",
-
   },
 
   CARD_ACTIONS: {
@@ -186,20 +185,31 @@ const COMMON = {
 };
 
 const CONTENT = {
-    HEADING: "Content Page",
+  HEADING: "Content Page",
 };
 
 const WELCOME = {
-    HEADING: "Welcome to the D&D app",
+  HEADING: "Welcome to the D&D app",
 };
 
 const NO_ROUTE = {
-    HEADING: "Page not found",
+  HEADING: "Page not found",
 };
 
 const ERROR_MESSAGES = {
   SERVER_NOT_RESPONDING: "Something went wrong during fetching data.",
-  CHARACTER_CREATE_MESSAGE: "You have to fill race, class and background to create a character.",
+  CHARACTER_CREATE_MESSAGE:
+    "You have to fill race, class and background to create a character.",
 };
 
-export { CHARACTERS, CREATE_CHARACTER, NAVBAR, CHARACTER_SHEET, COMMON, CONTENT, WELCOME, NO_ROUTE, ERROR_MESSAGES };
+export {
+  CHARACTERS,
+  CREATE_CHARACTER,
+  NAVBAR,
+  CHARACTER_SHEET,
+  COMMON,
+  CONTENT,
+  WELCOME,
+  NO_ROUTE,
+  ERROR_MESSAGES,
+};

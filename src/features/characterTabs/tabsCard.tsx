@@ -32,7 +32,9 @@ export default function TabsCard() {
               variant="scrollable"
             >
               <Tab label={CHARACTER_SHEET.ATTACKS_AND_ARMOR} value="1" />
-              {!!spellcasting && <Tab label={CHARACTER_SHEET.SPELLCASTING.TITLE} value="2" />}
+              {!!spellcasting && (
+                <Tab label={CHARACTER_SHEET.SPELLCASTING.TITLE} value="2" />
+              )}
               <Tab label={CHARACTER_SHEET.OTH_PROFICIENCIES.TITLE} value="3" />
               <Tab label={CHARACTER_SHEET.FEATURES.TITLE} value="4" />
             </TabList>
