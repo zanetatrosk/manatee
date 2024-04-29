@@ -15,46 +15,39 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 const fillDataForm = (character: CharacterSheet): StepperForm => {
-  const form: StepperForm = {} as StepperForm;
-  form.id = character.id;
-  form.info = {
-    characterName: character.info.characterName,
-    playerName: character.info.playerName,
-    sourceIds: character.sources.map((s) => s.id),
-    cardPhotoUrl: character.info.cardPhotoUrl,
-    sheetPhotoUrl: character.info.sheetPhotoUrl,
+  const { id, info, sources, tools, languages, abilities } = character;
+  const { characterName, playerName, cardPhotoUrl, sheetPhotoUrl, class: classInfo, race, size, background, subclass } = info;
+
+  const filterBySource = (source: string) => (item: SheetProficiencies<ToolsProficiency | LanguagesProficiency>) => item.from === source;
+  const mapToId = (item: SheetProficiencies<ToolsProficiency | LanguagesProficiency>) => item.item.id;
+
+  const form: StepperForm = {
+    id,
+    info: {
+      characterName,
+      playerName,
+      sourceIds: sources.map((s) => s.id),
+      cardPhotoUrl,
+      sheetPhotoUrl,
+    },
+    class: {
+      id: classInfo.id,
+      subclass: subclass,
+      toolIds: tools.filter(filterBySource("class")).map(mapToId),
+    },
+    race: {
+      id: race.id,
+      size,
+      languageIds: languages.filter(filterBySource("race")).map(mapToId),
+    },
+    abilityScores: abilities,
+    background: {
+      id: background.id,
+      toolIds: tools.filter(filterBySource("background")).map(mapToId),
+      languageIds: languages.filter(filterBySource("background")).map(mapToId),
+    },
   };
-  form.class = {
-    id: character.info.class.id,
-    subclass: character.info.subclass,
-    toolIds: character.tools
-      .filter((t: SheetProficiencies<ToolsProficiency>) => t.from === "class")
-      .map((t: SheetProficiencies<ToolsProficiency>) => t.item.id),
-  };
-  form.race = {
-    id: character.info.race.id,
-    size: character.info.size,
-    languageIds: character.languages
-      .filter(
-        (l: SheetProficiencies<LanguagesProficiency>) => l.from === "race",
-      )
-      .map((l: SheetProficiencies<LanguagesProficiency>) => l.item.id),
-  };
-  form.abilityScores = character.abilities;
-  form.background = {
-    id: character.info.background.id,
-    toolIds: character.tools
-      .filter(
-        (t: SheetProficiencies<ToolsProficiency>) => t.from === "background",
-      )
-      .map((t: SheetProficiencies<ToolsProficiency>) => t.item.id),
-    languageIds: character.languages
-      .filter(
-        (l: SheetProficiencies<LanguagesProficiency>) =>
-          l.from === "background",
-      )
-      .map((l: SheetProficiencies<LanguagesProficiency>) => l.item.id),
-  };
+
   return form;
 };
 export default function EditCharacter() {

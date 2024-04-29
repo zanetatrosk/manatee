@@ -62,8 +62,8 @@ export default function SkillTable({
                         }
                         return j;
                       });
-                      if (sendData) sendData(newData);
                       setTableData(newData);
+                      if (sendData) sendData(newData);
                     }}
                   />
                 </TableCell>

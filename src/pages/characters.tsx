@@ -15,6 +15,7 @@ import {
 import ConfirmationDialog from "@components/confirmationDialog";
 import Spinner from "@components/spinner";
 import { CharacterInfo } from "definitions/characterSheet";
+import noImage from "assets/images/no-image.png";
 
 function CharacterCard({ props }: { props: CharacterInfo }) {
   let navigate = useNavigate();
@@ -34,11 +35,7 @@ function CharacterCard({ props }: { props: CharacterInfo }) {
         <CardMedia
           sx={{ maxHeight: 160 }}
           component="img"
-          // Picture by pixabay: https://pixabay.com/cs
-          src={
-            props.info.cardPhotoUrl ||
-            "https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"
-          }
+          image={props.info.cardPhotoUrl || noImage}
           title="character"
         />
         <CardContent>

@@ -17,7 +17,7 @@ import {
   useGetToolsQuery,
 } from "api/generalContentApiSlice";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const BACKGROUND = CREATE_CHARACTER.BACKGROUND;
 
@@ -35,12 +35,7 @@ export default function BackgroundFrame({
   const { data: languages, isLoading: loadingLanguages } =
     useGetLanguagesQuery(sourceIds);
   const { data: tools, isLoading: loadingTools } = useGetToolsQuery([]);
-
-  const [background, setBackground] = useState<Background | null>(null);
-
-  if (backgrounds && backgroundForm.id && !background) {
-    setBackground(backgrounds.find((b) => b.id === backgroundForm.id) || null);
-  }
+  const [background, setBackground] = useState<Background | null>(backgrounds?.find((b) => b.id === backgroundForm.id) || null);
 
   const setPropertyInForm = (property: string, value: any) => {
     setForm((prev) => ({

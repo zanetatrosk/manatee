@@ -11,23 +11,49 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const charactersApiSlice = createApi({
   reducerPath: "charactersApi",
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
+  baseQuery: fetchBaseQuery({ 
+    baseUrl: process.env.REACT_APP_API_URL + "characters" 
+  }),
   tagTypes: ["CharacterList", "CharacterSheet"],
   endpoints: (builder) => ({
     getCharacters: builder.query<CharacterSheet[], void>({
-      query: () => "characters",
+      query: () => "",
       providesTags: ["CharacterList"],
     }),
     getCharacterById: builder.query<CharacterSheet, string>({
-      query: (id) => `characters/${id}`,
+      query: (id) => `/${id}`,
       providesTags: ["CharacterSheet"],
+    }),
+    putCharacter: builder.mutation<CharacterSheet, StepperForm>({
+      query: (body) => ({
+        url: `/${body.id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["CharacterSheet", "CharacterList"],
+    }),
+    addCharacter: builder.mutation<CharacterSheet, StepperForm>({
+      query: (body) => ({
+        url: "",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["CharacterList"],
+    }),
+    deleteCharacter: builder.mutation<void, string>({
+      query: (id) => ({
+        url: `/${id}`,
+        method: "DELETE",
+        responseHandler: "text",
+      }),
+      invalidatesTags: ["CharacterList"],
     }),
     postSpellsByCharacterId: builder.mutation<
       Spell[],
       { id: string; spells: string[] }
     >({
       query: ({ id, spells }) => ({
-        url: `characters/${id}/spells`,
+        url: `/${id}/spells`,
         method: "PUT",
         body: spells,
       }),
@@ -38,7 +64,7 @@ export const charactersApiSlice = createApi({
       { id: string; weapons: string[] }
     >({
       query: ({ id, weapons }) => ({
-        url: `characters/${id}/weapons`,
+        url: `/${id}/weapons`,
         method: "PUT",
         body: weapons,
       }),
@@ -49,7 +75,7 @@ export const charactersApiSlice = createApi({
       { id: string; armor: string }
     >({
       query: ({ id, armor }) => ({
-        url: `characters/${id}/armor`,
+        url: `/${id}/armor`,
         method: "PUT",
         body: { id: armor },
       }),
@@ -60,7 +86,7 @@ export const charactersApiSlice = createApi({
       { id: string; skills: Proficient[] }
     >({
       query: ({ id, skills }) => ({
-        url: `characters/${id}/skills`,
+        url: `/${id}/skills`,
         method: "PUT",
         body: skills,
       }),
@@ -68,35 +94,12 @@ export const charactersApiSlice = createApi({
     }),
     postLevelUpByCharacterId: builder.mutation<CharacterSheet, { id: string }>({
       query: ({ id }) => ({
-        url: `characters/${id}/levelup`,
+        url: `/${id}/levelup`,
         method: "POST",
       }),
       invalidatesTags: ["CharacterSheet"],
     }),
-    putCharacter: builder.mutation<CharacterSheet, StepperForm>({
-      query: (body) => ({
-        url: `characters/${body.id}`,
-        method: "PUT",
-        body,
-      }),
-      invalidatesTags: ["CharacterSheet", "CharacterList"],
-    }),
-    addCharacter: builder.mutation<CharacterSheet, StepperForm>({
-      query: (body) => ({
-        url: "characters",
-        method: "POST",
-        body,
-      }),
-      invalidatesTags: ["CharacterList"],
-    }),
-    deleteCharacter: builder.mutation<void, string>({
-      query: (id) => ({
-        url: `characters/${id}`,
-        method: "DELETE",
-        responseHandler: "text",
-      }),
-      invalidatesTags: ["CharacterList"],
-    }),
+    
   }),
 });
 export const {
