@@ -1,6 +1,6 @@
 import CardInfo from "@components/cardInfo";
 import MultiComplete from "@components/customMultiComplete";
-import { Race, BaseItem } from "@definitions/characterForm";
+import { Race, BaseItem, Sourceable } from "@definitions/characterForm";
 import { RaceForm, StepperForm } from "@definitions/stepperForm";
 import {
   Box,
@@ -53,7 +53,7 @@ export default function RaceFrame({
     setForm((prev) => ({ ...prev, race: { ...prev.race, [property]: value } }));
   };
 
-  const handleLanguagesChange = (value: BaseItem[]): void => {
+  const handleLanguagesChange = (value: Sourceable[]): void => {
     setPropertyInForm(
       "languageIds",
       value.map((v) => v.id),

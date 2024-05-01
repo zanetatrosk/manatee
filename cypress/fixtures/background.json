@@ -37,13 +37,12 @@
       "amount": 1,
       "defaults": [
           {
-              "id": "660d8ab159c37f01fbad2645",
-              "name": "Disguise kit",
-              "source": {
-                  "id": "SRD",
-                  "name": "System Reference Document"
-              },
-              "type": "other"
+            "id": "660d8ab159c37f01fbad2645",
+            "name": "Disguise kit",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            }
           }
       ]
   }

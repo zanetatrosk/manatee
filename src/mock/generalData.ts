@@ -1,18 +1,19 @@
 import {
-  BaseItem,
   Background,
   Class,
   Race,
   Source,
+  Sourceable,
 } from "definitions/characterForm";
 
 const races: Race[] = [
   {
     id: "1",
     name: "Dwarf",
+    source: { id: "0", name: "Player's Handbook" },
     languageProficiencies: {
       amount: 2,
-      defaults: [{ id: "1", name: "Common Dwarvish" }],
+      defaults: [{ id: "1", name: "Common Dwarvish", source: { id: "0", name: "Player's Handbook" }}],
     },
     description:
       "Bold and hardy, dwarves are known as skilled warriors, miners, and workers of stone and metal.",
@@ -35,11 +36,12 @@ const races: Race[] = [
   {
     id: "2",
     name: "Elf",
+    source: { id: "0", name: "Player's Handbook" },
     languageProficiencies: {
       amount: 2,
       defaults: [
-        { id: "1", name: "Common Elvish" },
-        { id: "2", name: "High Elvish" },
+        { id: "1", name: "Common Elvish", source: { id: "0", name: "Player's Handbook" }},
+        { id: "2", name: "High Elvish", source: { id: "0", name: "Player's Handbook"},},
       ],
     },
     description:
@@ -68,11 +70,12 @@ const races: Race[] = [
   {
     id: "3",
     name: "Halfling",
+    source: { id: "0", name: "Player's Handbook" },
     languageProficiencies: {
       amount: 2,
       defaults: [
-        { id: "8", name: "Common Draconic" },
-        { id: "9", name: "High Draconic" },
+        { id: "8", name: "Common Draconic", source: { id: "0", name: "Player's Handbook" }},
+        { id: "9", name: "High Draconic" , source: { id: "0", name: "Player's Handbook" },}
       ],
     },
     description:
@@ -101,9 +104,10 @@ const races: Race[] = [
   {
     id: "4",
     name: "Human",
+    source: { id: "0", name: "Player's Handbook" },
     languageProficiencies: {
       amount: 1,
-      defaults: [{ id: "1", name: "Common Elvish" }],
+      defaults: [{ id: "1", name: "Common Elvish", source: { id: "0", name: "Player's Handbook"}}],
     },
     description: "The Human is ",
     speed: 30,
@@ -111,100 +115,104 @@ const races: Race[] = [
     abilityScorePlus2: [],
     sizeOptions: ["Medium"],
   },
+  {
+    id: "5",
+    name: "Half-Elf",
+    source: { id: "0", name: "Player's Handbook" },
+        languageProficiencies: {
+            amount: 2,
+            defaults: [
+                { id: "2", name: "Elvish", source: { id: "0", name: "Player's Handbook" },},
+                { id: "1", name: "Common", source: { id: "0", name: "Player's Handbook" },}
+            ]
+        },
+        description: "Walking in two worlds but truly belonging to neither, half-elves combine what some say are the best qualities of their elf and human parents: human curiosity, inventiveness, and ambition tempered by the refined senses, love of nature, and artistic tastes of the elves. Some half-elves live among humans, set apart by their emotional and physical differences, watching friends and loved ones age while time barely touches them. Others live with the elves, growing to adulthood while their peers continue to live as children, growing restless in the timeless elven realms.",
+        speed: 30,
+        features: [
+            {
+                title: "Darkvision",
+                text: "...",
+                levelMinimum: 1
+            },
+            {
+                title: "Fey Ancestry",
+                text: "The elf has advantage on saving throws against being charmed, and magic can’t put the elf to sleep.",
+                levelMinimum: 1
+            }
+        ],
+        abilityScorePlus2: ["DEXTERITY"],
+        sizeOptions: ["medium"]
+  }
 ];
 
 const backgrounds: Background[] = [
   {
-    id: "1",
-    name: "Acolyte",
-    languageProficiencies: {
-      amount: 1,
-      defaults: [{ id: "1", name: "Common" }],
+    "id": "660d8ab159c37f01fbad266a",
+    "name": "Acolyte",
+    "source": {
+        "id": "0",
+        "name": "Player's Handbook"
     },
-    toolProficiencies: {
-      amount: 1,
-      defaults: [],
-    },
-    description:
-      "You have spent your life in the service of a temple to a specific god or pantheon of gods. You act as an intermediary between the realm of the holy and the mortal world, performing sacred rites and offering sacrifices in order to conduct worshipers into the presence of the divine. You are not necessarily a cleric—performing sacred rites is not the same thing as channeling divine power.",
-    features: [
-      {
-        title: "Shelter of the Faithful",
-        text: "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.",
-        levelMinimum: 1,
-      },
+    "description": "You have spent your life in the service of a temple to a specific god or pantheon of gods. You act as an intermediary between the realm of the holy and the mortal world, performing sacred rites and offering sacrifices in order to conduct worshipers into the presence of the divine.",
+    "features": [
+        {
+            "title": "Shelter of the Faithful",
+            "text": "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.",
+            "levelMinimum": 1
+        }
     ],
-  },
-  {
-    id: "2",
-    name: "Charlatan",
-    languageProficiencies: {
-      amount: 0,
-      defaults: [],
+    "skillProficiencies": {
+        "amount": 2,
+        "defaults": [
+            "insight",
+            "religion"
+        ]
     },
-    toolProficiencies: {
-      amount: 0,
-      defaults: [],
+    "languageProficiencies": {
+        "amount": 2,
+        "defaults": [
+        {
+            "id": "10",
+            "name": "Common",
+            "source": {
+                "id": "0",
+                "name": "Player's Handbook"
+            },
+        }]
     },
-    description:
-      "You have always had a way with people. You know what makes them tick, you can tease out their hearts' desires after a few minutes of conversation, and with a few leading questions you can read them like they were children's books. It's a useful talent, and one that you're perfectly willing to use for your advantage.",
-    features: [
-      {
-        title: "False Identity",
-        text: "You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona. Additionally, you can forge documents including official papers and personal letters, as long as you have seen an example of the kind of document or the handwriting you are trying to copy.",
-        levelMinimum: 1,
-      },
-    ],
-  },
+    "toolProficiencies": {
+        "amount": 1,
+        "defaults": [
+            {
+                "id": "18",
+                "name": "Disguise kit",
+                "source": {
+                    "id": "0",
+                    "name": "Player's Handbook"
+                },
+            }
+        ]
+    }
+  }
 ];
 
-const languages: BaseItem[] = [
+const languages: Sourceable[] = [
   // Elvish languages
-  { id: "1", name: "Common Elvish" },
-  { id: "2", name: "High Elvish" },
-  { id: "3", name: "Wood Elvish" },
-  { id: "4", name: "Drow Sign Language" },
-
+  { id: "1", name: "Common Elvish", source: { id: "0", name: "Player's Handbook" } },
+  { id: "2", name: "High Elvish", source: { id: "0", name: "Player's Handbook" } },
+  { id: "3", name: "Wood Elvish", source: { id: "0", name: "Player's Handbook" } },
   // Dwarvish languages
-  { id: "5", name: "Common Dwarvish" },
-  { id: "6", name: "Hill Dwarvish" },
-  { id: "7", name: "Mountain Dwarvish" },
-
-  // Draconic languages
-  { id: "8", name: "Common Draconic" },
-  { id: "9", name: "High Draconic" },
-  { id: "10", name: "Ancient Draconic" },
-
-  // Gnomish languages
-  { id: "11", name: "Common Gnomish" },
-  { id: "12", name: "Rock Gnomish" },
-  { id: "13", name: "Forest Gnomish" },
-
-  // Orcish languages
-  { id: "14", name: "Common Orcish" },
-  { id: "15", name: "Black Orcish" },
-  { id: "16", name: "Gray Orcish" },
-
-  // Celestial languages
-  { id: "17", name: "Common Celestial" },
-  { id: "18", name: "High Celestial" },
-
-  // Infernal languages
-  { id: "19", name: "Common Infernal" },
-  { id: "20", name: "High Infernal" },
-
-  // Abyssal languages
-  { id: "21", name: "Common Abyssal" },
-  { id: "22", name: "High Abyssal" },
-
-  // Giant languages
-  { id: "23", name: "Common Giant" },
-  { id: "24", name: "Hill Giant" },
-  { id: "25", name: "Stone Giant" },
-
-  // Undercommon languages
-  { id: "26", name: "Common Undercommon" },
-  { id: "27", name: "High Undercommon" },
+  { id: "4", name: "Common Dwarvish", source: { id: "0", name: "Player's Handbook" } },
+  { id: "5", name: "Deep Dwarvish", source: { id: "0", name: "Player's Handbook" } },
+  { id: "6", name: "Undercommon", source: { id: "0", name: "Player's Handbook" } },
+  // Halfling languages
+  { id: "7", name: "Common Halfling", source: { id: "0", name: "Player's Handbook" } },
+  { id: "8", name: "High Halfling", source: { id: "0", name: "Player's Handbook" } },
+  { id: "9", name: "Low Halfling", source: { id: "0", name: "Player's Handbook" } },
+  // Human languages
+  { id: "10", name: "Common", source: { id: "0", name: "Player's Handbook" } },
+  { id: "11", name: "High Common", source: { id: "0", name: "Player's Handbook" } },
+  { id: "12", name: "Low Common", source: { id: "0", name: "Player's Handbook" } },
 ];
 
 const sources: Source[] = [
@@ -230,6 +238,7 @@ const classes: Class[] = [
   {
     id: "1",
     name: "Barbarian",
+    source: { id: "0", name: "Player's Handbook" },
     hitDice: "1d12",
     subclasses: ["Berserker"],
     features: [
@@ -254,6 +263,7 @@ const classes: Class[] = [
   {
     id: "2",
     name: "Bard",
+    source: { id: "0", name: "Player's Handbook" },
     hitDice: "1d8",
     subclasses: ["Lore", "Valor"],
     features: [
@@ -278,36 +288,25 @@ const classes: Class[] = [
   },
 ];
 
-const proficiencyTools: BaseItem[] = [
-  { id: "1", name: "Alchemist’s Supplies" },
-  { id: "2", name: "Brewer’s Supplies" },
-  { id: "3", name: "Calligrapher’s Supplies" },
-  { id: "4", name: "Carpenter’s Tools" },
-  { id: "5", name: "Cartographer’s Tools" },
-  { id: "6", name: "Cobbler’s Tools" },
-  { id: "7", name: "Cook’s Utensils" },
-  { id: "8", name: "Glassblower’s Tools" },
-  { id: "9", name: "Jeweler’s Tools" },
-  { id: "10", name: "Leatherworker’s Tools" },
-  { id: "11", name: "Mason’s Tools" },
-  { id: "12", name: "Painter’s Supplies" },
-  { id: "13", name: "Potter’s Tools" },
-  { id: "14", name: "Smith’s Tools" },
-  { id: "15", name: "Tinker’s Tools" },
-  { id: "16", name: "Weaver’s Tools" },
-  { id: "17", name: "Woodcarver’s Tools" },
-  { id: "18", name: "Disguise Kit" },
-  { id: "19", name: "Forgery Kit" },
-  { id: "20", name: "Herbalism Kit" },
-  { id: "21", name: "Navigator’s Tools" },
-  { id: "22", name: "Poisoner’s Kit" },
-  { id: "23", name: "Thieves’ Tools" },
-  { id: "24", name: "Dice Set" },
-  { id: "25", name: "Dragonchess Set" },
-  { id: "26", name: "Playing Card Set" },
-  { id: "27", name: "Three-Dragon Ante Set" },
-  { id: "28", name: "Land Vehicles" },
-  { id: "29", name: "Water Vehicles" },
+const proficiencyTools: Sourceable[] = [
+  { id: "1", name: "Alchemist's Supplies", source: { id: "0", name: "Player's Handbook" } },
+  { id: "2", name: "Brewer's Supplies", source: { id: "0", name: "Player's Handbook" } },
+  { id: "3", name: "Calligrapher's Supplies", source: { id: "0", name: "Player's Handbook" } },
+  { id: "4", name: "Carpenter's Tools", source: { id: "0", name: "Player's Handbook" } },
+  { id: "5", name: "Cartographer's Tools", source: { id: "0", name: "Player's Handbook" } },
+  { id: "6", name: "Cobbler's Tools", source: { id: "0", name: "Player's Handbook" } },
+  { id: "7", name: "Cook's Utensils", source: { id: "0", name: "Player's Handbook" } },
+  { id: "8", name: "Glassblower's Tools", source: { id: "0", name: "Player's Handbook" } },
+  { id: "9", name: "Jeweler's Tools", source: { id: "0", name: "Player's Handbook" } },
+  { id: "10", name: "Leatherworker's Tools", source: { id: "0", name: "Player's Handbook" } },
+  { id: "11", name: "Mason's Tools", source: { id: "0", name: "Player's Handbook" } },
+  { id: "12", name: "Painter's Supplies", source: { id: "0", name: "Player's Handbook" } },
+  { id: "13", name: "Potter's Tools", source: { id: "0", name: "Player's Handbook" } },
+  { id: "14", name: "Smith's Tools", source: { id: "0", name: "Player's Handbook" } },
+  { id: "15", name: "Tinker's Tools", source: { id: "0", name: "Player's Handbook" } },
+  { id: "16", name: "Weaver's Tools", source: { id: "0", name: "Player's Handbook" } },
+  { id: "17", name: "Woodcarver Tools", source: { id: "0", name: "Player's Handbook" } },
+  { id: "18", name: "Disguise Kit", source: { id: "0", name: "Player's Handbook" } },
 ];
 
 const subclasses: string[] = ["Berserker", "Lore", "Valor"];

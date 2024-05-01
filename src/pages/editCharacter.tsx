@@ -47,7 +47,6 @@ const fillDataForm = (character: CharacterSheet): StepperForm => {
       languageIds: languages.filter(filterBySource("background")).map(mapToId),
     },
   };
-
   return form;
 };
 export default function EditCharacter() {

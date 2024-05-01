@@ -1,6 +1,6 @@
 import CardInfo from "@components/cardInfo";
 import MultiComplete from "@components/customMultiComplete";
-import { Class, BaseItem } from "@definitions/characterForm";
+import { Class, BaseItem, Sourceable } from "@definitions/characterForm";
 import { ClassForm, StepperForm } from "@definitions/stepperForm";
 import {
   Box,
@@ -52,7 +52,7 @@ export default function ClassFrame({
     }));
   };
 
-  const handleToolsChange = (value: BaseItem[]): void => {
+  const handleToolsChange = (value: Sourceable[]): void => {
     setPropertyInForm(
       "toolIds",
       value.map((v) => v.id),

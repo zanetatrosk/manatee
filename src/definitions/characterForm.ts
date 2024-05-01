@@ -30,10 +30,7 @@ interface AbilityScore {
   upByTwo: boolean;
 }
 
-interface Race {
-  id: string | null;
-  name: string;
-  source?: any;
+interface Race extends Sourceable {
   description: string;
   features: Feature[];
   speed: number;
@@ -42,18 +39,16 @@ interface Race {
   abilityScorePlus2?: string[];
   abilityScorePlus1?: string[];
   //enum
-  skillProficiencies?: AutocompleteParams;
-  languageProficiencies: AutocompleteParams;
+  skillProficiencies?: AutocompleteParams<string>;
+  languageProficiencies: AutocompleteParams<Sourceable>;
 }
 
-interface Class {
-  id: string | null;
-  name: string;
+interface Class extends Sourceable {
   subclasses: string[];
   description: string;
   hitDice: string;
   features: Feature[];
-  toolProficiencies: AutocompleteParams;
+  toolProficiencies: AutocompleteParams<Sourceable>;
 }
 
 interface Feature {
@@ -63,13 +58,12 @@ interface Feature {
 }
 
 //interface Background similar as Race
-interface Background {
-  id: string | null;
-  name: string;
+interface Background extends Sourceable {
   features: Feature[];
   description: string;
-  languageProficiencies: AutocompleteParams;
-  toolProficiencies: AutocompleteParams;
+  languageProficiencies: AutocompleteParams<Sourceable>;
+  toolProficiencies: AutocompleteParams<Sourceable>;
+  skillProficiencies: AutocompleteParams<string>;
 }
 
 interface Source extends BaseItem {}
@@ -84,9 +78,9 @@ interface Sourceable extends BaseItem {
   source: Source;
 }
 
-interface AutocompleteParams {
+interface AutocompleteParams<T> {
   amount: number;
-  defaults: BaseItem[];
+  defaults: T[];
 }
 
 export type {

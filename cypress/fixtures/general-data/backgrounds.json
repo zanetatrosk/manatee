@@ -137,8 +137,7 @@
                     "source": {
                         "id": "SRD",
                         "name": "System Reference Document"
-                    },
-                    "type": "other"
+                    }
                 }
             ]
         }
@@ -168,15 +167,16 @@
         "languageProficiencies": {
             "amount": 2,
             "defaults": [
-            {
-                "id": "660d8ab159c37f01fbad2653",
-                "name": "Common",
-                "source": {
-                    "id": "SRD",
-                    "name": "System Reference Document"
-                },
-                "exotic": false
-            }]
+                {
+                    "id": "660d8ab159c37f01fbad2653",
+                    "name": "Common",
+                    "source": {
+                        "id": "SRD",
+                        "name": "System Reference Document"
+                    },
+                    "exotic": false
+                }
+            ]
         },
         "toolProficiencies": {
             "amount": 1,

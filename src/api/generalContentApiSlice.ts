@@ -4,6 +4,7 @@ import {
   Class,
   Background,
   BaseItem,
+  Sourceable,
 } from "@definitions/characterForm";
 import { Pageable, Spell, Armor, Weapon } from "@definitions/characterSheet";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
@@ -42,14 +43,14 @@ export const generalContentApiSlice = createApi({
         params: { source: src },
       }),
     }),
-    getLanguages: builder.query<BaseItem[], string[]>({
+    getLanguages: builder.query<Sourceable[], string[]>({
       query: (src) => ({
         url: "languages",
         method: "GET",
         params: { source: src },
       }),
     }),
-    getTools: builder.query<BaseItem[], string[]>({
+    getTools: builder.query<Sourceable[], string[]>({
       query: (src) => ({
         url: "tools",
         method: "GET",

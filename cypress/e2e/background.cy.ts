@@ -4,18 +4,18 @@ describe("Automation TC04", () => {
   const str = "You can have up to";
   before(() => {
     cy.visit("http://localhost:3000/characters/create-character");
+    cy.intercept("GET", "/api/tools?source=", {
+      fixture: "general-data/tools.json",
+    }).as("getTools");
     cy.get('[data-cy="next"]').click();
-    cy.get('[data-cy="next"]').click();
+    cy.intercept("GET", "/api/languages?source=", {
+    fixture: "general-data/languages.json",
+      }).as("getLanguages");
+      cy.get('[data-cy="next"]').click();
     cy.get('[data-cy="next"]').click();
     cy.intercept("GET", "/api/backgrounds?source=", {
       fixture: "general-data/backgrounds.json",
     }).as("getBackgrounds");
-    cy.intercept("GET", "/api/languages?source=", {
-      fixture: "general-data/languages.json",
-      }).as("getLanguages");
-    cy.intercept("GET", "/api/tools?source=", {
-      fixture: "general-data/tools.json",
-    }).as("getTools");
     cy.get('[data-cy="next"]').click();
     cy.fixture('background.json').as('background').then((background) => {
       this.backgr = background.name;

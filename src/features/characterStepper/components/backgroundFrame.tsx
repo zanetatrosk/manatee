@@ -1,6 +1,6 @@
 import CardInfo from "@components/cardInfo";
 import MultiComplete from "@components/customMultiComplete";
-import { Background, BaseItem } from "@definitions/characterForm";
+import { Background, BaseItem, Source, Sourceable } from "@definitions/characterForm";
 import { BackgroundForm, StepperForm } from "@definitions/stepperForm";
 import {
   Box,
@@ -44,14 +44,14 @@ export default function BackgroundFrame({
     }));
   };
 
-  const handleToolsChange = (value: BaseItem[]): void => {
+  const handleToolsChange = (value: Sourceable[]): void => {
     setPropertyInForm(
       "toolIds",
       value.map((v) => v.id),
     );
   };
 
-  const handleLanguagesChange = (value: BaseItem[]): void => {
+  const handleLanguagesChange = (value: Sourceable[]): void => {
     setPropertyInForm(
       "languageIds",
       value.map((v) => v.id),
