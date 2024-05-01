@@ -192,9 +192,9 @@ export default function CreateCharacterStepper({
             {CREATE_CHARACTER.CARD_ACTIONS.BACK}
           </Button>
           <Box sx={{ flex: "1 1 auto" }} />
-          <Button onClick={handleNext} data-cy={"next"}>
+          {steps.length - 1 !== activeStep && <Button onClick={handleNext} data-cy={"next"}>
             {CREATE_CHARACTER.CARD_ACTIONS.NEXT}
-          </Button>
+          </Button>}
           <Tooltip
             title={!canFinish() ? ERROR_MESSAGES.CHARACTER_CREATE_MESSAGE : ""}
           >

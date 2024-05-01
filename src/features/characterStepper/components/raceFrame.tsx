@@ -41,7 +41,7 @@ export default function RaceFrame({
   const [race, setRace] = useState<Race | null>(null);
 
   if (races && raceForm.id && !race) {
-    const raceTmp = races?.find((r) => r.id === raceForm.id);
+    const raceTmp = races?.content.find((r) => r.id === raceForm.id);
     if (raceTmp) {
       setRace(raceTmp);
     }
@@ -83,7 +83,7 @@ export default function RaceFrame({
             sx={{ my: 2 }}
             clearOnBlur
             data-cy="race"
-            options={races || []}
+            options={races?.content || []}
             getOptionLabel={(option) => option.name}
             isOptionEqualToValue={(option, value) => option.id === value.id}
             value={race?.id ? race : null}
@@ -134,10 +134,10 @@ export default function RaceFrame({
             <Grid container sx={{ py: 2 }}>
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
-                  values={languages || []}
+                  values={languages?.content || []}
                   data_cy="languages"
                   results={
-                    languages?.filter((l) =>
+                    languages?.content.filter((l) =>
                       raceForm.languageIds.includes(l.id),
                     ) || []
                   }

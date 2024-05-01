@@ -1,6 +1,6 @@
 import CardInfo from "@components/cardInfo";
 import MultiComplete from "@components/customMultiComplete";
-import { Background, BaseItem, Source, Sourceable } from "@definitions/characterForm";
+import { Background, Sourceable } from "@definitions/characterForm";
 import { BackgroundForm, StepperForm } from "@definitions/stepperForm";
 import {
   Box,
@@ -35,7 +35,16 @@ export default function BackgroundFrame({
   const { data: languages, isLoading: loadingLanguages } =
     useGetLanguagesQuery(sourceIds);
   const { data: tools, isLoading: loadingTools } = useGetToolsQuery([]);
-  const [background, setBackground] = useState<Background | null>(backgrounds?.find((b) => b.id === backgroundForm.id) || null);
+  const [background, setBackground] = useState<Background | null>(null);
+
+  useEffect(() => {
+    if (backgrounds && backgroundForm.id && !background) {
+      const backgroundTmp = backgrounds?.content.find((b) => b.id === backgroundForm.id);
+      if (backgroundTmp) {
+        setBackground(backgroundTmp);
+      }
+    }
+  }, [backgrounds, backgroundForm.id, background]);
 
   const setPropertyInForm = (property: string, value: any) => {
     setForm((prev) => ({
@@ -77,7 +86,7 @@ export default function BackgroundFrame({
       <Grid container>
         <Grid item lg={7} xs={12}>
           <Autocomplete
-            options={backgrounds || []}
+            options={backgrounds?.content || []}
             value={background?.id ? background : null}
             getOptionLabel={(option) => option.name}
             sx={{ my: 2 }}
@@ -135,9 +144,9 @@ export default function BackgroundFrame({
               {background.languageProficiencies.amount != 0 && (
                 <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                   <MultiComplete
-                    values={languages || []}
+                    values={languages?.content || []}
                     results={
-                      languages?.filter((l) =>
+                      languages?.content.filter((l) =>
                         backgroundForm.languageIds.includes(l.id),
                       ) || []
                     }
@@ -156,9 +165,9 @@ export default function BackgroundFrame({
               )}
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
-                  values={tools || []}
+                  values={tools?.content || []}
                   results={
-                    tools?.filter((t) =>
+                    tools?.content.filter((t) =>
                       backgroundForm.toolIds.includes(t.id),
                     ) || []
                   }

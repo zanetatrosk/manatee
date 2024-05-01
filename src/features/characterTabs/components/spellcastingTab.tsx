@@ -8,8 +8,9 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { addPlusOrMinus } from "utils/textUtils";
 import ButtonAddItems from "@features/buttonAddItems/buttonAddItems";
-import { useSpells } from "@features/buttonAddItems/components/filteredTable";
 import { CHARACTER_SHEET } from "constants/characterDefinition";
+import { Source } from "@definitions/characterForm";
+import { useGetSpellsQuery } from "api/generalContentApiSlice";
 
 export default function SpellcastingTab() {
   const SPELLCASTING = CHARACTER_SHEET.SPELLCASTING;
@@ -24,7 +25,7 @@ export default function SpellcastingTab() {
   ];
   const { id } = useParams();
   const [postSpellsByCharacterId] = usePostSpellsByCharacterIdMutation();
-  const { spellcasting } = useAppSelector((state) => state.character);
+  const { spellcasting, sources } = useAppSelector((state) => state.character);
 
   const tranformSpells = (spells: Spell[]) => {
     return spells.map((spell: Spell) => {
@@ -47,6 +48,42 @@ export default function SpellcastingTab() {
           setSpells(tranformSpells(s));
         });
     }
+  };
+
+  interface ItemsProps {
+    data: RowData[];
+    totalElements: number;
+  }
+
+  const useSpells = (
+    page: number,
+    size: number,
+    query: string,
+    source: Source[]
+  ): ItemsProps => {
+    const spellsInfo = useGetSpellsQuery({
+      page: page,
+      size: size,
+      query: query,
+      source: sources.map((s) => s.id),
+    }).data;
+    
+    if (spellsInfo) {
+      return {
+        data: spellsInfo.content.map((spell) => {
+          return {
+            id: spell.id,
+            columns: [spell.name, spell.level.toString(), spell.castingTime],
+            description: spell.description,
+          };
+        }),
+        totalElements: spellsInfo.totalElements,
+      };
+    }
+    return {
+      data: [],
+      totalElements: 0,
+    };
   };
 
   if (!spellcasting) return null;

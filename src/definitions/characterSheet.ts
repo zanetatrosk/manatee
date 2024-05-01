@@ -134,10 +134,12 @@ interface CharacterSheet extends CharacterInfo {
   languages: SheetProficiencies<LanguagesProficiency>[];
   features: Feature[];
   spellcasting?: Spellcasting;
+  armorEquipped: boolean;
   armor: Armor;
   attacks: Attack[];
   sources: Source[];
   proficiencies: Proficiencies;
+  
 }
 
 const characterSheetDefaults: CharacterSheet = {
@@ -374,6 +376,7 @@ const characterSheetDefaults: CharacterSheet = {
   tools: [],
   languages: [],
   features: [],
+  armorEquipped: false,
   armor: {
     id: "",
     name: "",

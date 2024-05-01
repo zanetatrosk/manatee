@@ -27,53 +27,12 @@ const transformAttacks = (weapons: Attack[]): RowData[] => {
   return wap;
 };
 
-const useAttacks = (page: number, size: number, query: string) => {
-  const attacks = useGetWeaponsQuery({
-    page: page,
-    size: size,
-    query: query,
-  }).data;
 
-  if (attacks) {
-    return {
-      data: attacks.content.map((weapon: Weapon) => {
-        return {
-          id: weapon.id,
-          columns: [weapon.name, weapon.range, weapon.damageType],
-          description: weapon.properties.join(", "),
-        };
-      }),
-      totalElements: attacks.totalElements,
-    };
-  }
-  return { data: [], totalElements: 0 };
-};
-
-const useArmor = (page: number, size: number, query: string) => {
-  const armor = useGetArmorQuery({
-    page: page,
-    size: size,
-    query: query,
-  }).data;
-  if (armor) {
-    return {
-      data: armor.content.map((armor) => {
-        return {
-          id: armor.id,
-          columns: [armor.name, armor.baseArmorClass.toString(), armor.type],
-          description: armor.description,
-        };
-      }),
-      totalElements: armor.totalElements,
-    };
-  }
-  return { data: [], totalElements: 0 };
-};
 
 const ATTACKS = CHARACTER_SHEET.ATTACKS;
 const ARMOR = CHARACTER_SHEET.ARMOR;
 export default function AttacksAndArmorTab() {
-  const { armor: armorStore, attacks: weaponsStore } = useAppSelector(
+  const { armor: armorStore, attacks: weaponsStore, armorEquipped, sources } = useAppSelector(
     (state) => state.character,
   );
   const { id } = useParams();
@@ -89,6 +48,51 @@ export default function AttacksAndArmorTab() {
     ATTACKS.HEADERS.ATTACK_BONUS,
     ATTACKS.HEADERS.DAMAGE_TYPE,
   ];
+
+  const useAttacks = (page: number, size: number, query: string) => {
+    const attacks = useGetWeaponsQuery({
+      page: page,
+      size: size,
+      query: query,
+      source: sources.map((s) => s.id)
+    }).data;
+  
+    if (attacks) {
+      return {
+        data: attacks.content.map((weapon: Weapon) => {
+          return {
+            id: weapon.id,
+            columns: [weapon.name, weapon.range, weapon.damageType],
+            description: weapon.properties.join(", "),
+          };
+        }),
+        totalElements: attacks.totalElements,
+      };
+    }
+    return { data: [], totalElements: 0 };
+  };
+  
+  const useArmor = (page: number, size: number, query: string) => {
+    const armor = useGetArmorQuery({
+      page: page,
+      size: size,
+      query: query,
+      source: sources.map((s) => s.id)
+    }).data;
+    if (armor) {
+      return {
+        data: armor.content.map((armor) => {
+          return {
+            id: armor.id,
+            columns: [armor.name, armor.baseArmorClass.toString(), armor.type],
+            description: armor.description,
+          };
+        }),
+        totalElements: armor.totalElements,
+      };
+    }
+    return { data: [], totalElements: 0 };
+  };
 
   const usePostAttacks = (weapons: string[]) => {
     if (id) {
@@ -114,12 +118,12 @@ export default function AttacksAndArmorTab() {
   }, [weaponsStore]);
 
   useEffect(() => {
-    if (armorStore) {
+    if (armorStore && armorEquipped) {
       setArmor(tranformArmor(armorStore));
     }
   }, [armorStore]);
 
-  const [armor, setArmor] = useState<RowData>();
+  const [armor, setArmor] = useState<RowData|null>(null);
   const [weapons, setWeapons] = useState<RowData[]>([]);
 
   return (
@@ -148,7 +152,7 @@ export default function AttacksAndArmorTab() {
           <ButtonAddItems
             buttonText={ARMOR.ADD_ARMOR}
             usePaginationHook={useArmor}
-            defaults={[armorStore.id]}
+            defaults={armorEquipped ? [armorStore.id] : []}
             sendToBEHook={usePostArmor}
             singleChoice
             headers={armorHeaders}

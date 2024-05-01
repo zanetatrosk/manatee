@@ -38,7 +38,7 @@ export default function ClassFrame({
   );
 
   if (classForm.id && !characterClass) {
-    const classTmp = classes?.find((c) => c.id === classForm.id);
+    const classTmp = classes?.content.find((c) => c.id === classForm.id);
     if (classTmp) {
       setClass(classTmp);
       setVisibility(true);
@@ -79,7 +79,7 @@ export default function ClassFrame({
         <Grid item lg={7} xs={12}>
           <Autocomplete
             id="combo-box-demo"
-            options={classes || []}
+            options={classes?.content || []}
             getOptionLabel={(option) => option.name}
             value={characterClass?.id ? characterClass : null}
             sx={{ my: 2 }}
@@ -147,9 +147,9 @@ export default function ClassFrame({
               </Grid>
               <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                 <MultiComplete
-                  values={tools || []}
+                  values={tools?.content || []}
                   results={
-                    tools?.filter((t) => classForm.toolIds.includes(t.id)) || []
+                    tools?.content.filter((t) => classForm.toolIds.includes(t.id)) || []
                   }
                   onChange={handleToolsChange}
                   label={CLASS.PROF_TOOLS}

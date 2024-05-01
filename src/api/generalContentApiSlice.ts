@@ -13,13 +13,14 @@ export interface PaginationParams {
   page: number;
   size: number;
   query: string;
+  source?: string[];
 }
 
 export const generalContentApiSlice = createApi({
   reducerPath: "contentApi",
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
   endpoints: (builder) => ({
-    getRaces: builder.query<Race[], string[]>({
+    getRaces: builder.query<Pageable<Race>, string[]>({
       query: (src) => ({
         url: "races",
         method: "GET",
@@ -29,28 +30,28 @@ export const generalContentApiSlice = createApi({
     getSources: builder.query<Source[], void>({
       query: () => "sources",
     }),
-    getClasses: builder.query<Class[], string[]>({
+    getClasses: builder.query<Pageable<Class>, string[]>({
       query: (src) => ({
         url: "classes",
         method: "GET",
         params: { source: src },
       }),
     }),
-    getBackgrounds: builder.query<Background[], string[]>({
+    getBackgrounds: builder.query<Pageable<Background>, string[]>({
       query: (src) => ({
         url: "backgrounds",
         method: "GET",
         params: { source: src },
       }),
     }),
-    getLanguages: builder.query<Sourceable[], string[]>({
+    getLanguages: builder.query<Pageable<Sourceable>, string[]>({
       query: (src) => ({
         url: "languages",
         method: "GET",
         params: { source: src },
       }),
     }),
-    getTools: builder.query<Sourceable[], string[]>({
+    getTools: builder.query<Pageable<Sourceable>, string[]>({
       query: (src) => ({
         url: "tools",
         method: "GET",
@@ -61,21 +62,21 @@ export const generalContentApiSlice = createApi({
       query: (src) => ({
         url: "spells",
         method: "GET",
-        params: { page: src.page, size: src.size, name: src.query },
+        params: { page: src.page, size: src.size, name: src.query, source: src.source },
       }),
     }),
     getArmor: builder.query<Pageable<Armor>, PaginationParams>({
       query: (src) => ({
         url: "armor",
         method: "GET",
-        params: { page: src.page, size: src.size, name: src.query },
+        params: { page: src.page, size: src.size, name: src.query, source: src.source },
       }),
     }),
     getWeapons: builder.query<Pageable<Weapon>, PaginationParams>({
       query: (src) => ({
         url: "weapons",
         method: "GET",
-        params: { page: src.page, size: src.size, name: src.query },
+        params: { page: src.page, size: src.size, name: src.query, source: src.source },
       }),
     }),
   }),

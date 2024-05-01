@@ -1,10 +1,13 @@
 # Welcome to D&D App
 
-## Running the app
+## About repository
+This repository is a frontend part of the D&D App. It is fully developed by me, however, in some commits 
+my colleague is tagged as commiter. This is due to the fact I worked for some time on his computer.
 
-This app runs with Node v19.0.1. This app is fully dependent on backend from [D&D API](https://github.com/ph0enixCZ/anteater/tree/main). Please make sure to run the backend before running this app.
-Please before running the app, make sure to run the following command to install all the dependencies.
-### `npm install`
+## Running the app
+This app runs with Node v19.0.1. This app is fully dependent on backend from repository [Anteater](https://github.com/ph0enixCZ/anteater/tree/main). Please make sure to you run the compatible version of the backend when running the frontend.
+Please before running the app, make sure to run the following command to install all the dependencies: 
+`npm install`
 
 ## Available Scripts
 
@@ -23,11 +26,12 @@ Open Cypress to run the tests. Please make sure to run the frontend before runni
 
 ## `npm run build`
 Builds the app for production to the `build` folder.\
+Then it can be run with the following command: `serve -s build`
 
 ## `npm run mock`
-Runs the app without need of backend in the development mode with mock data.\ 
+Runs the app without need of backend in the development mode with mock data.
+The creation of character is the only thing that is mocked. 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
 
 
 

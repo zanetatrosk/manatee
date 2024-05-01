@@ -53,38 +53,6 @@ function EnhancedTableToolbar({ numSelected }: { numSelected: number }) {
   );
 }
 
-export interface ItemsProps {
-  data: RowData[];
-  totalElements: number;
-}
-export const useSpells = (
-  page: number,
-  size: number,
-  query: string,
-): ItemsProps => {
-  const spellsInfo = useGetSpellsQuery({
-    page: page,
-    size: size,
-    query: query,
-  }).data;
-  if (spellsInfo) {
-    return {
-      data: spellsInfo.content.map((spell) => {
-        return {
-          id: spell.id,
-          columns: [spell.name, spell.level.toString(), spell.castingTime],
-          description: spell.description,
-        };
-      }),
-      totalElements: spellsInfo.totalElements,
-    };
-  }
-  return {
-    data: [],
-    totalElements: 0,
-  };
-};
-
 function Row(props: {
   row: RowData;
   idx: number;
