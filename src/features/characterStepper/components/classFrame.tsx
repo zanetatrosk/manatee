@@ -149,7 +149,9 @@ export default function ClassFrame({
                 <MultiComplete
                   values={tools?.content || []}
                   results={
-                    tools?.content.filter((t) => classForm.toolIds.includes(t.id)) || []
+                    tools?.content.filter((t) =>
+                      classForm.toolIds.includes(t.id),
+                    ) || []
                   }
                   onChange={handleToolsChange}
                   label={CLASS.PROF_TOOLS}

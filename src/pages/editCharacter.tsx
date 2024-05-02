@@ -16,10 +16,25 @@ import { useParams } from "react-router-dom";
 
 const fillDataForm = (character: CharacterSheet): StepperForm => {
   const { id, info, sources, tools, languages, abilities } = character;
-  const { characterName, playerName, cardPhotoUrl, sheetPhotoUrl, class: classInfo, race, size, background, subclass } = info;
+  const {
+    characterName,
+    playerName,
+    cardPhotoUrl,
+    sheetPhotoUrl,
+    class: classInfo,
+    race,
+    size,
+    background,
+    subclass,
+  } = info;
 
-  const filterBySource = (source: string) => (item: SheetProficiencies<ToolsProficiency | LanguagesProficiency>) => item.from === source;
-  const mapToId = (item: SheetProficiencies<ToolsProficiency | LanguagesProficiency>) => item.item.id;
+  const filterBySource =
+    (source: string) =>
+    (item: SheetProficiencies<ToolsProficiency | LanguagesProficiency>) =>
+      item.from === source;
+  const mapToId = (
+    item: SheetProficiencies<ToolsProficiency | LanguagesProficiency>,
+  ) => item.item.id;
 
   const form: StepperForm = {
     id,

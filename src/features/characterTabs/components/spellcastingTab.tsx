@@ -59,7 +59,7 @@ export default function SpellcastingTab() {
     page: number,
     size: number,
     query: string,
-    source: Source[]
+    source: Source[],
   ): ItemsProps => {
     const spellsInfo = useGetSpellsQuery({
       page: page,
@@ -67,7 +67,7 @@ export default function SpellcastingTab() {
       query: query,
       source: sources.map((s) => s.id),
     }).data;
-    
+
     if (spellsInfo) {
       return {
         data: spellsInfo.content.map((spell) => {

@@ -139,7 +139,6 @@ interface CharacterSheet extends CharacterInfo {
   attacks: Attack[];
   sources: Source[];
   proficiencies: Proficiencies;
-  
 }
 
 const characterSheetDefaults: CharacterSheet = {

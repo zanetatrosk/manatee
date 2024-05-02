@@ -62,21 +62,36 @@ export const generalContentApiSlice = createApi({
       query: (src) => ({
         url: "spells",
         method: "GET",
-        params: { page: src.page, size: src.size, name: src.query, source: src.source },
+        params: {
+          page: src.page,
+          size: src.size,
+          name: src.query,
+          source: src.source,
+        },
       }),
     }),
     getArmor: builder.query<Pageable<Armor>, PaginationParams>({
       query: (src) => ({
         url: "armor",
         method: "GET",
-        params: { page: src.page, size: src.size, name: src.query, source: src.source },
+        params: {
+          page: src.page,
+          size: src.size,
+          name: src.query,
+          source: src.source,
+        },
       }),
     }),
     getWeapons: builder.query<Pageable<Weapon>, PaginationParams>({
       query: (src) => ({
         url: "weapons",
         method: "GET",
-        params: { page: src.page, size: src.size, name: src.query, source: src.source },
+        params: {
+          page: src.page,
+          size: src.size,
+          name: src.query,
+          source: src.source,
+        },
       }),
     }),
   }),

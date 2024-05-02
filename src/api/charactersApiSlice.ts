@@ -11,8 +11,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const charactersApiSlice = createApi({
   reducerPath: "charactersApi",
-  baseQuery: fetchBaseQuery({ 
-    baseUrl: process.env.REACT_APP_API_URL + "characters" 
+  baseQuery: fetchBaseQuery({
+    baseUrl: process.env.REACT_APP_API_URL + "characters",
   }),
   tagTypes: ["CharacterList", "CharacterSheet"],
   endpoints: (builder) => ({
@@ -99,7 +99,6 @@ export const charactersApiSlice = createApi({
       }),
       invalidatesTags: ["CharacterSheet"],
     }),
-    
   }),
 });
 export const {

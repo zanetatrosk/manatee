@@ -39,7 +39,9 @@ export default function BackgroundFrame({
 
   useEffect(() => {
     if (backgrounds && backgroundForm.id && !background) {
-      const backgroundTmp = backgrounds?.content.find((b) => b.id === backgroundForm.id);
+      const backgroundTmp = backgrounds?.content.find(
+        (b) => b.id === backgroundForm.id,
+      );
       if (backgroundTmp) {
         setBackground(backgroundTmp);
       }
