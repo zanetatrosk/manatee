@@ -99,9 +99,6 @@ export const charactersApiSlice = createApi({
       }),
       invalidatesTags: ["CharacterSheet"],
     }),
-    getPdfByCharacterId: builder.query<string, string>({
-      query: (id) => `/${id}/pdf`,
-    }),
   }),
 });
 export const {
@@ -115,5 +112,4 @@ export const {
   useDeleteCharacterMutation,
   usePostLevelUpByCharacterIdMutation,
   usePutCharacterMutation,
-  useGetPdfByCharacterIdQuery,
 } = charactersApiSlice;
