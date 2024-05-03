@@ -13,21 +13,21 @@ import { Background, Race } from "@definitions/characterForm";
 export const handlers = [
   rest.get("/races", (req, res, ctx) => {
     const sources = req.url.searchParams.get("source");
-    let filteredRaces = races.filter((race: Race) =>
+    let filteredRaces = races.content.filter((race: Race) =>
       sources?.includes(race.source.id),
     );
-    if (!sources) filteredRaces = races;
-    return res(ctx.status(200), ctx.json(filteredRaces));
+    if (!sources) filteredRaces = races.content;
+    return res(ctx.status(200), ctx.json({ content: filteredRaces , totalElements: filteredRaces.length }));
   }),
 
   rest.get("/backgrounds", (req, res, ctx) => {
     const sources = req.url.searchParams.get("source");
     let filteredBackgrounds = sources
-      ? backgrounds.filter((background: Background) =>
+      ? backgrounds.content.filter((background: Background) =>
           sources?.includes(background.source.id),
         )
-      : backgrounds;
-    return res(ctx.status(200), ctx.json(filteredBackgrounds));
+      : backgrounds.content;
+    return res(ctx.status(200), ctx.json({ content: filteredBackgrounds , totalElements: filteredBackgrounds.length }));
   }),
 
   rest.get("/sources", (req, res, ctx) => {
@@ -37,25 +37,25 @@ export const handlers = [
   rest.get("/classes", (req, res, ctx) => {
     const sources = req.url.searchParams.get("source");
     let filteredClasses = sources
-      ? classes.filter((c) => sources?.includes(c.source.id))
-      : classes;
-    return res(ctx.status(200), ctx.json(filteredClasses));
+      ? classes.content.filter((c) => sources?.includes(c.source.id))
+      : classes.content;
+    return res(ctx.status(200), ctx.json({ content: filteredClasses , totalElements: filteredClasses.length }));
   }),
 
   rest.get("/languages", (req, res, ctx) => {
     const sources = req.url.searchParams.get("source");
     let filteredLanguages = sources
-      ? languages.filter((l) => sources?.includes(l.source.id))
-      : languages;
-    return res(ctx.status(200), ctx.json(languages));
+      ? languages.content.filter((l) => sources?.includes(l.source.id))
+      : languages.content;
+    return res(ctx.status(200), ctx.json({ content: filteredLanguages , totalElements: filteredLanguages.length }));
   }),
 
   rest.get("/tools", (req, res, ctx) => {
     const sources = req.url.searchParams.get("source");
     let filteredTools = sources
-      ? proficiencyTools.filter((t) => sources?.includes(t.source.id))
-      : proficiencyTools;
-    return res(ctx.status(200), ctx.json(proficiencyTools));
+      ? proficiencyTools.content.filter((t) => sources?.includes(t.source.id))
+      : proficiencyTools.content;
+    return res(ctx.status(200), ctx.json({ content: filteredTools , totalElements: filteredTools.length }));
   }),
 
   rest.get("/subclasses", (req, res, ctx) => {

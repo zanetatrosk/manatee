@@ -1,3 +1,4 @@
+import { Pageable } from "@definitions/characterSheet";
 import {
   Background,
   Class,
@@ -6,7 +7,9 @@ import {
   Sourceable,
 } from "definitions/characterForm";
 
-const races: Race[] = [
+const races: Pageable<Race> = {
+  totalElements: 5,
+  content: [
   {
     id: "1",
     name: "Dwarf",
@@ -180,9 +183,11 @@ const races: Race[] = [
     abilityScorePlus2: ["DEXTERITY"],
     sizeOptions: ["medium"],
   },
-];
+]};
 
-const backgrounds: Background[] = [
+const backgrounds: Pageable<Background> = {
+  totalElements: 1,
+  content: [
   {
     id: "660d8ab159c37f01fbad266a",
     name: "Acolyte",
@@ -230,9 +235,11 @@ const backgrounds: Background[] = [
       ],
     },
   },
-];
+]};
 
-const languages: Sourceable[] = [
+const languages: Pageable<Sourceable> = {
+  totalElements: 13,
+  content: [
   // Elvish languages
   {
     id: "1",
@@ -293,7 +300,7 @@ const languages: Sourceable[] = [
     name: "Low Common",
     source: { id: "0", name: "Player's Handbook" },
   },
-];
+]};
 
 const sources: Source[] = [
   { id: "0", name: "Player's Handbook" },
@@ -314,7 +321,9 @@ const sources: Source[] = [
   { id: "15", name: "The Wild Beyond the Witchlight" },
 ];
 
-const classes: Class[] = [
+const classes: Pageable<Class> = {
+  totalElements: 2,
+  content: [
   {
     id: "1",
     name: "Barbarian",
@@ -366,9 +375,11 @@ const classes: Class[] = [
       defaults: [],
     },
   },
-];
+]};
 
-const proficiencyTools: Sourceable[] = [
+const proficiencyTools: Pageable<Sourceable> = {
+  totalElements: 18,
+  content: [
   {
     id: "1",
     name: "Alchemist's Supplies",
@@ -459,7 +470,7 @@ const proficiencyTools: Sourceable[] = [
     name: "Disguise Kit",
     source: { id: "0", name: "Player's Handbook" },
   },
-];
+]}
 
 const subclasses: string[] = ["Berserker", "Lore", "Valor"];
 
