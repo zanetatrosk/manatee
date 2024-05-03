@@ -93,7 +93,7 @@ function Row(props: {
             )}
           </TableCell>
           {row.columns.map((col) => (
-            <TableCell component="th" scope="row">
+            <TableCell component="th" scope="row" key={col}>
               <Typography variant="body2">{col}</Typography>
             </TableCell>
           ))}

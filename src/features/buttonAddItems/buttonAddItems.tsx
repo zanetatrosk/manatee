@@ -40,7 +40,6 @@ export default function ButtonAddItems({
   };
 
   const saveSelected = () => {
-    console.log(selected);
     sendToBEHook(selected);
     closeDialog();
   };

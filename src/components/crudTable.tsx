@@ -54,7 +54,6 @@ export default function CrudTable({
 
   function handleChangePage(event: unknown, page: number): void {
     setPage(page);
-    console.log(page);
   }
 
   const handleChangeRowsPerPage = (
@@ -72,7 +71,7 @@ export default function CrudTable({
         <TableRow key={idx} sx={[open && { "& > *": { borderBottom: 0 } }]}>
           <>
             {row.columns.map((col) => (
-              <TableCell component="th" scope="row">
+              <TableCell component="th" scope="row" key={col}>
                 <Typography variant="body2">{col}</Typography>
               </TableCell>
             ))}
@@ -122,7 +121,7 @@ export default function CrudTable({
             <TableHead>
               <TableRow>
                 {headers.map((header) => (
-                  <TableCell>{header}</TableCell>
+                  <TableCell key={header}>{header}</TableCell>
                 ))}
                 {showDescription && <TableCell></TableCell>}
               </TableRow>

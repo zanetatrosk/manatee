@@ -16,16 +16,16 @@ import NoRoute from "@pages/noRoute";
 
 function App() {
   const theme = useAppSelector((state) => state.theme);
+  const useTheme = createTheme({
+    palette: {
+      mode: theme as PaletteMode,
+    },
+  });
   return (
     <div className="App">
       <Router>
         <ThemeProvider
-          theme={(outerTheme) =>
-            createTheme({
-              ...outerTheme,
-              palette: { mode: theme as PaletteMode },
-            })
-          }
+          theme={useTheme}
         >
           <CssBaseline />
           <Navbar />
