@@ -25,6 +25,7 @@ import BasicInformation from "./components/basicInformationFrame";
 import Background from "./components/backgroundFrame";
 import Race from "./components/raceFrame";
 import Class from "./components/classFrame";
+import PATHS from "constants/path";
 
 const steps = [
   CREATE_CHARACTER.BASIC_INFO.HEADING,
@@ -130,14 +131,14 @@ export default function CreateCharacterStepper({
       putCharacter(tmpForm)
         .unwrap()
         .then((res: CharacterSheet) => {
-          navigate("/characters/character-sheet/" + res.id);
+          navigate(PATHS.CHARACTER_SHEET + "/" + res.id);
         });
       return;
     }
     postCharacter(tmpForm)
       .unwrap()
       .then((res: CharacterSheet) => {
-        navigate("/characters/character-sheet/" + res.id);
+        navigate(PATHS.CHARACTER_SHEET + "/" + res.id);
       });
   };
 

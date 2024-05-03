@@ -8,6 +8,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useState } from "react";
 import { usePostLevelUpByCharacterIdMutation } from "api/charactersApiSlice";
 import { CharacterSheet } from "@definitions/characterSheet";
+import PATHS from "constants/path";
 
 export default function CharacterHeader({ character } : { character: CharacterSheet }) {
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ return (
             <Button
               variant="outlined"
               startIcon={<ArrowBackIcon />}
-              onClick={() => navigate("/characters")}
+              onClick={() => navigate(PATHS.CHARACTERS)}
             >
               {CHARACTER_SHEET.ACTIONS.BACK}
             </Button>
@@ -58,7 +59,7 @@ return (
               <Button
                 variant="outlined"
                 onClick={() =>
-                  navigate("/characters/create-character/" + character.id)
+                  navigate( PATHS.CREATE_CHARACTER + "/" + character.id)
                 }
               >
                 {CHARACTER_SHEET.ACTIONS.REMAKE_CHARACTER}

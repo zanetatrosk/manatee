@@ -16,6 +16,7 @@ import ConfirmationDialog from "@components/confirmationDialog";
 import Spinner from "@components/spinner";
 import { CharacterInfo } from "definitions/characterSheet";
 import noImage from "assets/images/no-image.png";
+import PATHS from "constants/path";
 
 function CharacterCard({ props }: { props: CharacterInfo }) {
   let navigate = useNavigate();
@@ -30,7 +31,7 @@ function CharacterCard({ props }: { props: CharacterInfo }) {
   return (
     <Card sx={{ width: "100%" }} data-cy="character-card">
       <CardActionArea
-        onClick={() => navigate("/characters/character-sheet/" + props.id)}
+        onClick={() => navigate(PATHS.CHARACTER_SHEET + "/" + props.id)}
       >
         <CardMedia
           sx={{ maxHeight: 160 }}
@@ -55,7 +56,7 @@ function CharacterCard({ props }: { props: CharacterInfo }) {
               size="small"
               sx={{ mx: 1 }}
               onClick={() => {
-                navigate("/characters/character-sheet/" + props.id);
+                navigate(PATHS.CHARACTER_SHEET + "/" + props.id);
               }}
             >
               {CHARACTERS.VIEW}
@@ -116,7 +117,7 @@ export default function Characters() {
             variant="outlined"
             size="small"
             onClick={() => {
-              navigate("/characters/create-character");
+              navigate(PATHS.CREATE_CHARACTER);
             }}
             fullWidth={!greaterThanMid}
             endIcon={<AddIcon />}
