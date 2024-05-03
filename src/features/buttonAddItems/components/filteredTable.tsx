@@ -17,7 +17,6 @@ import {
   TextField,
   Radio,
 } from "@mui/material";
-import { useGetSpellsQuery } from "api/generalContentApiSlice";
 import React, { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";

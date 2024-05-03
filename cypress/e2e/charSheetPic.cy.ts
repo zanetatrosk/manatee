@@ -6,7 +6,7 @@ const srcPic =
   const race = "Half-Elf";
   const background = "Charlatan";
   before(() => {
-    cy.visit("http://localhost:3000/characters/create-character");
+    cy.visit("/characters/create-character");
     cy.intercept("GET", "/api/races?source=", {
       fixture: "general-data/races.json",
     }).as("getRaces");

@@ -3,7 +3,7 @@
 describe("Automation TC04", () => {
   const str = "You can have up to";
   before(() => {
-    cy.visit("http://localhost:3000/characters/create-character");
+    cy.visit("/characters/create-character");
     cy.intercept("GET", "/api/tools?source=", {
       fixture: "general-data/tools.json",
     }).as("getTools");

@@ -1,196 +1,199 @@
-[
-    {
-        "id": "660d8ab159c37f01fbad266e",
-        "name": "Another background",
-        "source": {
-            "id": "EXP1",
-            "name": "Experimental Source 1"
-        },
-        "description": "This is a background that is not the same as the others. It is different and unique.",
-        "features": [
-            {
-                "title": "Shelter of the Faithful",
-                "text": "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.",
-                "levelMinimum": 1
-            }
-        ],
-        "skillProficiencies": {
-            "amount": 2,
-            "defaults": [
-                "acrobatics",
-                "athletics"
-            ]
-        },
-        "languageProficiencies": {
-            "amount": 0,
-            "defaults": []
-        },
-        "toolProficiencies": {
-            "amount": 2,
-            "defaults": []
-        }
-    },
-    {
-        "id": "660d8ab159c37f01fbad266c",
-        "name": "Acolyte new",
-        "source": {
-            "id": "EXP1",
-            "name": "Experimental Source 1"
-        },
-        "description": "You have spent your life in the service of a temple to a specific god or pantheon of gods. You act as an intermediary between the realm of the holy and the mortal world, performing sacred rites and offering sacrifices in order to conduct worshipers into the presence of the divine.",
-        "features": [
-            {
-                "title": "Shelter of the Faithful",
-                "text": "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.",
-                "levelMinimum": 1
-            }
-        ],
-        "skillProficiencies": {
-            "amount": 2,
-            "defaults": [
-                "insight",
-                "religion"
-            ]
-        },
-        "languageProficiencies": {
-            "amount": 2,
-            "defaults": []
-        },
-        "toolProficiencies": {
-            "amount": 1,
-            "defaults": []
-        }
-    },
-    {
-        "id": "660d8ab159c37f01fbad266d",
-        "name": "Random dude",
-        "source": {
-            "id": "EXP2",
-            "name": "Experimental Source 2"
-        },
-        "description": "You have spent your life in the service of a temple to a specific god or pantheon of gods. You act as an intermediary between the realm of the holy and the mortal world, performing sacred rites and offering sacrifices in order to conduct worshipers into the presence of the divine.",
-        "features": [
-            {
-                "title": "Some feature",
-                "text": "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.",
-                "levelMinimum": 1
-            }
-        ],
-        "skillProficiencies": {
-            "amount": 2,
-            "defaults": [
-                "insight",
-                "religion"
-            ]
-        },
-        "languageProficiencies": {
-            "amount": 2,
-            "defaults": []
-        },
-        "toolProficiencies": {
-            "amount": 1,
-            "defaults": []
-        }
-    },
-    {
-        "id": "660d8ab159c37f01fbad266b",
-        "name": "Charlatan",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
-        },
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, vitae aliquam ni",
-        "features": [
-            {
-                "title": "False Identity",
-                "text": "Something about false identity",
-                "levelMinimum": 1
-            }
-        ],
-        "skillProficiencies": {
-            "amount": 2,
-            "defaults": [
-                "deception",
-                "sleight_of_hand"
-            ]
-        },
-        "languageProficiencies": {
-            "amount": 1,
-            "defaults": [
+{
+    "content": [
+        {
+            "id": "660d8ab159c37f01fbad266e",
+            "name": "Another background",
+            "source": {
+                "id": "EXP1",
+                "name": "Experimental Source 1"
+            },
+            "description": "This is a background that is not the same as the others. It is different and unique.",
+            "features": [
                 {
-                    "id": "660d8ab159c37f01fbad2653",
-                    "name": "Common",
-                    "source": {
-                        "id": "SRD",
-                        "name": "System Reference Document"
-                    },
-                    "exotic": false
+                    "title": "Shelter of the Faithful",
+                    "text": "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.",
+                    "levelMinimum": 1
                 }
-            ]
+            ],
+            "skillProficiencies": {
+                "amount": 2,
+                "defaults": [
+                    "acrobatics",
+                    "athletics"
+                ]
+            },
+            "languageProficiencies": {
+                "amount": 0,
+                "defaults": []
+            },
+            "toolProficiencies": {
+                "amount": 2,
+                "defaults": []
+            }
         },
-        "toolProficiencies": {
-            "amount": 1,
-            "defaults": [
+        {
+            "id": "660d8ab159c37f01fbad266c",
+            "name": "Acolyte new",
+            "source": {
+                "id": "EXP1",
+                "name": "Experimental Source 1"
+            },
+            "description": "You have spent your life in the service of a temple to a specific god or pantheon of gods. You act as an intermediary between the realm of the holy and the mortal world, performing sacred rites and offering sacrifices in order to conduct worshipers into the presence of the divine.",
+            "features": [
                 {
-                    "id": "660d8ab159c37f01fbad2645",
-                    "name": "Disguise kit",
-                    "source": {
-                        "id": "SRD",
-                        "name": "System Reference Document"
+                    "title": "Shelter of the Faithful",
+                    "text": "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.",
+                    "levelMinimum": 1
+                }
+            ],
+            "skillProficiencies": {
+                "amount": 2,
+                "defaults": [
+                    "insight",
+                    "religion"
+                ]
+            },
+            "languageProficiencies": {
+                "amount": 2,
+                "defaults": []
+            },
+            "toolProficiencies": {
+                "amount": 1,
+                "defaults": []
+            }
+        },
+        {
+            "id": "660d8ab159c37f01fbad266d",
+            "name": "Random dude",
+            "source": {
+                "id": "EXP2",
+                "name": "Experimental Source 2"
+            },
+            "description": "You have spent your life in the service of a temple to a specific god or pantheon of gods. You act as an intermediary between the realm of the holy and the mortal world, performing sacred rites and offering sacrifices in order to conduct worshipers into the presence of the divine.",
+            "features": [
+                {
+                    "title": "Some feature",
+                    "text": "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.",
+                    "levelMinimum": 1
+                }
+            ],
+            "skillProficiencies": {
+                "amount": 2,
+                "defaults": [
+                    "insight",
+                    "religion"
+                ]
+            },
+            "languageProficiencies": {
+                "amount": 2,
+                "defaults": []
+            },
+            "toolProficiencies": {
+                "amount": 1,
+                "defaults": []
+            }
+        },
+        {
+            "id": "660d8ab159c37f01fbad266b",
+            "name": "Charlatan",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, vitae aliquam ni",
+            "features": [
+                {
+                    "title": "False Identity",
+                    "text": "Something about false identity",
+                    "levelMinimum": 1
+                }
+            ],
+            "skillProficiencies": {
+                "amount": 2,
+                "defaults": [
+                    "deception",
+                    "sleight_of_hand"
+                ]
+            },
+            "languageProficiencies": {
+                "amount": 1,
+                "defaults": [
+                    {
+                        "id": "660d8ab159c37f01fbad2653",
+                        "name": "Common",
+                        "source": {
+                            "id": "SRD",
+                            "name": "System Reference Document"
+                        },
+                        "exotic": false
                     }
-                }
-            ]
-        }
-    },
-    {
-        "id": "660d8ab159c37f01fbad266a",
-        "name": "Acolyte",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
-        },
-        "description": "You have spent your life in the service of a temple to a specific god or pantheon of gods. You act as an intermediary between the realm of the holy and the mortal world, performing sacred rites and offering sacrifices in order to conduct worshipers into the presence of the divine.",
-        "features": [
-            {
-                "title": "Shelter of the Faithful",
-                "text": "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.",
-                "levelMinimum": 1
+                ]
+            },
+            "toolProficiencies": {
+                "amount": 1,
+                "defaults": [
+                    {
+                        "id": "660d8ab159c37f01fbad2645",
+                        "name": "Disguise kit",
+                        "source": {
+                            "id": "SRD",
+                            "name": "System Reference Document"
+                        }
+                    }
+                ]
             }
-        ],
-        "skillProficiencies": {
-            "amount": 2,
-            "defaults": [
-                "insight",
-                "religion"
-            ]
         },
-        "languageProficiencies": {
-            "amount": 2,
-            "defaults": [
+        {
+            "id": "660d8ab159c37f01fbad266a",
+            "name": "Acolyte",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "description": "You have spent your life in the service of a temple to a specific god or pantheon of gods. You act as an intermediary between the realm of the holy and the mortal world, performing sacred rites and offering sacrifices in order to conduct worshipers into the presence of the divine.",
+            "features": [
                 {
-                    "id": "660d8ab159c37f01fbad2653",
-                    "name": "Common",
-                    "source": {
-                        "id": "SRD",
-                        "name": "System Reference Document"
-                    },
-                    "exotic": false
+                    "title": "Shelter of the Faithful",
+                    "text": "As an acolyte, you command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your adventuring companions can expect to receive free healing and care at a temple, shrine, or other established presence of your faith, though you must provide any material components needed for spells. Those who share your religion will support you (but only you) at a modest lifestyle.",
+                    "levelMinimum": 1
                 }
-            ]
-        },
-        "toolProficiencies": {
-            "amount": 1,
-            "defaults": [
-                {
-                    "id": "660d8ab159c37f01fbad2645",
-                    "name": "Disguise kit",
-                    "source": {
-                        "id": "SRD",
-                        "name": "System Reference Document"
-                    },
-                    "type": "other"
-                }
-            ]
+            ],
+            "skillProficiencies": {
+                "amount": 2,
+                "defaults": [
+                    "insight",
+                    "religion"
+                ]
+            },
+            "languageProficiencies": {
+                "amount": 2,
+                "defaults": [
+                    {
+                        "id": "660d8ab159c37f01fbad2653",
+                        "name": "Common",
+                        "source": {
+                            "id": "SRD",
+                            "name": "System Reference Document"
+                        },
+                        "exotic": false
+                    }
+                ]
+            },
+            "toolProficiencies": {
+                "amount": 1,
+                "defaults": [
+                    {
+                        "id": "660d8ab159c37f01fbad2645",
+                        "name": "Disguise kit",
+                        "source": {
+                            "id": "SRD",
+                            "name": "System Reference Document"
+                        },
+                        "type": "other"
+                    }
+                ]
+            }
         }
-    }
-]
+    ]
+}
+    

@@ -32,9 +32,9 @@ export default function BackgroundFrame({
 }) {
   const { data: backgrounds, isLoading: loadingBackgrounds } =
     useGetBackgroundsQuery(sourceIds);
-  const { data: languages, isLoading: loadingLanguages } =
+  const { data: languages } =
     useGetLanguagesQuery(sourceIds);
-  const { data: tools, isLoading: loadingTools } = useGetToolsQuery([]);
+  const { data: tools } = useGetToolsQuery([]);
   const [background, setBackground] = useState<Background | null>(null);
 
   useEffect(() => {
@@ -143,7 +143,7 @@ export default function BackgroundFrame({
               </Divider>
             </Box>
             <Grid container sx={{ py: 2 }} columnSpacing={8}>
-              {background.languageProficiencies.amount != 0 && (
+              {background.languageProficiencies.amount !== 0 && (
                 <Grid item lg={6} xs={12} sx={{ py: 2 }}>
                   <MultiComplete
                     values={languages?.content || []}

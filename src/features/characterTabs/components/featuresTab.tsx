@@ -1,7 +1,7 @@
 import { useAppSelector } from "@hooks/hooksStore";
-import CrudTable from "../../../components/crudTable";
 import { Feature } from "definitions/characterForm";
 import { CHARACTER_SHEET } from "constants/characterDefinition";
+import CrudTable from "@components/crudTable";
 
 export default function FeaturesTab() {
   const { features } = useAppSelector((state) => state.character);

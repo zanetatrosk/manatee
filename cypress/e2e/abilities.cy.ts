@@ -1,7 +1,7 @@
 describe('Automation TC03 check abilities', () => {
     
     before(() => {
-        cy.visit('http://localhost:3000/characters/create-character');
+        cy.visit('/characters/create-character');
         cy.get('[data-cy="next"]').click();
         cy.get('[data-cy="next"]').click();
         cy.get('[data-cy="next"]').click();

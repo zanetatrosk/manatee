@@ -1,209 +1,211 @@
-[
-    {
-        "id": "660d8ab159c37f01fbad2656",
-        "name": "Giant",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
+{
+    "content": [
+        {
+            "id": "660d8ab159c37f01fbad2656",
+            "name": "Giant",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "exotic": false
         },
-        "exotic": false
-    },
-    {
-        "id": "660d8ab159c37f01fbad2653",
-        "name": "Common",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
+        {
+            "id": "660d8ab159c37f01fbad2653",
+            "name": "Common",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "exotic": false
         },
-        "exotic": false
-    },
-    {
-        "id": "660d8ab159c37f01fbad2654",
-        "name": "Dwarvish",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
+        {
+            "id": "660d8ab159c37f01fbad2654",
+            "name": "Dwarvish",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "exotic": false
         },
-        "exotic": false
-    },
-    {
-        "id": "660d8ab159c37f01fbad2657",
-        "name": "Gnomish",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
+        {
+            "id": "660d8ab159c37f01fbad2657",
+            "name": "Gnomish",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "exotic": false
         },
-        "exotic": false
-    },
-    {
-        "id": "660d8ab159c37f01fbad265a",
-        "name": "Orc",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
+        {
+            "id": "660d8ab159c37f01fbad265a",
+            "name": "Orc",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "exotic": false
         },
-        "exotic": false
-    },
-    {
-        "id": "660d8ab159c37f01fbad2655",
-        "name": "Elvish",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
+        {
+            "id": "660d8ab159c37f01fbad2655",
+            "name": "Elvish",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "exotic": false
         },
-        "exotic": false
-    },
-    {
-        "id": "660d8ab159c37f01fbad2659",
-        "name": "Halfling",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
+        {
+            "id": "660d8ab159c37f01fbad2659",
+            "name": "Halfling",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "exotic": false
         },
-        "exotic": false
-    },
-    {
-        "id": "660d8ab159c37f01fbad2658",
-        "name": "Goblin",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
+        {
+            "id": "660d8ab159c37f01fbad2658",
+            "name": "Goblin",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "exotic": false
         },
-        "exotic": false
-    },
-    {
-        "id": "660d8ab159c37f01fbad265d",
-        "name": "Draconic",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
+        {
+            "id": "660d8ab159c37f01fbad265d",
+            "name": "Draconic",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "exotic": true
         },
-        "exotic": true
-    },
-    {
-        "id": "660d8ab159c37f01fbad2662",
-        "name": "Undercommon",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
+        {
+            "id": "660d8ab159c37f01fbad2662",
+            "name": "Undercommon",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "exotic": true
         },
-        "exotic": true
-    },
-    {
-        "id": "660d8ab159c37f01fbad265e",
-        "name": "Deep Speech",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
+        {
+            "id": "660d8ab159c37f01fbad265e",
+            "name": "Deep Speech",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "exotic": true
         },
-        "exotic": true
-    },
-    {
-        "id": "660d8ab159c37f01fbad265c",
-        "name": "Celestial",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
+        {
+            "id": "660d8ab159c37f01fbad265c",
+            "name": "Celestial",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "exotic": true
         },
-        "exotic": true
-    },
-    {
-        "id": "660d8ab159c37f01fbad265f",
-        "name": "Infernal",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
+        {
+            "id": "660d8ab159c37f01fbad265f",
+            "name": "Infernal",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "exotic": true
         },
-        "exotic": true
-    },
-    {
-        "id": "660d8ab159c37f01fbad265b",
-        "name": "Abyssal",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
+        {
+            "id": "660d8ab159c37f01fbad265b",
+            "name": "Abyssal",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "exotic": true
         },
-        "exotic": true
-    },
-    {
-        "id": "660d8ab159c37f01fbad2660",
-        "name": "Primordial",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
+        {
+            "id": "660d8ab159c37f01fbad2660",
+            "name": "Primordial",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "exotic": true
         },
-        "exotic": true
-    },
-    {
-        "id": "660d8ab159c37f01fbad2661",
-        "name": "Sylvan",
-        "source": {
-            "id": "SRD",
-            "name": "System Reference Document"
+        {
+            "id": "660d8ab159c37f01fbad2661",
+            "name": "Sylvan",
+            "source": {
+                "id": "SRD",
+                "name": "System Reference Document"
+            },
+            "exotic": true
         },
-        "exotic": true
-    },
-    {
-        "id": "660d8ab159c37f01fbad2664",
-        "name": "French",
-        "source": {
-            "id": "EXP1",
-            "name": "Experimental Source 1"
+        {
+            "id": "660d8ab159c37f01fbad2664",
+            "name": "French",
+            "source": {
+                "id": "EXP1",
+                "name": "Experimental Source 1"
+            },
+            "exotic": false
         },
-        "exotic": false
-    },
-    {
-        "id": "660d8ab159c37f01fbad2665",
-        "name": "German",
-        "source": {
-            "id": "EXP1",
-            "name": "Experimental Source 1"
+        {
+            "id": "660d8ab159c37f01fbad2665",
+            "name": "German",
+            "source": {
+                "id": "EXP1",
+                "name": "Experimental Source 1"
+            },
+            "exotic": false
         },
-        "exotic": false
-    },
-    {
-        "id": "660d8ab159c37f01fbad2666",
-        "name": "Spanish",
-        "source": {
-            "id": "EXP1",
-            "name": "Experimental Source 1"
+        {
+            "id": "660d8ab159c37f01fbad2666",
+            "name": "Spanish",
+            "source": {
+                "id": "EXP1",
+                "name": "Experimental Source 1"
+            },
+            "exotic": false
         },
-        "exotic": false
-    },
-    {
-        "id": "660d8ab159c37f01fbad2663",
-        "name": "English",
-        "source": {
-            "id": "EXP1",
-            "name": "Experimental Source 1"
+        {
+            "id": "660d8ab159c37f01fbad2663",
+            "name": "English",
+            "source": {
+                "id": "EXP1",
+                "name": "Experimental Source 1"
+            },
+            "exotic": false
         },
-        "exotic": false
-    },
-    {
-        "id": "660d8ab159c37f01fbad2667",
-        "name": "Klingon",
-        "source": {
-            "id": "EXP2",
-            "name": "Experimental Source 2"
+        {
+            "id": "660d8ab159c37f01fbad2667",
+            "name": "Klingon",
+            "source": {
+                "id": "EXP2",
+                "name": "Experimental Source 2"
+            },
+            "exotic": false
         },
-        "exotic": false
-    },
-    {
-        "id": "660d8ab159c37f01fbad2669",
-        "name": "Romulan",
-        "source": {
-            "id": "EXP2",
-            "name": "Experimental Source 2"
+        {
+            "id": "660d8ab159c37f01fbad2669",
+            "name": "Romulan",
+            "source": {
+                "id": "EXP2",
+                "name": "Experimental Source 2"
+            },
+            "exotic": false
         },
-        "exotic": false
-    },
-    {
-        "id": "660d8ab159c37f01fbad2668",
-        "name": "Vulcan",
-        "source": {
-            "id": "EXP2",
-            "name": "Experimental Source 2"
-        },
-        "exotic": false
-    }
-]
+        {
+            "id": "660d8ab159c37f01fbad2668",
+            "name": "Vulcan",
+            "source": {
+                "id": "EXP2",
+                "name": "Experimental Source 2"
+            },
+            "exotic": false
+        }
+    ]
+}

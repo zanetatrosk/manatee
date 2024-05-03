@@ -1,6 +1,6 @@
 import CardInfo from "@components/cardInfo";
 import MultiComplete from "@components/customMultiComplete";
-import { Class, BaseItem, Sourceable } from "@definitions/characterForm";
+import { Class, Sourceable } from "@definitions/characterForm";
 import { ClassForm, StepperForm } from "@definitions/stepperForm";
 import {
   Box,
@@ -31,7 +31,7 @@ export default function ClassFrame({
 }) {
   const { data: classes, isLoading: loadingClasses } =
     useGetClassesQuery(sourceIds);
-  const { data: tools, isLoading: toolsLoading } = useGetToolsQuery(sourceIds);
+  const { data: tools } = useGetToolsQuery(sourceIds);
   const [characterClass, setClass] = React.useState<Class | null>(null);
   const [isVisible, setVisibility] = React.useState<boolean>(
     !!characterClass?.id,

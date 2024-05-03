@@ -1,7 +1,7 @@
 describe('Automation TC01 check home page after loading an app', () => {
 
   beforeEach(() => {
-    cy.visit('http://localhost:3000/')
+    cy.visit('/')
     cy.fixture('navbar.json').as('navbar').then((navbar) => {
       this.nav = navbar.nav;
       this.usersChoices = navbar.usersChoices;

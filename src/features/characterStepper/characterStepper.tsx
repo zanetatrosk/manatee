@@ -45,7 +45,6 @@ export default function CreateCharacterStepper({
   character?: StepperForm;
 }) {
   const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set<number>());
   const navigate = useNavigate();
   const [postCharacter] = useAddCharacterMutation();
   const [putCharacter] = usePutCharacterMutation();
@@ -102,9 +101,6 @@ export default function CreateCharacterStepper({
     return step === 0;
   };
 
-  const isStepSkipped = (step: number) => {
-    return skipped.has(step);
-  };
 
   const canFinish = () => {
     return !!(form.class.id && form.race.id && form.background.id);
@@ -159,9 +155,6 @@ export default function CreateCharacterStepper({
                 {CREATE_CHARACTER.CARD_ACTIONS.OPTIONAL}
               </Typography>
             );
-          }
-          if (isStepSkipped(index)) {
-            stepProps.completed = false;
           }
           return (
             <Step key={label} {...stepProps}>

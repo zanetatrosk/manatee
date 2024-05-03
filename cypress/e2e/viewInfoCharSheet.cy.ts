@@ -8,7 +8,7 @@ describe("Automation TC08 check that information that was entered in the form is
   const characterName = "Test Character name";
   
   before(() => {
-    cy.visit("http://localhost:3000/characters/create-character");
+    cy.visit("/characters/create-character");
     cy.intercept("GET", "/api/races?source=", {
       fixture: "general-data/races.json",
     }).as("getRaces");

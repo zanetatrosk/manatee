@@ -1,6 +1,6 @@
 describe("Automation TC02 Content page", () => {
   before(() => {
-    cy.visit("http://localhost:3000/");
+    cy.visit("/");
   });
   it('should navigate to /content and display page content with title "content"', () => {
     // Click on the "Content" link in the navbar

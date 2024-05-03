@@ -1,6 +1,6 @@
 describe("Automation TC06 check ability calc", () => {
   before(() => {
-    cy.visit("http://localhost:3000/characters/create-character");
+    cy.visit("/characters/create-character");
     cy.get('[data-cy="next"]').click();
     cy.get('[data-cy="next"]').click();
     cy.get('[data-cy="next"]').click();

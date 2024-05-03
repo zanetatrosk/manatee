@@ -1,6 +1,6 @@
 import CardInfo from "@components/cardInfo";
 import MultiComplete from "@components/customMultiComplete";
-import { Race, BaseItem, Sourceable } from "@definitions/characterForm";
+import { Race, Sourceable } from "@definitions/characterForm";
 import { RaceForm, StepperForm } from "@definitions/stepperForm";
 import {
   Box,
@@ -36,7 +36,7 @@ export default function RaceFrame({
 }) {
   //calling api to get all races, in future this will be called when create character button is clicked
   const { data: races, isLoading: loadingRaces } = useGetRacesQuery(sourceIds);
-  const { data: languages, isLoading: loadingLanguages } =
+  const { data: languages } =
     useGetLanguagesQuery(sourceIds);
   const [race, setRace] = useState<Race | null>(null);
 

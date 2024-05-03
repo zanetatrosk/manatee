@@ -25,7 +25,7 @@ export default function CharacterSheet() {
       dispatch(setCharacterSheet({ ...character }));
       setReduxLoading(false);
     }
-  }, [character]);
+  }, [character, dispatch]);
 
   if (!character || isLoading || reduxLoading) return <Spinner />;
 
