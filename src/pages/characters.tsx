@@ -16,7 +16,7 @@ import ConfirmationDialog from "@components/confirmationDialog";
 import Spinner from "@components/spinner";
 import { CharacterInfo } from "definitions/characterSheet";
 import noImage from "assets/images/no-image.png";
-import PATHS from "constants/path";
+import PATHS from "constants/paths";
 
 function CharacterCard({ props }: { props: CharacterInfo }) {
   let navigate = useNavigate();

@@ -8,7 +8,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useState } from "react";
 import { usePostLevelUpByCharacterIdMutation } from "api/charactersApiSlice";
 import { CharacterSheet } from "@definitions/characterSheet";
-import PATHS from "constants/path";
+import PATHS from "constants/paths";
 
 export default function CharacterHeader({ character } : { character: CharacterSheet }) {
     const navigate = useNavigate();

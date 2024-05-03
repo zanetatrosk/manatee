@@ -25,7 +25,7 @@ import BasicInformation from "./components/basicInformationFrame";
 import Background from "./components/backgroundFrame";
 import Race from "./components/raceFrame";
 import Class from "./components/classFrame";
-import PATHS from "constants/path";
+import PATHS from "constants/paths";
 
 const steps = [
   CREATE_CHARACTER.BASIC_INFO.HEADING,
