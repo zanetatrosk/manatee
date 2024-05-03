@@ -27,11 +27,13 @@ export default function ButtonAddItems({
   });
 
   const [selected, setSelected] = React.useState<string[]>(defaults);
+
   const items = usePaginationHook(
     pagination.page,
     pagination.size,
     pagination.query,
   );
+  
   const closeDialog = () => {
     setOpen(false);
     setPagination({ page: 0, size: 5, query: "" });
@@ -68,7 +70,7 @@ export default function ButtonAddItems({
           setSelectedIds={(ids: string[]) => {
             setSelected(ids);
           }}
-          selectedIds={selected}
+          selectedIds={defaults}
           singleChoice={singleChoice}
           headers={headers}
         />

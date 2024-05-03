@@ -109,6 +109,7 @@ const CHARACTER_SHEET = {
   SAVING_THROWS: "Saving Throws",
   ACTIONS: {
     REMAKE_CHARACTER: "Remake Character",
+    GENERATE_PDF: "Generate PDF",
     LEVEL_UP: "Level Up",
     BACK: "Back",
   },

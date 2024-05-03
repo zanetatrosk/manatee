@@ -1,16 +1,14 @@
-import CrudTable, { RowData } from "@components/crudTable";
+import CrudTable from "@components/crudTable";
 import StatsGrid from "@features/statsGrid/statsGrid";
 import { useAppSelector } from "@hooks/hooksStore";
 import { Grid } from "@mui/material";
 import { Spell, Slot } from "definitions/characterSheet";
-import { usePostSpellsByCharacterIdMutation } from "api/charactersApiSlice";
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { addPlusOrMinus } from "utils/textUtils";
 import ButtonAddItems from "@features/buttonAddItems/buttonAddItems";
 import { CHARACTER_SHEET } from "constants/characterDefinition";
-import { Source } from "@definitions/characterForm";
-import { useGetSpellsQuery } from "api/generalContentApiSlice";
+import usePostSpells from "../hooks/usePostSpells";
+import useSpells from "../hooks/useSpells";
 
 export default function SpellcastingTab() {
   const SPELLCASTING = CHARACTER_SHEET.SPELLCASTING;
@@ -24,8 +22,8 @@ export default function SpellcastingTab() {
     SPELLCASTING.VIEW_TABLE_HEADERS.CASTING_TIME,
   ];
   const { id } = useParams();
-  const [postSpellsByCharacterId] = usePostSpellsByCharacterIdMutation();
-  const { spellcasting, sources } = useAppSelector((state) => state.character);
+  const { spellcasting } = useAppSelector((state) => state.character);
+  const postSpells = usePostSpells();
 
   const tranformSpells = (spells: Spell[]) => {
     return spells.map((spell: Spell) => {
@@ -35,55 +33,6 @@ export default function SpellcastingTab() {
         description: spell.description,
       };
     });
-  };
-
-  const [tableSpells, setSpells] = useState<RowData[]>(
-    tranformSpells(spellcasting?.spells || []),
-  );
-  const usePostSpells = (spells: string[]) => {
-    if (id) {
-      postSpellsByCharacterId({ id, spells })
-        .unwrap()
-        .then((s: Spell[]) => {
-          setSpells(tranformSpells(s));
-        });
-    }
-  };
-
-  interface ItemsProps {
-    data: RowData[];
-    totalElements: number;
-  }
-
-  const useSpells = (
-    page: number,
-    size: number,
-    query: string,
-    source: Source[],
-  ): ItemsProps => {
-    const spellsInfo = useGetSpellsQuery({
-      page: page,
-      size: size,
-      query: query,
-      source: sources.map((s) => s.id),
-    }).data;
-
-    if (spellsInfo) {
-      return {
-        data: spellsInfo.content.map((spell) => {
-          return {
-            id: spell.id,
-            columns: [spell.name, spell.level.toString(), spell.castingTime],
-            description: spell.description,
-          };
-        }),
-        totalElements: spellsInfo.totalElements,
-      };
-    }
-    return {
-      data: [],
-      totalElements: 0,
-    };
   };
 
   if (!spellcasting) return null;
@@ -127,14 +76,14 @@ export default function SpellcastingTab() {
         <Grid item>
           <CrudTable
             title={SPELLCASTING.SPELLS_TITLE}
-            rows={tableSpells}
+            rows={tranformSpells(spellcasting.spells)}
             headers={spellsHeaders}
             actionButton={
               <ButtonAddItems
                 buttonText={SPELLCASTING.ADD_SPELL}
                 usePaginationHook={useSpells}
                 defaults={spellcasting.spells?.map((spell: Spell) => spell.id)}
-                sendToBEHook={usePostSpells}
+                sendToBEHook={(spells: string[]) => postSpells(spells, id!)}
                 headers={spellsHeaders}
               />
             }
