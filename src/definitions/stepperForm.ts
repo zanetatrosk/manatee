@@ -18,18 +18,21 @@ interface ClassForm {
   id: string | null;
   subclass: string | null;
   toolIds: string[];
+  source: string;
 }
 
 interface RaceForm {
   id: string | null;
   size: string;
   languageIds: string[];
+  source: string;
 }
 
 interface BackgroundForm {
   id: string | null;
   toolIds: string[];
   languageIds: string[];
+  source: string;
 }
 
 interface StepperForm {

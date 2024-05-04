@@ -102,8 +102,9 @@ export default function CreateCharacterStepper({
     return step === 0;
   };
 
-
   const canFinish = () => {
+    const sources = form.info.sourceIds;
+    if( sources.length > 0 && !sources.includes(form.class.source) && !sources.includes(form.race.source) && !sources.includes(form.background.source) ) return false;
     return !!(form.class.id && form.race.id && form.background.id);
   };
 

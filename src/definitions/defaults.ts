@@ -59,17 +59,20 @@ export const returnDefaults = (): StepperForm => {
     race: {
       id: null,
       size: "",
+      source: "",
       languageIds: [],
     },
     background: {
       id: null,
       toolIds: [],
+      source: "",
       languageIds: [],
     },
     class: {
       id: null,
       subclass: null,
       toolIds: [],
+      source: "",
     },
   };
 };

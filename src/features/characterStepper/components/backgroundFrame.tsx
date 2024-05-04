@@ -104,6 +104,7 @@ export default function BackgroundFrame({
                   id: value.id,
                   toolIds: toolIds,
                   languageIds: languageIds,
+                  source: value.source.id,
                 },
               }));
               setBackground(value);

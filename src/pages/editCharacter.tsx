@@ -47,17 +47,20 @@ const fillDataForm = (character: CharacterSheet): StepperForm => {
     },
     class: {
       id: classInfo.id,
+      source: classInfo.sourceId,
       subclass: subclass,
       toolIds: tools.filter(filterBySource("class")).map(mapToId),
     },
     race: {
       id: race.id,
       size,
+      source: race.sourceId,
       languageIds: languages.filter(filterBySource("race")).map(mapToId),
     },
     abilityScores: abilities,
     background: {
       id: background.id,
+      source: background.sourceId,
       toolIds: tools.filter(filterBySource("background")).map(mapToId),
       languageIds: languages.filter(filterBySource("background")).map(mapToId),
     },

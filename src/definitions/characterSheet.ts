@@ -9,13 +9,18 @@ import {
 } from "./characterForm";
 import { ToolsProficiency, LanguagesProficiency } from "./stepperForm";
 
+
+interface ItemWithSourceId extends BaseItem {
+  sourceId: string;
+}
+
 interface SheetHeaderInfo extends BasicInfo {
   subclass: string;
   size: string;
   level: number;
-  race: BaseItem;
-  class: BaseItem;
-  background: BaseItem;
+  race: ItemWithSourceId;
+  class: ItemWithSourceId;
+  background: ItemWithSourceId;
 }
 
 export interface Armor extends Sourceable {
@@ -156,14 +161,17 @@ const characterSheetDefaults: CharacterSheet = {
     class: {
       id: "",
       name: "Barbarian",
+      sourceId: "",
     },
     background: {
       id: "",
       name: "Acolyte",
+      sourceId: "",
     },
     race: {
       id: "",
       name: "Human",
+      sourceId: "",
     },
   },
   stats: {
