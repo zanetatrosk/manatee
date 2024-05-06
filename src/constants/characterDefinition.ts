@@ -123,7 +123,7 @@ const CHARACTER_SHEET = {
     INITIATIVE: "Initiative",
     SPEED: "Speed",
     HIT_POINT_MAX: "Hit Point Max",
-    PROF_BONUS: "Proficiency Bonus",
+    PROF_BONUS: "Prof. Bonus",
     HIT_DICE: "Hit Dice",
   },
   ATTACKS_AND_ARMOR: "Attacks and Armor",
@@ -187,6 +187,8 @@ const COMMON = {
 
 const CONTENT = {
   HEADING: "Content Page",
+  DESCRIPTION:
+    "Adding sources is only available in the backend through script. Please follow instructions in the README.md file to add sources.",
 };
 
 const WELCOME = {

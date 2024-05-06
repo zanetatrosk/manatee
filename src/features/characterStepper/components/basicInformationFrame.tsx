@@ -35,7 +35,7 @@ function BasicInformation({
       <Grid container item columnSpacing={8}>
         <Grid item xs={12} pb={4}>
           <Typography gutterBottom variant="h4" component="div">
-            Basic Information
+            {BASIC_INFO.HEADING}
           </Typography>
         </Grid>
         <Grid item xs={12} lg={6}>
@@ -71,7 +71,6 @@ function BasicInformation({
             {BASIC_INFO.SOURCES}
           </Typography>
         </Grid>
-
         <Grid item xs>
           <Autocomplete
             id="combo-box-demo"
@@ -110,7 +109,7 @@ function BasicInformation({
       <Grid container item direction={"row"} columnSpacing={8}>
         <Grid item xs={12} pb={1}>
           <Typography gutterBottom variant="h5" component="div">
-            Images
+            {BASIC_INFO.IMAGES}
           </Typography>
         </Grid>
         <Grid item xs={12} lg={6}>

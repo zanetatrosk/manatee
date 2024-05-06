@@ -6,6 +6,7 @@ const ContentPage: React.FC = () => {
   return (
     <Box>
       <Typography variant="h4">{CONTENT.HEADING}</Typography>
+      <Typography>{CONTENT.DESCRIPTION}</Typography>
     </Box>
   );
 };
