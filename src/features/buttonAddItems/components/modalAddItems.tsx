@@ -8,6 +8,7 @@ import {
 import { CHARACTER_SHEET } from "constants/characterDefinition";
 import React from "react";
 
+// modal to add items to the character sheet
 export default function ModalAddItems({
   openDialog,
   closeDialog,

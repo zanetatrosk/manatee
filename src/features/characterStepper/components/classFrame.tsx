@@ -16,7 +16,7 @@ import {
   useGetToolsQuery,
 } from "api/generalContentApiSlice";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
-import React from "react";
+import React, { useEffect } from "react";
 
 const CLASS = CREATE_CHARACTER.CLASS;
 
@@ -36,14 +36,17 @@ export default function ClassFrame({
   const [isVisible, setVisibility] = React.useState<boolean>(
     !!characterClass?.id,
   );
-
-  if (classForm.id && !characterClass) {
-    const classTmp = classes?.content.find((c) => c.id === classForm.id);
-    if (classTmp) {
-      setClass(classTmp);
-      setVisibility(true);
+  useEffect(() => {
+    debugger;
+    if (classForm.id === characterClass?.id) return;
+    if (classes && classForm.id && !characterClass) {
+      const classTmp = classes?.content.find((c) => c.id === classForm.id);
+      if (classTmp) {
+        setClass(classTmp);
+        setVisibility(true);
+      }
     }
-  }
+  }, [classes, classForm.id, characterClass]);
 
   const setPropertyInForm = (property: string, value: any) => {
     setForm((prev) => ({
@@ -83,15 +86,20 @@ export default function ClassFrame({
             getOptionLabel={(option) => option.name}
             value={characterClass?.id ? characterClass : null}
             sx={{ my: 2 }}
-            onChange={(e, value) => {
+            onChange={(_, value) => {
               if (!value) return;
               setClass(value);
-              setPropertyInForm("id", value.id);
-              setPropertyInForm("subclass", null);
-              setPropertyInForm(
-                "toolIds",
-                value.toolProficiencies.defaults.map((t) => t.id),
-              );
+              const toolIds = value.toolProficiencies.defaults.map((t) => t.id);
+              const tmpClass: ClassForm = {
+                id: value.id,
+                toolIds,
+                subclass: null,
+                source: value.source.id,
+              };
+              setForm((prev) => ({
+                ...prev,
+                class: tmpClass,
+              }));
               setVisibility(true);
             }}
             data-cy="class"

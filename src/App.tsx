@@ -13,6 +13,7 @@ import HomePage from "@pages/home";
 import { useAppSelector } from "@hooks/hooksStore";
 import ErrorAlert from "@components/errorAlert";
 import NoRoute from "@pages/noRoute";
+import PATHS from "constants/paths";
 
 function App() {
   const theme = useAppSelector((state) => state.theme);
@@ -40,18 +41,18 @@ function App() {
           >
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/characters" element={<Characters />} />
-              <Route path="/content" element={<ContentPage />} />
+              <Route path={PATHS.CHARACTERS} element={<Characters />} />
+              <Route path={PATHS.CONTENT} element={<ContentPage />} />
               <Route
-                path="/characters/create-character"
+                path={PATHS.CREATE_CHARACTER}
                 element={<CreateCharacter />}
               />
               <Route
-                path="/characters/character-sheet/:id"
+                path={PATHS.CHARACTER_SHEET + "/:id"}
                 element={<CharacterSheet />}
               />
               <Route
-                path="/characters/create-character/:id"
+                path={PATHS.CREATE_CHARACTER + "/:id"}
                 element={<EditCharacter />}
               />
               <Route path="/*" element={<NoRoute />} />

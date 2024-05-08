@@ -20,7 +20,20 @@ export default function CharacterHeader({ character } : { character: CharacterSh
     const confirmAction = () => {
         postLevelUp({ id: character.id });
         closeDialog();
-      };
+    };
+    const savePdf = async () => {
+      fetch(process.env.REACT_APP_API_URL + "characters/" + character.id + "/pdf")
+        .then((response) => response.blob())
+        .then((blob) => {
+          const url = window.URL.createObjectURL(new Blob([blob]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", character.info.characterName + ".pdf");
+          document.body.appendChild(link);
+          link.click();
+          link.parentNode?.removeChild(link);
+        });
+    }
 return (
     <Grid container mb={1}>
         <Grid item container spacing={2}>
@@ -37,19 +50,7 @@ return (
             <Button
               variant="outlined"
               startIcon={<SaveAltIcon />}
-              onClick={ async () => {
-                  fetch(process.env.REACT_APP_API_URL + "characters/" + character.id + "/pdf")
-                    .then((response) => response.blob())
-                    .then((blob) => {
-                      const url = window.URL.createObjectURL(new Blob([blob]));
-                      const link = document.createElement("a");
-                      link.href = url;
-                      link.setAttribute("download", character.info.characterName + ".pdf");
-                      document.body.appendChild(link);
-                      link.click();
-                      link.parentNode?.removeChild(link);
-                    });
-              }}
+              onClick={savePdf}
             >
               {CHARACTER_SHEET.ACTIONS.GENERATE_PDF}
             </Button>

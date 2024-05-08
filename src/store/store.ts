@@ -15,6 +15,7 @@ import { themeReducer } from "reducers/themeReducer";
 import { showAlert } from "reducers/alertReducer";
 import { ERROR_MESSAGES } from "constants/characterDefinition";
 
+// Middleware to log errors from RTK Query and show an alert
 const rtkQueryErrorLogger: Middleware =
   (api: MiddlewareAPI) => (next) => (action) => {
     if (isRejectedWithValue(action)) {

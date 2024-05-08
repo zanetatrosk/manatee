@@ -34,7 +34,7 @@ export default function BackgroundFrame({
     useGetBackgroundsQuery(sourceIds);
   const { data: languages } =
     useGetLanguagesQuery(sourceIds);
-  const { data: tools } = useGetToolsQuery([]);
+  const { data: tools } = useGetToolsQuery(sourceIds);
   const [background, setBackground] = useState<Background | null>(null);
 
   useEffect(() => {

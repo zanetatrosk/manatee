@@ -4,6 +4,7 @@ import React from "react";
 import FilteredTable from "./components/filteredTable";
 import ModalAddItems from "./components/modalAddItems";
 
+// button that opens a modal to add items
 export default function ButtonAddItems({
   usePaginationHook,
   defaults,

@@ -21,7 +21,7 @@ import {
   useGetLanguagesQuery,
 } from "api/generalContentApiSlice";
 import { CREATE_CHARACTER } from "constants/characterDefinition";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const RACE = CREATE_CHARACTER.RACE;
 
@@ -34,21 +34,20 @@ export default function RaceFrame({
   setForm: React.Dispatch<React.SetStateAction<StepperForm>>;
   sourceIds: string[];
 }) {
-  //calling api to get all races, in future this will be called when create character button is clicked
   const { data: races, isLoading: loadingRaces } = useGetRacesQuery(sourceIds);
   const { data: languages } =
     useGetLanguagesQuery(sourceIds);
   const [race, setRace] = useState<Race | null>(null);
 
+  useEffect(() => {
+  if( raceForm.id === race?.id) return; 
   if (races && raceForm.id && !race) {
     const raceTmp = races?.content.find((r) => r.id === raceForm.id);
     if (raceTmp) {
       setRace(raceTmp);
     }
-  }
+  }},[races, raceForm.id, race]);
 
-  //these are the values that are going to be displayed in the multicomplete
-  //that are selected by user or by default according to race
   const setPropertyInForm = (property: string, value: any) => {
     setForm((prev) => ({ ...prev, race: { ...prev.race, [property]: value } }));
   };
@@ -90,13 +89,16 @@ export default function RaceFrame({
             onChange={(_, value) => {
               if (!value) return;
               //setting the right properties of race
-              //recalculate ability scores acording to a new race
-              setPropertyInForm("id", value.id);
-              setPropertyInForm("size", value.sizeOptions[0]);
-              setPropertyInForm(
-                "languageIds",
-                value.languageProficiencies.defaults.map((l) => l.id),
-              );
+              const tmpRace: RaceForm = {
+                id: value.id,
+                languageIds: value.languageProficiencies.defaults.map((l) => l.id),
+                size: value.sizeOptions[0],
+                source: value.source.id,
+              };
+              setForm((prev) => ({ 
+                ...prev,
+                race: tmpRace,
+              }));
               setRace(value);
             }}
             renderInput={(params) => (

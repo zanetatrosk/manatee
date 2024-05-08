@@ -9,6 +9,7 @@ import {
   StepButton,
   Button,
   Tooltip,
+  StepContent,
 } from "@mui/material";
 import {
   useAddCharacterMutation,
@@ -26,6 +27,7 @@ import Background from "./components/backgroundFrame";
 import Race from "./components/raceFrame";
 import Class from "./components/classFrame";
 import PATHS from "constants/paths";
+import { AbilityScore } from "@definitions/characterForm";
 
 const steps = [
   CREATE_CHARACTER.BASIC_INFO.HEADING,
@@ -104,7 +106,9 @@ export default function CreateCharacterStepper({
 
   const canFinish = () => {
     const sources = form.info.sourceIds;
-    if( sources.length > 0 && !sources.includes(form.class.source) && !sources.includes(form.race.source) && !sources.includes(form.background.source) ) return false;
+    // debugger;
+    if( sources.length > 0 && (!sources.includes(form.class.source) || !sources.includes(form.race.source) || !sources.includes(form.background.source)) ) return false;
+
     return !!(form.class.id && form.race.id && form.background.id);
   };
 
@@ -123,7 +127,7 @@ export default function CreateCharacterStepper({
   const handleFinish = () => {
     const tmpForm = {
       ...form,
-      abilityScores: form.abilityScores.map((a) => ({
+      abilityScores: form.abilityScores.map((a: AbilityScore) => ({
         ...a,
         label: a.label.toLowerCase(),
       })),
@@ -147,7 +151,6 @@ export default function CreateCharacterStepper({
     <Box>
       <Stepper nonLinear activeStep={activeStep} sx={{ mb: 7 }}>
         {steps.map((label, index) => {
-          const stepProps: { completed?: boolean } = {};
           const labelProps: {
             optional?: React.ReactNode;
           } = {};
@@ -159,7 +162,7 @@ export default function CreateCharacterStepper({
             );
           }
           return (
-            <Step key={label} {...stepProps}>
+            <Step key={label}>
               <StepButton
                 color="inherit"
                 onClick={handleStep(index)}
