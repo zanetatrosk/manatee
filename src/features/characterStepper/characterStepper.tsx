@@ -8,8 +8,7 @@ import {
   Step,
   StepButton,
   Button,
-  Tooltip,
-  StepContent,
+  Tooltip
 } from "@mui/material";
 import {
   useAddCharacterMutation,
@@ -106,7 +105,6 @@ export default function CreateCharacterStepper({
 
   const canFinish = () => {
     const sources = form.info.sourceIds;
-    // debugger;
     if( sources.length > 0 && (!sources.includes(form.class.source) || !sources.includes(form.race.source) || !sources.includes(form.background.source)) ) return false;
 
     return !!(form.class.id && form.race.id && form.background.id);

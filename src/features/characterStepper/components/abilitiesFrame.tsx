@@ -96,7 +96,6 @@ export default function Abilities({
             {ABILITIES.HEADING}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {/* todo implement point buy */}
             {ABILITIES.SUBTITLE}
           </Typography>
         </CardContent>

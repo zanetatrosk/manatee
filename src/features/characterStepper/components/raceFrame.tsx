@@ -70,7 +70,6 @@ export default function RaceFrame({
         <Grid item>
           {!race && (
             <Typography gutterBottom variant="body2" color="text.secondary">
-              {/* todo implement point buy */}
               {RACE.SUBTITLE}
             </Typography>
           )}

@@ -37,7 +37,6 @@ export default function ClassFrame({
     !!characterClass?.id,
   );
   useEffect(() => {
-    debugger;
     if (classForm.id === characterClass?.id) return;
     if (classes && classForm.id && !characterClass) {
       const classTmp = classes?.content.find((c) => c.id === classForm.id);
