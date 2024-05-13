@@ -4,7 +4,7 @@
 This repository is a frontend part of the D&D App. 
 
 ## Running the app
-This app runs with Node v19.0.1. This app is fully dependent on backend from repository [Anteater](https://github.com/ph0enixCZ/anteater/tree/main). Please make sure to you run the backend before running the frontend.
+This app runs with Node v20.13.1. This app is fully dependent on backend from repository [Anteater](https://github.com/ph0enixCZ/anteater/tree/main). Please make sure to you run the backend before running the frontend.
 Please before running the app, make sure to run the following command to install all the dependencies: 
 `npm install`
 
